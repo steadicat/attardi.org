@@ -1,5 +1,6 @@
 /** @jsx React.DOM **/
 var React = require('./react');
+var HasTouch = ('ontouchstart' in window);
 
 var CardText = React.createClass({
 
@@ -36,7 +37,7 @@ var CardText = React.createClass({
   },
 
   componentDidMount: function() {
-    if (this.props.autoStart) this.start();
+    if (this.props.autoStart || HasTouch) this.start();
   },
 
   componentWillUnmount: function() {
