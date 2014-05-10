@@ -1,0 +1,19 @@
+unit = 8px
+
+size(font, line)
+  font-size font px
+  line-height line px
+
+.text-m
+  size 28, unit * 4
+.text-s
+  size 32, unit * 4
+.text-xl
+  size unit * 5, unit * 5
+
+.tight
+  letter-spacing: -1px
+
+html
+  @extend .text-m
+  font-family 'Questrial', sans-serif

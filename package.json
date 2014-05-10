@@ -1,0 +1,33 @@
+{
+  "name": "Attardi.org",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-browserify": "*",
+    "gulp-cached": "*",
+    "gulp-clean": "*",
+    "gulp-cloudfront": "0.0.5",
+    "gulp-gzip": "*",
+    "gulp-jade": "*",
+    "gulp-jshint": "*",
+    "gulp-livereload": "*",
+    "gulp-minify-css": "*",
+    "gulp-react": "*",
+    "gulp-rev-all": "git://github.com/steadicat/gulp-rev-all.git",
+    "gulp-s3": "git://github.com/steadicat/gulp-s3.git",
+    "gulp-stylus": "*",
+    "gulp-uglify": "*",
+    "gulp-util": "*",
+    "nib": "^1.0.2",
+    "reactify": "*",
+    "tiny-lr": "*"
+  }
+}
