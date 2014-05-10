@@ -32,12 +32,12 @@ var facts = [
   ]},
   {color: 'gray', question: 'I work on', answers: [
     ['Storehouse', 'https://www.storehouse.co/'],
-    ['Swarmation', 'http://www.swarmation.com/'],
+    ['Swarmation', 'http://www.swarmation.com/']
   ]},
   {color: 'teal', question: 'I am an amateur bar', space: null, answers: [
     'ista', 'itone', 'tender'
   ]},
-  {color: 'green', question: 'I get excited about', space: '\n', answers: [
+  {color: 'purple', question: 'I get excited about', space: '\n', answers: [
     'site speed',
     'React.js',
     'DNS',
@@ -50,12 +50,18 @@ var facts = [
     'cats',
     'singing'
   ]},
+  {color: 'orange', question: 'I occasionally write about', space: '\n', answers: [
+    ['carfree cities', 'https://www.storehouse.co/stories/s996-car-scale'],
+    ['pizza dough', 'https://www.storehouse.co/stories/l6fd-making-pizza'],
+    ['baking pizza', 'https://www.storehouse.co/stories/l6fd-making-pizza'],
+    ['investing', 'http://attardi.org/dilbert-black-swan-portfolio/']
+  ]},
   {color: 'blue', question: 'You can reach me on', space: '\n', answers: [
     ['Facebook', 'https://www.facebook.com/attardi'],
     ['Twitter', 'https://www.twitter.com/steadicat'],
     ['Github', 'https://github.com/steadicat'],
     ['Email', 'mailto:hi@attardi.org']
-  ]},
+  ]}
 ];
 
 var Home = React.createClass({

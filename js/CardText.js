@@ -21,6 +21,7 @@ var CardText = React.createClass({
   stop: function() {
     this._interval && clearInterval(this._interval);
     this._interval = null;
+    this.setState({opacity: 0});
   },
 
   next: function() {
