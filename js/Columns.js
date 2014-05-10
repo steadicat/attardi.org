@@ -5,7 +5,7 @@ var Columns = React.createClass({
   getInitialState: function() {
     this._staggering = [];
     for (var i = 0; i < 10; i++) {
-      this._staggering[i] = Math.round(Math.random() * 100);
+      this._staggering[i] = Math.round(Math.random() * 160);
     }
     return {width: document.body.clientWidth};
   },
@@ -13,7 +13,8 @@ var Columns = React.createClass({
   getDefaultProps: function() {
     return {
       column: 222,
-      margins: 40
+      margins: 40,
+      maxColumns: 4
     }
   },
 
@@ -33,7 +34,7 @@ var Columns = React.createClass({
   },
 
   getNumberOfColumns: function() {
-    return Math.floor((this.state.width - 2 * this.props.margins) / this.props.column);
+    return Math.min(this.props.maxColumns, Math.floor((this.state.width - 2 * this.props.margins) / this.props.column));
   },
 
   render: function() {

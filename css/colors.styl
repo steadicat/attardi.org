@@ -6,6 +6,7 @@ all_colors = {
   green: #A6C104,
   orange: #CC7252,
   gray: #5F5F5F,
+  light-gray: #ccc,
   black: #333,
   trans: rgba(255,255,255,0)
 }
@@ -17,8 +18,15 @@ for name, color in all_colors
     border 1px solid color
   .{name}-bg
     background color
+  .hover-{name}:hover
+    color color
+  .hover-{name}-border:hover
+    border 1px solid color
+  .hover-{name}-bg:hover
+    background color
 
 html
   @extend .black
 a
-  @extend .purple
+  @extend .light-gray
+  border-bottom: 1px solid #ccc

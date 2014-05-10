@@ -18,7 +18,7 @@ var lr = require('tiny-lr');
 var nib = require('nib');
 var server = lr();
 
-var aws = require('./aws');
+var Aws = require('./aws');
 
 gulp.task('css', function() {
   return gulp.src('css/main.styl')
@@ -69,8 +69,8 @@ gulp.task('deploy', function () {
   gulp.src('dist/**')
       .pipe(revall())
       .pipe(gzip())
-      .pipe(s3(AWS, options))
-      .pipe(cloudfront(AWS));
+      .pipe(s3(Aws, options))
+      .pipe(cloudfront(Aws));
 });
 
 gulp.task('watch', function () {
