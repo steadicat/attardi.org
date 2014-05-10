@@ -3,19 +3,16 @@ var gutil = require('gulp-util');
 var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
 var jade = require('gulp-jade');
-//var react = require('gulp-react');
-//var cache = require('gulp-cached');
 var gzip = require('gulp-gzip');
 var stylus = require('gulp-stylus');
 var minifycss = require('gulp-minify-css');
 var jshint = require('gulp-jshint');
 var clean = require('gulp-clean');
 var s3 = require('gulp-s3');
-var cloudfront = require('gulp-cloudfront');
-var livereload = require('gulp-livereload');
 var revall = require('gulp-rev-all');
-var lr = require('tiny-lr');
 var nib = require('nib');
+var livereload = require('gulp-livereload');
+var lr = require('tiny-lr');
 var server = lr();
 
 var Aws = require('./aws');
@@ -24,7 +21,6 @@ gulp.task('css', function() {
   return gulp.src('css/main.styl')
     .pipe(stylus({use: [nib()]}))
     .on('error', gutil.log)
-    .pipe(minifycss())
     .pipe(gulp.dest('dist/css'))
     .pipe(livereload(server))
     .on('error', gutil.log);
@@ -39,7 +35,6 @@ gulp.task('js', function() {
     }))
     .on('error', gutil.log)
     .pipe(jshint())
-    .pipe(gutil.env.production ? uglify() : gutil.noop())
     .pipe(gulp.dest('dist/js'))
     .pipe(livereload(server))
     .on('error', gutil.log);
@@ -65,12 +60,28 @@ gulp.task('clean', function() {
 });
 
 gulp.task('deploy', function () {
-  var options = {gzippedOnly: true};
-  gulp.src('dist/**')
+  var options = {gzippedOnly: true, headers: {'Cache-Control': 'max-age=315360000'}};
+  var htmlOptions = {gzippedOnly: true, headers: {'Cache-Control': 'max-age=60'}};
+  gulp.src(['dist/**/*.js'])
+      .pipe(uglify())
       .pipe(revall())
       .pipe(gzip())
-      .pipe(s3(Aws, options))
-      .pipe(cloudfront(Aws));
+      .pipe(s3(Aws, options));
+  gulp.src(['dist/**/*.css', 'dist/**/*.js'])
+      .pipe(revall())
+      .pipe(minifycss())
+      .pipe(gzip())
+      .pipe(s3(Aws, options));
+  gulp.src(['dist/**/*.jpg', 'dist/**/*.png'])
+      .pipe(revall())
+      .pipe(s3(Aws, options));
+  gulp.src(['dist/**/*.html'])
+      .pipe(revall({ ignore: ['.html'] }))
+      .pipe(gzip())
+      .pipe(s3(Aws, {gzippedOnly: true}));
+  gulp.src('static/**')
+      .pipe(gzip())
+      .pipe(s3(Aws, options));
 });
 
 gulp.task('watch', function () {

@@ -12,9 +12,7 @@
   "devDependencies": {
     "gulp": "*",
     "gulp-browserify": "*",
-    "gulp-cached": "*",
     "gulp-clean": "*",
-    "gulp-cloudfront": "0.0.5",
     "gulp-gzip": "*",
     "gulp-jade": "*",
     "gulp-jshint": "*",
