@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
-var jade = require('gulp-jade');
 var gzip = require('gulp-gzip');
 var stylus = require('gulp-stylus');
 var minifycss = require('gulp-minify-css');
