@@ -22,7 +22,7 @@ var Page = React.createClass({
           <meta property="og:url" content={'http://attardi.org/' + (this.props.module !== 'index' ? this.props.module : '')} />
           <meta property="og:title" content={this.props.title} />
           <meta property="og:description" content={this.props.description} />
-          <meta property="og:image" content="/img/card.png" />
+          <meta property="og:image" content="http://attardi.org/img/card.png" />
         </head>
         <body>
           {this.props.children}
