@@ -115,6 +115,6 @@ gulp.task('livereload', function() {
   });
 });
 
-gulp.task('serve', serve({root: 'dist', port: 8080}));
+gulp.task('serve', serve({root: ['dist', 'static'], port: 8080}));
 
 gulp.task('default', ['html', 'css', 'js', 'images', 'watch', 'livereload', 'serve']);

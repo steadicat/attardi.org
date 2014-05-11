@@ -20,17 +20,31 @@ var Card = React.createClass({
     this.setState({link: link});
   },
 
+  getColorClass: function() {
+    return this.state.link ? 'white' : this.props.color;
+  },
+
+  getBackgroundClass: function() {
+    return this.state.link ? this.props.color : 'white';
+  },
+
+  getLink: function() {
+    if (!this.state.link) return null;
+    return this.state.link.replace(/^(http(s)?\:\/\/(www\.)?)|(mailto\:)/g, '');
+  },
+
   render: function() {
     return this.transferPropsTo(
       <a
         href={this.state.link}
-        className={'block mhs pointer rounded rel text-m ba card left ' + this.props.color + ' ' + this.props.color + '-border'}
+        className={'block mhs rounded rel text-m ba card left ' + this.getColorClass() + ' ' + this.getColorClass() + '-border' + ' ' + this.getBackgroundClass() + '-bg' + ' ' + (this.state.link ? 'pointer' : 'default')}
         style={{marginBottom: 10}}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}>
+          {this.state.link && <div className="text-s pam">{this.getLink()}</div>}
           <CardText
             ref="text"
-            color={this.props.color}
+            color={this.getColorClass()}
             question={this.props.question}
             answers={this.props.answers}
             space={this.props.space}

@@ -10,8 +10,8 @@ var Facts = [
     'Strategic Design'
   ]},
   {color: 'gray', question: 'I work on', answers: [
-    ['Storehouse', 'https://www.storehouse.co/'],
-    ['Swarmation', 'http://www.swarmation.com/']
+    ['Storehouse', 'https://www.storehouse.co'],
+    ['Swarmation', 'http://www.swarmation.com']
   ]},
   {color: 'green', question: 'I speak', space: '\n', answers: [
     'English fluently',
@@ -35,7 +35,7 @@ var Facts = [
     ['carfree cities', 'https://www.storehouse.co/stories/s996-car-scale'],
     ['pizza dough', 'https://www.storehouse.co/stories/l6fd-making-pizza'],
     ['baking pizza', 'https://www.storehouse.co/stories/l6fd-making-pizza'],
-    ['investing', 'http://attardi.org/dilbert-black-swan-portfolio/']
+    ['investing', 'http://attardi.org/dilbert-black-swan-portfolio']
   ]},
   {color: 'gray', question: 'I get excited about', space: '\n', answers: [
     'site speed',

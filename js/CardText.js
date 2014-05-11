@@ -22,6 +22,7 @@ var CardText = React.createClass({
     this._interval && clearInterval(this._interval);
     this._interval = null;
     this.setState({opacity: 0});
+    this.props.onLinkChange && this.props.onLinkChange(null);
   },
 
   next: function() {
@@ -87,7 +88,7 @@ var CardText = React.createClass({
           );
         }.bind(this))}
         <div className="abs top-left">
-          <span className="">{this.props.question}</span>
+          <span className="trans">{this.props.question}</span>
           {this.getSpace()}
           {this.renderAnswer(this.props.answers[this.state.answer])}
         </div>
