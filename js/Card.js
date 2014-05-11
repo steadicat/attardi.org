@@ -21,7 +21,7 @@ var Card = React.createClass({
   },
 
   render: function() {
-    return (
+    return this.transferPropsTo(
       <a
         href={this.state.link}
         className={'block mhs pointer rounded rel text-m ba card left ' + this.props.color + ' ' + this.props.color + '-border'}

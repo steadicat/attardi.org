@@ -40,15 +40,6 @@ gulp.task('js', function() {
     .on('error', gutil.log);
 });
 
-/*
-gulp.task('html', function() {
-  gulp.src('*.jade')
-    .pipe(jade())
-    .on('error', gutil.log)
-    .pipe(gulp.dest('dist/'));
-});
-*/
-
 var React = require('./js/react');
 var through2 = require('through2');
 

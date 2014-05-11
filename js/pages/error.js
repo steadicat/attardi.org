@@ -3,15 +3,15 @@ var React = require('../react');
 var Page = require('../Page');
 var Card = require('../Card');
 
-var NotFound = React.createClass({
+var Error = React.createClass({
   render: function() {
     return (
-      <Page title="Not found" module="notfound">
+      <Page title="Error" module="error">
         <div className="center mah pah">
           <Card
             className="ib"
-            color={'orange'}
-            question={'This page does not exist. Go back'}
+            color={'gray'}
+            question={'Something went wrong. Try going back'}
             space={'\n'}
             answers={[
               ['to the homepage', '/'],
@@ -30,7 +30,7 @@ var NotFound = React.createClass({
 });
 
 if (typeof document !== 'undefined') {
-  React.renderComponent(NotFound(null), document);
+  React.renderComponent(Error(null), document);
 }
 
-module.exports = NotFound;
+module.exports = Error;
