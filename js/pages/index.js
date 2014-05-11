@@ -36,11 +36,11 @@ var Index = React.createClass({
               Come work with me
             </a>
           </div>
-          <div className="text-s pah mbh light-gray loose ib" style={{maxWidth: 320}}>
+          <div className="text-s pvh phm mbh light-gray loose ib" style={{maxWidth: 360}}>
             Site built with {' '}
             <a href="http://facebook.github.io/react/">React.js</a>,
             packaged with <a href="http://gulpjs.com/">Gulp</a>, {' '}
-            and hosted on <a href="http://aws.amazon.com/">S3+CloudFront</a>.
+            and hosted on <a href="http://aws.amazon.com/">S3+CloudFront</a>. The source is <a href="https://github.com/steadicat/attardi.org">on Github</a>.
             DNS provided by <a href="https://www.dnsmadeeasy.com/">DNS Made Easy</a>.
             The typeface used is <a href="http://www.google.com/fonts/specimen/Questrial">Questrial</a>, by <a href="https://dribbble.com/JoePrince">Joe Prince</a>.
           </div>
