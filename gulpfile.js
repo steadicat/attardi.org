@@ -77,17 +77,18 @@ gulp.task('clean', function() {
 
 gulp.task('deploy', function () {
   var options = {headers: {'Cache-Control': 'max-age=315360000'}};
-  var htmlOptions = {headers: {'Cache-Control': 'max-age=60', 'Content-Type': 'text/html; charset=utf-8'}};
+  var textOptions = {headers: {'Cache-Control': 'max-age=315360000'}, encoding: 'utf-8'};
+  var htmlOptions = {headers: {'Cache-Control': 'max-age=300'}, encoding: 'utf-8'};
   gulp.src(['dist/**/*.js'])
       .pipe(revall())
       .pipe(uglify())
       .pipe(gzip())
-      .pipe(s3(Aws, options));
+      .pipe(s3(Aws, textOptions));
   gulp.src(['dist/**/*.css'])
       .pipe(revall())
       .pipe(minifycss())
       .pipe(gzip())
-      .pipe(s3(Aws, options));
+      .pipe(s3(Aws, textOptions));
   gulp.src(['dist/**/*.jpg', 'dist/**/*.png'])
       .pipe(revall())
       .pipe(s3(Aws, options));
@@ -103,9 +104,8 @@ gulp.task('deploy', function () {
 gulp.task('watch', function () {
   //gulp.watch(['css', 'js', '*.jade'], ['clean']);
   gulp.watch('css/**/*.styl', ['css']);
-  gulp.watch('js/**/*.js', ['js']);
+  gulp.watch('js/**/*.js', ['js', 'html']);
   gulp.watch('images/**', ['images']);
-  gulp.watch('js/**/*.js', ['html']);
 });
 
 gulp.task('livereload', function() {
