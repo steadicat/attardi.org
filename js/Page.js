@@ -12,7 +12,7 @@ var Page = React.createClass({
           <link
             href="http://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css"
           />
-          <link rel="stylesheet" type="text/css" href="css/main.css" />
+          <link rel="stylesheet" type="text/css" href="/css/main.css" />
           <link rel="shortcut icon" href="/img/icon.png" type="image/png" />
           <link rel="apple-touch-icon" href="/img/icon.png" />
           <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -26,7 +26,7 @@ var Page = React.createClass({
         </head>
         <body>
           {this.props.children}
-          <script src={'js/' + this.props.module + '.js'} />
+          <script src={'/js/' + this.props.module + '.js'} />
         </body>
       </html>
     );
