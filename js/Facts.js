@@ -32,10 +32,10 @@ var Facts = [
     'Cologne'
   ]},
   {color: 'orange', question: 'I occasionally write about', space: '\n', answers: [
-    ['carfree cities', 'https://www.storehouse.co/stories/s996-car-scale'],
-    ['pizza dough', 'https://www.storehouse.co/stories/l6fd-making-pizza'],
-    ['baking pizza', 'https://www.storehouse.co/stories/l6fd-making-pizza'],
-    ['investing', 'http://attardi.org/dilbert-black-swan-portfolio']
+    ['carfree cities', 'http://strh.se/stU'],
+    ['pizza dough', 'http://strh.se/0zC5'],
+    ['baking pizza', 'http://strh.se/0zC5'],
+    ['investing', '/dilbert-black-swan-portfolio']
   ]},
   {color: 'gray', question: 'I get excited about', space: '\n', answers: [
     'site speed',
