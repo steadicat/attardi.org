@@ -2,8 +2,7 @@
   "name": "Attardi.org",
   "version": "0.0.0",
   "description": "",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": "",
   "author": "Stefano J. Attardi",
   "license": "BSD",
@@ -19,6 +18,7 @@
     "gulp-react": "*",
     "gulp-rev-all": "git://github.com/steadicat/gulp-rev-all.git",
     "gulp-s3": "git://github.com/steadicat/gulp-s3.git",
+    "gulp-serve": "^0.2.0",
     "gulp-stylus": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",

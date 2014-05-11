@@ -10,6 +10,7 @@ var clean = require('gulp-clean');
 var s3 = require('gulp-s3');
 var revall = require('gulp-rev-all');
 var nib = require('nib');
+var serve = require('gulp-serve');
 var livereload = require('gulp-livereload');
 var lr = require('tiny-lr');
 var server = lr();
@@ -114,5 +115,6 @@ gulp.task('livereload', function() {
   });
 });
 
+gulp.task('serve', serve({root: 'dist', port: 8080}));
 
-gulp.task('default', ['html', 'css', 'js', 'images', 'watch', 'livereload']);
+gulp.task('default', ['html', 'css', 'js', 'images', 'watch', 'livereload', 'serve']);
