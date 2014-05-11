@@ -46,6 +46,7 @@ var Columns = React.createClass({
 
     React.Children.forEach(this.props.children, function(child, i) {
       var col = i % n;
+      col = Math.floor((n - 1) / 2) + Math.round(col / 2) * (col % 2 == 0 ? -1 : 1);
       cols[col] || (cols[col] = []);
       cols[col].push(React.addons.cloneWithProps(child, {key: i}));
     }, this);
