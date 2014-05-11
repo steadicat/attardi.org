@@ -3,11 +3,8 @@ var React = require('./react');
 
 var Columns = React.createClass({
   getInitialState: function() {
-    this._staggering = [];
-    for (var i = 0; i < 10; i++) {
-      this._staggering[i] = Math.round(Math.random() * 160);
-    }
-    return {width: document.body.clientWidth};
+    this._staggering = [60, 0, 80, 40];
+    return {width: 1000};
   },
 
   getDefaultProps: function() {
@@ -19,18 +16,24 @@ var Columns = React.createClass({
   },
 
   componentDidMount: function() {
+    if (typeof window === 'undefined') return;
     window.addEventListener('resize', this.updateWidth);
     window.addEventListener('orientationchange', this.updateWidth);
+    setTimeout(this.updateWidth, 0);
   },
 
   componentWillUnmount: function() {
+    if (typeof window === 'undefined') return;
     window.removeEventListener('resize', this.updateWidth);
     window.removeEventListener('orientationchange', this.updateWidth);
   },
 
   updateWidth: function() {
-    if (!this.isMounted()) debugger;
-    this.setState({width: document.body.clientWidth});
+    this.setState({width: this.getWidth()});
+  },
+
+  getWidth: function() {
+    return typeof document === 'undefined' ? 1000 : document.body.clientWidth;
   },
 
   getNumberOfColumns: function() {
@@ -38,32 +41,25 @@ var Columns = React.createClass({
   },
 
   render: function() {
-    var perCol = this.props.children.length / this.getNumberOfColumns();
+    var n = this.getNumberOfColumns();
     var cols = [];
-    var batch = [];
-    var column = 0;
 
     React.Children.forEach(this.props.children, function(child, i) {
-      var currentCol = Math.floor(i / perCol);
-      if (currentCol > column) {
-        cols.push(
-          <div className="ib top" style={{marginTop: this._staggering[i]}} key={column}>
-            {batch}
-          </div>
-        );
-        batch = [];
-        column = currentCol;
-      }
-      batch.push(React.addons.cloneWithProps(child));
+      var col = i % n;
+      cols[col] || (cols[col] = []);
+      cols[col].push(React.addons.cloneWithProps(child, {key: i}));
     }, this);
 
-    cols.push(
-      <div className="ib top" style={{marginTop: this._staggering[column]}} key={column}>
-        {batch}
-      </div>
-    );
+    var els = [];
+    for (var i = 0; i < n; i++) {
+      els.push(
+        <div className="ib top" style={{marginTop: this._staggering[i]}} key={i}>
+          {cols[i]}
+        </div>
+      );
+    }
 
-    return this.transferPropsTo(<div>{cols}</div>);
+    return this.transferPropsTo(<div>{els}</div>);
   }
 });
 

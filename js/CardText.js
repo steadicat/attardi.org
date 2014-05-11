@@ -1,6 +1,6 @@
 /** @jsx React.DOM **/
 var React = require('./react');
-var HasTouch = ('ontouchstart' in window);
+var HasTouch = (typeof window === 'undefined' ? false : ('ontouchstart' in window));
 
 var CardText = React.createClass({
 

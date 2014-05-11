@@ -27,10 +27,10 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-  gulp.src('js/main.js')
+  gulp.src('js/pages/*.js')
     .pipe(browserify({
       insertGlobals: false,
-      debug: !gutil.env.production,
+      debug: false,
       transform: ['reactify']
     }))
     .on('error', gutil.log)
@@ -40,10 +40,35 @@ gulp.task('js', function() {
     .on('error', gutil.log);
 });
 
+/*
 gulp.task('html', function() {
   gulp.src('*.jade')
     .pipe(jade())
     .on('error', gutil.log)
+    .pipe(gulp.dest('dist/'));
+});
+*/
+
+var React = require('./js/react');
+var through2 = require('through2');
+
+var path = require('path');
+require('node-jsx').install()
+
+gulp.task('html', function() {
+  gulp.src('js/pages/**/*.js')
+    .pipe(function() {
+      return through2.obj(function(file, enc, done) {
+        var p = path.relative(__dirname, file.path);
+        var component = require('./' + p.substring(0, p.length - 3));
+        var str = React.renderComponentToString(component(null));
+        str = str.replace(/&#x2f;/g, '/');
+        file.contents = new Buffer(str);
+        var b = path.basename(file.path);
+        file.path = path.dirname(file.path) + '/' + b.substring(0, b.length - 3) + '.html';
+        return done(null, file);
+      });
+    }())
     .pipe(gulp.dest('dist/'));
 });
 
@@ -60,14 +85,14 @@ gulp.task('clean', function() {
 });
 
 gulp.task('deploy', function () {
-  var options = {gzippedOnly: true, headers: {'Cache-Control': 'max-age=315360000'}};
-  var htmlOptions = {gzippedOnly: true, headers: {'Cache-Control': 'max-age=60'}};
+  var options = {headers: {'Cache-Control': 'max-age=315360000'}};
+  var htmlOptions = {headers: {'Cache-Control': 'max-age=60', 'Content-Type': 'text/html; charset=utf-8'}};
   gulp.src(['dist/**/*.js'])
-      .pipe(uglify())
       .pipe(revall())
+      .pipe(uglify())
       .pipe(gzip())
       .pipe(s3(Aws, options));
-  gulp.src(['dist/**/*.css', 'dist/**/*.js'])
+  gulp.src(['dist/**/*.css'])
       .pipe(revall())
       .pipe(minifycss())
       .pipe(gzip())
@@ -78,7 +103,7 @@ gulp.task('deploy', function () {
   gulp.src(['dist/**/*.html'])
       .pipe(revall({ ignore: ['.html'] }))
       .pipe(gzip())
-      .pipe(s3(Aws, {gzippedOnly: true}));
+      .pipe(s3(Aws, htmlOptions));
   gulp.src('static/**')
       .pipe(gzip())
       .pipe(s3(Aws, options));
@@ -86,10 +111,10 @@ gulp.task('deploy', function () {
 
 gulp.task('watch', function () {
   //gulp.watch(['css', 'js', '*.jade'], ['clean']);
-  gulp.watch('css/*.styl', ['css']);
-  gulp.watch('js/*.js', ['js']);
-  gulp.watch('images/*', ['images']);
-  gulp.watch('*.jade', ['html']);
+  gulp.watch('css/**/*.styl', ['css']);
+  gulp.watch('js/**/*.js', ['js']);
+  gulp.watch('images/**', ['images']);
+  gulp.watch('js/**/*.js', ['html']);
 });
 
 gulp.task('livereload', function() {
@@ -98,5 +123,6 @@ gulp.task('livereload', function() {
     console.log('Livereload listening on port 35729');
   });
 });
+
 
 gulp.task('default', ['html', 'css', 'js', 'images', 'watch', 'livereload']);
