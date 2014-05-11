@@ -14,8 +14,8 @@ var Index = React.createClass({
           <div className="pic mbm mth" />
           <h1 className="text-xl tight mbm">Stefano J. Attardi</h1>
           <h2 className="mbh purple text-m">
-            <div className="ib rel">
-              <CardText color="purple" space={'\xa0'} question={'I\xa0am\xa0a\xa0web'} answers={['developer', 'designer']} autoStart={true} />
+            <div className="ib rel nowrap">
+              <CardText color="purple" question={'I am a web'} answers={['developer', 'designer']} autoStart={true} />
             </div>
           </h2>
           <Columns>
@@ -36,12 +36,12 @@ var Index = React.createClass({
               Come work with me
             </a>
           </div>
-          <div className="text-s pah mbh light-gray loose ib" style={{maxWidth: 400}}>
+          <div className="text-s pah mbh light-gray loose ib" style={{maxWidth: 320}}>
             Site built with {' '}
             <a href="http://facebook.github.io/react/">React.js</a>,
             packaged with <a href="http://gulpjs.com/">Gulp</a>, {' '}
             and hosted on <a href="http://aws.amazon.com/">S3+CloudFront</a>.
-            DNS provided by <a href="https://www.cloudflare.com/">CloudFlare</a>.
+            DNS provided by <a href="https://www.dnsmadeeasy.com/">DNS Made Easy</a>.
             The typeface used is <a href="http://www.google.com/fonts/specimen/Questrial">Questrial</a>, by <a href="https://dribbble.com/JoePrince">Joe Prince</a>.
           </div>
         </div>
