@@ -8,8 +8,8 @@ var Facts = require('../Facts');
 
 var Index = React.createClass({
   render: function() {
-    return (
-      <Page title="Stefano J. Attardi: I am a web [developer, designer]" module="index" description="I am Stefano J. Attardi, a web developer and designer currently working at Storehouse. Previously at Facebook. Winner of the first Node.js Knockout with Swarmation.com.">
+    return this.transferPropsTo(
+      <Page title="Stefano J. Attardi: I am a web [developer, designer]" description="I am Stefano J. Attardi, a web developer and designer currently working at Storehouse. Previously at Facebook. Winner of the first Node.js Knockout with Swarmation.com.">
         <div className="center aa">
           <div className="pic mbm mth" />
           <h1 className="text-xl tight mbm">Stefano J. Attardi</h1>
@@ -51,7 +51,7 @@ var Index = React.createClass({
 });
 
 if (typeof document !== 'undefined') {
-  React.renderComponent(Index(null), document);
+  React.renderComponent(Index({js: '/js/index.js'}), document);
 }
 
 module.exports = Index;

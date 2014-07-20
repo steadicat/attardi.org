@@ -41,7 +41,7 @@ var Card = React.createClass({
         style={{marginBottom: 10}}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}>
-          {this.state.link && <div className="text-s pam">{this.getLink()}</div>}
+          <span key="link" className={'block text-s pam' + (this.state.link ? '' : ' off')}>{this.getLink()}</span>
           <CardText
             ref="text"
             color={this.getColorClass()}

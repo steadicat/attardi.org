@@ -19,14 +19,14 @@ var Page = React.createClass({
           <meta property="og:site_name" content="Attardi.org" />
           <meta property="og:type" content="website" />
           <meta name="description" content={this.props.description} />
-          <meta property="og:url" content={'http://attardi.org/' + (this.props.module !== 'index' ? this.props.module : '')} />
+          <meta property="og:url" content={'http://attardi.org/'} />
           <meta property="og:title" content={this.props.title} />
           <meta property="og:description" content={this.props.description} />
           <meta property="og:image" content="http://attardi.org/img/card.png" />
         </head>
         <body>
           {this.props.children}
-          <script src={'/js/' + this.props.module + '.js'} />
+          <script src={this.props.js} />
         </body>
       </html>
     );

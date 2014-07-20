@@ -52,12 +52,14 @@ gulp.task('html', function() {
     .pipe(function() {
       return through2.obj(function(file, enc, done) {
         var p = path.relative(__dirname, file.path);
-        var component = require('./' + p.substring(0, p.length - 3));
-        var str = React.renderComponentToString(component(null));
+        p = p.substring(0, p.length - 3);
+        var module = './' + p;
+        delete require.cache[module];
+        var component = require(module);
+        var str = React.renderComponentToString(component({js: '/js/' + p.substring(9) + '.js'}));
         str = str.replace(/&#x2f;/g, '/');
         file.contents = new Buffer(str);
-        var b = path.basename(file.path);
-        file.path = path.dirname(file.path) + '/' + b.substring(0, b.length - 3) + '.html';
+        file.path = module + '.html';
         return done(null, file);
       });
     }())

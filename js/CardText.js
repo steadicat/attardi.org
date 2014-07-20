@@ -70,7 +70,7 @@ var CardText = React.createClass({
 
   render: function() {
     return (
-      <div className={this.props.className}>
+      <span className={this.props.className}>
         {this.props.question}
         {this.getSpace()}
         <span className={'bb trans ' + this.props.color + '-border bb'}>
@@ -78,21 +78,21 @@ var CardText = React.createClass({
         </span>
         {this.props.answers.map(function(answer, i) {
           return (
-            <div key={i} className="abs top-left trans">
+            <span key={i} className="abs block top-left trans">
               {this.props.question}
               {this.getSpace()}
               <span className={'bb ' + this.props.color + '-border bb'}>
                 {this.getAnswer(answer)}
               </span>
-            </div>
+            </span>
           );
         }.bind(this))}
-        <div className="abs top-left">
+        <span className="abs top-left">
           <span className="trans">{this.props.question}</span>
           {this.getSpace()}
           {this.renderAnswer(this.props.answers[this.state.answer])}
-        </div>
-      </div>
+        </span>
+      </span>
     );
   },
 
