@@ -10,6 +10,7 @@
   "devDependencies": {
     "gulp": "*",
     "gulp-browserify": "*",
+    "gulp-buffer": "0.0.2",
     "gulp-clean": "*",
     "gulp-gzip": "*",
     "gulp-jshint": "*",
@@ -18,15 +19,16 @@
     "gulp-react": "*",
     "gulp-rev-all": "git://github.com/steadicat/gulp-rev-all.git",
     "gulp-s3": "git://github.com/steadicat/gulp-s3.git",
-    "gulp-serve": "^0.2.0",
+    "gulp-serve": "*",
     "gulp-stylus": "*",
+    "gulp-tap": "^0.1.1",
     "gulp-uglify": "*",
     "gulp-util": "*",
-    "nib": "^1.0.2",
-    "node-jsx": "^0.10.0",
-    "react": "^0.10.0",
-    "reactify": "^0.10.0",
-    "through2": "^0.4.1",
+    "nib": "*",
+    "node-jsx": "*",
+    "react": "^0.11.0",
+    "reactify": "^0.11.0",
+    "through2": "*",
     "tiny-lr": "*"
   }
 }
