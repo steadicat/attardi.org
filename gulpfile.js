@@ -102,7 +102,6 @@ gulp.task('deploy', function () {
       // Fix React checksum
       var markup = f.contents.toString();
       var originalMarkup = markup.replace(/ data-react-checksum="-?\d+"/, '');
-      console.log(originalMarkup);
       var checksum = adler32(originalMarkup);
       f.contents = new Buffer(markup.replace(/ data-react-checksum="-?\d+"/, ' data-react-checksum="'+checksum+'"'));
       this.push(f);
