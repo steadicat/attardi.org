@@ -1,8 +1,8 @@
 import React from "react";
 import Tracking from "./Tracking";
 
-const Page = React.createClass({
-  render: function() {
+export default class Page extends React.Component {
+  render() {
     return (
       <html>
         <head>
@@ -29,6 +29,5 @@ const Page = React.createClass({
       </html>
     );
   }
-});
+}
 
-export default Page;

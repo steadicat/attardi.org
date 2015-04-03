@@ -1,46 +1,44 @@
 import React from "react";
 import cloneWithProps from "react-clonewithprops";
 
-const Columns = React.createClass({
-  getInitialState: function() {
+export default class Columns extends React.Component {
+
+  constructor(props) {
+    super(props);
     this._staggering = [60, 0, 80, 40];
-    return {width: 1000};
-  },
+    this.state = {width: 1000};
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
+    this.updateWidth = this.updateWidth.bind(this);
+    this.getNumberOfColumns = this.getNumberOfColumns.bind(this);
+  }
 
-  getDefaultProps: function() {
-    return {
-      column: 222,
-      margins: 40,
-      maxColumns: 4
-    }
-  },
-
-  componentDidMount: function() {
+  componentDidMount() {
     if (typeof window === 'undefined') return;
     window.addEventListener('resize', this.updateWidth);
     window.addEventListener('orientationchange', this.updateWidth);
     setTimeout(this.updateWidth, 0);
-  },
+  }
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     if (typeof window === 'undefined') return;
     window.removeEventListener('resize', this.updateWidth);
     window.removeEventListener('orientationchange', this.updateWidth);
-  },
+  }
 
-  updateWidth: function() {
+  updateWidth() {
     this.setState({width: this.getWidth()});
-  },
+  }
 
-  getWidth: function() {
+  getWidth() {
     return typeof document === 'undefined' ? 1000 : document.body.clientWidth;
-  },
+  }
 
-  getNumberOfColumns: function() {
+  getNumberOfColumns() {
     return Math.min(this.props.maxColumns, Math.floor((this.state.width - 2 * this.props.margins) / this.props.column));
-  },
+  }
 
-  render: function() {
+  render() {
     const n = this.getNumberOfColumns();
     const cols = [];
 
@@ -62,6 +60,10 @@ const Columns = React.createClass({
 
     return <div {...this.props}>{els}</div>;
   }
-});
+}
 
-export default Columns;
+Columns.defaultProps = {
+  column: 222,
+  margins: 40,
+  maxColumns: 4
+};

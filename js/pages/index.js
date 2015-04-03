@@ -6,8 +6,9 @@ import Columns from "../Columns";
 import CardText from "../CardText";
 import Facts from "../Facts";
 
-const Index = React.createClass({
-  render: function() {
+export default class Index extends React.Component {
+
+  render() {
     return (
       <Page {...this.props} title="Stefano J. Attardi: I am a web [developer, designer]" description="I am Stefano J. Attardi, a web developer and designer currently working at Storehouse. Previously at Facebook. Winner of the first Node.js Knockout with Swarmation.com.">
         <div className="center aa">
@@ -48,10 +49,8 @@ const Index = React.createClass({
       </Page>
     );
   }
-});
+}
 
 if (typeof document !== 'undefined') {
   React.render(<Index js="/js/index.js" />, document);
 }
-
-export default Index;

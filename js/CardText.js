@@ -1,30 +1,35 @@
 import React from "react";
 const HasTouch = (typeof window === 'undefined' ? false : ('ontouchstart' in window));
 
-const CardText = React.createClass({
+export default class CardText extends React.Component {
 
-  getDefaultProps: function() {
-    return {space: ' '};
-  },
+  constructor(props) {
+    super(props);
+    this.state = {answer: this.props.answers.length - 1, opacity: 0};
+    this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
+    this.next = this.next.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
+    this.longestAnswer = this.longestAnswer.bind(this);
+    this.getSpace = this.getSpace.bind(this);
+    this.renderAnswer = this.renderAnswer.bind(this);
+  }
 
-  getInitialState: function() {
-    return {answer: this.props.answers.length - 1, opacity: 0};
-  },
-
-  start: function() {
+  start() {
     if (this._interval) return;
     this.next();
     this._interval = setInterval(this.next, 600);
-  },
+  }
 
-  stop: function() {
+  stop() {
     this._interval && clearInterval(this._interval);
     this._interval = null;
     this.setState({opacity: 0});
     this.props.onLinkChange && this.props.onLinkChange(null);
-  },
+  }
 
-  next: function() {
+  next() {
     if (this.state.opacity === 0) {
       const index = (this.state.answer + 1) % this.props.answers.length;
       this.setState({
@@ -35,17 +40,17 @@ const CardText = React.createClass({
     } else {
       this.setState({opacity: 0});
     }
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     if (this.props.autoStart || HasTouch) this.start();
-  },
+  }
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     this._interval && clearInterval(this._interval);
-  },
+  }
 
-  longestAnswer: function() {
+  longestAnswer() {
     let longest = '';
     for (const i = 0, l = this.props.answers.length; i < l; i++) {
       if (this.props.answers[i].length > longest.length) {
@@ -53,21 +58,21 @@ const CardText = React.createClass({
       }
     }
     return this.getAnswer(longest);
-  },
+  }
 
-  getSpace: function() {
+  getSpace() {
     return this.props.space === '\n' ? <br/> : this.props.space;
-  },
+  }
 
-  getAnswer: function(answer) {
+  getAnswer(answer) {
     return (answer instanceof Array) ? answer[0] : answer;
-  },
+  }
 
-  getAnswerLink: function(answer) {
+  getAnswerLink(answer) {
     return (answer instanceof Array) ? answer[1] : null;
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <span className={this.props.className}>
         {this.props.question}
@@ -93,14 +98,16 @@ const CardText = React.createClass({
         </span>
       </span>
     );
-  },
+  }
 
-  renderAnswer:function(answer) {
+  renderAnswer(answer) {
     return (
       <span className="t-opacity" style={{opacity: this.state.opacity}}>{this.getAnswer(answer)}.</span>
     );
   }
 
-});
+}
 
-export default CardText;
+CardText.defaultProps = {space: ' '};
+
+

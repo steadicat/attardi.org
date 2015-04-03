@@ -1,38 +1,45 @@
 import React from "react";
 import CardText from "./CardText";
 
-const Card = React.createClass({
+export default class Card extends React.Component {
 
-  onMouseEnter: function() {
+  constructor(props) {
+    super(props);
+    this.state = {link: null};
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.onLinkChange = this.onLinkChange.bind(this);
+    this.getColorClass = this.getColorClass.bind(this);
+    this.getBackgroundClass = this.getBackgroundClass.bind(this);
+    this.getLink = this.getLink.bind(this);
+  }
+
+  onMouseEnter() {
     this.refs.text.start();
-  },
+  }
 
-  onMouseLeave: function() {
+  onMouseLeave() {
     this.refs.text.stop();
-  },
+  }
 
-  getInitialState: function() {
-    return {link: null};
-  },
-
-  onLinkChange: function(link) {
+  onLinkChange(link) {
     this.setState({link: link});
-  },
+  }
 
-  getColorClass: function() {
+  getColorClass() {
     return this.state.link ? 'white' : this.props.color;
-  },
+  }
 
-  getBackgroundClass: function() {
+  getBackgroundClass() {
     return this.state.link ? this.props.color : 'white';
-  },
+  }
 
-  getLink: function() {
+  getLink() {
     if (!this.state.link) return null;
     return this.state.link.replace(/^(http(s)?\:\/\/(www\.)?)|(mailto\:)/g, '');
-  },
+  }
 
-  render: function() {
+  render() {
     const {className, style, ...props} = this.props;
     return (
       <a
@@ -56,6 +63,5 @@ const Card = React.createClass({
     )
   }
 
-});
+}
 
-export default Card;

@@ -12,8 +12,8 @@ const answers = [
   ['to Google', 'http://www.google.com']
 ];
 
-const Error = React.createClass({
-  render: function() {
+export default class Error {
+  render() {
     return (
       <Page {...this.props} title="Error" module="error">
         <div className="center mah pah">
@@ -28,7 +28,7 @@ const Error = React.createClass({
       </Page>
     );
   }
-});
+}
 
 if (typeof document !== 'undefined') {
   const component = React.render(<Error js="/js/error.js" />, document);
@@ -39,5 +39,3 @@ if (typeof document !== 'undefined') {
    }
   }, 0);
 }
-
-export default Error;

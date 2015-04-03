@@ -12,8 +12,9 @@ const answers = [
   ['to Google', 'http://www.google.com']
 ];
 
-const NotFound = React.createClass({
-  render: function() {
+export default class NotFound extends React.Component {
+
+  render() {
     return (
       <Page {...this.props} title="Not found" module="notfound">
         <div className="center mah pah">
@@ -28,7 +29,8 @@ const NotFound = React.createClass({
       </Page>
     );
   }
-});
+
+}
 
 if (typeof document !== 'undefined') {
   const component = React.render(<NotFound js="/js/notfound.js" />, document);
@@ -40,4 +42,3 @@ if (typeof document !== 'undefined') {
   }, 0);
 }
 
-export default NotFound;
