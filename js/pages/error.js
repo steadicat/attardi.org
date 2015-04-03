@@ -1,7 +1,7 @@
 require('babel/polyfill');
-import React from "react";
-import Page from "../Page";
-import Card from "../Card";
+import React from 'react';
+import Page from '../Page';
+import Card from '../Card';
 
 const answers = [
   ['to the homepage', 'http://attardi.org'],

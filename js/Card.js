@@ -1,5 +1,5 @@
-import React from "react";
-import CardText from "./CardText";
+import React from 'react';
+import CardText from './CardText';
 
 export default class Card extends React.Component {
 

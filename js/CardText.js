@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 const HasTouch = (typeof window === 'undefined' ? false : ('ontouchstart' in window));
 
 export default class CardText extends React.Component {

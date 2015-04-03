@@ -1,10 +1,10 @@
 require('babel/polyfill');
-import React from "react";
-import Page from "../Page";
-import Card from "../Card";
-import Columns from "../Columns";
-import CardText from "../CardText";
-import Facts from "../Facts";
+import React from 'react';
+import Page from '../Page';
+import Card from '../Card';
+import Columns from '../Columns';
+import CardText from '../CardText';
+import Facts from '../Facts';
 
 export default class Index extends React.Component {
 

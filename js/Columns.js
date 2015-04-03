@@ -1,5 +1,5 @@
-import React from "react";
-import cloneWithProps from "react-clonewithprops";
+import React from 'react';
+import cloneWithProps from 'react-clonewithprops';
 
 export default class Columns extends React.Component {
 

@@ -1,5 +1,5 @@
-import React from "react";
-import Tracking from "./Tracking";
+import React from 'react';
+import Tracking from './Tracking';
 
 export default class Page extends React.Component {
   render() {
