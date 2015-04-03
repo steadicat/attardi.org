@@ -1,8 +1,7 @@
-/** @jsx React.DOM **/
-var React = require('./react');
-var HasTouch = (typeof window === 'undefined' ? false : ('ontouchstart' in window));
+import React from "react";
+const HasTouch = (typeof window === 'undefined' ? false : ('ontouchstart' in window));
 
-var CardText = React.createClass({
+const CardText = React.createClass({
 
   getDefaultProps: function() {
     return {space: ' '};
@@ -27,7 +26,7 @@ var CardText = React.createClass({
 
   next: function() {
     if (this.state.opacity === 0) {
-      var index = (this.state.answer + 1) % this.props.answers.length;
+      const index = (this.state.answer + 1) % this.props.answers.length;
       this.setState({
         answer: index,
         opacity: 1
@@ -47,8 +46,8 @@ var CardText = React.createClass({
   },
 
   longestAnswer: function() {
-    var longest = '';
-    for (var i = 0, l = this.props.answers.length; i < l; i++) {
+    let longest = '';
+    for (const i = 0, l = this.props.answers.length; i < l; i++) {
       if (this.props.answers[i].length > longest.length) {
         longest = this.props.answers[i];
       }
@@ -104,4 +103,4 @@ var CardText = React.createClass({
 
 });
 
-module.exports = CardText;
+export default CardText;

@@ -1,9 +1,7 @@
-/** @jsx React.DOM **/
+import React from "react";
+import Tracking from "./Tracking";
 
-var React = require('./react');
-var Tracking = require('./Tracking');
-
-var Page = React.createClass({
+const Page = React.createClass({
   render: function() {
     return (
       <html>
@@ -33,4 +31,4 @@ var Page = React.createClass({
   }
 });
 
-module.exports = Page;
+export default Page;

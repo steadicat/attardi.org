@@ -1,7 +1,7 @@
-/** @jsx React.DOM **/
-var React = require('./react');
+import React from "react";
+import cloneWithProps from "react-clonewithprops";
 
-var Columns = React.createClass({
+const Columns = React.createClass({
   getInitialState: function() {
     this._staggering = [60, 0, 80, 40];
     return {width: 1000};
@@ -41,18 +41,18 @@ var Columns = React.createClass({
   },
 
   render: function() {
-    var n = this.getNumberOfColumns();
-    var cols = [];
+    const n = this.getNumberOfColumns();
+    const cols = [];
 
     React.Children.forEach(this.props.children, function(child, i) {
-      var col = i % n;
+      let col = i % n;
       col = Math.floor((n - 1) / 2) + Math.round(col / 2) * (col % 2 == 0 ? -1 : 1);
       cols[col] || (cols[col] = []);
-      cols[col].push(React.addons.cloneWithProps(child, {key: i}));
+      cols[col].push(cloneWithProps(child, {key: i}));
     }, this);
 
-    var els = [];
-    for (var i = 0; i < n; i++) {
+    const els = [];
+    for (const i = 0; i < n; i++) {
       els.push(
         <div className="ib top" style={{marginTop: this._staggering[i]}} key={i}>
           {cols[i]}
@@ -60,8 +60,8 @@ var Columns = React.createClass({
       );
     }
 
-    return this.transferPropsTo(<div>{els}</div>);
+    return <div {...this.props}>{els}</div>;
   }
 });
 
-module.exports = Columns;
+export default Columns;

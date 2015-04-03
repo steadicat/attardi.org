@@ -8,4 +8,4 @@ if (typeof window !== 'undefined') {
   ga('send', 'pageview');
 };
 
-module.exports = {};
+export default {};

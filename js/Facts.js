@@ -1,6 +1,7 @@
-var Facts = [
+const Facts = [
   {color: 'blue', question: 'In the past I worked at', answers: [
     'Facebook',
+    'Storehouse',
     'Cloudant'
   ]},
   {color: 'orange', question: 'I studied', answers: [
@@ -8,10 +9,6 @@ var Facts = [
     'Graphic Design',
     'Interaction Design',
     'Strategic Design'
-  ]},
-  {color: 'gray', question: 'I work on', answers: [
-    ['Storehouse', 'https://www.storehouse.co'],
-    ['Swarmation', 'http://www.swarmation.com']
   ]},
   {color: 'green', question: 'I speak', space: '\n', answers: [
     'English fluently',
@@ -58,4 +55,4 @@ var Facts = [
   ]}
 ];
 
-module.exports = Facts;
+export default Facts;

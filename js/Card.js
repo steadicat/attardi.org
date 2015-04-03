@@ -1,8 +1,7 @@
-/** @jsx React.DOM **/
-var React = require('./react');
-var CardText = require('./CardText');
+import React from "react";
+import CardText from "./CardText";
 
-var Card = React.createClass({
+const Card = React.createClass({
 
   onMouseEnter: function() {
     this.refs.text.start();
@@ -34,11 +33,13 @@ var Card = React.createClass({
   },
 
   render: function() {
-    return this.transferPropsTo(
+    const {className, style, ...props} = this.props;
+    return (
       <a
+        {...props}
         href={this.state.link}
-        className={'block mhs rounded rel text-m ba card left ' + this.getColorClass() + ' ' + this.getColorClass() + '-border' + ' ' + this.getBackgroundClass() + '-bg' + ' ' + (this.state.link ? 'pointer' : 'default')}
-        style={{marginBottom: 10}}
+        className={`${className} block mhs rounded rel text-m ba card left ${this.getColorClass()} ${this.getColorClass()}-border ${this.getBackgroundClass()}-bg ${this.state.link ? 'pointer' : 'default'}`}
+        style={Object.assign({}, {marginBottom: 10}, style)}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}>
           <span key="link" className={'block text-s pam' + (this.state.link ? '' : ' off')}>{this.getLink()}</span>
@@ -57,4 +58,4 @@ var Card = React.createClass({
 
 });
 
-module.exports = Card;
+export default Card;

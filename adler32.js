@@ -18,8 +18,6 @@
 
 /* jslint bitwise:true */
 
-"use strict";
-
 var MOD = 65521;
 
 // This is a clean-room implementation of adler32 designed for detecting

@@ -1,15 +1,15 @@
-/** @jsx React.DOM **/
-var React = require('../react');
-var Page = require('../Page');
-var Card = require('../Card');
-var Columns = require('../Columns');
-var CardText = require('../CardText');
-var Facts = require('../Facts');
+require('babel/polyfill');
+import React from "react";
+import Page from "../Page";
+import Card from "../Card";
+import Columns from "../Columns";
+import CardText from "../CardText";
+import Facts from "../Facts";
 
-var Index = React.createClass({
+const Index = React.createClass({
   render: function() {
-    return this.transferPropsTo(
-      <Page title="Stefano J. Attardi: I am a web [developer, designer]" description="I am Stefano J. Attardi, a web developer and designer currently working at Storehouse. Previously at Facebook. Winner of the first Node.js Knockout with Swarmation.com.">
+    return (
+      <Page {...this.props} title="Stefano J. Attardi: I am a web [developer, designer]" description="I am Stefano J. Attardi, a web developer and designer currently working at Storehouse. Previously at Facebook. Winner of the first Node.js Knockout with Swarmation.com.">
         <div className="center aa">
           <div className="pic mbm mth" />
           <h1 className="text-xl tight mbm">Stefano J. Attardi</h1>
@@ -32,8 +32,8 @@ var Index = React.createClass({
             })}
           </Columns>
           <div className="mvh pth">
-            <a href="https://www.storehouse.co/jobs" className="teal teal-border ba ib rounded pvm phl hover-teal-bg hover-white">
-              Come work with me
+            <a href="https://www.facebook.com/messages/attardi" className="teal teal-border ba ib rounded pvm phl hover-teal-bg hover-white">
+              Hire me
             </a>
           </div>
           <div className="text-s pvh phm mbh light-gray loose ib" style={{maxWidth: 360}}>
@@ -51,7 +51,7 @@ var Index = React.createClass({
 });
 
 if (typeof document !== 'undefined') {
-  React.renderComponent(Index({js: '/js/index.js'}), document);
+  React.render(<Index js="/js/index.js" />, document);
 }
 
-module.exports = Index;
+export default Index;

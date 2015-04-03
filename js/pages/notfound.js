@@ -1,9 +1,9 @@
-/** @jsx React.DOM **/
-var React = require('../react');
-var Page = require('../Page');
-var Card = require('../Card');
+require('babel/polyfill');
+import React from "react";
+import Page from "../Page";
+import Card from "../Card";
 
-var answers = [
+const answers = [
   ['to the homepage', 'http://attardi.org'],
   ['to my Facebook', 'https://www.facebook.com/attardi'],
   ['to my Twitter', 'https://www.twitter.com/steadicat'],
@@ -12,10 +12,10 @@ var answers = [
   ['to Google', 'http://www.google.com']
 ];
 
-var NotFound = React.createClass({
+const NotFound = React.createClass({
   render: function() {
-    return this.transferPropsTo(
-      <Page title="Not found" module="notfound">
+    return (
+      <Page {...this.props} title="Not found" module="notfound">
         <div className="center mah pah">
           <Card
             className="ib"
@@ -31,7 +31,7 @@ var NotFound = React.createClass({
 });
 
 if (typeof document !== 'undefined') {
-  var component = React.renderComponent(NotFound({js: '/js/notfound.js'}), document);
+  const component = React.render(<NotFound js="/js/notfound.js" />, document);
   setTimeout(function() {
    if (document.referrer) {
      answers.splice(1, 0, ['where you came from', document.referrer]);
@@ -40,4 +40,4 @@ if (typeof document !== 'undefined') {
   }, 0);
 }
 
-module.exports = NotFound;
+export default NotFound;
