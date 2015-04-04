@@ -3,6 +3,10 @@ import Tracking from './Tracking';
 import Style from './Style';
 
 export default class Page extends React.Component {
+  componentDidMount() {
+    Tracking.init();
+  }
+
   render() {
     return (
       <html>

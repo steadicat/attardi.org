@@ -16,7 +16,7 @@
     "gulp": "*",
     "gulp-buffer": "*",
     "gulp-gzip": "*",
-    "gulp-rev-all": "*",
+    "gulp-rev-all": "git://github.com/steadicat/gulp-rev-all.git",
     "gulp-s3": "git://github.com/steadicat/gulp-s3.git",
     "gulp-serve": "*",
     "gulp-uglify": "*",

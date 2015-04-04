@@ -28,7 +28,7 @@ export default class Index extends React.Component {
           <h1 style={headlineStyle}>Stefano J. Attardi</h1>
           <h2 style={subtitleWrapperStyle}>
             <div style={subtitleStyle}>
-              <CardText color="purple" question={'I am a web'} answers={['developer', 'designer']} space={'\xa0'} autoStart={true} />
+              <CardText color="purple" question={'I am a web'} answers={['developer', 'designer']} autoStart={true} />
             </div>
           </h2>
           <Columns>

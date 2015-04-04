@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Facts = [
   {color: 'blue', question: 'In the past I worked at', answers: [
     'Facebook',
@@ -25,7 +27,7 @@ const Facts = [
     'Milan',
     'Boston',
     'Pisa',
-    'San\xa0Francisco',
+    <span style={{whiteSpace: 'nowrap'}}>San Francisco</span>,
     'Cologne'
   ]},
   {color: 'orange', question: 'I occasionally write about', space: '\n', answers: [

@@ -15,12 +15,13 @@ Main.tOpacity = {transition: 'opacity 0.6s'};
 
 Main.card = {width: 210, height: 240};
 
-const suffix = typeof devicePixelRatio !== 'undefined' && devicePixelRatio >= 2 ? '@2x' : '';
+const is2x = typeof devicePixelRatio !== 'undefined' && devicePixelRatio >= 2;
+const image = is2x ? 'url(/img/pic@2x.jpg)' : 'url(/img/pic.jpg)';
 
 Main.pic = merge(
   Layout.ib,
   {
-    background: `url(../img/pic${suffix}.jpg) no-repeat center center`,
+    background: `${image} no-repeat center center`,
     backgroundSize: '131px 131px',
     width: 131,
     height: 131
