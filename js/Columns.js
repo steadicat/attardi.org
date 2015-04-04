@@ -1,4 +1,6 @@
 import React from 'react';
+import Style from './Style';
+import merge from './merge';
 import cloneWithProps from 'react-clonewithprops';
 
 export default class Columns extends React.Component {
@@ -52,7 +54,7 @@ export default class Columns extends React.Component {
     const els = [];
     for (const i = 0; i < n; i++) {
       els.push(
-        <div className="ib top" style={{marginTop: this._staggering[i]}} key={i}>
+        <div style={merge(Style.ib, Style.top, {marginTop: this._staggering[i]})} key={i}>
           {cols[i]}
         </div>
       );

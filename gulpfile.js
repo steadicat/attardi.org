@@ -4,31 +4,20 @@ const gulpWebpack = require('gulp-webpack');
 const webpack = require('webpack');
 const uglify = require('gulp-uglify');
 const gzip = require('gulp-gzip');
-const stylus = require('gulp-stylus');
-const minifycss = require('gulp-minify-css');
 const jshint = require('gulp-jshint');
-const clean = require('gulp-clean');
 const s3 = require('gulp-s3');
 const revall = require('gulp-rev-all');
-const nib = require('nib');
 const glob = require('glob');
 const serve = require('gulp-serve');
 const adler32 = require('./adler32');
 const path = require('path');
 
-const DEBUG = false;
+const DEBUG = process.env.NODE_ENV !== 'production';
 const Aws = require('./aws');
-
-gulp.task('css', function() {
-  return gulp.src('css/main.styl')
-    .pipe(stylus({use: [nib()]}))
-    .on('error', gutil.log)
-    .pipe(gulp.dest('dist/css'))
-    .on('error', gutil.log);
-});
 
 gulp.task('js', function() {
   const entries = {};
+
   glob.sync('./js/pages/*.js').forEach(function(pathName) {
     const baseName = path.basename(pathName, '.js');
     const dirName = path.dirname(pathName);
@@ -43,7 +32,8 @@ gulp.task('js', function() {
       loaders: [
         {
           test: /\.js$/,
-          loaders: DEBUG ? ['react-hot', 'babel-loader?stage=0'] : ['babel-loader?stage=0'],
+          loaders: ['babel-loader?stage=0'],
+          exclude: /node_modules/,
         },
       ],
     },
@@ -55,17 +45,19 @@ gulp.task('js', function() {
       publicPath: '/js/',
     },
     plugins: DEBUG ? [
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new webpack.optimize.CommonsChunkPlugin('common.js', Object.keys(entries), 2)
     ] : [
+      new webpack.optimize.CommonsChunkPlugin('common.js', Object.keys(entries), 2),
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: JSON.stringify('production'),
+          NODE_ENV: '"production"',
         },
       }),
+      new webpack.optimize.UglifyJsPlugin({sourceMap: false}),
     ],
   })
   .on('error', gutil.log)
-  //.pipe(jshint())
   .pipe(gulp.dest('dist/js'))
   .on('error', gutil.log);
 });
@@ -82,12 +74,12 @@ gulp.task('html', function() {
   gulp.src('js/pages/**/*.js')
     .pipe(function() {
       return through2.obj(function(file, enc, done) {
-        const p = path.relative(__dirname, file.path);
+        var p = path.relative(__dirname, file.path);
         p = p.substring(0, p.length - 3);
         const module = './' + p;
         delete require.cache[module];
         const component = require(module);
-        const str = React.renderToString(React.createElement(component, {js: '/js/' + p.substring(9) + '.js'}));
+        var str = React.renderToString(React.createElement(component, {js: '/js/' + p.substring(9) + '.js'}));
         str = str.replace(/&#x2f;/g, '/');
         file.contents = new Buffer(str);
         file.path = module + '.html';
@@ -110,12 +102,6 @@ gulp.task('deploy', function () {
   const buffer = require('gulp-buffer');
   gulp.src(['dist/**/*.js'])
     .pipe(revall())
-    .pipe(uglify())
-    .pipe(gzip())
-    .pipe(s3(Aws, textOptions));
-  gulp.src(['dist/**/*.css'])
-    .pipe(revall())
-    .pipe(minifycss())
     .pipe(gzip())
     .pipe(s3(Aws, textOptions));
   gulp.src(['dist/**/*.jpg', 'dist/**/*.png'])
@@ -140,12 +126,11 @@ gulp.task('deploy', function () {
 });
 
 gulp.task('watch', function () {
-  //gulp.watch(['css', 'js', '*.jade'], ['clean']);
-  gulp.watch('css/**/*.styl', ['css']);
-  gulp.watch('js/**/*.js', ['js', 'html']);
-  gulp.watch('images/**', ['images']);
+  gulp.watch('js/**/*.js', ['html']);
 });
 
 gulp.task('serve', serve({root: ['dist', 'static'], port: 8080}));
 
-gulp.task('default', ['html', 'css', 'js', 'images', 'watch', 'serve']);
+gulp.task('build', ['html', 'js', 'images']);
+
+gulp.task('default', ['html', 'js', 'images', 'watch', 'serve']);

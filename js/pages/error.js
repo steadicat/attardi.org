@@ -1,7 +1,9 @@
-require('babel/polyfill');
+import 'babel/polyfill';
 import React from 'react';
 import Page from '../Page';
 import Card from '../Card';
+import Style from '../Style';
+import merge from '../merge';
 
 const answers = [
   ['to the homepage', 'http://attardi.org'],
@@ -12,13 +14,15 @@ const answers = [
   ['to Google', 'http://www.google.com']
 ];
 
+const style = merge(Style.center, Style.mah, Style.pah);
+
 export default class Error {
   render() {
     return (
       <Page {...this.props} title="Error" module="error">
-        <div className="center mah pah">
+        <div style={style}>
           <Card
-            className="ib"
+            style={Style.ib}
             color={'gray'}
             question={'Something went wrong. Try going back'}
             space={'\n'}

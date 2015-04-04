@@ -1,7 +1,9 @@
-require('babel/polyfill');
+import 'babel/polyfill';
 import React from 'react';
 import Page from '../Page';
 import Card from '../Card';
+import Style from '../Style';
+import merge from '../merge';
 
 const answers = [
   ['to the homepage', 'http://attardi.org'],
@@ -17,9 +19,9 @@ export default class NotFound extends React.Component {
   render() {
     return (
       <Page {...this.props} title="Not found" module="notfound">
-        <div className="center mah pah">
+        <div style={merge(Style.center, Style.mah, Style.pah)}>
           <Card
-            className="ib"
+            style={Style.ib}
             color={'orange'}
             question={'This page does not exist. Go back'}
             space={'\n'}
@@ -37,7 +39,7 @@ if (typeof document !== 'undefined') {
   setTimeout(function() {
    if (document.referrer) {
      answers.splice(1, 0, ['where you came from', document.referrer]);
-     component.setProps({answers: answers});
+     component.setProps({answers});
    }
   }, 0);
 }

@@ -7,30 +7,24 @@
   "author": "Stefano J. Attardi",
   "license": "BSD",
   "dependencies": {
-    "gulp-tap": "^0.1.3"
   },
   "devDependencies": {
-    "babel-loader": "*",
-    "babel-core": "*",
     "babel": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
     "glob": "*",
     "gulp": "*",
     "gulp-buffer": "*",
-    "gulp-clean": "*",
     "gulp-gzip": "*",
-    "gulp-jshint": "*",
-    "gulp-minify-css": "*",
-    "gulp-rev-all": "git://github.com/steadicat/gulp-rev-all.git",
+    "gulp-rev-all": "*",
     "gulp-s3": "git://github.com/steadicat/gulp-s3.git",
     "gulp-serve": "*",
-    "gulp-stylus": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
-    "react-clonewithprops": "*",
-    "nib": "*",
-    "react": "*",
-    "through2": "*",
     "gulp-webpack": "*",
+    "react": "*",
+    "react-clonewithprops": "*",
+    "through2": "*",
     "webpack": "*"
   }
 }

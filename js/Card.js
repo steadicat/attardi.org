@@ -1,17 +1,23 @@
 import React from 'react';
 import CardText from './CardText';
+import Style from './Style';
+import merge from './merge';
+
+const cardTextStyle = merge(Style.abs, Style.bottomLeft, Style.left, Style.mam);
 
 export default class Card extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {link: null};
+    this._styles = {link: {}, noLink: {}};
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onLinkChange = this.onLinkChange.bind(this);
     this.getColorClass = this.getColorClass.bind(this);
     this.getBackgroundClass = this.getBackgroundClass.bind(this);
     this.getLink = this.getLink.bind(this);
+    this.getStyle = this.getStyle.bind(this);
   }
 
   onMouseEnter() {
@@ -23,7 +29,7 @@ export default class Card extends React.Component {
   }
 
   onLinkChange(link) {
-    this.setState({link: link});
+    this.setState({link});
   }
 
   getColorClass() {
@@ -39,26 +45,49 @@ export default class Card extends React.Component {
     return this.state.link.replace(/^(http(s)?\:\/\/(www\.)?)|(mailto\:)/g, '');
   }
 
+  getStyle() {
+    let style = this._styles[this.state.link ? 'link' : 'noLink'][this.getColorClass()];
+    if (style) return style;
+    style = merge(
+      Style.noBorder,
+      Style.block,
+      Style.mhs,
+      Style.rounded,
+      Style.rel,
+      Style.textM,
+      Style.card,
+      Style.left,
+      Style[this.getColorClass()],
+      Style[`${this.getColorClass()}Border`],
+      Style[`${this.getBackgroundClass()}Bg`],
+      Style[this.state.link ? 'pointer' : 'arrow'],
+      Style.ba,
+      {marginBottom: 10}
+    );
+    this._styles[this.state.link ? 'link' : 'noLink'][this.getColorClass()] = style;
+    return style;
+  }
+
   render() {
-    const {className, style, ...props} = this.props;
+    const {question, answers, space, style, ...props} = this.props;
+    style;
     return (
       <a
         {...props}
         href={this.state.link}
-        className={`${className} block mhs rounded rel text-m ba card left ${this.getColorClass()} ${this.getColorClass()}-border ${this.getBackgroundClass()}-bg ${this.state.link ? 'pointer' : 'default'}`}
-        style={Object.assign({}, {marginBottom: 10}, style)}
+        style={this.getStyle()}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}>
-          <span key="link" className={'block text-s pam' + (this.state.link ? '' : ' off')}>{this.getLink()}</span>
-          <CardText
-            ref="text"
-            color={this.getColorClass()}
-            question={this.props.question}
-            answers={this.props.answers}
-            space={this.props.space}
-            className="abs bottom-left left mam"
-            onLinkChange={this.onLinkChange}
-          />
+        <span key="link" style={merge(Style.block, Style.textS, Style.pam, this.state.link ? {} : Style.off)}>{this.getLink()}</span>
+        <CardText
+          ref="text"
+          color={this.getColorClass()}
+          question={question}
+          answers={answers}
+          space={space}
+          style={cardTextStyle}
+          onLinkChange={this.onLinkChange}
+        />
       </a>
     )
   }

@@ -1,4 +1,7 @@
 import React from 'react';
+import Style from './Style';
+import merge from './merge';
+
 const HasTouch = (typeof window === 'undefined' ? false : ('ontouchstart' in window));
 
 export default class CardText extends React.Component {
@@ -73,28 +76,36 @@ export default class CardText extends React.Component {
   }
 
   render() {
+    const {question, color, answers, space, autoStart, style, ...props} = this.props;
     return (
-      <span className={this.props.className}>
-        {this.props.question}
+      <span {...props} style={style}>
+        {question}
         {this.getSpace()}
-        <span className={'bb trans ' + this.props.color + '-border bb'}>
-          {this.longestAnswer(this.props.answers)}
+        <span style={merge(
+          Style.trans,
+          Style[`${color}Border`],
+          Style.bb
+        )}>
+          {this.longestAnswer(answers)}.
         </span>
-        {this.props.answers.map(function(answer, i) {
+        {answers.map(function(answer, i) {
           return (
-            <span key={i} className="abs block top-left trans">
-              {this.props.question}
+            <span key={i} style={merge(Style.abs, Style.block, Style.topLeft, Style.trans)}>
+              <span style={Style.trans}>{question}</span>
               {this.getSpace()}
-              <span className={'bb ' + this.props.color + '-border bb'}>
-                {this.getAnswer(answer)}
+              <span style={merge(
+                Style[`${color}Border`],
+                Style.bb
+              )}>
+                {this.getAnswer(answer)}.
               </span>
             </span>
           );
         }.bind(this))}
-        <span className="abs top-left">
-          <span className="trans">{this.props.question}</span>
+        <span style={merge(Style.abs, Style.topLeft)}>
+          <span style={Style.trans}>{question}</span>
           {this.getSpace()}
-          {this.renderAnswer(this.props.answers[this.state.answer])}
+          {this.renderAnswer(answers[this.state.answer])}
         </span>
       </span>
     );
@@ -102,7 +113,7 @@ export default class CardText extends React.Component {
 
   renderAnswer(answer) {
     return (
-      <span className="t-opacity" style={{opacity: this.state.opacity}}>{this.getAnswer(answer)}.</span>
+      <span style={merge(Style.tOpacity, {opacity: this.state.opacity})}>{this.getAnswer(answer)}.</span>
     );
   }
 
