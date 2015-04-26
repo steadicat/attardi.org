@@ -22,7 +22,7 @@ export default class Index extends React.Component {
 
   render() {
     return (
-      <Page {...this.props} title="Stefano J. Attardi: I am a web [developer, designer]" description="I am Stefano J. Attardi, a web developer and designer currently working at Storehouse. Previously at Facebook. Winner of the first Node.js Knockout with Swarmation.com.">
+      <Page {...this.props} title="Stefano J. Attardi: I am a web [developer, designer]" description="I am Stefano J. Attardi, a web developer and designer. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com.">
         <div style={wrapperStyle}>
           <div style={picStyle} />
           <h1 style={headlineStyle}>Stefano J. Attardi</h1>
