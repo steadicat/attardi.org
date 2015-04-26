@@ -52,7 +52,7 @@ export default class Columns extends React.Component {
     }, this);
 
     const els = [];
-    for (const i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) {
       els.push(
         <div style={merge(Style.ib, Style.top, {marginTop: this._staggering[i]})} key={i}>
           {cols[i]}

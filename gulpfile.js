@@ -4,7 +4,6 @@ const gulpWebpack = require('gulp-webpack');
 const webpack = require('webpack');
 const uglify = require('gulp-uglify');
 const gzip = require('gulp-gzip');
-const jshint = require('gulp-jshint');
 const s3 = require('gulp-s3');
 const revall = require('gulp-rev-all');
 const glob = require('glob');

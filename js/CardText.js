@@ -55,7 +55,7 @@ export default class CardText extends React.Component {
 
   longestAnswer() {
     let longest = '';
-    for (const i = 0, l = this.props.answers.length; i < l; i++) {
+    for (let i = 0, l = this.props.answers.length; i < l; i++) {
       if (this.props.answers[i].length > longest.length) {
         longest = this.props.answers[i];
       }
@@ -120,5 +120,3 @@ export default class CardText extends React.Component {
 }
 
 CardText.defaultProps = {space: ' '};
-
-
