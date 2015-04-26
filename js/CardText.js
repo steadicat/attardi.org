@@ -5,6 +5,9 @@ import merge from './merge';
 const HasTouch = (typeof window === 'undefined' ? false : ('ontouchstart' in window));
 
 export default class CardText extends React.Component {
+  displayName() {
+    return 'CardText';
+  }
 
   constructor(props) {
     super(props);
@@ -37,7 +40,7 @@ export default class CardText extends React.Component {
       const index = (this.state.answer + 1) % this.props.answers.length;
       this.setState({
         answer: index,
-        opacity: 1
+        opacity: 1,
       });
       this.props.onLinkChange && this.props.onLinkChange(this.getAnswerLink(this.props.answers[index]));
     } else {
@@ -77,6 +80,8 @@ export default class CardText extends React.Component {
 
   render() {
     const {question, color, answers, space, autoStart, style, ...props} = this.props;
+    autoStart;
+    space;
     return (
       <span {...props} style={style}>
         {question}
@@ -120,3 +125,13 @@ export default class CardText extends React.Component {
 }
 
 CardText.defaultProps = {space: ' '};
+
+CardText.propTypes = {
+  space: React.PropTypes.string,
+  answers: React.PropTypes.array,
+  autoStart: React.PropTypes.bool,
+  style: React.PropTypes.object,
+  color: React.PropTypes.string,
+  question: React.PropTypes.string,
+  onLinkChange: React.PropTypes.func,
+};

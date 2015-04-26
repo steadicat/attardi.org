@@ -27,3 +27,7 @@ deploy: dist
 clean:
 	rm -rf dist
 	mkdir -p dist
+
+.PHONY: lint
+lint:
+	./node_modules/.bin/eslint js/*.js js/**/*.js

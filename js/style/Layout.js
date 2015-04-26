@@ -37,10 +37,10 @@ Layout.float = {float: 'left'};
 // Position
 
 Layout.zero = {top: 0, right: 0, bottom: 0, left: 0};
-Layout.topLeft = {top: 0, left: 0}
-Layout.topRight = {top: 0, right: 0}
-Layout.bottomLeft = {bottom: 0, left: 0}
-Layout.bottomRight = {bottom: 0, right: 0}
+Layout.topLeft = {top: 0, left: 0};
+Layout.topRight = {top: 0, right: 0};
+Layout.bottomLeft = {bottom: 0, left: 0};
+Layout.bottomRight = {bottom: 0, right: 0};
 Layout.offscreen = merge(Layout.abs, {top: -10000});
 
 // Size

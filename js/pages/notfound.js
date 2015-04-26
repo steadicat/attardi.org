@@ -11,10 +11,13 @@ const answers = [
   ['to my Twitter', 'https://www.twitter.com/steadicat'],
   ['to Hacker News', 'https://news.ycombinator.com'],
   ['to Swarmation', 'http://www.swarmation.com'],
-  ['to Google', 'http://www.google.com']
+  ['to Google', 'http://www.google.com'],
 ];
 
 export default class NotFound extends React.Component {
+  displayName() {
+    return 'NotFound';
+  }
 
   render() {
     return (
@@ -37,10 +40,14 @@ export default class NotFound extends React.Component {
 if (typeof document !== 'undefined') {
   const component = React.render(<NotFound js="/js/notfound.js" />, document);
   setTimeout(function() {
-   if (document.referrer) {
-     answers.splice(1, 0, ['where you came from', document.referrer]);
-     component.setProps({answers});
-   }
+    if (document.referrer) {
+      answers.splice(1, 0, ['where you came from', document.referrer]);
+      component.setProps({answers});
+    }
   }, 0);
 }
+
+NotFound.propTypes = {
+  answers: React.PropTypes.object,
+};
 

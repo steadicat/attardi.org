@@ -6,12 +6,14 @@
   "repository": "git://github.com/steadicat/attardi.org",
   "author": "Stefano J. Attardi",
   "license": "BSD",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel": "*",
     "babel-core": "*",
+    "babel-eslint": "*",
     "babel-loader": "*",
+    "eslint": "*",
+    "eslint-plugin-react": "*",
     "glob": "*",
     "gulp": "*",
     "gulp-buffer": "*",

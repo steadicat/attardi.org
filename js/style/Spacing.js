@@ -29,7 +29,7 @@ const sizes = {
   s: unit,
   m: unit * 2,
   l: unit * 4,
-  h: unit * 8
+  h: unit * 8,
 };
 const types = {m: 'margin', p: 'padding'};
 const directions = {t: 'Top', r: 'Right', b: 'Bottom', l: 'Left'};

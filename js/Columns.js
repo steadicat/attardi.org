@@ -4,6 +4,9 @@ import merge from './merge';
 import cloneWithProps from 'react-clonewithprops';
 
 export default class Columns extends React.Component {
+  displayName() {
+    return 'Columns';
+  }
 
   constructor(props) {
     super(props);
@@ -46,7 +49,7 @@ export default class Columns extends React.Component {
 
     React.Children.forEach(this.props.children, function(child, i) {
       let col = i % n;
-      col = Math.floor((n - 1) / 2) + Math.round(col / 2) * (col % 2 == 0 ? -1 : 1);
+      col = Math.floor((n - 1) / 2) + Math.round(col / 2) * (col % 2 === 0 ? -1 : 1);
       cols[col] || (cols[col] = []);
       cols[col].push(cloneWithProps(child, {key: i}));
     }, this);
@@ -67,5 +70,12 @@ export default class Columns extends React.Component {
 Columns.defaultProps = {
   column: 222,
   margins: 40,
-  maxColumns: 4
+  maxColumns: 4,
+};
+
+Columns.propTypes = {
+  column: React.PropTypes.number,
+  margins: React.PropTypes.number,
+  maxColumns: React.PropTypes.number,
+  children: React.PropTypes.any,
 };

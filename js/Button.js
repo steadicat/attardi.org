@@ -6,6 +6,9 @@ const defaultStyle = merge(Style.noUnderline, Style.teal, Style.tealBorder, Styl
 const hoverStyle = merge(defaultStyle, Style.tealBg, Style.white);
 
 export default class Button extends React.Component {
+  displayName() {
+    return 'Button';
+  }
 
   constructor(props) {
     super(props);
@@ -15,7 +18,7 @@ export default class Button extends React.Component {
   }
 
   render() {
-    const {style, ...props} = this.props;
+    const {style, children, ...props} = this.props;
     style; // Ignored!
     return (
       <a
@@ -23,9 +26,14 @@ export default class Button extends React.Component {
         style={this.state.hover ? hoverStyle : defaultStyle}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}>
-        {this.props.children}
+        {children}
       </a>
     );
   }
 
 }
+
+Button.propTypes = {
+  style: React.PropTypes.object,
+  children: React.PropTypes.any,
+};

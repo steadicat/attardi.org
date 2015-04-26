@@ -6,6 +6,9 @@ import merge from './merge';
 const cardTextStyle = merge(Style.abs, Style.bottomLeft, Style.left, Style.mam);
 
 export default class Card extends React.Component {
+  displayName() {
+    return 'Card';
+  }
 
   constructor(props) {
     super(props);
@@ -89,8 +92,15 @@ export default class Card extends React.Component {
           onLinkChange={this.onLinkChange}
         />
       </a>
-    )
+    );
   }
 
 }
 
+Card.propTypes = {
+  space: React.PropTypes.string,
+  color: React.PropTypes.string,
+  question: React.PropTypes.string,
+  answers: React.PropTypes.array,
+  style: React.PropTypes.object,
+};

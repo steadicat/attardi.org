@@ -24,6 +24,6 @@ Main.pic = merge(
     background: `${image} no-repeat center center`,
     backgroundSize: '131px 131px',
     width: 131,
-    height: 131
+    height: 131,
   }
 );

@@ -19,6 +19,9 @@ const colophonStyle = merge(Style.textS, Style.pvh, Style.phm, Style.mbh, Style.
 const linkStyle = merge(Style.noUnderline, Style.linkColor);
 
 export default class Index extends React.Component {
+  displayName() {
+    return 'Index';
+  }
 
   render() {
     return (
@@ -51,11 +54,11 @@ export default class Index extends React.Component {
           </div>
           <div style={colophonStyle}>
             Site built with {' '}
-            <a style={linkStyle} href="http://facebook.github.io/react/">React.js</a>,
-            packaged with <a style={linkStyle} href="http://gulpjs.com/">Gulp</a>, {' '}
+            <a style={linkStyle} href="http://facebook.github.io/react/">React.js</a>{','}
+            packaged with <a style={linkStyle} href="http://gulpjs.com/">Gulp</a>{','} {' '}
             and hosted on <a style={linkStyle} href="http://aws.amazon.com/">S3+CloudFront</a>. The source is <a style={linkStyle} href="https://github.com/steadicat/attardi.org">on Github</a>.
             DNS provided by <a style={linkStyle} href="https://www.dnsmadeeasy.com/">DNS Made Easy</a>.
-            The typeface used is <a style={linkStyle} href="http://www.google.com/fonts/specimen/Questrial">Questrial</a>, by <a style={linkStyle} href="https://dribbble.com/JoePrince">Joe Prince</a>.
+            The typeface used is <a style={linkStyle} href="http://www.google.com/fonts/specimen/Questrial">Questrial</a>{','} by <a style={linkStyle} href="https://dribbble.com/JoePrince">Joe Prince</a>.
           </div>
         </div>
       </Page>
