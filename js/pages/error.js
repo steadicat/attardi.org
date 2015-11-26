@@ -1,11 +1,10 @@
-import 'babel/polyfill';
 import React from 'react';
 import Page from '../Page';
 import Card from '../Card';
 import Style from '../Style';
 import merge from '../merge';
 
-const answers = [
+const ANSWERS = [
   ['to the homepage', 'http://attardi.org'],
   ['to my Facebook', 'https://www.facebook.com/attardi'],
   ['to my Twitter', 'https://www.twitter.com/steadicat'],
@@ -16,9 +15,17 @@ const answers = [
 
 const style = merge(Style.center, Style.mah, Style.pah);
 
-export default class Error {
-  displayName() {
-    return 'Error';
+export default class Error extends React.Component {
+  constructor() {
+    super();
+    this.state = {answers: ANSWERS};
+  }
+
+  componentWillMount() {
+    if ((typeof document !== 'undefined') && document.referrer) {
+      const answers = this.state.answers.splice(1, 0, ['where you came from', document.referrer]);
+      this.setState({answers});
+    }
   }
 
   render() {
@@ -30,25 +37,11 @@ export default class Error {
             color={'gray'}
             question={'Something went wrong. Try going back'}
             space={'\n'}
-            answers={this.props.answers || answers}
+            answers={this.state.answers}
           />
         </div>
       </Page>
     );
   }
 }
-
-if (typeof document !== 'undefined') {
-  const component = React.render(<Error js="/js/error.js" />, document);
-  setTimeout(function() {
-    if (document.referrer) {
-      answers.splice(1, 0, ['where you came from', document.referrer]);
-      component.setProps({answers});
-    }
-  }, 0);
-}
-
-Error.propTypes = {
-  answers: React.PropTypes.array,
-};
 

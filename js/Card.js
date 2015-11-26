@@ -6,9 +6,6 @@ import merge from './merge';
 const cardTextStyle = merge(Style.abs, Style.bottomLeft, Style.left, Style.mam);
 
 export default class Card extends React.Component {
-  displayName() {
-    return 'Card';
-  }
 
   constructor(props) {
     super(props);
@@ -25,6 +22,7 @@ export default class Card extends React.Component {
 
   onMouseEnter() {
     this.refs.text.start();
+    this.props.onHover && this.props.onHover();
   }
 
   onMouseLeave() {

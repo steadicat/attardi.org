@@ -39,7 +39,7 @@ const image = is2x ? 'url(/img/pic@2x.jpg)' : 'url(/img/pic.jpg)';
 Main.pic = merge(
   Layout.ib,
   {
-    background: `${image} no-repeat center center`,
+    background: 'no-repeat center center',
     backgroundSize: '131px 131px',
     width: 131,
     height: 131,

@@ -1,5 +1,5 @@
-import 'babel/polyfill';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Page from '../Page';
 import Card from '../Card';
 import Style from '../Style';
@@ -38,13 +38,15 @@ export default class NotFound extends React.Component {
 }
 
 if (typeof document !== 'undefined') {
-  const component = React.render(<NotFound js="/js/notfound.js" />, document);
+  /*
+  const component = ReactDOM.render(<NotFound js="/js/notfound.js" />, document);
   setTimeout(function() {
     if (document.referrer) {
       answers.splice(1, 0, ['where you came from', document.referrer]);
       component.setProps({answers});
     }
   }, 0);
+*/
 }
 
 NotFound.propTypes = {

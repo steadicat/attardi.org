@@ -1,7 +1,6 @@
 import React from 'react';
 import Style from './Style';
 import merge from './merge';
-import cloneWithProps from 'react-clonewithprops';
 
 export default class Columns extends React.Component {
   displayName() {
@@ -51,7 +50,7 @@ export default class Columns extends React.Component {
       let col = i % n;
       col = Math.floor((n - 1) / 2) + Math.round(col / 2) * (col % 2 === 0 ? -1 : 1);
       cols[col] || (cols[col] = []);
-      cols[col].push(cloneWithProps(child, {key: i}));
+      cols[col].push(React.cloneElement(child, {key: i}));
     }, this);
 
     const els = [];

@@ -28,7 +28,7 @@ const Facts = [
       'ista', 'itone', 'tender',
     ],
   },
-  {color: 'purple', question: 'I\u2019ve lived in', answers: [
+  {color: 'orange', question: 'I\u2019ve lived in', answers: [
       'Helsinki',
       'Milan',
       'Boston',
@@ -37,7 +37,7 @@ const Facts = [
       'Cologne',
     ],
   },
-  {color: 'orange', question: 'I occasionally write about', space: '\n', answers: [
+  {color: 'purple', question: 'I occasionally write about', space: '\n', answers: [
       ['carfree cities', 'http://strh.se/stU'],
       ['pizza dough', 'http://strh.se/0zC5'],
       ['baking pizza', 'http://strh.se/0zC5'],
