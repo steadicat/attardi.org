@@ -38,9 +38,9 @@ const Facts = [
     ],
   },
   {color: 'purple', question: 'I occasionally write about', space: '\n', answers: [
-      ['carfree cities', 'http://strh.se/stU'],
-      ['pizza dough', 'http://strh.se/0zC5'],
-      ['baking pizza', 'http://strh.se/0zC5'],
+      ['carfree cities', 'https://storehouse.co/stories/s996'],
+      ['pizza dough', 'https://storehouse.co/stories/l6fd'],
+      ['baking pizza', 'https://storehouse.co/stories/l9fg'],
       ['investing', '/dilbert-black-swan-portfolio'],
     ],
   },
@@ -62,7 +62,7 @@ const Facts = [
       ['Facebook', 'https://www.facebook.com/attardi'],
       ['Twitter', 'https://www.twitter.com/steadicat'],
       ['Github', 'https://github.com/steadicat'],
-      ['Email', 'mailto:hi@attardi.org'],
+      ['Email', '/email'],
     ],
   },
 ];

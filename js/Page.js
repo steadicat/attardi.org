@@ -20,7 +20,7 @@ export default class Page extends React.Component {
         <head>
           <title>{title}</title>
           <link
-            href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css"
+            href="//fonts.googleapis.com/css?family=Rubik" rel="stylesheet" type="text/css"
           />
           <link rel="shortcut icon" href={assets['images/icon.png']} type="image/png" />
           <link rel="apple-touch-icon" href={assets['images/icon.png']} />

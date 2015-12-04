@@ -4,6 +4,9 @@ runtime: go
 api_version: go1
 
 handlers:
+- url: /email
+  script: _go_app
+  secure: always
 - url: /(.*)\.js
   static_files: build/\1.js
   upload: build/.*\.js

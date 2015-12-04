@@ -25,7 +25,7 @@ export default class CardText extends React.Component {
   start() {
     if (this._interval) return;
     this.next();
-    this._interval = setInterval(this.next, 600);
+    this._interval = setInterval(this.next, 700);
   }
 
   stop() {

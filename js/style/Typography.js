@@ -22,7 +22,7 @@ Typography.loose = {letterSpacing: '0.3px'};
 
 Typography.default = merge(
   Typography.textM,
-  {fontFamily: 'Questrial, sans-serif'}
+  {fontFamily: 'Rubik, sans-serif'}
 );
 
 Typography.aa = {

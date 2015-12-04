@@ -58,6 +58,7 @@ export default class Card extends React.Component {
       Style.textM,
       Style.card,
       Style.left,
+      Style.noUnderline,
       Style[this.getColorClass()],
       Style[`${this.getColorClass()}Border`],
       Style[`${this.getBackgroundClass()}Bg`],

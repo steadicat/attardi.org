@@ -12,7 +12,7 @@ import Tracking from '../Tracking';
 const wrapperStyle = merge(Style.center, Style.aa);
 const picStyle = merge(Style.pic, Style.mbm, Style.mth);
 const headlineStyle = merge(Style.inherit, Style.textXL, Style.tight, Style.mbm);
-const subtitleWrapperStyle = merge(Style.inherit, Style.mbh, Style.purple, Style.textM);
+const subtitleWrapperStyle = merge(Style.inherit, Style.mbh, Style.pbh, Style.purple, Style.textM);
 const subtitleStyle = merge(Style.ib, Style.rel, Style.nowrap);
 const footerStyle = merge(Style.mvh, Style.pth);
 const colophonStyle = merge(Style.textS, Style.pvh, Style.phm, Style.mbh, Style.lightGray, Style.loose, Style.ib, {maxWidth: 360});
@@ -55,7 +55,7 @@ export default class Index extends React.Component {
             })}
           </Columns>
           <div style={footerStyle}>
-            <Button onClick={this.trackConversion} href="https://www.facebook.com/messages/attardi">
+            <Button onClick={this.trackConversion} href="/email">
               Hire me
             </Button>
           </div>
@@ -65,7 +65,7 @@ export default class Index extends React.Component {
             processed with <a style={linkStyle} href="https://webpack.github.io/">Webpack</a>+<a style={linkStyle} href="https://babeljs.io/">Babel</a>{','} {' '}
             and hosted on <a style={linkStyle} href="https://cloud.google.com/appengine/">Google App Engine</a>. The source is <a style={linkStyle} href="https://github.com/steadicat/attardi.org">on Github</a>.
             DNS provided by <a style={linkStyle} href="https://www.cloudflare.com/">CloudFlare</a>.
-            The typeface used is <a style={linkStyle} href="http://www.google.com/fonts/specimen/Questrial">Questrial</a>{','} by <a style={linkStyle} href="https://dribbble.com/JoePrince">Joe Prince</a>.
+            The typeface used is <a style={linkStyle} href="http://www.google.com/fonts/specimen/Rubik">Rubik</a>{','} by <a style={linkStyle} href="http://hubertfischer.com/">Hubert & Fischer</a>.
           </div>
         </div>
       </Page>
