@@ -15,7 +15,7 @@ const headlineStyle = merge(Style.inherit, Style.textXL, Style.tight, Style.mbm)
 const subtitleWrapperStyle = merge(Style.inherit, Style.mbh, Style.pbh, Style.purple, Style.textM);
 const subtitleStyle = merge(Style.ib, Style.rel, Style.nowrap);
 const footerStyle = merge(Style.mvh, Style.pth);
-const colophonStyle = merge(Style.textS, Style.pvh, Style.phm, Style.mbh, Style.lightGray, Style.loose, Style.ib, {maxWidth: 360});
+const colophonStyle = merge(Style.textS, Style.pvh, Style.phm, Style.mbh, Style.lightGray, Style.loose, Style.ib, {maxWidth: 400});
 const linkStyle = merge(Style.noUnderline, Style.linkColor);
 const is2x = 2;
 
