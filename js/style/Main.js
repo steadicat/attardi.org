@@ -33,8 +33,7 @@ Main.tOpacity = prefix({transition: 'opacity 0.6s'});
 
 Main.card = {width: 210, height: 240};
 
-const is2x = true; //typeof devicePixelRatio !== 'undefined' && devicePixelRatio >= 2;
-const image = is2x ? 'url(/img/pic@2x.jpg)' : 'url(/img/pic.jpg)';
+
 
 Main.pic = merge(
   Layout.ib,

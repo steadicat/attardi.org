@@ -18,10 +18,12 @@ handlers:
   static_files: build/index.html
   upload: build/index.html
   mime_type: text/html; charset=UTF-8
+  secure: always
 - url: /.*
   static_files: build/errors/notfound.html
   upload: build/errors/notfound.html
   mime_type: text/html; charset=UTF-8
+  secure: always
 
 error_handlers:
 - file: build/errors/error.html

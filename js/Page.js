@@ -20,7 +20,7 @@ export default class Page extends React.Component {
         <head>
           <title>{title}</title>
           <link
-            href="http://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css"
+            href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css"
           />
           <link rel="shortcut icon" href={assets['images/icon.png']} type="image/png" />
           <link rel="apple-touch-icon" href={assets['images/icon.png']} />
@@ -28,10 +28,10 @@ export default class Page extends React.Component {
           <meta property="og:site_name" content="Attardi.org" />
           <meta property="og:type" content="website" />
           <meta name="description" content={description} />
-          <meta property="og:url" content={'http://attardi.org/'} />
+          <meta property="og:url" content={'https://attardi.org/'} />
           <meta property="og:title" content={title} />
           <meta property="og:description" content={description} />
-          <meta property="og:image" content={`http://attardi.org${assets['images/card.jpg']}`} />
+          <meta property="og:image" content={`https://attardi.org${assets['images/card.jpg']}`} />
         </head>
         <body style={Style.default}>
           {children}

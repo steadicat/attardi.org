@@ -5,7 +5,7 @@ import Style from '../Style';
 import merge from '../merge';
 
 const ANSWERS = [
-  ['to the homepage', 'http://attardi.org'],
+  ['to the homepage', 'https://attardi.org'],
   ['to my Facebook', 'https://www.facebook.com/attardi'],
   ['to my Twitter', 'https://www.twitter.com/steadicat'],
   ['to Hacker News', 'https://news.ycombinator.com'],

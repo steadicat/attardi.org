@@ -7,6 +7,7 @@ import CardText from '../CardText';
 import Facts from '../Facts';
 import Style from '../Style';
 import merge from '../merge';
+import Tracking from '../Tracking';
 
 const wrapperStyle = merge(Style.center, Style.aa);
 const picStyle = merge(Style.pic, Style.mbm, Style.mth);
@@ -21,11 +22,11 @@ const is2x = 2;
 export default class Index extends React.Component {
 
   trackConversion(event) {
-    analytics && analytics.track(`Clicked CTA`);
+    Tracking.event('click', 'cta');
   }
 
   trackHover(question) {
-    analytics && analytics.track(`Hovered on card ${question}`);
+    Tracking.event('hover', `card [${question}]`);
   }
 
   render() {
