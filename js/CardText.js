@@ -1,41 +1,46 @@
 import React from 'react';
-import Style from './Style';
-import merge from './merge';
+import {Inline} from 'stylistic-elements';
+import * as Colors from './Colors';
+
+/* global setInterval, clearInterval, window */
 
 const HasTouch = (typeof window === 'undefined' ? false : ('ontouchstart' in window));
 
 export default class CardText extends React.Component {
-  displayName() {
-    return 'CardText';
+  static defaultProps = {
+    space: ' ',
   }
 
   constructor(props) {
     super(props);
-    this.state = {answer: this.props.answers.length - 1, opacity: 0};
-    this.start = this.start.bind(this);
-    this.stop = this.stop.bind(this);
-    this.next = this.next.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentWillUnmount = this.componentWillUnmount.bind(this);
-    this.longestAnswer = this.longestAnswer.bind(this);
-    this.getSpace = this.getSpace.bind(this);
-    this.renderAnswer = this.renderAnswer.bind(this);
+    this.state = {
+      answer: this.props.answers.length - 1,
+      opacity: 0,
+    };
   }
 
-  start() {
-    if (this._interval) return;
+  componentDidMount() {
+    if (this.props.autoStart || HasTouch) this.start();
+  }
+
+  componentWillUnmount() {
+    this.interval && clearInterval(this.interval);
+  }
+
+  start = () => {
+    if (this.interval) return;
     this.next();
-    this._interval = setInterval(this.next, 700);
+    this.interval = setInterval(this.next, 700);
   }
 
-  stop() {
-    this._interval && clearInterval(this._interval);
-    this._interval = null;
+  stop = () => {
+    this.interval && clearInterval(this.interval);
+    this.interval = null;
     this.setState({opacity: 0});
     this.props.onLinkChange && this.props.onLinkChange(null);
   }
 
-  next() {
+  next = () => {
     if (this.state.opacity === 0) {
       const index = (this.state.answer + 1) % this.props.answers.length;
       this.setState({
@@ -48,15 +53,7 @@ export default class CardText extends React.Component {
     }
   }
 
-  componentDidMount() {
-    if (this.props.autoStart || HasTouch) this.start();
-  }
-
-  componentWillUnmount() {
-    this._interval && clearInterval(this._interval);
-  }
-
-  longestAnswer() {
+  longestAnswer = () =>  {
     let longest = '';
     for (let i = 0, l = this.props.answers.length; i < l; i++) {
       if (this.props.answers[i].length > longest.length) {
@@ -66,7 +63,7 @@ export default class CardText extends React.Component {
     return this.getAnswer(longest);
   }
 
-  getSpace() {
+  getSpace = () => {
     return this.props.space === '\n' ? <br/> : this.props.space;
   }
 
@@ -78,60 +75,50 @@ export default class CardText extends React.Component {
     return (answer instanceof Array) ? answer[1] : null;
   }
 
-  render() {
-    const {question, color, answers, space, autoStart, style, ...props} = this.props;
-    autoStart;
-    space;
+  renderAnswer = (answer, i) => {
     return (
-      <span {...props} style={style}>
-        {question}
+      <Inline
+        key={i}
+        position="absolute"
+        display="block"
+        top={0}
+        left={0}
+        color={Colors.trans}>
+        {this.props.question}
         {this.getSpace()}
-        <span style={merge(
-          Style.trans,
-          Style[`${color}Border`],
-          Style.bb
-        )}>
-          {this.longestAnswer(answers)}.
-        </span>
-        {answers.map(function(answer, i) {
-          return (
-            <span key={i} style={merge(Style.abs, Style.block, Style.topLeft, Style.trans)}>
-              <span style={Style.trans}>{question}</span>
-              {this.getSpace()}
-              <span style={merge(
-                Style[`${color}Border`],
-                Style.bb
-              )}>
-                {this.getAnswer(answer)}.
-              </span>
-            </span>
-          );
-        }.bind(this))}
-        <span style={merge(Style.abs, Style.topLeft)}>
-          <span style={Style.trans}>{question}</span>
-          {this.getSpace()}
-          {this.renderAnswer(answers[this.state.answer])}
-        </span>
-      </span>
+        {this.getAnswer(answer)}
+        .
+      </Inline>
     );
   }
 
-  renderAnswer(answer) {
+  render() {
+    const {question, color, answers, space, autoStart, ...props} = this.props;
+    autoStart;
+    space;
     return (
-      <span style={merge(Style.tOpacity, {opacity: this.state.opacity})}>{this.getAnswer(answer)}.</span>
+      <Inline color={Colors[color]} {...props}>
+        {question}
+        {this.getSpace()}
+        <Inline
+          color={Colors.trans}
+          borderBottomStyle="solid"
+          borderBottomWidth={2}
+          borderBottomColor={Colors[color]}>
+          {this.longestAnswer(answers)}.
+        </Inline>
+        {answers.map(this.renderAnswer)}
+        <Inline position="absolute" top={0} left={0}>
+          <Inline color={Colors.trans}>{question}</Inline>
+          {this.getSpace()}
+          <Inline
+            transition="opacity 0.6s"
+            opacity={this.state.opacity}>
+            {this.getAnswer(answers[this.state.answer])}.
+          </Inline>
+        </Inline>
+      </Inline>
     );
   }
 
 }
-
-CardText.defaultProps = {space: ' '};
-
-CardText.propTypes = {
-  space: React.PropTypes.string,
-  answers: React.PropTypes.array,
-  autoStart: React.PropTypes.bool,
-  style: React.PropTypes.object,
-  color: React.PropTypes.string,
-  question: React.PropTypes.string,
-  onLinkChange: React.PropTypes.func,
-};

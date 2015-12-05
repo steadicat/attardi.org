@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {Block} from 'stylistic-elements';
+import * as Spacing from '../Spacing';
 import Page from '../Page';
 import Card from '../Card';
-import Style from '../Style';
-import merge from '../merge';
 
-const answers = [
+const ANSWERS = [
   ['to the homepage', 'https://attardi.org'],
   ['to my Facebook', 'https://www.facebook.com/attardi'],
   ['to my Twitter', 'https://www.twitter.com/steadicat'],
@@ -15,41 +14,32 @@ const answers = [
 ];
 
 export default class NotFound extends React.Component {
-  displayName() {
-    return 'NotFound';
+
+  constructor() {
+    super();
+    this.state = {answers: []};
+  }
+
+  componentWillMount() {
+    /* global document */
+    if (typeof document !== 'undefined' && document.referrer) {
+      this.setState({answers: ['where you came from', document.referrer]});
+    }
   }
 
   render() {
     return (
-      <Page {...this.props} title="Not found" module="notfound">
-        <div style={merge(Style.center, Style.mah, Style.pah)}>
+      <Page title="Not found" {...this.props}>
+        <Block textAlign="center" margin={Spacing.h} padding={Spacing.h}>
           <Card
-            style={Style.ib}
             color={'orange'}
             question={'This page does not exist. Go back'}
             space={'\n'}
-            answers={this.props.answers || answers}
+            answers={[...this.state.answers, ...ANSWERS]}
+            display="inline-block"
           />
-        </div>
+        </Block>
       </Page>
     );
   }
-
 }
-
-if (typeof document !== 'undefined') {
-  /*
-  const component = ReactDOM.render(<NotFound js="/js/notfound.js" />, document);
-  setTimeout(function() {
-    if (document.referrer) {
-      answers.splice(1, 0, ['where you came from', document.referrer]);
-      component.setProps({answers});
-    }
-  }, 0);
-*/
-}
-
-NotFound.propTypes = {
-  answers: React.PropTypes.object,
-};
-

@@ -51,4 +51,7 @@ build: clean buildjs buildimg buildstatic buildhtml buildconfig
 deploy: build
 	goapp deploy
 
-.PHONY: clean dirs devjs devhtml devserver dev buildconfig buildjs buildhtml buildimg build deploy
+lint:
+	$(NODE_BIN)/eslint js/**/*.js
+
+.PHONY: clean dirs devjs devhtml devserver dev buildconfig buildjs buildhtml buildimg build deploy lint

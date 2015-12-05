@@ -1,8 +1,8 @@
 import React from 'react';
+import {Block} from 'stylistic-elements';
+import * as Spacing from '../Spacing';
 import Page from '../Page';
 import Card from '../Card';
-import Style from '../Style';
-import merge from '../merge';
 
 const ANSWERS = [
   ['to the homepage', 'https://attardi.org'],
@@ -13,33 +13,32 @@ const ANSWERS = [
   ['to Google', 'http://www.google.com'],
 ];
 
-const style = merge(Style.center, Style.mah, Style.pah);
-
 export default class Error extends React.Component {
+
   constructor() {
     super();
-    this.state = {answers: ANSWERS};
+    this.state = {answers: []};
   }
 
   componentWillMount() {
-    if ((typeof document !== 'undefined') && document.referrer) {
-      const answers = this.state.answers.splice(1, 0, ['where you came from', document.referrer]);
-      this.setState({answers});
+    /* global document */
+    if (typeof document !== 'undefined' && document.referrer) {
+      this.setState({answers: ['where you came from', document.referrer]});
     }
   }
 
   render() {
     return (
-      <Page {...this.props} title="Error" module="error">
-        <div style={style}>
+      <Page title="Not found" {...this.props}>
+        <Block textAlign="center" margin={Spacing.h} padding={Spacing.h}>
           <Card
-            style={Style.ib}
-            color={'gray'}
-            question={'Something went wrong. Try going back'}
-            space={'\n'}
-            answers={this.state.answers}
+            color="gray"
+            question="Something went wrong. Try going back"
+            space="\n"
+            answers={[...this.state.answers, ...ANSWERS]}
+            display="inline-block"
           />
-        </div>
+        </Block>
       </Page>
     );
   }

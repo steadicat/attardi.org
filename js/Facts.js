@@ -1,6 +1,3 @@
-import React from 'react';
-React;
-
 const Facts = [
   {color: 'blue', question: 'In the past I worked at',
     answers: [
@@ -33,7 +30,7 @@ const Facts = [
       'Milan',
       'Boston',
       'Pisa',
-      <span style={{whiteSpace: 'nowrap'}}>San Francisco</span>,
+      'San\xa0Francisco',
       'Cologne',
     ],
   },
@@ -58,7 +55,7 @@ const Facts = [
       'singing',
     ],
   },
-  {color: 'blue', question: 'You can reach me on', space: '\n', answers: [
+  {color: 'blue', question: 'You can reach me via', space: '\n', answers: [
       ['Facebook', 'https://www.facebook.com/attardi'],
       ['Twitter', 'https://www.twitter.com/steadicat'],
       ['Github', 'https://github.com/steadicat'],
@@ -66,5 +63,4 @@ const Facts = [
     ],
   },
 ];
-
 export default Facts;

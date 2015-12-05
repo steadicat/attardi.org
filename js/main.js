@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-/* global require */
+/* global require, document */
+
 export const pages = {
   '/': require('./pages/index'),
   '/error': require('./pages/error'),

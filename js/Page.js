@@ -1,14 +1,11 @@
 import React from 'react';
-import Tracking from './Tracking';
-import Style from './Style';
+import {ResetElement} from 'stylistic-elements';
+import * as Tracking from './Tracking';
+import * as Type from './Type';
 
 const LOCAL_ASSETS = (process.env.NODE_ENV !== 'production') || (process.env.LOCAL_ASSETS === 'true');
 
 export default class Page extends React.Component {
-  displayName() {
-    return 'Page';
-  }
-
   componentDidMount() {
     Tracking.init();
   }
@@ -33,11 +30,11 @@ export default class Page extends React.Component {
           <meta property="og:description" content={description} />
           <meta property="og:image" content={`https://attardi.org${assets['images/card.jpg']}`} />
         </head>
-        <body style={Style.default}>
+        <ResetElement tag="body" color="#000" {...Type.def}>
           {children}
           <script src={LOCAL_ASSETS ? 'http://localhost:8081/main.js' : '/' + assets['main.js']} />
           <script dangerouslySetInnerHTML={{__html: `Attardi.init(${inlineJSON(path)}, ${inlineJSON(assets)})`}} />
-        </body>
+        </ResetElement>
       </html>
     );
   }

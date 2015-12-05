@@ -1,7 +1,4 @@
-const Tracking = {};
-export default Tracking;
-
-Tracking.init = function() {
+export function init() {
   /* eslint-disable */
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -21,7 +18,7 @@ Tracking.init = function() {
 
 };
 
-Tracking.event = (type, info) => {
+export function event(type, info) {
   /* global window */
   window.ga && window.ga('send', 'event', type, info);
 };

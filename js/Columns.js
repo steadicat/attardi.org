@@ -1,20 +1,19 @@
 import React from 'react';
-import Style from './Style';
-import merge from './merge';
+import {Block, InlineBlock} from 'stylistic-elements';
+
+/* global window, document, setTimeout */
 
 export default class Columns extends React.Component {
-  displayName() {
-    return 'Columns';
+  static defaultProps = {
+    column: 222,
+    margins: 40,
+    maxColumns: 4,
   }
 
   constructor(props) {
     super(props);
-    this._staggering = [60, 0, 80, 40];
+    this.staggering = [60, 0, 80, 40];
     this.state = {width: 1000};
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentWillUnmount = this.componentWillUnmount.bind(this);
-    this.updateWidth = this.updateWidth.bind(this);
-    this.getNumberOfColumns = this.getNumberOfColumns.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +29,7 @@ export default class Columns extends React.Component {
     window.removeEventListener('orientationchange', this.updateWidth);
   }
 
-  updateWidth() {
+  updateWidth = () => {
     this.setState({width: this.getWidth()});
   }
 
@@ -38,7 +37,7 @@ export default class Columns extends React.Component {
     return typeof document === 'undefined' ? 1000 : document.body.clientWidth;
   }
 
-  getNumberOfColumns() {
+  getNumberOfColumns = () => {
     return Math.min(this.props.maxColumns, Math.floor((this.state.width - 2 * this.props.margins) / this.props.column));
   }
 
@@ -56,25 +55,12 @@ export default class Columns extends React.Component {
     const els = [];
     for (let i = 0; i < n; i++) {
       els.push(
-        <div style={merge(Style.ib, Style.top, {marginTop: this._staggering[i]})} key={i}>
+        <InlineBlock verticalAlign="top" marginTop={this.staggering[i]} key={i}>
           {cols[i]}
-        </div>
+        </InlineBlock>
       );
     }
 
-    return <div {...this.props}>{els}</div>;
+    return <Block {...this.props}>{els}</Block>;
   }
 }
-
-Columns.defaultProps = {
-  column: 222,
-  margins: 40,
-  maxColumns: 4,
-};
-
-Columns.propTypes = {
-  column: React.PropTypes.number,
-  margins: React.PropTypes.number,
-  maxColumns: React.PropTypes.number,
-  children: React.PropTypes.any,
-};

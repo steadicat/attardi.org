@@ -1,39 +1,39 @@
 import React from 'react';
-import merge from './merge';
-import Style from './Style';
-
-const defaultStyle = merge(Style.noUnderline, Style.teal, Style.tealBorder, Style.ba, Style.ib, Style.rounded, Style.pvm, Style.phh, Style.hoverTealBg, Style.hoverWhite);
-const hoverStyle = merge(defaultStyle, Style.tealBg, Style.white);
+import {Inline} from 'stylistic-elements';
+import * as Colors from './Colors';
+import * as Spacing from './Spacing';
 
 export default class Button extends React.Component {
-  displayName() {
-    return 'Button';
-  }
 
   constructor(props) {
     super(props);
     this.state = {hover: false};
-    this.onMouseEnter = () => this.setState({hover: true});
-    this.onMouseLeave = () => this.setState({hover: false});
   }
 
+  onMouseEnter = () => this.setState({hover: true})
+  onMouseLeave = () => this.setState({hover: false})
+
   render() {
-    const {style, children, ...props} = this.props;
-    style; // Ignored!
     return (
-      <a
-        {...props}
-        style={this.state.hover ? hoverStyle : defaultStyle}
+      <Inline
+        tag="a"
+        textDecoration="none"
+        color={this.state.hover ? Colors.white : Colors.teal}
+        backgroundColor={this.state.hover ? Colors.teal : Colors.white}
+        borderColor={Colors.teal}
+        borderStyle="solid"
+        borderWidth={2}
+        display="inline-block"
+        borderRadius={5}
+        paddingTop={Spacing.m}
+        paddingBottom={Spacing.m}
+        paddingLeft={Spacing.h}
+        paddingRight={Spacing.h}
         onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}>
-        {children}
-      </a>
+        onMouseLeave={this.onMouseLeave}
+        {...this.props}
+      />
     );
   }
 
 }
-
-Button.propTypes = {
-  style: React.PropTypes.object,
-  children: React.PropTypes.any,
-};

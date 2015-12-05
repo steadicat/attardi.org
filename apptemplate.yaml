@@ -7,6 +7,9 @@ handlers:
 - url: /email
   script: _go_app
   secure: always
+- url: /labels2?
+  script: _go_app
+  secure: always
 - url: /(.*)\.js
   static_files: build/\1.js
   upload: build/.*\.js
