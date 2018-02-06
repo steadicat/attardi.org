@@ -8,6 +8,8 @@ func init() {
 	http.HandleFunc("/email", emailHandler)
 	http.HandleFunc("/labels", labelsHandler)
 	http.HandleFunc("/labels2", labelsHandler)
+  http.HandleFunc("/labels/", labelsHandler)
+  http.HandleFunc("/labels2/", labelsHandler)
 }
 
 func emailHandler(w http.ResponseWriter, r *http.Request) {

@@ -1,0 +1,16 @@
+application: attardi-org
+module: maria
+version: 1
+runtime: go
+api_version: go1
+
+handlers:
+- url: /.*
+  static_files: index.html
+  upload: index.html
+  mime_type: text/html; charset=UTF-8
+  secure: always
+
+skip_files:
+- ^Makefile$
+- ^(.*/)?\..*$
