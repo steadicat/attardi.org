@@ -1,0 +1,11 @@
+application: attardi-org
+
+dispatch:
+  - url: "maria.attardi.org/*"
+    module: maria
+  - url: "*.maria.attardi.org/*"
+    module: maria
+  - url: "attardi.org/*"
+    module: default
+  - url: "*.attardi.org/*"
+    module: www
