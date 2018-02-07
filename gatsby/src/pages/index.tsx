@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View} from 'glamor/jsxstyle';
-import {Title, Subtitle, Link, Heading, Subheading, Date, Button} from '../components/text';
+import {Title, Subtitle, Link, Heading, Subheading, DateView, Button} from '../components/text';
 import {accentColor, gray, white, linkColor} from '../design/colors';
 import {sansXS, sansCaps, sansM, sansBoldS, sansBoldL} from '../design/text';
 import {unit} from '../design/layout';
@@ -61,10 +61,10 @@ const NewTag = () => (
 
 const ProjectRow = (url, title, description, isNew = false) => [
   <Subheading media={['(max-width: 480px)', {marginTop: unit}]}>
-    <Link href={url}>{title}</Link>
+    <Link href={url}>{title}</Link> {isNew && <NewTag />}
   </Subheading>,
   <View color={gray} {...sansM}>
-    {isNew && <NewTag />} {description}
+    {description}
   </View>,
 ];
 
@@ -81,9 +81,10 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
     <Heading marginTop={unit * 2}>Articles</Heading>
     {edges.map(({node: {frontmatter: {title, date}, fields: {slug}}}, i) => [
       <Heading key={`${i}0`} marginTop={unit} marginBottom={unit / 4}>
-        <Link to={slug}>{title}</Link> <NewTag />
+        <Link to={slug}>{title}</Link>{' '}
+        {new Date() - new Date(date) < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
       </Heading>,
-      <Date key={`${i}1`}>{date}</Date>,
+      <DateView key={`${i}1`} date={date} />,
     ])}
     <View
       display="grid"

@@ -16,6 +16,7 @@
     "gatsby-plugin-glamor": "^1.6.11",
     "gatsby-plugin-react-helmet": "^2.0.4",
     "gatsby-plugin-typescript": "^1.4.10",
+    "gatsby-remark-autolink-headers": "^1.4.11",
     "gatsby-remark-prismjs": "^1.2.12",
     "gatsby-source-filesystem": "^1.5.18",
     "gatsby-transformer-remark": "^1.7.30",

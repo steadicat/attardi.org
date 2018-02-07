@@ -1,5 +1,5 @@
 ---
-title: "How I Shipped a Neural Network on iOS with CoreML, PyTorch, and React Native"
+title: "How I Shipped a Neural Network on iOS with CoreML, PyTorch, and\xa0React\xa0Native"
 date: "2018-02-09"
 ---
 
@@ -169,7 +169,7 @@ Problem way harder than I thought.
 
 ### Deploying
 
-#### Adjusting the Model for ONNX and CoreML
+#### Adjustments for ONNX/CoreML
 
 > ##### Casting and transformations
 

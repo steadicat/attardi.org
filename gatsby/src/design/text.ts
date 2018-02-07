@@ -1,8 +1,8 @@
 import {unit} from '../design/layout';
 
-export const xl = {fontSize: 36, lineHeight: `${unit * 2}px`};
+export const xl = {fontSize: 36, lineHeight: `${unit * 2.5}px`};
 export const l = {fontSize: 28, lineHeight: `${unit * 2}px`};
-export const m = {fontSize: 22, lineHeight: `${unit * 1.5}px`};
+export const m = {fontSize: 24, lineHeight: `${unit * 1.5}px`};
 export const s = {fontSize: 18, lineHeight: `${unit * 1.5}px`};
 export const xs = {fontSize: 12, lineHeight: `${unit}px`};
 
@@ -20,6 +20,7 @@ const sansExtraBold = {fontFamily: sans, fontWeight: 600};
 const monoRegular = {fontFamily: mono, fontWeight: 400};
 
 export const sansXS = {...sansRegular, ...xs};
+export const sansS = {...sansRegular, ...s};
 export const sansM = {...sansRegular, ...m};
 export const serifS = {...serifRegular, ...s};
 

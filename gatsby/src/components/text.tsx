@@ -8,20 +8,22 @@ import {
   sansBoldL,
   sansXS,
   sansM,
+  sansS,
 } from '../design/text';
 import {unit} from '../design/layout';
 import GatsbyLink from 'gatsby-link';
-import {
-  linkColor,
-  hoverLinkColor,
-  activeLinkColor,
-  gray,
-  white,
-  linkBorderColor,
-} from '../design/colors';
+import {linkColor, hoverLinkColor, activeLinkColor, gray, white} from '../design/colors';
 
-export const Title = ({children}: {children: React.ReactNode}) => (
-  <View component="h1" {...sansBoldXL} marginTop={unit} marginBottom={unit}>
+export const Title = ({
+  children,
+  marginTop = 0,
+  marginBottom = 0,
+}: {
+  children: React.ReactNode;
+  marginTop?: number;
+  marginBottom?: number;
+}) => (
+  <View component="h1" {...sansBoldXL} marginTop={marginTop} marginBottom={marginBottom}>
     {children}
   </View>
 );
@@ -80,9 +82,28 @@ export const Subheading = ({
   </View>
 );
 
-export const Date = ({children}: {children: React.ReactNode}) => (
-  <View component="h3" {...sansXS} marginTop={0} marginBottom={0} color={gray}>
-    {children}
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'Setember',
+  'October',
+  'November',
+  'December',
+];
+
+function format(date: Date) {
+  return `${months[date.getMonth()]} ${date.getDate()},  ${date.getFullYear()}`;
+}
+
+export const DateView = ({date}: {date: string}) => (
+  <View component="h3" {...sansXS} fontSize={16} marginBottom={0} color={gray} marginTop={unit / 2}>
+    {format(new Date(date))}
   </View>
 );
 
