@@ -1,13 +1,13 @@
 ---
 title: "How I Shipped a Neural Network on iOS with CoreML, PyTorch, and React Native"
-date: "February 12, 2018"
+date: "2018-02-09"
 ---
 
 ### The Challenge
 
 I recently built a little iOS app using React Native for mechanical watch aficionados to track the accuracy of their watches over time.
 
-> #### Mechanical Watch Rabbit Hole
+> ##### Mechanical Watch Rabbit Hole
 > If you don’t own a mechanical watch, you may be questioning the whole point of this app, and the whole point of owning an expensive, inaccurate watch in the first place. What ultimately sold me was realizing that a mechanical watch is a piece of jewelry that’s also a perfect synergy of design and engineering in physical form. I’ve been trying to marry the two my entire life (hence the name of my consulting company, Rational Creation), so wearing both on my wrist just feels right.
 
 One of the main features of the app is a chart of the measurements you’ve taken, with trendlines estimating how your watch is performing.
@@ -30,14 +30,14 @@ Since I was building an iOS app, CoreML was the obvious choice. It’s the only 
 
 Another huge benefit of CoreML is that it’s built-in to the OS, so I wouldn’t need to worry about compiling, linking, and shipping binaries of sprawling ML libraries with my little app.
 
-> #### CoreML Caveats
+> ##### CoreML Caveats
 > Unfortunately CoreML is still very new, and its tools are quite rough. CoreML itself only supports certain kinds of layers and operations. The tools that Apple ships to convert trained models into CoreML models support a subset of those. Plus they only officially support converting neural networks trained with Keras. On top of that, Keras models don’t seem to perform great on CoreML. I did some inspecting of the converted Keras models and there’s a great deal of time spent converting data into Caffe operations and back. It seems likely that Apple uses Caffe internally, and Keras support was tacked on. Caffe is great for vision, but not so great for the tasks I typically tackle (NLP).
 
 I’ve had mixed luck with converting Keras models to CoreML (see box above), so I’ve been on the hunt for other ways to generate CoreML models. Meanwhile, I’d been looking for an excuse to try out PyTorch. Somewhere along my research I stumbled upon ONNX, a proposed standard exchange format for trained neural network models. PyTorch support is available from day one. Somehow it occurred to me to look for an ONNX to CoreML converter,  and sure enough, one exists!
 
 I finally had all the pieces of the puzzle. I knew from my experience with Keras/Tensorflow and CoreML that so many things could still go wrong.
 
-> ####  What about Tensorflow?
+> #####  What about Tensorflow?
 > Like most people, I built and trained most of my neural networks with TensorFlow. honeymoon phase had long faded. I was tired of the kitchen-sink approach to library management, the sprawling and competing and messy APIs, the huge binaries, and the extremely slow startup times when training.
 > TensorFlow APIs are a sprawling mess. Keras  mitigates some of that problem, but it's a leaky abstraction. Debugging issues is hard if you don’t understand how things work behind the scenes.
 > As ex-Facebook engineer, I'm biased towards anything Facebook produces, so I was eager to give PyTorch a try, and I’m very glad I did.
@@ -57,7 +57,7 @@ Thankfully, the problem at hand is relatively easy for a neural network (or so I
 
 I had the perfect UI already. I had built it to tweak the parameters of my brute-force algorithm and see the effects in real time. It didn’t take me long to convert it into a UI for generating training examples. With a few clicks of the mouse and a `JSON.stringify` call I had enough of a dataset to jump into Python.
 
-> #### Parcel
+> ##### Parcel
 
 ### Preprocessing the Data
 
@@ -90,7 +90,7 @@ def encode(points, padded_length=100):
     return input_tensor
 ```
 
-> #### Order of coordinates in PyTorch vs Tensorflow
+> ##### Order of coordinates in PyTorch vs Tensorflow
 > PyTorch flips the coordinates: the channel (x/y in this case, r/g/b in case of an image) comes before the position (i).
 
 #### Normalization
@@ -131,9 +131,9 @@ def encode(points, padded_length=100):
     return input_tensor
 ```
 
-> #### Processing inside the network
+> ##### Processing inside the network
 
-> #### What about feature engineering
+> ##### What about feature engineering
 
 ### The Model
 
@@ -147,18 +147,18 @@ The tricky thing when working with convolution is that they are by their nature 
 
 The goal is to slowly transform the shape of the input into the shape you need for the output.
 
-> #### No fully connected layers?
+> ##### No fully connected layers?
 
-> #### What about RNNs?
+> ##### What about RNNs?
 
 ### Training
 
 #### PyTorch DataLoader
 #### Shuffling
 #### Setting Aside a Validation Set
-> #### Test set
+> ##### Test set
 
-> #### Spot Instances
+> ##### Spot Instances
 > Another aside.
 
 #### PyTorch Tools
@@ -171,14 +171,14 @@ Problem way harder than I thought.
 
 #### Adjusting the Model for ONNX and CoreML
 
-> #### Casting and transformations
+> ##### Casting and transformations
 
 
 #### ONNX
 
 Installing the correct version of ONNX.
 
-> #### Makefile
+> ##### Makefile
 #### CoreML Tools
 
 #### CoreML

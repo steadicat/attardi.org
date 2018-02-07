@@ -1,9 +1,13 @@
 import * as React from 'react';
-import Link from 'gatsby-link';
+import {View} from 'glamor/jsxstyle';
+import {Title, Subtitle, Link, Heading, Subheading, Date, Button} from '../components/text';
+import {accentColor, gray, white, linkColor} from '../design/colors';
+import {sansXS, sansCaps, sansM, sansBoldS, sansBoldL} from '../design/text';
+import {unit} from '../design/layout';
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allMarkdownRemark {
+    allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
       edges {
         node {
           frontmatter {
@@ -41,49 +45,56 @@ interface IndexPageProps {
 }
 
 const NewTag = () => (
-  <span
-    style={{
-      border: '1px solid #ffcc00',
-      color: '#ffcc00',
-      fontWeight: 400,
-      borderRadius: 3,
-      padding: '3px 6px 1px',
-      fontSize: 10,
-      verticalAlign: 'middle',
-    }}>
-    NEW
-  </span>
+  <View
+    component="span"
+    border={`1px solid ${accentColor}`}
+    color={accentColor}
+    {...sansXS}
+    borderRadius={3}
+    padding="2px 4px"
+    verticalAlign="middle">
+    <View component="span" {...sansCaps}>
+      NEW
+    </View>
+  </View>
 );
 
 const ProjectRow = (url, title, description, isNew = false) => [
-  <div style={{textAlign: 'right'}}>
-    <a href={url}>{title}</a>
-  </div>,
-  <div>
+  <Subheading media={['(max-width: 480px)', {marginTop: unit}]}>
+    <Link href={url}>{title}</Link>
+  </Subheading>,
+  <View color={gray} {...sansM}>
     {isNew && <NewTag />} {description}
-  </div>,
+  </View>,
 ];
 
 const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
   <div>
-    <h1>Stefano J. Attardi</h1>
-    <h4>
-      UI Engineering and Design consultant. I specialize in React and React performance. I consult
-      as <a href="https://rationalcreation.com/">Rational Creation LLC</a>.
-    </h4>
-    <h3>Articles</h3>
-    {edges.map(({node: {frontmatter: {title, date}, fields: {slug}}}, i) => (
-      <div key={i}>
-        <h3 style={{marginBottom: 0}}>
-          <Link to={slug}>{title}</Link> <NewTag />
-        </h3>
-        <h5>{date}</h5>
-      </div>
-    ))}
-    <div
-      className="dim sans"
-      style={{display: 'grid', gridTemplateColumns: 'auto auto', gridGap: 20}}>
-      <h3 style={{gridColumn: '1/3', color: '#333'}}>Projects</h3>
+    <View paddingTop={unit * 2} paddingBottom={unit * 2}>
+      <Title>Stefano J. Attardi</Title>
+      <Subtitle marginTop={unit} marginBottom={unit}>
+        UI Engineering and Design consultant, specializing in React and React performance.
+        Consulting as <Link href="https://rationalcreation.com/">Rational Creation</Link>.
+      </Subtitle>
+      <Button href="/email">Get in Touch</Button>
+    </View>
+    <Heading marginTop={unit * 2}>Articles</Heading>
+    {edges.map(({node: {frontmatter: {title, date}, fields: {slug}}}, i) => [
+      <Heading key={`${i}0`} marginTop={unit} marginBottom={unit / 4}>
+        <Link to={slug}>{title}</Link> <NewTag />
+      </Heading>,
+      <Date key={`${i}1`}>{date}</Date>,
+    ])}
+    <View
+      display="grid"
+      css={{
+        gridTemplateColumns: '1fr 2fr',
+        gridGap: unit,
+      }}
+      media={['(max-width: 480px)', {display: 'block'}]}>
+      <Heading css={{gridColumn: '1/3'}} marginTop={unit * 2}>
+        Projects
+      </Heading>
       {ProjectRow('', 'Movement', 'iOS app to set and track mechanical watches.', true)}
       {ProjectRow(
         'https://pdfbymail.com/',
@@ -98,7 +109,7 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
       {ProjectRow(
         'https://swarmation.com/',
         'Swarmation',
-        'A multiplayer browser-based game, winner of the 2010 Node.js Knockout.',
+        'An in-browser real-time multiplayer game, winner of the 2010 Node.js Knockout.',
       )}
       {ProjectRow('https://justpickthis.com/', 'Just Pick This', 'A minimal product review site.')}
       {ProjectRow(
@@ -106,7 +117,9 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
         'Napkin',
         'Experimental spreadsheet-as-documents web app.',
       )}
-      <h3 style={{gridColumn: '1/3', color: '#333'}}>Code</h3>
+      <Heading css={{gridColumn: '1/3'}} marginTop={unit * 2}>
+        Code
+      </Heading>
       {ProjectRow(
         'https://github.com/steadicat/grindelwald',
         'Grindelwald',
@@ -122,7 +135,18 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
         'Vectorinox',
         'A swiss-army knife for converting and processing SVG files.',
       )}
-    </div>
+    </View>
+    <View display="flex" justifyContent="space-around" marginTop={unit * 4}>
+      <View {...sansBoldS}>
+        <Link href="/email">Email</Link>
+      </View>
+      <View {...sansBoldS}>
+        <Link href="https://twitter.com/steadicat">Twitter</Link>
+      </View>
+      <View {...sansBoldS}>
+        <Link href="https://github.com/steadicat">Github</Link>
+      </View>
+    </View>
   </div>
 );
 

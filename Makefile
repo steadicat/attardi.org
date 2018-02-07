@@ -8,7 +8,6 @@ dev: gatsby/node_modules
 
 build: gatsby/node_modules
 	cd gatsby && gatsby build
-	mv gatsby/public app/public
 
 app/app.yaml: app/app.template.yaml gatsby/buildconfig.ts
 	cd gatsby && ts-node buildconfig.ts
