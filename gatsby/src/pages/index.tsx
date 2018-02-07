@@ -51,7 +51,7 @@ const NewTag = () => (
     color={accentColor}
     {...sansXS}
     borderRadius={3}
-    padding="2px 4px"
+    padding="0px 4px 1px 5px"
     verticalAlign="middle">
     <View component="span" {...sansCaps}>
       NEW
@@ -60,10 +60,10 @@ const NewTag = () => (
 );
 
 const ProjectRow = (url, title, description, isNew = false) => [
-  <Subheading media={['(max-width: 480px)', {marginTop: unit}]}>
+  <Subheading key={url} media={['(max-width: 480px)', {marginTop: unit}]}>
     <Link href={url}>{title}</Link> {isNew && <NewTag />}
   </Subheading>,
-  <View color={gray} {...sansM}>
+  <View key={`${url}2`} color={gray} {...sansM}>
     {description}
   </View>,
 ];
@@ -78,7 +78,7 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
       </Subtitle>
       <Button href="/email">Get in Touch</Button>
     </View>
-    <Heading marginTop={unit * 2}>Articles</Heading>
+    <Heading marginTop={unit}>Articles</Heading>
     {edges.map(({node: {frontmatter: {title, date}, fields: {slug}}}, i) => [
       <Heading key={`${i}0`} marginTop={unit} marginBottom={unit / 4}>
         <Link to={slug}>{title}</Link>{' '}
@@ -96,7 +96,12 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
       <Heading css={{gridColumn: '1/3'}} marginTop={unit * 2}>
         Projects
       </Heading>
-      {ProjectRow('', 'Movement', 'iOS app to set and track mechanical watches.', true)}
+      {ProjectRow(
+        'https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157',
+        'Movement',
+        'iOS app to set and track mechanical watches.',
+        true,
+      )}
       {ProjectRow(
         'https://pdfbymail.com/',
         'Send PDF by Mail',

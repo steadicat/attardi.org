@@ -78,7 +78,7 @@ const tableOfContentsStyle = css({
   '& p': {margin: 0},
   '& a': {
     ...sansXS,
-    color: linkColor,
+    color: gray,
     textDecoration: 'none',
     transition: '0.5s color, border-color',
   },
@@ -125,13 +125,17 @@ class Body extends React.Component {
         for (const entry of entries) {
           if (entry.intersectionRatio === 1 && entry.boundingClientRect.top > 100) {
             setActiveHeaderId(entry.target.id);
-          } else if (entry.intersectionRatio < 1 && entry.boundingClientRect.top > 100) {
+          } else if (
+            entry.intersectionRatio < 1 &&
+            entry.boundingClientRect.top > 100 &&
+            activeHeaderLink
+          ) {
             const id = this.previousHeaderIDs[entry.target.id];
             id && setActiveHeaderId(id);
           }
         }
       },
-      {threshold: 1, rootMargin: '0px 0px -80% 0px'},
+      {threshold: 1, rootMargin: '0px 0px -66% 0px'},
     );
     let lastID = null;
     for (let i = 0; i < headers.length; i++) {

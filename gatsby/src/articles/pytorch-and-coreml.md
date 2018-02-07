@@ -77,10 +77,10 @@ def encode(points, padded_length=100):
     return input_tensor
 ```
 
-Know that you can already use this to start training and running your neural network, before you put in any real data. It won’t learn anything useful, but at least you’ll know your architecture works before you put more work into curating and preprocessing your dataset.
+Note that you can already use this to start training and running your neural network, before you put in any real data. It won’t learn anything useful, but at least you’ll know your architecture works before you put more work into curating and preprocessing your dataset.
 
 Next we fill in the tensor with data:
-```python
+```python{3-6}
 def encode(points, padded_length=100):
     input_tensor = torch.zeros([2, padded_length])
     for i in range(min(padded_length, len(points))):
@@ -97,7 +97,7 @@ def encode(points, padded_length=100):
 
 We could stop here, but it’s good practice to normalize your inputs so that the values cluster around 0. This is where floating point numbers have the highest precision.
 
-```python
+```python{2-16,21-24,28,29}
 def encode(points, padded_length=100):
     xs = [p[0] for p in points]
     ys = [p[1] for p in points]

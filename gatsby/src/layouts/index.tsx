@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import {View} from 'glamor/jsxstyle';
 
 import './index.css';
-import 'prismjs/themes/prism-tomorrow.css';
+import './prism.css';
 import {textColor} from '../design/colors';
 import {unit, mobileMargin, maxColumn} from '../design/layout';
 
