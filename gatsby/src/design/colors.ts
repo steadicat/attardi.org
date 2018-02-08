@@ -7,5 +7,6 @@ export const activeLinkColor = accentColor;
 
 export const gray = '#aaa';
 export const grayBackground = '#f7f7f7';
+export const darkerGrayBackground = '#f0f0f0';
 
 export const white = '#fff';

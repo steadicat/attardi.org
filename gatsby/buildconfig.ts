@@ -10,7 +10,14 @@ function handler(path, add) {
   //console.log('found', path);
   if (/^\/404/.test(path)) return;
   //url = url.replace(/^assets/, '');
-  if (/\.html$/.test(path)) {
+
+  if (/\.sass$/.test(path)) {
+    // Skip
+  } else if (/^\/component---/.test(path)) {
+    // Skip
+  } else if (/^\/path---/.test(path)) {
+    // Skip
+  } else if (/\.html$/.test(path)) {
     let url = path.replace(/\/index\.html$/, '').replace(/\.html$/, '');
     add({
       url: url + '/?',
@@ -30,8 +37,6 @@ function handler(path, add) {
       file: path,
       mime_type: 'text/css; charset=UTF-8',
     });
-  } else if (/\.sass$/.test(path)) {
-    // Skip
   } else {
     add({url: path, file: path});
   }

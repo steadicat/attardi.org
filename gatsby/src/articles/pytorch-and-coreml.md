@@ -21,7 +21,7 @@ In the app, watch owners periodically add measurements by tapping the screen whe
 > ##### Mechanical Watch Rabbit Hole
 > If you don’t own a mechanical watch, you may be questioning the whole point of this app. Hell, maybe even the whole point of owning an expensive, inaccurate watch in the first place. If you’re one of _those_, just bear with me. All you need to know is that mechanical watches are inaccurate: they gain or lose a few seconds per day if they’re good, a few minutes if they’re bad. They need to be periodically reset – they stop running if you don’t wear them or wind them. And they need to be periodically serviced. If they’re anywhere near a magnet, they become “magnetized” and become much less accurate until they’re demagnetized using a special machine.
 >
-> Watch lovers can get really attached to their timepieces, and can become obsessed about maintaining and measuring their accuracy. Knowing your watch is accurate can increase your pride in your watch tenfold. And knowing your watch is inaccurate can let you know when it’s time to take it in for service (besides getting you on time to meetings).
+> Watch lovers can get really attached to their timepieces, and can become obsessed with maintaining and measuring their accuracy. Knowing your watch is accurate can increase your pride in your watch tenfold. And knowing your watch is inaccurate can tell you it’s time to take it in for service (besides saving you from being late to meetings).
 >
 > Why bother with all this? I guess that’s a very personal question. What ultimately sold me on the appeal of mechanical watches was realizing that they are a piece of jewelry that’s also a perfect synergy of design and engineering in physical form. I’ve been trying to marry the two my entire life (hence the name of my consulting company, [Rational Creation](https://rationalcreation.com/)), so wearing both on my wrist just feels right.
 
@@ -75,7 +75,7 @@ I’d had mixed luck with converting [Keras](https://keras.io) models to CoreML 
 >
 > TensorFlow APIs are a sprawling mess. Keras mitigates that problem somewhat, but it’s a leaky abstraction. Debugging issues is hard if you don’t understand how things work behind the scenes.
 >
-> As an ex-Facebook engineer, I’m biased towards any open-source code Facebook releases, so I was eager to give PyTorch a try, and...
+> As an ex-Facebook engineer, I’m biased towards any open-source code Facebook releases, so I was eager to give PyTorch a try, and…
 >
 > PyTorch is a breath of fresh air. It’s much faster to start up than TensorFlow, which makes iterating on my network much more immediate and fun. It has a smaller API, and a simpler execution model. Unlike TensorFlow, it does not require you build a computation graph in advance and have no insight or influence in how it gets executed. It feels much more like regular programming, makes things easier to debug, and also enables more dynamic architectures (which I hope to use some day).
 
@@ -87,7 +87,7 @@ In my experience with neural networks, assembling a large-enough quality dataset
 
 However, I find the standard image and text tasks boring. I like solving new problems, and I like neural networks because they can be applied to anything. So I craft brew my own micro-datasets. Since my datasets are small, I limit myself to problems that are slightly more manageable than your typical VanGogh-style portrait generation project.
 
-Fortunately, the problem at hand is relatively simple (or so one would think), so a small dataset should suffice. On top of that, it’s a very visual problem, so generating data and evaluating the neural networks should be easy... given a mouse, a pair of eyes, and the right tools.
+Fortunately, the problem at hand is relatively simple (or so one would think), so a small dataset should suffice. On top of that, it’s a very visual problem, so generating data and evaluating the neural networks should be easy… given a mouse, a pair of eyes, and the right tools.
 
 #### The Test UI
 
@@ -105,7 +105,7 @@ Another common hurdle when designing a neural network is finding the optimal way
 
 In my dataset, each example is a series of `[x, y]` coordinates, one for each of the points in the input, plus a list of coordinates for each of the splits that I’ve manually entered (this is what I will be training the network to learn).
 
-<svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="235" y1="0" x2="235" y2="200"></line><line stroke="#ccc" x1="320" y1="0" x2="320" y2="200"></line><line stroke="#ccc" x1="467" y1="0" x2="467" y2="200"></line><circle fill="#01beff" r="5" cx="43" cy="167"></circle><circle fill="#01beff" r="5" cx="86" cy="131"></circle><circle fill="#01beff" r="5" cx="152" cy="106"></circle><circle fill="#01beff" r="5" cx="175" cy="82"></circle><circle fill="#01beff" r="5" cx="221" cy="44"></circle><circle fill="#01beff" r="5" cx="247" cy="162"></circle><circle fill="#01beff" r="5" cx="279" cy="139"></circle><circle fill="#01beff" r="5" cx="303" cy="111"></circle><circle fill="#01beff" r="5" cx="329" cy="166"></circle><circle fill="#01beff" r="5" cx="369" cy="144"></circle><circle fill="#01beff" r="5" cx="392" cy="124"></circle><circle fill="#01beff" r="5" cx="422" cy="81"></circle><circle fill="#01beff" r="5" cx="461" cy="72"></circle><circle fill="#01beff" r="5" cx="470" cy="166"></circle><circle fill="#01beff" r="5" cx="500" cy="143"></circle><circle fill="#01beff" r="5" cx="525" cy="107"></circle><circle fill="#01beff" r="5" cx="542" cy="86"></circle><circle fill="#01beff" r="5" cx="582" cy="62"></circle><line stroke="#f00" x1="43" y1="166.20683699600977" x2="221" y2="50.223969189843785"></line><line stroke="#f00" x1="247" y1="163.74324324324328" x2="303" y2="113.32432432432437"></line><line stroke="#f00" x1="329" y1="168.57152451309602" x2="461" y2="65.6044325050369"></line><line stroke="#f00" x1="470" y1="165.48665886809277" x2="582" y2="55.80439505347596"></line></svg>
+<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="235" y1="0" x2="235" y2="200"></line><line stroke="#ccc" x1="320" y1="0" x2="320" y2="200"></line><line stroke="#ccc" x1="467" y1="0" x2="467" y2="200"></line><circle fill="#01beff" r="5" cx="43" cy="167"></circle><circle fill="#01beff" r="5" cx="86" cy="131"></circle><circle fill="#01beff" r="5" cx="152" cy="106"></circle><circle fill="#01beff" r="5" cx="175" cy="82"></circle><circle fill="#01beff" r="5" cx="221" cy="44"></circle><circle fill="#01beff" r="5" cx="247" cy="162"></circle><circle fill="#01beff" r="5" cx="279" cy="139"></circle><circle fill="#01beff" r="5" cx="303" cy="111"></circle><circle fill="#01beff" r="5" cx="329" cy="166"></circle><circle fill="#01beff" r="5" cx="369" cy="144"></circle><circle fill="#01beff" r="5" cx="392" cy="124"></circle><circle fill="#01beff" r="5" cx="422" cy="81"></circle><circle fill="#01beff" r="5" cx="461" cy="72"></circle><circle fill="#01beff" r="5" cx="470" cy="166"></circle><circle fill="#01beff" r="5" cx="500" cy="143"></circle><circle fill="#01beff" r="5" cx="525" cy="107"></circle><circle fill="#01beff" r="5" cx="542" cy="86"></circle><circle fill="#01beff" r="5" cx="582" cy="62"></circle><line stroke="#f00" x1="43" y1="166.20683699600977" x2="221" y2="50.223969189843785"></line><line stroke="#f00" x1="247" y1="163.74324324324328" x2="303" y2="113.32432432432437"></line><line stroke="#f00" x1="329" y1="168.57152451309602" x2="461" y2="65.6044325050369"></line><line stroke="#f00" x1="470" y1="165.48665886809277" x2="582" y2="55.80439505347596"></line></svg></div>
 
 The above, as JSON, looks like this:
 
@@ -156,6 +156,8 @@ I like to factor out the data encoding logic into its own function, as this will
 My `encode` function will take a series of points of variable length, and returns a fixed-length tensor. Let’s start with something that returns an empty tensor of the right shape:
 
 ```python
+import torch
+
 def encode(points, padded_length=100):
     input_tensor = torch.zeros([2, padded_length])
     return input_tensor
@@ -165,7 +167,9 @@ Note that you can already use this to start training and running your neural net
 
 Next we fill in the tensor with data:
 
-```python{3-6}
+```python{5-8}
+import torch
+
 def encode(points, padded_length=100):
     input_tensor = torch.zeros([2, padded_length])
     for i in range(min(padded_length, len(points))):
@@ -176,7 +180,7 @@ def encode(points, padded_length=100):
 ```
 
 > ##### Order of coordinates in PyTorch vs TensorFlow
-> If you’re paying attention, you might have noticed that the x/y coordinate comes before the position. In other words, the shape of the input data is [n, 2, 100], not [n, 100, 2] as it would be in TensorFlow. PyTorch convolutions (see later) expect coordinates in a different order: the channel (x/y in this case, r/g/b in case of an image) comes before the position (i).
+> If you’re paying attention, you might have noticed that the x/y coordinate comes before the position. In other words, the shape of the input data is `[n, 2, 100]`, not `[n, 100, 2]` as it would be in TensorFlow. PyTorch convolutions (see later) expect coordinates in a different order: the channel (x/y in this case, r/g/b in case of an image) comes before the position (i).
 
 #### Normalization
 
@@ -184,7 +188,9 @@ We have the data in a format the neural network can accept. We could stop here, 
 
 I find the min and max coordinates in each example and scale everything proportionally.
 
-```python{2-16,21-24,28,29}
+```python{4-18,23-26,30,31}
+import torch
+
 def encode(points, padded_length=100):
     xs = [p[0] for p in points]
     ys = [p[1] for p in points]
@@ -222,7 +228,7 @@ def encode(points, padded_length=100):
 > Many of the operations that I’m writing in Python, like normalization, casting, etc., are available as operations inside most machine learning libraries. You could implement them that way, and they would be more efficient, potentially even running on the GPU. However, I found that most of these operations are not supported by CoreML.
 
 > ##### What about Feature Engineering?
-> Feature engineering is the process of further massaging the input in order to give the neural network a head-start. For example, in this case I could feed it not only the `[x, y]` of each point, but also the distance, gap, and slope between each pair. I like to think that my neural network can learn to compute whatever it needs out of the input. In fact, I did try feeding a bunch of derived values as input, but that did not seem to help one bit.
+> Feature engineering is the process of further massaging the input in order to give the neural network a head-start. For example, in this case I could feed it not only the `[x, y]` of each point, but also the distance, gap, and slope between each pair. However, I like to think that my neural network can learn to compute whatever it needs out of the input. In fact, I did try feeding a bunch of derived values as input, but that did not seem to help one bit.
 
 ### The Model
 
@@ -247,7 +253,7 @@ The tricky thing when working with convolution is that they are by their nature 
 
 I’m stacking convolutional layers like this for two reasons. First, stacking layers in general has been shown to help networks learn progressively more abstract concepts (this is why “deep learning” is so popular). Second, each stack of convolutions gets access to more and more of the sequence. This is my way of giving each point in the output more information about its context.
 
-The ultimate aim is to tweaking the various parameters so the network progressively transforms the shape of the input into the shape of my output. Meanwhile I adjusting the third dimension (depth) so that there’s enough “room” to carry forward just the right amount of information from the previous layers. I don’t want my layers to be too small, otherwise there might be too much information lost from the previous layers, and my network will struggle to learn anything. I don’t want them to be too big either, because they’ll take longer to train, and, quite likely, they’ll have enough “memory” to memorize each of my examples separately, instead of being forced to create a summary that might be better able to generalize to never-before-seen examples.
+The ultimate aim is to tweaking the various parameters so the network progressively transforms the shape of the input into the shape of my output. Meanwhile I’m adjusting the third dimension (depth) so that there’s enough “room” to carry forward just the right amount of information from the previous layers. I don’t want my layers to be too small, otherwise there might be too much information lost from the previous layers, and my network will struggle to learn anything. I don’t want them to be too big either, because they’ll take longer to train, and, quite likely, they’ll have enough “memory” to memorize each of my examples separately, instead of being forced to create a summary that might be better able to generalize to never-before-seen examples.
 
 
 > ##### No Fully Connected Layers?
@@ -255,6 +261,12 @@ The ultimate aim is to tweaking the various parameters so the network progressiv
 
 
 #### PyTorch Model
+
+Before we translate that architecture into PyTorch code, we need PyTorch installed. I followed the very [clear instructions](http://pytorch.org/) on the PyTorch homepage:
+
+```bash
+pip install http://download.pytorch.org/whl/torch-0.3.0.post4-cp27-none-macosx_10_6_x86_64.whl
+```
 
 This is how the above structure translates to PyTorch code. You subclass `nn.Module`, and in the constructor you define each layer you’ll need. Note I’m picking padding values carefully to preserve the length of my inputs. So if I have a convolution kernel that’s 7 wide, I pad by 3 on each side so that the kernel still has room to center on position 0 and position n.
 
@@ -286,7 +298,7 @@ class Model(nn.Module):
         )
 ```
 
-All the layers use the popular [ReLU] activation function, except the last one with uses a sigmoid. That’s so the output values get squashed into the [0, 1] range, so they match the labeled outputs I’m providing (series of ones and zeros), and make sense as probabilities.
+All the layers use the popular <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a> activation function, except the last one with uses a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a>. That’s so the output values get squashed into the [0, 1] range, so they match the labeled outputs I’m providing (series of ones and zeros), and make sense as probabilities.
 
 The next step is to define a `forward()` method, which will actually be called on your data during training and prediction:
 
@@ -335,7 +347,38 @@ This method is what makes PyTorch feel really different than TensorFlow. You’r
 
 #### PyTorch Dataset
 
-```python
+Creating a dataset is the first step required in feeding data to a neural network for training in PyTorch. All it needs is a constructor, a `__len__` method, and a `__getitem__` method.
+
+The constructor is the perfect place to read in my JSON file with all the examples:
+
+```python{5-7}
+import json
+import torch
+from torch.utils.data import Dataset
+
+class PointsDataset(Dataset):
+    def __init__(self, csv_file):
+        self.examples = json.load(open(json_file))
+```
+
+Returning the length is easy:
+
+```python{9-10}
+import json
+import torch
+from torch.utils.data import Dataset
+
+class PointsDataset(Dataset):
+    def __init__(self, csv_file):
+        self.examples = json.load(open(csv_file))
+
+    def __len__(self):
+        return len(self.examples)
+```
+
+Finally, I return a single example’s input and output from `__getitem__`. I use `encode()` defined earlier to encode the input. Encoding the output is relatively simple, so I do it inline. I create a new tensor of the right shape, fill it with zeros, and then insert a 1 at every position where there should be a split.
+
+```python{12-19}
 import json
 import torch
 from torch.utils.data import Dataset
@@ -350,20 +393,22 @@ class PointsDataset(Dataset):
     def __getitem__(self, idx):
         example = self.examples[idx]
         input_tensor = encode(example['points'])
-        output_tensor = torch.zeros(number_of_points)
+        output_tensor = torch.zeros(100)
         for split_position in example['splits']:
             index = next(i for i, point in enumerate(example['points']) if point[0] > split_position) - 1
             output_tensor[index] = 1
         return input_tensor, output_tensor
 
 ```
-We then instantiate our dataset like this:
+
+I then instantiate the dataset like this:
+
 ```python
 dataset = PointsDataset(data_file)
 ```
 
 #### Setting Aside a Validation Set
-We need to set aside some of our data to evaluate how our training is doing. This is called a validation set. I like to automatically split out a random subset of examples for this purpose.  PyTorch doesn’t provide an easy way to do that out of the box, so I used [PyTorchNet](https://github.com/pytorch/tnt) for this purpose. I installed it straight from Git:
+We need to set aside some of our data to evaluate how our training is doing. This is called a *validation set*. I like to automatically split out a random subset of examples for this purpose.  PyTorch doesn’t provide an easy way to do that out of the box, so I used [PyTorchNet](https://github.com/pytorch/tnt) for this purpose. It’s not in PyPI, so I installed it straight from GitHub:
 
 ```bash
 pip install git+https://github.com/pytorch/tnt.git
@@ -380,11 +425,12 @@ dataset = SplitDataset(ShuffleDataset(dataset), {'train': 0.9, 'validation': 0.1
 
 `SplitDataset` will let us switch between the two datasets as we alternate between training and validation later.
 
-> ##### Test set
+> ##### Test Set
+> It’s customary to set aside a third set of examples, called the *test set*, which you never touch as you’re developing the network. The test set is meant to serve as a final sanity check to confirm that your accuracy on the validation set was not a fluke. At this stage, with a dataset this small, I don’t have the luxury of keeping more data out of the training set. As far as sanity checking my accuracy… for now, running the neural network in the production app with real data will have to do!
 
 #### PyTorch DataLoader
 
-One more hoop to jump through before we can actually start training. DataLoders are how you feed a dataset to a neural network during training in PyTorch. Thankfully it’s easy enough:
+One more hoop to jump through before we can actually start training. DataLoders are how you feed a dataset to a neural network during training in PyTorch. The data loaders will spit out data in batches for training. I want my batches to be random (`shuffle=True`) and quite small, since the dataset is small too.
 
 ```python{5}
 from torchnet.dataset import SplitDataset, ShuffleDataset
@@ -444,7 +490,7 @@ for epoch in range(1000):
         logits = model(inputs)
 ```
 
-Then I do some fancy math to figure out how far off the model is. Most of the complexity is so that I can ignore (“mask”) the output for points that are just padding. The interesting part is the `F.mse_loss()` call, which is – you guessed it – the mean squared error between the guessed output and what the output should actually be.
+After that I do some fancy math to figure out how far off the model is. Most of the complexity is so that I can ignore (“mask”) the output for points that are just padding. The interesting part is the `F.mse_loss()` call, which is – you guessed it – the mean squared error between the guessed output and what the output should actually be.
 
 ```python{11-15}
 model.train()
@@ -464,7 +510,7 @@ for epoch in range(1000):
         loss = F.mse_loss(logits, target)
 ```
 
-Finally we “backpropagate”, i.e. take that error and use it to correct the weights in the model to be more correct next time. We need an “optimizer” to do this work for us:
+Finally, I “backpropagate”, i.e. take that error and use it to correct the weights in the model to be more correct next time. We need an “optimizer” to do this work for us:
 
 ```python{2,18-20}
 model.train()
@@ -489,7 +535,7 @@ for epoch in range(1000):
         optimizer.step()
 ```
 
-Once we’ve gone through all the batches, our epoch is over. We just use the validation dataset to calculate and print out how our learning is going. Then we start over with the next epoch. The code in the `evaluate()` function should look familiar. It does the same work we just did during training, except using the validation data and with some extra metrics.
+Once I’ve gone through all the batches, the epoch is over. I use the validation dataset to calculate and print out how our learning is going. Then I start over with the next epoch. The code in the `evaluate()` function should look familiar. It does the same work we just did during training, except using the validation data and with some extra metrics.
 
 ```python{22-32,34-49}
 model.train()
@@ -570,38 +616,38 @@ Time to run it. This is what the output looks like.
 [1000] validation loss: 0.008318 - validation accuracy: 92.308% (48/52 correct) 
 ```
 
-As you can see the network learns pretty quickly. The accuracy on the validation set is already at 87% at the end of the first epoch, peaks at 94% around epoch 220, then plateaus around 92%. (I probably could have stopped it sooner.)
+As you can see the network learns pretty quickly. In this particular run, the accuracy on the validation set was already at 87% at the end of the first epoch, peaked at 94% around epoch 220, then settled at around 92%. (I probably could have stopped it sooner.)
 
 > ##### Spot Instances
-> Another aside.
+> This network is small enough to train in a couple of minutes on my poor old first-generation [Macbook Adorable](https://www.apple.com/macbook/). For training larger networks, nothing beats the price/performance ratio of an [AWS GPU-optimized spot instance](https://aws.amazon.com/ec2/spot/pricing/). If you do a lot of machine learning and can’t afford a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Nvidia_Tesla">Tesla</a>, you owe it to yourself to write a little script to spin up an instance and run training on it. There are great AMIs available that come with everything required, including CUDA.
 
 ### Evaluating
 
-My accuracy results were pretty decent out of the gate. To truly understand how it was performing though, I fed the network back into the test UI to visualize how it succeeded and how it failed.
+My accuracy results were pretty decent out of the gate. To truly understand how it was performing, I fed the output of the network back into the test UI to visualize how it succeeded and how it failed.
 
 There were many difficult examples where it was spot on, and it made me a proud daddy:
 
-<svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="139" y1="0" x2="139" y2="200"></line><line stroke="#ccc" x1="195" y1="0" x2="195" y2="200"></line><line stroke="#ccc" x1="329" y1="0" x2="329" y2="200"></line><line stroke="#ccc" x1="462" y1="0" x2="462" y2="200"></line><line stroke="#ccc" x1="534" y1="0" x2="534" y2="200"></line><line stroke="#ccc" x1="619" y1="0" x2="619" y2="200"></line><line stroke="#ccc" x1="667" y1="0" x2="667" y2="200"></line><circle fill="#01beff" r="5" cx="51" cy="186"></circle><circle fill="#01beff" r="5" cx="78" cy="167"></circle><circle fill="#01beff" r="5" cx="106" cy="151"></circle><circle fill="#01beff" r="5" cx="133" cy="130"></circle><circle fill="#01beff" r="5" cx="151" cy="187"></circle><circle fill="#01beff" r="5" cx="176" cy="168"></circle><circle fill="#01beff" r="5" cx="201" cy="190"></circle><circle fill="#01beff" r="5" cx="245" cy="152"></circle><circle fill="#01beff" r="5" cx="280" cy="118"></circle><circle fill="#01beff" r="5" cx="316" cy="92"></circle><circle fill="#01beff" r="5" cx="332" cy="192"></circle><circle fill="#01beff" r="5" cx="366" cy="162"></circle><circle fill="#01beff" r="5" cx="387" cy="135"></circle><circle fill="#01beff" r="5" cx="430" cy="95"></circle><circle fill="#01beff" r="5" cx="496" cy="190"></circle><circle fill="#01beff" r="5" cx="565" cy="189"></circle><circle fill="#01beff" r="5" cx="592" cy="161"></circle><circle fill="#01beff" r="5" cx="631" cy="190"></circle><circle fill="#01beff" r="5" cx="685" cy="188"></circle><circle fill="#01beff" r="5" cx="753" cy="117"></circle><circle fill="#01beff" r="5" cx="781" cy="93"></circle><line stroke="#f00" x1="51" y1="186.02264251465104" x2="133" y2="130.97735748534896"></line><line stroke="#f00" x1="151" y1="187" x2="176" y2="168"></line><line stroke="#f00" x1="201" y1="189.38972517608065" x2="316" y2="90.06504626432815"></line><line stroke="#f00" x1="332" y1="192.90064944722621" x2="430" y2="94.5848495364632"></line><line stroke="#f00" x1="565" y1="189" x2="592" y2="161"></line><line stroke="#f00" x1="685" y1="187.31838074398252" x2="781" y2="91.34463894967178"></line></svg>
+<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="139" y1="0" x2="139" y2="200"></line><line stroke="#ccc" x1="195" y1="0" x2="195" y2="200"></line><line stroke="#ccc" x1="329" y1="0" x2="329" y2="200"></line><line stroke="#ccc" x1="462" y1="0" x2="462" y2="200"></line><line stroke="#ccc" x1="534" y1="0" x2="534" y2="200"></line><line stroke="#ccc" x1="619" y1="0" x2="619" y2="200"></line><line stroke="#ccc" x1="667" y1="0" x2="667" y2="200"></line><circle fill="#01beff" r="5" cx="51" cy="186"></circle><circle fill="#01beff" r="5" cx="78" cy="167"></circle><circle fill="#01beff" r="5" cx="106" cy="151"></circle><circle fill="#01beff" r="5" cx="133" cy="130"></circle><circle fill="#01beff" r="5" cx="151" cy="187"></circle><circle fill="#01beff" r="5" cx="176" cy="168"></circle><circle fill="#01beff" r="5" cx="201" cy="190"></circle><circle fill="#01beff" r="5" cx="245" cy="152"></circle><circle fill="#01beff" r="5" cx="280" cy="118"></circle><circle fill="#01beff" r="5" cx="316" cy="92"></circle><circle fill="#01beff" r="5" cx="332" cy="192"></circle><circle fill="#01beff" r="5" cx="366" cy="162"></circle><circle fill="#01beff" r="5" cx="387" cy="135"></circle><circle fill="#01beff" r="5" cx="430" cy="95"></circle><circle fill="#01beff" r="5" cx="496" cy="190"></circle><circle fill="#01beff" r="5" cx="565" cy="189"></circle><circle fill="#01beff" r="5" cx="592" cy="161"></circle><circle fill="#01beff" r="5" cx="631" cy="190"></circle><circle fill="#01beff" r="5" cx="685" cy="188"></circle><circle fill="#01beff" r="5" cx="753" cy="117"></circle><circle fill="#01beff" r="5" cx="781" cy="93"></circle><line stroke="#f00" x1="51" y1="186.02264251465104" x2="133" y2="130.97735748534896"></line><line stroke="#f00" x1="151" y1="187" x2="176" y2="168"></line><line stroke="#f00" x1="201" y1="189.38972517608065" x2="316" y2="90.06504626432815"></line><line stroke="#f00" x1="332" y1="192.90064944722621" x2="430" y2="94.5848495364632"></line><line stroke="#f00" x1="565" y1="189" x2="592" y2="161"></line><line stroke="#f00" x1="685" y1="187.31838074398252" x2="781" y2="91.34463894967178"></line></svg></div>
 
 As the network got better, I started thinking up more and more evil examples. Like this pair:
 
-<svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="265" y1="0" x2="265" y2="200"></line><line stroke="#ccc" x1="429" y1="0" x2="429" y2="200"></line><line stroke="#ccc" x1="631" y1="0" x2="631" y2="200"></line><circle fill="#01beff" r="5" cx="81" cy="129"></circle><circle fill="#01beff" r="5" cx="130" cy="117"></circle><circle fill="#01beff" r="5" cx="155" cy="108"></circle><circle fill="#01beff" r="5" cx="176" cy="104"></circle><circle fill="#01beff" r="5" cx="218" cy="92"></circle><circle fill="#01beff" r="5" cx="246" cy="81"></circle><circle fill="#01beff" r="5" cx="288" cy="88"></circle><circle fill="#01beff" r="5" cx="301" cy="100"></circle><circle fill="#01beff" r="5" cx="327" cy="106"></circle><circle fill="#01beff" r="5" cx="340" cy="114"></circle><circle fill="#01beff" r="5" cx="377" cy="124"></circle><circle fill="#01beff" r="5" cx="392" cy="132"></circle><circle fill="#01beff" r="5" cx="402" cy="134"></circle><circle fill="#01beff" r="5" cx="446" cy="126"></circle><circle fill="#01beff" r="5" cx="476" cy="113"></circle><circle fill="#01beff" r="5" cx="503" cy="106"></circle><circle fill="#01beff" r="5" cx="529" cy="97"></circle><circle fill="#01beff" r="5" cx="553" cy="90"></circle><circle fill="#01beff" r="5" cx="574" cy="81"></circle><circle fill="#01beff" r="5" cx="594" cy="68"></circle><circle fill="#01beff" r="5" cx="615" cy="62"></circle><circle fill="#01beff" r="5" cx="648" cy="77"></circle><circle fill="#01beff" r="5" cx="675" cy="86"></circle><circle fill="#01beff" r="5" cx="694" cy="93"></circle><circle fill="#01beff" r="5" cx="722" cy="102"></circle><circle fill="#01beff" r="5" cx="733" cy="106"></circle><circle fill="#01beff" r="5" cx="745" cy="111"></circle><line stroke="#f00" x1="81" y1="130.01884534848938" x2="246" y2="82.70412055040383"></line><line stroke="#f00" x1="288" y1="91.73880525914632" x2="402" y2="134.96127096036585"></line><line stroke="#f00" x1="446" y1="126.5953237782052" x2="615" y2="63.45144878079046"></line><line stroke="#f00" x1="648" y1="76.83482368820651" x2="745" y2="110.44312950420596"></line></svg>
+<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="265" y1="0" x2="265" y2="200"></line><line stroke="#ccc" x1="429" y1="0" x2="429" y2="200"></line><line stroke="#ccc" x1="631" y1="0" x2="631" y2="200"></line><circle fill="#01beff" r="5" cx="81" cy="129"></circle><circle fill="#01beff" r="5" cx="130" cy="117"></circle><circle fill="#01beff" r="5" cx="155" cy="108"></circle><circle fill="#01beff" r="5" cx="176" cy="104"></circle><circle fill="#01beff" r="5" cx="218" cy="92"></circle><circle fill="#01beff" r="5" cx="246" cy="81"></circle><circle fill="#01beff" r="5" cx="288" cy="88"></circle><circle fill="#01beff" r="5" cx="301" cy="100"></circle><circle fill="#01beff" r="5" cx="327" cy="106"></circle><circle fill="#01beff" r="5" cx="340" cy="114"></circle><circle fill="#01beff" r="5" cx="377" cy="124"></circle><circle fill="#01beff" r="5" cx="392" cy="132"></circle><circle fill="#01beff" r="5" cx="402" cy="134"></circle><circle fill="#01beff" r="5" cx="446" cy="126"></circle><circle fill="#01beff" r="5" cx="476" cy="113"></circle><circle fill="#01beff" r="5" cx="503" cy="106"></circle><circle fill="#01beff" r="5" cx="529" cy="97"></circle><circle fill="#01beff" r="5" cx="553" cy="90"></circle><circle fill="#01beff" r="5" cx="574" cy="81"></circle><circle fill="#01beff" r="5" cx="594" cy="68"></circle><circle fill="#01beff" r="5" cx="615" cy="62"></circle><circle fill="#01beff" r="5" cx="648" cy="77"></circle><circle fill="#01beff" r="5" cx="675" cy="86"></circle><circle fill="#01beff" r="5" cx="694" cy="93"></circle><circle fill="#01beff" r="5" cx="722" cy="102"></circle><circle fill="#01beff" r="5" cx="733" cy="106"></circle><circle fill="#01beff" r="5" cx="745" cy="111"></circle><line stroke="#f00" x1="81" y1="130.01884534848938" x2="246" y2="82.70412055040383"></line><line stroke="#f00" x1="288" y1="91.73880525914632" x2="402" y2="134.96127096036585"></line><line stroke="#f00" x1="446" y1="126.5953237782052" x2="615" y2="63.45144878079046"></line><line stroke="#f00" x1="648" y1="76.83482368820651" x2="745" y2="110.44312950420596"></line></svg></div>
 
-<svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><circle fill="#01beff" r="5" cx="83" cy="116"></circle><circle fill="#01beff" r="5" cx="124" cy="109"></circle><circle fill="#01beff" r="5" cx="171" cy="102"></circle><circle fill="#01beff" r="5" cx="201" cy="104"></circle><circle fill="#01beff" r="5" cx="223" cy="105"></circle><circle fill="#01beff" r="5" cx="253" cy="113"></circle><circle fill="#01beff" r="5" cx="275" cy="120"></circle><circle fill="#01beff" r="5" cx="298" cy="123"></circle><circle fill="#01beff" r="5" cx="350" cy="126"></circle><circle fill="#01beff" r="5" cx="404" cy="126"></circle><circle fill="#01beff" r="5" cx="451" cy="109"></circle><circle fill="#01beff" r="5" cx="493" cy="91"></circle><circle fill="#01beff" r="5" cx="521" cy="84"></circle><circle fill="#01beff" r="5" cx="585" cy="88"></circle><circle fill="#01beff" r="5" cx="612" cy="90"></circle><circle fill="#01beff" r="5" cx="662" cy="97"></circle><circle fill="#01beff" r="5" cx="695" cy="108"></circle><circle fill="#01beff" r="5" cx="720" cy="114"></circle><circle fill="#01beff" r="5" cx="747" cy="109"></circle><circle fill="#01beff" r="5" cx="773" cy="97"></circle><line stroke="#f00" x1="83" y1="114.04278068464784" x2="773" y2="99.23109561830489"></line></svg>
+<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><circle fill="#01beff" r="5" cx="83" cy="116"></circle><circle fill="#01beff" r="5" cx="124" cy="109"></circle><circle fill="#01beff" r="5" cx="171" cy="102"></circle><circle fill="#01beff" r="5" cx="201" cy="104"></circle><circle fill="#01beff" r="5" cx="223" cy="105"></circle><circle fill="#01beff" r="5" cx="253" cy="113"></circle><circle fill="#01beff" r="5" cx="275" cy="120"></circle><circle fill="#01beff" r="5" cx="298" cy="123"></circle><circle fill="#01beff" r="5" cx="350" cy="126"></circle><circle fill="#01beff" r="5" cx="404" cy="126"></circle><circle fill="#01beff" r="5" cx="451" cy="109"></circle><circle fill="#01beff" r="5" cx="493" cy="91"></circle><circle fill="#01beff" r="5" cx="521" cy="84"></circle><circle fill="#01beff" r="5" cx="585" cy="88"></circle><circle fill="#01beff" r="5" cx="612" cy="90"></circle><circle fill="#01beff" r="5" cx="662" cy="97"></circle><circle fill="#01beff" r="5" cx="695" cy="108"></circle><circle fill="#01beff" r="5" cx="720" cy="114"></circle><circle fill="#01beff" r="5" cx="747" cy="109"></circle><circle fill="#01beff" r="5" cx="773" cy="97"></circle><line stroke="#f00" x1="83" y1="114.04278068464784" x2="773" y2="99.23109561830489"></line></svg></div>
 
-As I added more examples, I started to realize that the problem was way harder than I imagined at first. Still, the network performed pretty well. It got to the point where I would cook up examples I would not be sure how to split it myself. I would just trust the network to figure it out. Like with this crazy one:
+As I added more examples, I soon realized that the problem was way harder than I imagined at first. Still, the network performed well. It got to the point where I would cook up examples I would not be sure how to split it myself. I would just trust the network to figure it out. Like with this crazy one:
 
-<svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="186" y1="0" x2="186" y2="200"></line><line stroke="#ccc" x1="389" y1="0" x2="389" y2="200"></line><line stroke="#ccc" x1="570" y1="0" x2="570" y2="200"></line><line stroke="#ccc" x1="678" y1="0" x2="678" y2="200"></line><circle fill="#01beff" r="5" cx="137" cy="152"></circle><circle fill="#01beff" r="5" cx="168" cy="131"></circle><circle fill="#01beff" r="5" cx="220" cy="109"></circle><circle fill="#01beff" r="5" cx="257" cy="92"></circle><circle fill="#01beff" r="5" cx="306" cy="77"></circle><circle fill="#01beff" r="5" cx="360" cy="68"></circle><circle fill="#01beff" r="5" cx="422" cy="60"></circle><circle fill="#01beff" r="5" cx="481" cy="57"></circle><circle fill="#01beff" r="5" cx="531" cy="62"></circle><circle fill="#01beff" r="5" cx="593" cy="72"></circle><circle fill="#01beff" r="5" cx="644" cy="86"></circle><circle fill="#01beff" r="5" cx="708" cy="113"></circle><circle fill="#01beff" r="5" cx="766" cy="143"></circle><line stroke="#f00" x1="137" y1="152" x2="168" y2="131"></line><line stroke="#f00" x1="220" y1="105.52238603779547" x2="360" y2="65.01844618545528"></line><line stroke="#f00" x1="422" y1="58.754338819840996" x2="531" y2="60.530119807412376"></line><line stroke="#f00" x1="593" y1="72" x2="644" y2="86"></line><line stroke="#f00" x1="708" y1="113" x2="766" y2="143"></line></svg>
+<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="186" y1="0" x2="186" y2="200"></line><line stroke="#ccc" x1="389" y1="0" x2="389" y2="200"></line><line stroke="#ccc" x1="570" y1="0" x2="570" y2="200"></line><line stroke="#ccc" x1="678" y1="0" x2="678" y2="200"></line><circle fill="#01beff" r="5" cx="137" cy="152"></circle><circle fill="#01beff" r="5" cx="168" cy="131"></circle><circle fill="#01beff" r="5" cx="220" cy="109"></circle><circle fill="#01beff" r="5" cx="257" cy="92"></circle><circle fill="#01beff" r="5" cx="306" cy="77"></circle><circle fill="#01beff" r="5" cx="360" cy="68"></circle><circle fill="#01beff" r="5" cx="422" cy="60"></circle><circle fill="#01beff" r="5" cx="481" cy="57"></circle><circle fill="#01beff" r="5" cx="531" cy="62"></circle><circle fill="#01beff" r="5" cx="593" cy="72"></circle><circle fill="#01beff" r="5" cx="644" cy="86"></circle><circle fill="#01beff" r="5" cx="708" cy="113"></circle><circle fill="#01beff" r="5" cx="766" cy="143"></circle><line stroke="#f00" x1="137" y1="152" x2="168" y2="131"></line><line stroke="#f00" x1="220" y1="105.52238603779547" x2="360" y2="65.01844618545528"></line><line stroke="#f00" x1="422" y1="58.754338819840996" x2="531" y2="60.530119807412376"></line><line stroke="#f00" x1="593" y1="72" x2="644" y2="86"></line><line stroke="#f00" x1="708" y1="113" x2="766" y2="143"></line></svg></div>
 
 How does it even.
 
 Even when it “fails”, at least according to my inputs, it’s arguably just as correct as my option. Sometimes it even makes me question my own judgment. Like, what was I thinking here?
 
-<svg viewBox="0 0 800 200" style="border: 3px solid rgb(255, 0, 0); box-sizing: border-box; display: block; margin: 20px 0px;"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="112" y1="0" x2="112" y2="200"></line><line stroke="#ccc" x1="276" y1="0" x2="276" y2="200"></line><line stroke="#ccc" x1="410" y1="0" x2="410" y2="200"></line><circle fill="#01beff" r="5" cx="41" cy="176"></circle><circle fill="#01beff" r="5" cx="163" cy="84"></circle><circle fill="#01beff" r="5" cx="254" cy="84"></circle><circle fill="#01beff" r="5" cx="319" cy="97"></circle><circle fill="#01beff" r="5" cx="484" cy="88"></circle><circle fill="#01beff" r="5" cx="533" cy="116"></circle><circle fill="#01beff" r="5" cx="629" cy="109"></circle><line stroke="#f00" x1="163" y1="81.91284403669724" x2="319" y2="94.07798165137613"></line><line stroke="#f00" x1="484" y1="96.91415967158875" x2="629" y2="113.54993566570676"></line></svg>
+<div><svg viewBox="0 0 800 200" style="border: 3px solid rgb(255, 0, 0); box-sizing: border-box; display: block; margin: 20px 0px;"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="112" y1="0" x2="112" y2="200"></line><line stroke="#ccc" x1="276" y1="0" x2="276" y2="200"></line><line stroke="#ccc" x1="410" y1="0" x2="410" y2="200"></line><circle fill="#01beff" r="5" cx="41" cy="176"></circle><circle fill="#01beff" r="5" cx="163" cy="84"></circle><circle fill="#01beff" r="5" cx="254" cy="84"></circle><circle fill="#01beff" r="5" cx="319" cy="97"></circle><circle fill="#01beff" r="5" cx="484" cy="88"></circle><circle fill="#01beff" r="5" cx="533" cy="116"></circle><circle fill="#01beff" r="5" cx="629" cy="109"></circle><line stroke="#f00" x1="163" y1="81.91284403669724" x2="319" y2="94.07798165137613"></line><line stroke="#f00" x1="484" y1="96.91415967158875" x2="629" y2="113.54993566570676"></line></svg></div>
 
-However, it’s not perfect. Here’s an example where it fails. It’s pretty understandable though, I might have made that mistake myself.
+No, it’s not perfect. Here’s an example where it fails. It’s pretty understandable though, I might have made that mistake myself.
 
-<svg viewBox="0 0 800 200" style="border: 3px solid rgb(255, 0, 0); box-sizing: border-box; display: block; margin: 20px 0px;"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="169" y1="0" x2="169" y2="200"></line><line stroke="#ccc" x1="285" y1="0" x2="285" y2="200"></line><line stroke="#ccc" x1="444" y1="0" x2="444" y2="200"></line><line stroke="#ccc" x1="657" y1="0" x2="657" y2="200"></line><circle fill="#01beff" r="5" cx="133" cy="143"></circle><circle fill="#01beff" r="5" cx="215" cy="143"></circle><circle fill="#01beff" r="5" cx="254" cy="128"></circle><circle fill="#01beff" r="5" cx="305" cy="149"></circle><circle fill="#01beff" r="5" cx="357" cy="127"></circle><circle fill="#01beff" r="5" cx="428" cy="96"></circle><circle fill="#01beff" r="5" cx="451" cy="151"></circle><circle fill="#01beff" r="5" cx="528" cy="119"></circle><circle fill="#01beff" r="5" cx="580" cy="89"></circle><circle fill="#01beff" r="5" cx="644" cy="56"></circle><circle fill="#01beff" r="5" cx="667" cy="136"></circle><circle fill="#01beff" r="5" cx="718" cy="107"></circle><circle fill="#01beff" r="5" cx="762" cy="83"></circle><line stroke="#f00" x1="133" y1="145.0960412479245" x2="254" y2="132.40706108537972"></line><line stroke="#f00" x1="305" y1="149.15519804144444" x2="428" y2="96.11366617119873"></line><line stroke="#f00" x1="451" y1="153.3004932875429" x2="644" y2="57.42836091164531"></line><line stroke="#f00" x1="667" y1="135.8312933195694" x2="762" y2="82.80445362041002"></line></svg>
+<div><svg viewBox="0 0 800 200" style="border: 3px solid rgb(255, 0, 0); box-sizing: border-box; display: block; margin: 20px 0px;"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="169" y1="0" x2="169" y2="200"></line><line stroke="#ccc" x1="285" y1="0" x2="285" y2="200"></line><line stroke="#ccc" x1="444" y1="0" x2="444" y2="200"></line><line stroke="#ccc" x1="657" y1="0" x2="657" y2="200"></line><circle fill="#01beff" r="5" cx="133" cy="143"></circle><circle fill="#01beff" r="5" cx="215" cy="143"></circle><circle fill="#01beff" r="5" cx="254" cy="128"></circle><circle fill="#01beff" r="5" cx="305" cy="149"></circle><circle fill="#01beff" r="5" cx="357" cy="127"></circle><circle fill="#01beff" r="5" cx="428" cy="96"></circle><circle fill="#01beff" r="5" cx="451" cy="151"></circle><circle fill="#01beff" r="5" cx="528" cy="119"></circle><circle fill="#01beff" r="5" cx="580" cy="89"></circle><circle fill="#01beff" r="5" cx="644" cy="56"></circle><circle fill="#01beff" r="5" cx="667" cy="136"></circle><circle fill="#01beff" r="5" cx="718" cy="107"></circle><circle fill="#01beff" r="5" cx="762" cy="83"></circle><line stroke="#f00" x1="133" y1="145.0960412479245" x2="254" y2="132.40706108537972"></line><line stroke="#f00" x1="305" y1="149.15519804144444" x2="428" y2="96.11366617119873"></line><line stroke="#f00" x1="451" y1="153.3004932875429" x2="644" y2="57.42836091164531"></line><line stroke="#f00" x1="667" y1="135.8312933195694" x2="762" y2="82.80445362041002"></line></svg></div>
 
 I was pretty satisfied with these results. Definitely much better than the brute-force math approach I had earlier. Time to ship it!
 
@@ -609,9 +655,13 @@ I was pretty satisfied with these results. Definitely much better than the brute
 
 #### Adapting to ONNX/CoreML
 
-> ##### Casting and reshaping
+Unfortunately, I had to jump through a few hoops in order to successfully convert the PyTorch model to CoreML.
 
-```python
+The biggest issue is casting from integers to floats or vice-versa. Casting inside neural networks is pretty common. In my first attempt I fed the network integers (such is my input data), and cast them to floats inside the network. I was able to work around this by only using floats, but I hope this limitation is lifted soon. There’s quite a bit of preprocessing and postprocessing I’m doing that requires casts, and it would be nice to be able to do that in the network. Some layers (such as embeddings) *require* integers to work!
+
+The other issue I ran into is that ONNX-CoreML does not support <span class="caps">1D</span> convolutions, which is the kind I’m using. Despite being simpler, <span class="caps">1D</span> convolutions are always the underdog, because working with text and sequences is not as cool as working with images. Thankfully, it’s pretty easy to reshape my data to add an extra bogus dimension. I changed the model to use <span class="caps">2D</span> convolutions, and I used the `view()` method on the input tensor to reshape the data to match what the <span class="caps">2D</span> convolutions expect.
+
+```python{11,15,19,23,28}
 import torch.nn as nn
 
 input_channels = 2
@@ -645,14 +695,13 @@ class Model(nn.Module):
         x = self.conv3(x)
         x = self.conv4(x)
         x = x.view(-1, x.size(3))
-        x = self.sigmoid(x)
         return x
 
 ```
 
 #### ONNX
 
-First we export our trained model as ONNX. We need to provide the export function an example of what the input shape will look like.
+Once those tweaks were done, I was finally able to export the trained model as ONNX. I had to provide the export function an example of what the input shape will look like.
 
 ```python{4-5}
 import torch
@@ -666,12 +715,11 @@ torch.onnx.export(model, dummy_input, 'SplitModel.proto', verbose=True)
 
 To convert the ONNX model to CoreML, we need [ONNX-CoreML](https://github.com/onnx/onnx-coreml).
 
-The version of ONNX-CoreML on pip seems broken, I never got it to work. Install it straight from GitHub:
+The version of ONNX-CoreML on PyPI is broken, so I installed the latest version straight from GitHub:
 
 ```bash
 pip install git+https://github.com/onnx/onnx-coreml.git
 ```
-
 
 > ##### Makefile
 > I love writing Makefiles. They’re like READMEs, but easier to run. I need a few dependencies for this project, many of which have weird install procedures. I also like to use `virtualenv` to install Python libraries, but I don’t want to have to remember to activate it. This Makefile does all the above for me. I just run `make train`.
@@ -758,26 +806,142 @@ coreml_model.save('SplitModel.mlmodel')
 
 #### CoreML
 
-Now that we have a trained CoreML model, it’s time to write some Swift code.
+Now that we have a trained CoreML model, it’s time to drag your model into Xcode:
 
-```swift
-  @objc(split:callback:)
-  func split(points: [[Float32]], callback: RCTResponseSenderBlock) {
-    guard points.count >= 2 else {
-      callback([NSNull(), []])
-      return
+![](../images/pytorch-and-coreml/xcode.png)
+<figcaption>Drag the model in and Xcode will do some magic.</figcaption>
+
+That’s all there is to it! Now I can write some Swift to run the model. First I make sure I’m running on iOS 11 or greater.
+
+```swift{4-8}
+import CoreML
+
+func split(points: [[Float32]]) -> [Int]? {
+  if #available(iOS 11.0, *) {
+
+  } else {
+    return nil
+  }
+}
+```
+
+Then I create a `MLMultiArray` and fill it with the input data. To do so I had to port over the `encode()` logic from earlier. Unfortunately the CoreML API requires quite a few type conversions.
+
+```swift{5-20}
+import CoreML
+
+func split(points: [[Float32]]) -> [Int]? {
+  if #available(iOS 11.0, *) {
+    let data = try! MLMultiArray(shape: [1, 2, 100], dataType: .float32)
+    let xs = points.map { $0[0] }
+    let ys = points.map { $0[1] }
+    let minX = xs.min()!
+    let maxX = xs.max()!
+    let minY = ys.min()!
+    let maxY = ys.max()!
+    let yShift = ((maxY - minY) / (maxX - minX)) / 2.0
+
+    for (i, point) in points.enumerated() {
+      let doubleI = Double(i)
+      let x = Double((point[0] - minX) / (maxX - minX) - 0.5)
+      let y = Double((point[1] - minY) / (maxX - minX) - yShift)
+      data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 0), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: x)
+      data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 1), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: y)
     }
-    if #available(iOS 11.0, *) {
-      if self.model == nil {
-        self.model = SplitModel()
-      }
-      guard let model = self.model as? SplitModel else {
-        print("Failed to create model")
-        callback(["coreml_error", NSNull()])
-        return
-      }
+  } else {
+    return nil
+  }
+}
+```
 
-      // example: [[Float32]] = [[41, 24], [163, 116], [254, 116], [319, 103], [484, 112], [533, 84], [629, 91]]
+Finally, I instantiate and run the model. `_1` and `_27` are the unfortunate names that the input and output layers were assigned somewhere along the process. You can click on the `mlmodel` file in the sidebar to find out what your names are.
+
+```swift{22-23}
+import CoreML
+
+func split(points: [[Float32]]) -> [Int]? {
+  if #available(iOS 11.0, *) {
+    let data = try! MLMultiArray(shape: [1, 2, 100], dataType: .float32)
+    let xs = points.map { $0[0] }
+    let ys = points.map { $0[1] }
+    let minX = xs.min()!
+    let maxX = xs.max()!
+    let minY = ys.min()!
+    let maxY = ys.max()!
+    let yShift = ((maxY - minY) / (maxX - minX)) / 2.0
+
+    for (i, point) in points.enumerated() {
+      let doubleI = Double(i)
+      let x = Double((point[0] - minX) / (maxX - minX) - 0.5)
+      let y = Double((point[1] - minY) / (maxX - minX) - yShift)
+      data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 0), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: x)
+      data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 1), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: y)
+    }
+
+    let model = SplitModel()
+    let prediction = try! model.prediction(_1: data)._27
+  } else {
+    return nil
+  }
+}
+```
+
+We have some predictions! All we need to do is convert the probabilities into a list of indices where the probability is greater than 50%.
+
+```swift{25-31}
+import CoreML
+
+func split(points: [[Float32]]) -> [Int]? {
+  if #available(iOS 11.0, *) {
+    let data = try! MLMultiArray(shape: [1, 2, 100], dataType: .float32)
+    let xs = points.map { $0[0] }
+    let ys = points.map { $0[1] }
+    let minX = xs.min()!
+    let maxX = xs.max()!
+    let minY = ys.min()!
+    let maxY = ys.max()!
+    let yShift = ((maxY - minY) / (maxX - minX)) / 2.0
+
+    for (i, point) in points.enumerated() {
+      let doubleI = Double(i)
+      let x = Double((point[0] - minX) / (maxX - minX) - 0.5)
+      let y = Double((point[1] - minY) / (maxX - minX) - yShift)
+      data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 0), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: x)
+      data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 1), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: y)
+    }
+
+    let model = SplitModel()
+    let prediction = try! model.prediction(_1: data)._27
+
+    var indices: [Int] = []
+    for (index, prob) in prediction {
+      if prob > 0.5 && index < points.count - 1 {
+        indices.append(Int(index))
+      }
+    }
+    return indices.sorted()
+  } else {
+    return nil
+  }
+}
+```
+
+#### React Native
+
+If this were a completely native app, I would be done. But my app is written in React Native, and I want to be able to call this neural network from my UI code. So there are a few more steps.
+
+First I put my function inside a class, and made sure it’s callable from Objective-C.
+
+```swift{3,4,6}
+import CoreML
+
+@objc(Split)
+class Split: NSObject {
+
+  @objc(split:)
+  func split(points: [[Float32]]) -> [Int]? {
+    if #available(iOS 11.0, *) {
+      let data = try! MLMultiArray(shape: [1, 2, 100], dataType: .float32)
       let xs = points.map { $0[0] }
       let ys = points.map { $0[1] }
       let minX = xs.min()!
@@ -785,12 +949,7 @@ Now that we have a trained CoreML model, it’s time to write some Swift code.
       let minY = ys.min()!
       let maxY = ys.max()!
       let yShift = ((maxY - minY) / (maxX - minX)) / 2.0
-      guard let data = try? MLMultiArray(shape: [1, 2, 100], dataType: .float32) else {
-        print("Failed to create MLMultiArray")
-        callback(["coreml_error", NSNull()])
-        return
-      }
-      
+  
       for (i, point) in points.enumerated() {
         let doubleI = Double(i)
         let x = Double((point[0] - minX) / (maxX - minX) - 0.5)
@@ -798,40 +957,142 @@ Now that we have a trained CoreML model, it’s time to write some Swift code.
         data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 0), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: x)
         data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 1), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: y)
       }
-            
-      do {
-        let start = CACurrentMediaTime()
-        let prediction = try model.prediction(_1: data)._27
-        print("ml time \(CACurrentMediaTime() - start)")
-        var indices: [Int] = []
-        for (index, prob) in prediction {
-          if prob > 0.5 && index < points.count - 1 {
-            indices.append(Int(index))
-          }
+  
+      let model = SplitModel()
+      let prediction = try! model.prediction(_1: data)._27
+  
+      var indices: [Int] = []
+      for (index, prob) in prediction {
+        if prob > 0.5 && index < points.count - 1 {
+          indices.append(Int(index))
         }
-        callback([NSNull(), indices.sorted()])
-        return
-      } catch {
-        print("Error running CoreML: \(error)")
-        callback(["coreml_error", NSNull()])
-        return
       }
+      return indices.sorted()
+    }
+  } else {
+    return nil
+  }
+}
+```
+
+Then, instead of returning the output, I made it take a React Native callback.
+
+```swift{6-7,35}
+import CoreML
+
+@objc(Split)
+class Split: NSObject {
+
+  @objc(split:callback)
+  func split(points: [[Float32]], callback: RCTResponseSenderBlock) {
+    if #available(iOS 11.0, *) {
+      let data = try! MLMultiArray(shape: [1, 2, 100], dataType: .float32)
+      let xs = points.map { $0[0] }
+      let ys = points.map { $0[1] }
+      let minX = xs.min()!
+      let maxX = xs.max()!
+      let minY = ys.min()!
+      let maxY = ys.max()!
+      let yShift = ((maxY - minY) / (maxX - minX)) / 2.0
+  
+      for (i, point) in points.enumerated() {
+        let doubleI = Double(i)
+        let x = Double((point[0] - minX) / (maxX - minX) - 0.5)
+        let y = Double((point[1] - minY) / (maxX - minX) - yShift)
+        data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 0), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: x)
+        data[[NSNumber(floatLiteral: 0), NSNumber(floatLiteral: 1), NSNumber(floatLiteral: doubleI)]] = NSNumber(floatLiteral: y)
+      }
+  
+      let model = SplitModel()
+      let prediction = try! model.prediction(_1: data)._27
+  
+      var indices: [Int] = []
+      for (index, prob) in prediction {
+        if prob > 0.5 && index < points.count - 1 {
+          indices.append(Int(index))
+        }
+      }
+      callback([NSNull(), indices.sorted()])
     } else {
-      callback(["coreml_unavailable", NSNull()])
+      callback([NSNull(), NSNull()])
     }
   }
 }
 ```
 
-#### React Native
+Finally, I wrote the little Objective-C wrapper required:
 
-### Next Steps
+```objectivec
+#import <React/RCTBridgeModule.h>
+
+@interface RCT_EXTERN_MODULE(Split, NSObject)
+
+RCT_EXTERN_METHOD(split:(NSArray<NSArray<NSNumber *> *> *)points callback:(RCTResponseSenderBlock *)callback)
+
+@end
+```
+
+Oh, one more thing. React Native doesn’t know how to convert three-dimensional arrays, so I had to teach it:
+
+```objectivec{9-19}
+#import <React/RCTBridgeModule.h>
+
+@interface RCT_EXTERN_MODULE(Split, NSObject)
+
+RCT_EXTERN_METHOD(split:(NSArray<NSArray<NSNumber *> *> *)points callback:(RCTResponseSenderBlock *)callback)
+
+@end
+
+#import <React/RCTConvert.h>
+
+@interface RCTConvert (RCTConvertNSNumberArrayArray)
+@end
+
+@implementation RCTConvert (RCTConvertNSNumberArrayArray)
++ (NSArray<NSArray<NSNumber *> *> *)NSNumberArrayArray:(id)json
+{
+  return RCTConvertArrayValue(@selector(NSNumberArray:), json);
+}
+@end
+```
+
+With all this out of the way, calling into CoreML from the JavaScript UI code is easy:
+
+```js
+import {NativeModules} from 'react-native';
+const {Split} = NativeModules;
+
+Split.split(points, (err, splits) => {
+  if (err) return;
+  // Use the splits here!
+});
+```
+
+And with that, the app is ready for App Store review!
+
+### Final Words
+
 #### Closing the Loop
 
-### Conclusion
+I’m quite satisfied with how the neural network is performing in production. It’s not perfect, but the cool thing is that it  can keep improving without me having to write any more code. All it needs to improve is more data. One day I hope to build the tools for users to submit their examples to the training set, and thus fully close the feedback loop of continuous improvement.
 
-The full code is available here.
-End-to-end. Hope you found this helpful. If you did, get the app (or tell a watch nerd friend). I’m also available for hire for React, React Native, and ML work.
+#### Your Turn
 
+I hope you enjoyed this end-to-end walkthrough of how I took a neural network all the way from idea to App Store. I covered a lot, so I hope you found some value in at least parts of it. I can’t wait to see what creative uses *you* will make of neural networks!
 
-Thanks.
+<br />
+
+The full code is [on GitHub]. Questions and comments are welcome on Twitter (<a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>), and [on Hacker News].
+
+<br />
+
+If you enjoyed this, [get the app](https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157) (or tell a watch nerd friend), and follow me on Twitter: <a title="Twitter" href="https://twitter.com/steadicat">steadicat</a> – more posts like are coming, and I will announce them there.
+
+<br />
+
+I’m also available for consulting. I specialize in React, React Native, and ML work.
+
+<br />
+<br />
+
+*Thanks to Casey Muller, Ana Muller, Beau Hartshorne, Giuseppe Attardi, and Maria Simi for reading drafts of this.*

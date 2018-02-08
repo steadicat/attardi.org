@@ -11,6 +11,13 @@ handlers:
 - url: /labels2?/?
   script: _go_app
   secure: always
+- url: /(component|path)---(.+)\.js(\.map)?
+  mime_type: application/javascript; charset=UTF-8
+  static_files: public/\1---\2.js\3
+  upload: public/(component|path)---(.+)\.js(\.map)?
+  secure: always
+  http_headers: 
+    Strict-Transport-Security: 'max-age=63072000; includeSubDomains; preload'
 %STATIC%
 - url: /.*
   static_files: public/404.html

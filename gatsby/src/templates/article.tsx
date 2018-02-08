@@ -19,7 +19,14 @@ import {
   mono,
   monoS,
 } from '../design/text';
-import {linkColor, hoverLinkColor, activeLinkColor, grayBackground, gray} from '../design/colors';
+import {
+  linkColor,
+  hoverLinkColor,
+  activeLinkColor,
+  grayBackground,
+  gray,
+  darkerGrayBackground,
+} from '../design/colors';
 import {unit, maxColumn} from '../design/layout';
 import {Subtitle, Title, DateView, Link, Button, Heading} from '../components/text';
 
@@ -43,19 +50,26 @@ const markdownStyle = css({
   paddingTop: unit * 2,
   ...serifS,
   ...commonStyle,
-  '& h3': {...sansBoldM, marginTop: unit * 2, marginBottom: unit / 2},
-  '& h4': {...sansBoldS, marginTop: unit, marginBottom: unit / 2},
+  '& h3': {...sansBoldL, marginTop: unit * 2, marginBottom: unit / 2},
+  '& h4': {...sansBoldM, marginTop: unit * 2, marginBottom: unit / 2},
+  '& h3 + h4': {marginTop: unit / 2},
   '& h5': {...sansBoldXS, marginTop: 0, marginBottom: unit / 4},
   '& strong': sansBold,
-  '& code': {fontFamily: mono},
-  '& pre': monoXS,
+  '& pre': {...monoS, fontVariantLigatures: 'none'},
+  '& p>code': {
+    ...monoS,
+    background: darkerGrayBackground,
+    borderRadius: 3,
+    fontVariantLigatures: 'none',
+    paddingLeft: 2,
+    paddingRight: 2,
+  },
   '& p>.caps': serifCaps,
-  '& p>code': {...monoS, background: grayBackground, borderRadius: 3},
   '& h3>.caps, h4>.caps, h5>.caps, a>.caps': sansBoldCaps,
   '& blockquote>p>.caps': sansCaps,
   '& p': {margin: 0},
   '& p + p': {
-    textIndent: '28px',
+    textIndent: unit * 1.5,
   },
   '& blockquote': {
     ...sansXS,
@@ -71,6 +85,23 @@ const markdownStyle = css({
     },
     '& a': {
       ...sansXS,
+      '& .caps': {
+        fontWeight: 'normal',
+      },
+    },
+    '& p + p': {
+      textIndent: unit,
+    },
+    '& p>code': monoXS,
+    '& pre': {
+      background: darkerGrayBackground,
+      marginBottom: 0,
+      color: gray,
+      ...monoXS,
+      lineHeight: '14px',
+      '& .token.symbol': {
+        color: '#f08d49',
+      },
     },
   },
   '& .gatsby-resp-image-wrapper': {
@@ -185,6 +216,7 @@ const ArticlePage = ({
         top: 0,
         left: 0,
         right: 0,
+        paddingBottom: 4 * unit,
       },
     ]}>
     <View
@@ -201,7 +233,7 @@ const ArticlePage = ({
       padding={unit}
       {...tableOfContentsStyle}
       dangerouslySetInnerHTML={{
-        __html: tableOfContents,
+        __html: tableOfContents.replace(/[A-Z]{2,8}/g, '<span class="caps">$&</span>'),
       }}
       media={['(max-width: 959px)', {display: 'none'}]}
       onClick={onTOCClick}

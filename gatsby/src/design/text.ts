@@ -2,7 +2,7 @@ import {unit} from '../design/layout';
 
 const xl = {fontSize: 36, lineHeight: `${unit * 2.5}px`};
 const l = {fontSize: 28, lineHeight: `${unit * 2}px`};
-const m = {fontSize: 24, lineHeight: `${unit * 1.5}px`};
+const m = {fontSize: 22, lineHeight: `${unit * 1.5}px`};
 const s = {fontSize: 17, lineHeight: `${unit * 1.5}px`};
 const xs = {fontSize: 12, lineHeight: `${unit}px`};
 
@@ -30,8 +30,8 @@ export const sansBoldXS = {...sansBold, ...xs};
 
 export const serifS = {...serifRegular, ...s, fontSize: 19};
 
-export const monoXS = {...monoRegular, ...xs};
-export const monoS = {...monoRegular, fontSize: 14};
+export const monoXS = {...monoRegular, fontSize: 10, lineHeight: `${unit}px`};
+export const monoS = {...monoRegular, fontSize: 13};
 
 export const sansCaps = {
   ...sansMedium,

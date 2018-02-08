@@ -10,7 +10,7 @@ dev: gatsby/node_modules
 build: gatsby/node_modules
 	cd gatsby && gatsby build
 
-app/app.yaml: app/app.template.yaml gatsby/buildconfig.ts $(SOURCES)
+app/app.yaml: app/app.template.yaml gatsby/buildconfig.ts $(SOURCES) | build
 	cd gatsby && ts-node buildconfig.ts
 
 serve: app/app.yaml
