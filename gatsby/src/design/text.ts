@@ -39,6 +39,7 @@ export const sansCaps = {
   letterSpacing: '1px',
   paddingLeft: '1px',
   paddingRight: '1px',
+  lineHeight: 1,
 };
 export const sansBoldCaps = {
   ...sansExtraBold,
@@ -46,6 +47,7 @@ export const sansBoldCaps = {
   letterSpacing: '1px',
   paddingLeft: '1px',
   paddingRight: '1px',
+  lineHeight: 1,
 };
 export const serifCaps = {
   ...serifMedium,
@@ -53,4 +55,5 @@ export const serifCaps = {
   letterSpacing: '1px',
   paddingLeft: '1px',
   paddingRight: '1px',
+  lineHeight: 1,
 };

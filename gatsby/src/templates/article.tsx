@@ -69,6 +69,9 @@ const markdownStyle = css({
       margin: 0,
       color: gray,
     },
+    '& a': {
+      ...sansXS,
+    },
   },
   '& .gatsby-resp-image-wrapper': {
     marginTop: unit * 2,
