@@ -25,7 +25,7 @@ class DefaultLayout extends React.PureComponent<DefaultLayoutProps, void> {
         marginBottom={unit * 4}
         color={textColor}>
         <Helmet
-          title="Rational Creation Blog"
+          title="Stefano J. Attardi"
           meta={[
             {name: 'description', content: 'Sample'},
             {name: 'keywords', content: 'sample, something'},

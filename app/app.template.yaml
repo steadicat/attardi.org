@@ -1,5 +1,5 @@
 application: attardi-org
-version: 1
+version: 2
 runtime: go
 api_version: go1
 default_expiration: 30d
@@ -23,3 +23,6 @@ handlers:
 error_handlers:
 - file: public/404.html
   mime_type: text/html; charset=UTF-8
+
+skip_files:
+- /app\.template\.yaml

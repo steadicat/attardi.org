@@ -16,6 +16,8 @@ import {
   sansCaps,
   serifS,
   sansRegular,
+  mono,
+  monoS,
 } from '../design/text';
 import {linkColor, hoverLinkColor, activeLinkColor, grayBackground, gray} from '../design/colors';
 import {unit, maxColumn} from '../design/layout';
@@ -23,7 +25,7 @@ import {Subtitle, Title, DateView, Link, Button, Heading} from '../components/te
 
 const commonStyle = {
   '& a': {
-    ...sansBold,
+    ...sansBoldS,
     color: linkColor,
     textDecoration: 'none',
     transition: '0.5s color, border-color',
@@ -38,21 +40,23 @@ const commonStyle = {
 };
 
 const markdownStyle = css({
+  paddingTop: unit * 2,
   ...serifS,
   ...commonStyle,
   '& h3': {...sansBoldM, marginTop: unit * 2, marginBottom: unit / 2},
   '& h4': {...sansBoldS, marginTop: unit, marginBottom: unit / 2},
   '& h5': {...sansBoldXS, marginTop: 0, marginBottom: unit / 4},
   '& strong': sansBold,
-  '& code': monoXS,
+  '& code': {fontFamily: mono},
+  '& pre': monoXS,
   '& p>.caps': serifCaps,
-  '& h3>.caps, h4>.caps': sansBoldCaps,
+  '& p>code': {...monoS, background: grayBackground, borderRadius: 3},
+  '& h3>.caps, h4>.caps, h5>.caps, a>.caps': sansBoldCaps,
   '& blockquote>p>.caps': sansCaps,
   '& p': {margin: 0},
   '& p + p': {
     textIndent: '28px',
   },
-
   '& blockquote': {
     ...sansXS,
     marginTop: unit / 2,
@@ -61,10 +65,25 @@ const markdownStyle = css({
     padding: [unit * 0.75, unit, unit * 0.75, unit].map(x => `${x}px`).join(' '),
     color: gray,
     margin: [unit, 0].map(x => `${x}px`).join(' '),
+    '& h4': {
+      margin: 0,
+      color: gray,
+    },
   },
-  '& blockquote h4': {
-    margin: 0,
-    color: gray,
+  '& .gatsby-resp-image-wrapper': {
+    marginTop: unit * 2,
+    marginBottom: unit / 2,
+  },
+  '& figcaption': {
+    fontStyle: 'normal',
+    ...sansBoldXS,
+    display: 'block',
+    textAlign: 'center',
+    marginBottom: unit * 2,
+    textIndent: 0,
+    '& a': {
+      ...sansBoldXS,
+    },
   },
 });
 
@@ -85,6 +104,7 @@ const tableOfContentsStyle = css({
   '& a.active': {
     ...sansBoldXS,
   },
+  '& .caps': sansCaps,
 });
 
 function onTOCClick(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -172,12 +192,7 @@ const ArticlePage = ({
       </Heading>
       <Title marginTop={unit}>{title}</Title>
       <DateView date={date} />
-      <Body
-        {...markdownStyle}
-        dangerouslySetInnerHTML={{
-          __html: html.replace(/[A-Z]{2,10}/g, '<span class="caps">$&</span>'),
-        }}
-      />
+      <Body {...markdownStyle} dangerouslySetInnerHTML={{__html: html}} />
       <View marginTop={unit * 4}>
         <Heading>
           <Link to="/">Stefano J. Attardi</Link>

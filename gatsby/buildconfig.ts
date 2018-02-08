@@ -24,15 +24,14 @@ function handler(path, add) {
       file: path,
       mime_type: 'application/javascript; charset=UTF-8',
     });
-  }
-  if (/\.css$/.test(path)) {
+  } else if (/\.css$/.test(path)) {
     add({
       url: path,
       file: path,
       mime_type: 'text/css; charset=UTF-8',
     });
-  } else if (/\.map$/.test(path)) {
-    // skip
+  } else if (/\.sass$/.test(path)) {
+    // Skip
   } else {
     add({url: path, file: path});
   }
