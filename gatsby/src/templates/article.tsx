@@ -92,7 +92,6 @@ const markdownStyle = css({
 
 const tableOfContentsStyle = css({
   ...commonStyle,
-  padding: unit,
   '& ul': {margin: 0, padding: 0, listStyleType: 'none', paddingLeft: unit},
   '& a.active::before': {content: '▸', position: 'absolute', left: 0},
   '&>ul': {paddingLeft: 0},
@@ -176,20 +175,38 @@ class Body extends React.Component {
 const ArticlePage = ({
   data: {markdownRemark: {frontmatter: {title, date}, html, tableOfContents}},
 }: ArticlePageProps) => (
-  <div>
+  <View
+    media={[
+      '(min-width: 960px)',
+      {
+        display: 'flex',
+        alignItems: 'flex-start',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+      },
+    ]}>
     <View
+      position="sticky"
+      top={0}
+      maxHeight="100vh"
+      marginLeft="auto"
+      marginRight="auto"
+      boxSizing="border-box"
       width={sidebarWidth}
-      position="fixed"
-      left={`calc((100% - ${maxColumn}px - ${sidebarWidth}px) / 6)`}
-      bottom={0}
+      overflow="auto"
+      flexShrink={0}
+      marginTop={540}
+      padding={unit}
       {...tableOfContentsStyle}
       dangerouslySetInnerHTML={{
         __html: tableOfContents,
       }}
-      onClick={onTOCClick}
       media={['(max-width: 959px)', {display: 'none'}]}
+      onClick={onTOCClick}
     />
-    <View media={['(min-width: 960px)', {position: 'relative', left: sidebarWidth / 2}]}>
+    <View media={['(min-width: 960px)', {maxWidth: maxColumn, marginRight: 'auto'}]}>
       <Heading marginTop={unit}>
         <Link to="/">Stefano J. Attardi</Link>
       </Heading>
@@ -207,7 +224,7 @@ const ArticlePage = ({
         <Button href="/email">Get in Touch</Button>
       </View>
     </View>
-  </div>
+  </View>
 );
 
 export default ArticlePage;
