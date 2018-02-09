@@ -82,7 +82,7 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
     {edges.map(({node: {frontmatter: {title, date}, fields: {slug}}}, i) => [
       <Heading key={`${i}0`} marginTop={unit} marginBottom={unit / 4}>
         <Link to={slug}>{title}</Link>{' '}
-        {new Date() - new Date(date) < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
+        {Date.now() - new Date(date).valueOf() < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
       </Heading>,
       <DateView key={`${i}1`} date={date} />,
     ])}

@@ -223,8 +223,8 @@ const ArticlePage = ({
       position="sticky"
       top={0}
       maxHeight="100vh"
-      marginLeft="auto"
-      marginRight="auto"
+      marginLeft={`calc((100vw - ${maxColumn}px - ${sidebarWidth}px) / 4)`}
+      marginRight={`calc((100vw - ${maxColumn}px - ${sidebarWidth}px) / -4)`}
       boxSizing="border-box"
       width={sidebarWidth}
       overflow="auto"
@@ -238,7 +238,11 @@ const ArticlePage = ({
       media={['(max-width: 959px)', {display: 'none'}]}
       onClick={onTOCClick}
     />
-    <View media={['(min-width: 960px)', {maxWidth: maxColumn, marginRight: 'auto'}]}>
+    <View
+      media={[
+        '(min-width: 960px)',
+        {maxWidth: maxColumn, marginLeft: 'auto', marginRight: 'auto'},
+      ]}>
       <Heading marginTop={unit}>
         <Link to="/">Stefano J. Attardi</Link>
       </Heading>

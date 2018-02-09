@@ -3,11 +3,11 @@ title: "How I Shipped a Neural Network on iOS with CoreML, PyTorch, and\xa0React
 date: "2018-02-09"
 ---
 
-Ever felt like machine learning tutorials are too pie-in-the-sky, and short on practical details that you can actually use? If so, you might enjoy this.
+Ever felt like machine learning tutorials are too lofty, and short on practical details? If so, you might enjoy this.
 
-This is the story of how I trained a simple neural network that solves a well-defined yet novel problem in a real iOS app. I’ll walk through every single step, from identifying the problem to curating the dataset all the way to shipping the trained neural network and hooking it up to the UI.
+This is the story of how I trained a simple neural network to solve a well-defined yet novel problem in a real iOS app. I’ll walk through every step, from identifying the problem to curating the dataset all the way to shipping the trained neural network and hooking it up to the UI.
 
-I hope this inspires you to start sprinkling neural networks into your apps as well, even if you’re working on something slightly less ambitious than digital assistants or self-driving cars.
+I hope this inspires you to start sprinkling neural nets into your apps as well, even if you’re working on something less ambitious than digital assistants or self-driving cars.
 
 ### The Challenge
 
@@ -16,30 +16,28 @@ I recently built [a little iOS app](https://itunes.apple.com/us/app/movement-wat
 ![](../images/pytorch-and-coreml/app-store.png)
 <figcaption><a href="https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157">Movement - Watch Tracker</a> as presented in the App Store.</figcaption>
 
-In the app, watch owners periodically add measurements by tapping the screen when their watch shows a certain time. Over time these measurements tell the story of how watch is performing.
+In the app, watch owners periodically add measurements by tapping the screen when their watch shows a certain time. Over time these measurements tell the story of how each watch is performing.
 
 > ##### Mechanical Watch Rabbit Hole
-> If you don’t own a mechanical watch, you may be questioning the whole point of this app. Hell, maybe even the whole point of owning an expensive, inaccurate watch in the first place. If you’re one of *those*, just bear with me. All you need to know is that mechanical watches gain or lose a few seconds per day if they’re good, or a few minutes if they’re bad. They often need to be reset: they stop running if you don’t wear them or wind them. And they need to be serviced. If they’re anywhere near a magnet, they become “magnetized” and become much less accurate until they’re demagnetized using a special machine.
+> If you don’t own a mechanical watch, you may be questioning the whole point of this app. Maybe even the whole point of owning an expensive, inaccurate watch in the first place. If you’re one of *those*, bear with me. All you need to know is that mechanical watches gain or lose a few seconds per day if they’re good, or a few minutes if they’re bad. They often need to be reset: they stop running if you don’t wear them or wind them. And they need to be serviced. If they’re anywhere near a magnet, they get “magnetized” and run wild until they’re demagnetized using a special machine.
 >
-> Watch lovers can become obsessed with maintaining and measuring the accuracy of their watches. Knowing your watch is accurate can increase your pride in your watch tenfold. And knowing your watch is inaccurate can tell you it’s time to take it in for service (besides saving you from being late to meetings).
->
-> Why bother with all this? I guess that’s a very personal question. What ultimately sold me on the appeal of mechanical watches was realizing that they are a piece of jewelry that’s also a perfect synergy of design and engineering in physical form. I’ve been trying to marry the two my entire life (hence the name of my consulting company, [Rational Creation](https://rationalcreation.com/)), so wearing both on my wrist just feels right.
+> Some watch lovers obsess about maintaining and measuring the accuracy of their watches. Knowing your watch is accurate increases your pride in your watch tenfold. And knowing it is inaccurate tells you it’s time to service it. It also saves you from being late to meetings.
 
-One of the main features of the app is a chart of the measurements, with trendlines estimating how your watch is performing.
+One of the main features of the app is a little chart, with points plotting how your watch has deviated from current time, and trendlines estimating how your watch is performing.
 
 ![](../images/pytorch-and-coreml/charts.png)
 <figcaption>Watch charts and trendlines in the app.</figcaption>
 
-Computing a trendline across some given points is easy. You can use a simple <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Linear_regression">linear regression</a> – or you can even get fancy and use a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Robust_regression">robust regression</a>, to minimize the impact of inaccurate or stray measurements.
+Computing a trendline given some points is easy. Use a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Linear_regression">linear regression</a> – or get fancy with a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Robust_regression">robust regression</a>, which minimizes the impact of inaccurate or stray measurements.
 
-However, what often happens with a mechanical watch – especially one that’s not running very well – is that you reset it to the current time every few days. Or you skip wearing it for a couple days, and its “charge” depletes, so you have to reset it. These events create a “break” in the trendline. For example:
+However, mechanical watches – especially ones that are not running very well – need to be reset to the current time every few days. And any watch you don’t wear for a couple days runs out of juice, so you have to reset it. These events create a “break” in the trendline. For example:
 
 ![](../images/pytorch-and-coreml/trendlines.png)
 <figcaption>Two very clearly separate runs: each gets a trendline.</figcaption>
 
 It looks like I didn’t wear that watch for a couple of days, and when I picked it up again, I started over from zero.
 
-I wanted the app to show separate trendlines for each of these runs, but I didn’t want to ask my users to do extra work each time they reset their watch. I imagined I could pretty easily figure out where to split the trendlines automatically.
+I wanted the app to show separate trendlines for each of these runs, but I didn’t want to ask my users to do extra work each time they reset their watch. I imagined it would be pretty easy to automatically figure out where to split the trendlines.
 
 My plan was to Google my way out the problem, like I had done earlier when looking for a robust linear regression formula. I pretty quickly found what felt like the right keywords (<a title="Wikipedia" href="https://en.wikipedia.org/wiki/Segmented_regression">segmented regression</a>, and [piecewise linear regression](https://onlinecourses.science.psu.edu/stat501/node/310)). And for a second I thought I’d hit the jackpot. I found [one article](https://www.datadoghq.com/blog/engineering/piecewise-regression/) that seems to solve this exact problem using basic math.
 
@@ -59,7 +57,7 @@ I’ve experimented for years with neural networks, but never yet had had the ch
 
 ### The Tools
 
-Since the goal was running the neural network production, my main concern was figuring out how I would deploy it. Many online tutorials just drop you off at the end of the training and leave this part out. But I’d decided this would be the time I’d see my neural network all the way through.
+Since the goal was running the neural network production, my main concern was figuring out how I would deploy it. Many online tutorials drop you off at the end of the training and leave this part out. But I’d decided this would be the time I’d see my neural network all the way through.
 
 Since I was building an iOS app, [CoreML](https://developer.apple.com/documentation/coreml) was the obvious choice. It’s the only way I know of to run predictions on the GPU; last I checked <a title="Wikipedia" href="https://en.wikipedia.org/wiki/CUDA">CUDA</a> was not available on iOS.
 
@@ -140,7 +138,7 @@ The output is a series of bits, with ones marking a position where the trendline
 ]
 ```
 
-There are only 99 possible splits, since it doesn’t make sense to split at position 100. However, keeping the length the same simplifies the neural network (see later). I’ll just ignore the final bit in the output.
+There are only 99 possible splits, since it doesn’t make sense to split at position 100. However, keeping the length the same simplifies the neural network (see later). I’ll ignore the final bit in the output.
 
 As the neural network tries to approximate this series of ones and zeros, each output number will fall somewhere in-between.
 
@@ -540,7 +538,7 @@ for epoch in range(1000):
         optimizer.step()
 ```
 
-Once I’ve gone through all the batches, the epoch is over. I use the validation dataset to calculate and print out how our learning is going. Then I start over with the next epoch. The code in the `evaluate()` function should look familiar. It does the same work we just did during training, except using the validation data and with some extra metrics.
+Once I’ve gone through all the batches, the epoch is over. I use the validation dataset to calculate and print out how our learning is going. Then I start over with the next epoch. The code in the `evaluate()` function should look familiar. It does the same work we did during training, except using the validation data and with some extra metrics.
 
 ```python{22-32,34-49}
 model.train()
@@ -640,7 +638,7 @@ As the network got better, I started thinking up more and more evil examples. Li
 
 <div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><circle fill="#01beff" r="5" cx="83" cy="116"></circle><circle fill="#01beff" r="5" cx="124" cy="109"></circle><circle fill="#01beff" r="5" cx="171" cy="102"></circle><circle fill="#01beff" r="5" cx="201" cy="104"></circle><circle fill="#01beff" r="5" cx="223" cy="105"></circle><circle fill="#01beff" r="5" cx="253" cy="113"></circle><circle fill="#01beff" r="5" cx="275" cy="120"></circle><circle fill="#01beff" r="5" cx="298" cy="123"></circle><circle fill="#01beff" r="5" cx="350" cy="126"></circle><circle fill="#01beff" r="5" cx="404" cy="126"></circle><circle fill="#01beff" r="5" cx="451" cy="109"></circle><circle fill="#01beff" r="5" cx="493" cy="91"></circle><circle fill="#01beff" r="5" cx="521" cy="84"></circle><circle fill="#01beff" r="5" cx="585" cy="88"></circle><circle fill="#01beff" r="5" cx="612" cy="90"></circle><circle fill="#01beff" r="5" cx="662" cy="97"></circle><circle fill="#01beff" r="5" cx="695" cy="108"></circle><circle fill="#01beff" r="5" cx="720" cy="114"></circle><circle fill="#01beff" r="5" cx="747" cy="109"></circle><circle fill="#01beff" r="5" cx="773" cy="97"></circle><line stroke="#f00" x1="83" y1="114.04278068464784" x2="773" y2="99.23109561830489"></line></svg></div>
 
-As I added more examples, I soon realized that the problem was way harder than I imagined at first. Still, the network performed well. It got to the point where I would cook up examples I would not be sure how to split it myself. I would just trust the network to figure it out. Like with this crazy one:
+As I added more examples, I soon realized that the problem was way harder than I imagined at first. Still, the network performed well. It got to the point where I would cook up examples I would not be sure how to split it myself. I would trust the network to figure it out. Like with this crazy one:
 
 <div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="186" y1="0" x2="186" y2="200"></line><line stroke="#ccc" x1="389" y1="0" x2="389" y2="200"></line><line stroke="#ccc" x1="570" y1="0" x2="570" y2="200"></line><line stroke="#ccc" x1="678" y1="0" x2="678" y2="200"></line><circle fill="#01beff" r="5" cx="137" cy="152"></circle><circle fill="#01beff" r="5" cx="168" cy="131"></circle><circle fill="#01beff" r="5" cx="220" cy="109"></circle><circle fill="#01beff" r="5" cx="257" cy="92"></circle><circle fill="#01beff" r="5" cx="306" cy="77"></circle><circle fill="#01beff" r="5" cx="360" cy="68"></circle><circle fill="#01beff" r="5" cx="422" cy="60"></circle><circle fill="#01beff" r="5" cx="481" cy="57"></circle><circle fill="#01beff" r="5" cx="531" cy="62"></circle><circle fill="#01beff" r="5" cx="593" cy="72"></circle><circle fill="#01beff" r="5" cx="644" cy="86"></circle><circle fill="#01beff" r="5" cx="708" cy="113"></circle><circle fill="#01beff" r="5" cx="766" cy="143"></circle><line stroke="#f00" x1="137" y1="152" x2="168" y2="131"></line><line stroke="#f00" x1="220" y1="105.52238603779547" x2="360" y2="65.01844618545528"></line><line stroke="#f00" x1="422" y1="58.754338819840996" x2="531" y2="60.530119807412376"></line><line stroke="#f00" x1="593" y1="72" x2="644" y2="86"></line><line stroke="#f00" x1="708" y1="113" x2="766" y2="143"></line></svg></div>
 
@@ -935,7 +933,7 @@ func split(points: [[Float32]]) -> [Int]? {
 
 If this were a completely native app, I would be done. But my app is written in React Native, and I want to be able to call this neural network from my UI code. So there are a few more steps.
 
-First I put my function inside a class, and made sure it’s callable from Objective-C.
+First, I wrapped my function inside a class, and made sure it was callable from Objective-C.
 
 ```swift{3,4,6}
 import CoreML
@@ -982,13 +980,13 @@ class Split: NSObject {
 
 Then, instead of returning the output, I made it take a React Native callback.
 
-```swift{6-7,35}
+```swift{6-7,35,37}
 import CoreML
 
 @objc(Split)
 class Split: NSObject {
 
-  @objc(split:callback)
+  @objc(split:callback:)
   func split(points: [[Float32]], callback: RCTResponseSenderBlock) {
     if #available(iOS 11.0, *) {
       let data = try! MLMultiArray(shape: [1, 2, 100], dataType: .float32)
@@ -1069,7 +1067,7 @@ const {Split} = NativeModules;
 
 Split.split(points, (err, splits) => {
   if (err) return;
-  // Use the splits here!
+  // Use the splits here
 });
 ```
 
@@ -1079,23 +1077,22 @@ And with that, the app is ready for App Store review!
 
 #### Closing the Loop
 
-I’m quite satisfied with how the neural network is performing in production. It’s not perfect, but the cool thing is that it  can keep improving without me having to write any more code. All it needs to improve is more data. One day I hope to build the tools for users to submit their examples to the training set, and thus fully close the feedback loop of continuous improvement.
+I’m quite satisfied with how the neural network is performing in production. It’s not perfect, but the cool thing is that it can keep improving without me having to write any more code. All it needs to improve is more data. One day I hope to build the tools for users to submit their examples to the training set, and thus fully close the feedback loop of continuous improvement.
 
 #### Your Turn
 
 I hope you enjoyed this end-to-end walkthrough of how I took a neural network all the way from idea to App Store. I covered a lot, so I hope you found some value in at least parts of it. I can’t wait to see what creative uses *you* will make of neural networks!
 
-<br />
+#### Calls to Action!
 
-The full code is [on GitHub]. Questions and comments are welcome on Twitter (<a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>), and [on Hacker News].
+Pick one. Or two. Or all. I don’t care. You do you:
 
-<br />
-
-If you enjoyed this, [get the app](https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157) (or tell a watch nerd friend), and follow me on Twitter: <a title="Twitter" href="https://twitter.com/steadicat">steadicat</a> – more posts like are coming, and I will announce them there.
-
-<br />
-
-I’m also available for consulting. I specialize in React, React Native, and ML work.
+- [Get the app](https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157), or tell a watch lover friend.
+- Ask a questions or comments on [Hacker News] or Twitter (<a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>).
+- Check out the full code [on GitHub].
+- Come up with one problem in your app that you can realistically solve with neural networks.
+- Follow me on Twitter: <a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>: more posts like are coming, and I will announce them there.
+- [Hire me] as a consultant. I specialize in React, React Native, and ML work.
 
 <br />
 <br />
