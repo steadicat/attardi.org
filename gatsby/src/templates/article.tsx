@@ -55,7 +55,7 @@ const markdownStyle = css({
   '& h3 + h4': {marginTop: unit / 2},
   '& h5': {...sansBoldXS, marginTop: 0, marginBottom: unit / 4},
   '& strong': sansBold,
-  '& pre': {...monoS, fontVariantLigatures: 'none'},
+  '& pre[class*="language"], code': {...monoXS, fontVariantLigatures: 'none'},
   '& p>code': {
     ...monoS,
     background: darkerGrayBackground,

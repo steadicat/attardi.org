@@ -31,7 +31,7 @@ class DefaultLayout extends React.PureComponent<DefaultLayoutProps, void> {
             {name: 'keywords', content: 'sample, something'},
           ]}>
           <link
-            href="//fonts.googleapis.com/css?family=Zilla+Slab:400,400i,500|Rubik:600,500,400,300|Space+Mono:400"
+            href="//fonts.googleapis.com/css?family=Zilla+Slab:400,400i,500|Rubik:600,500,400,300|PT+Mono:400"
             rel="stylesheet"
           />
         </Helmet>

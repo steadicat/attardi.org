@@ -46,10 +46,10 @@ The approach is essentially brute-force, trying to split the trendline at every 
 ![](../images/pytorch-and-coreml/failures.png)
 <figcaption>Two common failure scenarios.</figcaption>
 
-This approach is very sensitive to the parameters you pick (like how much increase in error is acceptable), so I built a UI to help me tweak the parameters. You can [try out the UI for yourself here].
+This approach is very sensitive to the parameters you pick (like how much increase in error is acceptable), so I built a UI to help me tweak the parameters. You can [try out the UI for yourself here](/pytorch-and-coreml-test-ui/).
 
 ![](../images/pytorch-and-coreml/test-ui.png)
-<figcaption>The UI I used to generate and visualize examples, with hot reload for paramater tuning.</figcaption>
+<figcaption><a href="/pytorch-and-coreml-test-ui/">The UI</a> I used to generate and visualize examples, with hot reload for paramater tuning.</figcaption>
 
 Still, I got stuck. No matter how I tweaked the parameters, the algorithm was either splitting too frequently, or not frequently enough. This approach wasn’t going to cut it.
 
@@ -89,10 +89,10 @@ Fortunately, the problem at hand is relatively simple (or so one would think), s
 
 #### The Test UI
 
-I had the perfect UI already. I’d built it to tweak the parameters of my brute-force algorithm and see the effects in real time. It didn’t take me long to convert it into a [UI for generating training examples]. I added the option to specify where I thought runs should split. And with a few clicks of the mouse and a `JSON.stringify` call I had enough of a dataset to jump into Python.
+I had the perfect UI already. I’d built it to tweak the parameters of my brute-force algorithm and see the effects in real time. It didn’t take me long to convert it into a [UI for generating training examples]((/pytorch-and-coreml-test-ui/). I added the option to specify where I thought runs should split. And with a few clicks of the mouse and a `JSON.stringify` call I had enough of a dataset to jump into Python.
 
 ![](../images/pytorch-and-coreml/test-ui-nn.png)
-<figcaption>Test UI with manually-entered splits, and red boxes around incorrect predictions.</figcaption>
+<figcaption><a href="/pytorch-and-coreml-test-ui/">Test UI</a> with manually-entered splits, and red boxes around incorrect predictions.</figcaption>
 
 > ##### Parcel
 > As an experienced web developer, I knew building this UI as a web app with React was going to be easy. However, there was one part I was dreading, even though I’ve done it dozens of times before: configuring [Webpack](https://webpack.js.org). So I took this as an opportunity to try [Parcel](https://parceljs.org). Parcel worked out-of-the-box with zero configuration. It even worked with TypeScript. And hot code reload. I was able to have a fully working web app faster than it would take me to type `create-react-app`.
@@ -626,7 +626,7 @@ As you can see the network learns pretty quickly. In this particular run, the ac
 
 ### Evaluating
 
-My accuracy results were pretty decent out of the gate. To truly understand how the network was performing, I fed the output of the network back into the test UI to visualize how it succeeded and how it failed.
+My accuracy results were pretty decent out of the gate. To truly understand how the network was performing, I fed the output of the network back into the [test UI](/pytorch-and-coreml-test-ui/) to visualize how it succeeded and how it failed.
 
 There were many difficult examples where it was spot on, and it made me a proud daddy:
 
@@ -1090,6 +1090,7 @@ Pick one. Or two. Or all. I don’t care. You do you:
 - [Get the app](https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157), or tell a watch lover friend.
 - Ask a questions or comments on [Hacker News] or Twitter (<a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>).
 - Check out the full code [on GitHub].
+- See the training data an try out the test UI [here](/pytorch-and-coreml-test-ui/).
 - Come up with one problem in your app that you can realistically solve with neural networks.
 - Follow me on Twitter: <a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>: more posts like are coming, and I will announce them there.
 - [Hire me] as a consultant. I specialize in React, React Native, and ML work.

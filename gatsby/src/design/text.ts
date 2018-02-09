@@ -9,7 +9,7 @@ const xs = {fontSize: 12, lineHeight: `${unit}px`};
 // Font variants
 export const sans = 'Rubik, sans-serif';
 export const serif = '"Zilla Slab", serif';
-export const mono = '"Space Mono", monospace';
+export const mono = '"PT Mono", monospace';
 
 export const serifRegular = {fontFamily: serif, fontWeight: 400};
 const serifMedium = {fontFamily: serif, fontWeight: 500};
@@ -30,7 +30,7 @@ export const sansBoldXS = {...sansBold, ...xs};
 
 export const serifS = {...serifRegular, ...s, fontSize: 19};
 
-export const monoXS = {...monoRegular, fontSize: 10, lineHeight: `${unit}px`};
+export const monoXS = {...monoRegular, fontSize: 11, lineHeight: `${unit}px`};
 export const monoS = {...monoRegular, fontSize: 13};
 
 export const sansCaps = {
