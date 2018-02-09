@@ -3,9 +3,9 @@ title: "How I Shipped a Neural Network on iOS with CoreML, PyTorch, and\xa0React
 date: "2018-02-09"
 ---
 
-Ever felt like ML tutorials are a little too pie-in-the-sky, and short on practical details that you can actually use? If so, you might find this story interesting.
+Ever felt like machine learning tutorials are too pie-in-the-sky, and short on practical details that you can actually use? If so, you might enjoy this.
 
-This is the story of how I trained a relatively simple neural network, but one that solves a well-defined and novel problem in a real iOS app. I’m laying it all out, from identifying problem to curating the dataset all the way to shipping the trained neural network and hooking it up to the UI.
+This is the story of how I trained a simple neural network that solves a well-defined yet novel problem in a real iOS app. I’ll walk through every single step, from identifying the problem to curating the dataset all the way to shipping the trained neural network and hooking it up to the UI.
 
 I hope this inspires you to start sprinkling neural networks into your apps as well, even if you’re working on something slightly less ambitious than digital assistants or self-driving cars.
 
@@ -16,12 +16,12 @@ I recently built [a little iOS app](https://itunes.apple.com/us/app/movement-wat
 ![](../images/pytorch-and-coreml/app-store.png)
 <figcaption><a href="https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157">Movement - Watch Tracker</a> as presented in the App Store.</figcaption>
 
-In the app, watch owners periodically add measurements by tapping the screen when their watch shows a certain time. Over time these measurements tell the story of how each of your watches is performing.
+In the app, watch owners periodically add measurements by tapping the screen when their watch shows a certain time. Over time these measurements tell the story of how watch is performing.
 
 > ##### Mechanical Watch Rabbit Hole
-> If you don’t own a mechanical watch, you may be questioning the whole point of this app. Hell, maybe even the whole point of owning an expensive, inaccurate watch in the first place. If you’re one of _those_, just bear with me. All you need to know is that mechanical watches are inaccurate: they gain or lose a few seconds per day if they’re good, a few minutes if they’re bad. They need to be periodically reset – they stop running if you don’t wear them or wind them. And they need to be periodically serviced. If they’re anywhere near a magnet, they become “magnetized” and become much less accurate until they’re demagnetized using a special machine.
+> If you don’t own a mechanical watch, you may be questioning the whole point of this app. Hell, maybe even the whole point of owning an expensive, inaccurate watch in the first place. If you’re one of *those*, just bear with me. All you need to know is that mechanical watches gain or lose a few seconds per day if they’re good, or a few minutes if they’re bad. They often need to be reset: they stop running if you don’t wear them or wind them. And they need to be serviced. If they’re anywhere near a magnet, they become “magnetized” and become much less accurate until they’re demagnetized using a special machine.
 >
-> Watch lovers can get really attached to their timepieces, and can become obsessed with maintaining and measuring their accuracy. Knowing your watch is accurate can increase your pride in your watch tenfold. And knowing your watch is inaccurate can tell you it’s time to take it in for service (besides saving you from being late to meetings).
+> Watch lovers can become obsessed with maintaining and measuring the accuracy of their watches. Knowing your watch is accurate can increase your pride in your watch tenfold. And knowing your watch is inaccurate can tell you it’s time to take it in for service (besides saving you from being late to meetings).
 >
 > Why bother with all this? I guess that’s a very personal question. What ultimately sold me on the appeal of mechanical watches was realizing that they are a piece of jewelry that’s also a perfect synergy of design and engineering in physical form. I’ve been trying to marry the two my entire life (hence the name of my consulting company, [Rational Creation](https://rationalcreation.com/)), so wearing both on my wrist just feels right.
 
@@ -30,7 +30,7 @@ One of the main features of the app is a chart of the measurements, with trendli
 ![](../images/pytorch-and-coreml/charts.png)
 <figcaption>Watch charts and trendlines in the app.</figcaption>
 
-Computing a trendline across given points is easy. You can use a simple <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Linear_regression">linear regression</a>, or you can even get fancy and use a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Robust_regression">robust regression</a> (such as <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Theil–Sen_estimator">Theil-Sen</a>) to minimize the impact of inaccurate or stray measurements.
+Computing a trendline across some given points is easy. You can use a simple <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Linear_regression">linear regression</a> – or you can even get fancy and use a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Robust_regression">robust regression</a>, to minimize the impact of inaccurate or stray measurements.
 
 However, what often happens with a mechanical watch – especially one that’s not running very well – is that you reset it to the current time every few days. Or you skip wearing it for a couple days, and its “charge” depletes, so you have to reset it. These events create a “break” in the trendline. For example:
 
@@ -39,16 +39,16 @@ However, what often happens with a mechanical watch – especially one that’s 
 
 It looks like I didn’t wear that watch for a couple of days, and when I picked it up again, I started over from zero.
 
-I wanted to show separate trendlines for each of these runs, but I didn’t want to ask my users to do extra work each time they reset their watch. I imagined I could pretty easily figure out where to split automatically.
+I wanted the app to show separate trendlines for each of these runs, but I didn’t want to ask my users to do extra work each time they reset their watch. I imagined I could pretty easily figure out where to split the trendlines automatically.
 
-My plan was to Google my way out the problem, like I did earlier when looking for a robust linear regression formula. I pretty quickly found what felt like the right keywords (<a title="Wikipedia" href="https://en.wikipedia.org/wiki/Segmented_regression">segmented regression</a>, and [piecewise linear regression](https://onlinecourses.science.psu.edu/stat501/node/310)). And for a second I thought I’d hit the jackpot. I found [one article](https://www.datadoghq.com/blog/engineering/piecewise-regression/) that seems to solve this exact problem using basic math.
+My plan was to Google my way out the problem, like I had done earlier when looking for a robust linear regression formula. I pretty quickly found what felt like the right keywords (<a title="Wikipedia" href="https://en.wikipedia.org/wiki/Segmented_regression">segmented regression</a>, and [piecewise linear regression](https://onlinecourses.science.psu.edu/stat501/node/310)). And for a second I thought I’d hit the jackpot. I found [one article](https://www.datadoghq.com/blog/engineering/piecewise-regression/) that seems to solve this exact problem using basic math.
 
 The approach is essentially brute-force, trying to split the trendline at every possible point and then deciding which splits to pick based on how much they affect the mean squared error. I implemented this, and this happened:
 
 ![](../images/pytorch-and-coreml/failures.png)
 <figcaption>Two common failure scenarios.</figcaption>
 
-This approach is very sensitive to the parameters you pick (like how much increase in error is acceptable), so I built a UI to help me tweak the parameters:
+This approach is very sensitive to the parameters you pick (like how much increase in error is acceptable), so I built a UI to help me tweak the parameters. You can [try out the UI for yourself here].
 
 ![](../images/pytorch-and-coreml/test-ui.png)
 <figcaption>The UI I used to generate and visualize examples, with hot reload for paramater tuning.</figcaption>
@@ -61,12 +61,12 @@ I’ve experimented for years with neural networks, but never yet had had the ch
 
 Since the goal was running the neural network production, my main concern was figuring out how I would deploy it. Many online tutorials just drop you off at the end of the training and leave this part out. But I’d decided this would be the time I’d see my neural network all the way through.
 
-Since I was building an iOS app, [CoreML](https://developer.apple.com/documentation/coreml) was the obvious choice. It’s the only way I know of to run predictions on the GPU; last I checked CUDA was not available on iOS.
+Since I was building an iOS app, [CoreML](https://developer.apple.com/documentation/coreml) was the obvious choice. It’s the only way I know of to run predictions on the GPU; last I checked <a title="Wikipedia" href="https://en.wikipedia.org/wiki/CUDA">CUDA</a> was not available on iOS.
 
-Another huge benefit of CoreML is that it’s built in to the OS, so I wouldn’t need to worry about compiling, linking, and shipping binaries of sprawling ML libraries with my little app.
+Another huge benefit of CoreML is that it’s built in to the OS, so I wouldn’t need to worry about compiling, linking, and shipping binaries of ML libraries with my little app.
 
 > ##### CoreML Caveats
-> Unfortunately CoreML is still very new, and its tools are quite rough. CoreML itself only supports a subset of all possible layers and operations. The [tools that Apple ships](https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml) only support converting neural networks trained with [Keras](https://keras.io). Ironically, Keras models don’t seem to perform very well on CoreML. I did some inspecting of the converted Keras models and there’s a great deal of time spent converting data into Caffe operations and back. It seems likely that Apple uses Caffe internally, and Keras support was tacked on. Caffe does not strike me as a great compile target for a Keras/TensorFlow model.
+> Unfortunately CoreML is still very new, and its tools are quite rough. CoreML itself only supports [a subset of all possible layers and operations](https://apple.github.io/coremltools/coremlspecification/sections/NeuralNetwork.html). The [tools that Apple ships](https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml) to generate CoreML models only support neural networks trained with [Keras](https://keras.io). Ironically, Keras models don’t seem to perform very well on CoreML. I did some inspecting of the converted Keras models and there’s a great deal of time spent converting data into Caffe operations and back. It seems likely that Apple uses Caffe internally, and Keras support was tacked on. Caffe does not strike me as a great compile target for a Keras/TensorFlow model.
 
 I’d had mixed luck with converting [Keras](https://keras.io) models to CoreML (see box above), so I’d been on the hunt for other ways to generate CoreML models. Meanwhile, I’d been looking for an excuse to try out [PyTorch](http://pytorch.org/) (see box below). Somewhere along my research I stumbled upon [ONNX](https://onnx.ai/), a proposed standard exchange format for trained neural network models. PyTorch support is available from day one. Somehow it occurred to me to look for an ONNX to CoreML converter,  and sure enough, [one exists](https://github.com/onnx/onnx-coreml)!
 
@@ -77,7 +77,7 @@ I’d had mixed luck with converting [Keras](https://keras.io) models to CoreML 
 >
 > As an ex-Facebook engineer, I’m biased towards any open-source code Facebook releases, so I was eager to give PyTorch a try, and…
 >
-> PyTorch is a breath of fresh air. It’s much faster to start up than TensorFlow, which makes iterating on my network much more immediate and fun. It has a smaller API, and a simpler execution model. Unlike TensorFlow, it does not require you build a computation graph in advance and have no insight or influence in how it gets executed. It feels much more like regular programming, makes things easier to debug, and also enables more dynamic architectures (which I hope to use some day).
+> PyTorch is a breath of fresh air. It’s much faster to start up than TensorFlow, which makes iterating on my network much more immediate and fun. It has a smaller API, and a simpler execution model. Unlike TensorFlow, it does not require you build a computation graph in advance and have no insight or influence in how it gets executed. It feels much more like regular programming, it makes things easier to debug, and also enables more dynamic architectures (which I hope to use some day).
 
 I finally had all the pieces of the puzzle, from training a neural network all the way to deploying it on iOS. However, I knew from some of my earlier experiments that many things could still go wrong. Only one way to find out.
 
@@ -85,19 +85,19 @@ I finally had all the pieces of the puzzle, from training a neural network all t
 
 In my experience with neural networks, assembling a large-enough quality dataset to train on is the hardest part. I imagine this is why most papers and tutorials out there start with a well-known public dataset, like <a title="Wikipedia" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a>.
 
-However, I find the standard image and text tasks boring. I like solving new problems, and I like neural networks because they can be applied to anything. So I craft brew my own micro-datasets. Since my datasets are small, I limit myself to problems that are slightly more manageable than your typical VanGogh-style portrait generation project.
+However, I find the standard image and text tasks boring. I like solving new problems, and I like neural networks because they can be applied to anything. So I craft brew my own micro-datasets. Since my datasets are small, I limit myself to problems that are slightly more manageable than your run-of-the-mill Van Gogh-style portrait generation project.
 
 Fortunately, the problem at hand is relatively simple (or so one would think), so a small dataset should suffice. On top of that, it’s a very visual problem, so generating data and evaluating the neural networks should be easy… given a mouse, a pair of eyes, and the right tools.
 
 #### The Test UI
 
-I had the perfect UI already. I’d built it to tweak the parameters of my brute-force algorithm and see the effects in real time. It didn’t take me long to convert it into a UI for generating training examples. I added the option to specify where I thought runs should split. And with a few clicks of the mouse and a `JSON.stringify` call I had enough of a dataset to jump into Python.
+I had the perfect UI already. I’d built it to tweak the parameters of my brute-force algorithm and see the effects in real time. It didn’t take me long to convert it into a [UI for generating training examples]. I added the option to specify where I thought runs should split. And with a few clicks of the mouse and a `JSON.stringify` call I had enough of a dataset to jump into Python.
 
 ![](../images/pytorch-and-coreml/test-ui-nn.png)
 <figcaption>Test UI with manually-entered splits, and red boxes around incorrect predictions.</figcaption>
 
 > ##### Parcel
-> As an experienced web developer, building this UI as a web app with React was easy. However, there was one part I was dreading, even though I’ve done it dozens of times before: configuring [Webpack](https://webpack.js.org). I love trying new things, and so I took this as an opportunity to try [Parcel](https://parceljs.org). I’m so glad I did. Parcel worked out-of-the-box with zero configuration. It even worked with TypeScript. I was able to have a fully working web app faster than it would take me to type `create-react-app`.
+> As an experienced web developer, I knew building this UI as a web app with React was going to be easy. However, there was one part I was dreading, even though I’ve done it dozens of times before: configuring [Webpack](https://webpack.js.org). So I took this as an opportunity to try [Parcel](https://parceljs.org). Parcel worked out-of-the-box with zero configuration. It even worked with TypeScript. And hot code reload. I was able to have a fully working web app faster than it would take me to type `create-react-app`.
 
 ### Preprocessing the Data
 
@@ -111,49 +111,52 @@ The above, as JSON, looks like this:
 
 ```json
 {
-  "points":[
-    [43, 33],
-    [86, 69],
-    [152, 94],
-    [175, 118],
-    [221, 156],
-    [247, 38],
-    [279, 61],
-    [303, 89],
-    [329, 34],
-    [369, 56],
-    [392, 76],
-    [422, 119],
-    [461, 128],
-    [470, 34],
-    [500, 57],
-    [525, 93],
-    [542, 114],
-    [582, 138]],
-  "splits":
-    [235, 320, 467]
+  "points": [
+    [43, 33], [86, 69], [152, 94], [175, 118], [221, 156],
+    [247, 38], [279, 61], [303, 89],
+    [329, 34], [369, 56], [392, 76], [422, 119], [461, 128],
+    [470, 34], [500, 57], [525, 93], [542, 114], [582, 138]],
+  "splits": [
+    235,
+    320,
+    467,
+  ]
 }
 ```
 
 All I had to do to feed the list of points into a neural network was to pad it to a fixed length. I picked a number that felt large enough for my app (100). So I fed the network vectors of floats in the shape `[n, 100, 2]`, where n is the number of examples in each batch (more on batching later).
 
-The output is a series of bits, with ones marking a position where the trendline should be split. This will be in the shape `[n, 100, 1]`. 
+```json
+[
+  [[43, 33], [86, 69], [152, 94], [175, 118], [221, 156], [247, 38], [279, 61], [303, 89], ... [0, 0], [0, 0], [0, 0]]
+]
+```
 
-[code]
+The output is a series of bits, with ones marking a position where the trendline should be split. This will be in the shape `[n, 100]`.
 
-Obviously there are only 99 possible splits, since it doesn’t make sense to split at position 100. However, keeping the length the same simplifies the neural network (see later). I’ll just ignore the final bit in the output.
+```json
+[
+  [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, ... 0, 0, 0]
+]
+```
+
+There are only 99 possible splits, since it doesn’t make sense to split at position 100. However, keeping the length the same simplifies the neural network (see later). I’ll just ignore the final bit in the output.
 
 As the neural network tries to approximate this series of ones and zeros, each output number will fall somewhere in-between.
 
-[code]
+```json
+[
+  [0, 0.0002, 0, 0, 1, 0, 0, 0.1057, 0, 0.0020, 0, 0.3305, 0.9997, 0, 0, 0, 0, 0, ... 0, 0, 0]
+]
+```
 
-We can interpret those as the probability that a split should happen at a certain point, and split anywhere above a certain confidence value (typically 0.5).
+We can interpret those as the probability that a split should happen at a certain point, and split anywhere above a certain confidence value (typically 0.5). In the example above, you can see that the network  is pretty confident we should split at positions 5 and 13 (correct!), but it's not so sure about position 8 (wrong). It also thinks 12 might be a candidate, but not confident enough to call it (correct).
 
-#### Padding
+#### Encoding the Inputs
 
 I like to factor out the data encoding logic into its own function, as this will likely be used in multiple places (training, evaluation, and sometimes even production).
 
-My `encode` function will take a series of points of variable length, and returns a fixed-length tensor. Let’s start with something that returns an empty tensor of the right shape:
+My `encode` function will take a single example (a series of points of variable length), and returns a fixed-length tensor. Let’s start with something that returns an empty tensor of the right shape:
 
 ```python
 import torch
@@ -163,7 +166,7 @@ def encode(points, padded_length=100):
     return input_tensor
 ```
 
-Note that you can already use this to start training and running your neural network, before you put in any real data. It won’t learn anything useful, but at least you’ll know your architecture works before you put more work into curating and preprocessing your dataset.
+Note that you can already use this to start training and running your neural network, before you put in any real data. It won’t learn anything useful, but at least you’ll know your architecture works before you invest more time curating and preprocessing your dataset.
 
 Next we fill in the tensor with data:
 
@@ -180,7 +183,7 @@ def encode(points, padded_length=100):
 ```
 
 > ##### Order of coordinates in PyTorch vs TensorFlow
-> If you’re paying attention, you might have noticed that the x/y coordinate comes before the position. In other words, the shape of the input data is `[n, 2, 100]`, not `[n, 100, 2]` as it would be in TensorFlow. PyTorch convolutions (see later) expect coordinates in a different order: the channel (x/y in this case, r/g/b in case of an image) comes before the position (i).
+> If you’re paying attention, you might have noticed that the x/y coordinate comes before the position. In other words, the shape of each example is `[2, 100]`, not `[100, 2]` as it would be in TensorFlow. PyTorch convolutions (see later) expect coordinates in a different order: the channel (x/y in this case, r/g/b in case of an image) comes before the position (i).
 
 #### Normalization
 
@@ -225,10 +228,10 @@ def encode(points, padded_length=100):
 ```
 
 > ##### Processing Inside the Network
-> Many of the operations that I’m writing in Python, like normalization, casting, etc., are available as operations inside most machine learning libraries. You could implement them that way, and they would be more efficient, potentially even running on the GPU. However, I found that most of these operations are not supported by CoreML.
+> Many of the operations I’m writing in Python, like normalization, casting, etc., are available as operations inside most machine learning libraries. You could implement them that way, and they would be more efficient, potentially even running on the GPU. However, I found that most of these operations are not supported by CoreML.
 
 > ##### What about Feature Engineering?
-> Feature engineering is the process of further massaging the input in order to give the neural network a head-start. For example, in this case I could feed it not only the `[x, y]` of each point, but also the distance, gap, and slope between each pair. However, I like to think that my neural network can learn to compute whatever it needs out of the input. In fact, I did try feeding a bunch of derived values as input, but that did not seem to help one bit.
+> Feature engineering is the process of further massaging the input in order to give the neural network a head-start. For example, in this case I could feed it not only the `[x, y]` of each point, but also the distance, horizontal and vertical gaps, and slope of the line between each pair. However, I like to think that my neural network can learn to compute whatever it needs out of the input. In fact, I did try feeding a bunch of derived values as input, but that did not seem to help one bit.
 
 ### The Model
 
@@ -242,39 +245,38 @@ I like to think of convolution as code reuse for neural networks. A typical full
 > An important realization is that, though convolutions sound expensive and complicated (convoluted?), their main benefit is that they actually simplify the network. By reusing logic, networks become smaller. Smaller networks are need less data and are faster to train.
 
 > ##### What about RNNs?
-> Recurrent neural networks (RNNs) are popular when dealing with sequential data. Roughly speaking, instead of looking at all the input at once, they process the sequence in order and build up a “memory” of what happened before, and use that memory to decide what happens next. This makes them a great fit for any sequence. However, RNNs tend to be way more complex, and as such take more time – and more data – to train. For smaller problems like this, RNNs tend to be overkill. Plus, recent papers have shown that properly designed CNNs can achieve similar results faster than RNNs.
+> Recurrent neural networks (RNNs) are popular when dealing with sequential data. Roughly speaking, instead of looking at all the input at once, they process the sequence in order and build up a “memory” of what happened before, and use that memory to decide what happens next. This makes them a great fit for any sequence. However, RNNs tend to be way more complex, and as such take more time – and more data – to train. For smaller problems like this, RNNs tend to be overkill. Plus, [recent papers](https://code.facebook.com/posts/1978007565818999/a-novel-approach-to-neural-machine-translation/) have shown that properly designed CNNs can achieve similar results faster than RNNs, even at tasks where RNNs traditionally shine.
 
 #### Architecture
 
-The tricky thing when working with convolution is that they are by their nature very spatial, which means you need to have a very good intuitive understanding of the shape of the data they expect as input and the shape of their output. I tend to visualize diagrams like these when I design my convolutional layers.
+The tricky thing when working with convolution is that they are by their nature very spatial, which means you need to have a very good intuitive understanding of the shape of the data they expect as input and the shape of their output. I tend to sketch or visualize diagrams like these when I design my convolutional layers:
 
 ![](../images/pytorch-and-coreml/chart.png)
 <figcaption>Diagram of the stacked convolutional layers and their shapes.</figcaption>
 
 I’m stacking convolutional layers like this for two reasons. First, stacking layers in general has been shown to help networks learn progressively more abstract concepts (this is why “deep learning” is so popular). Second, each stack of convolutions gets access to more and more of the sequence. This is my way of giving each point in the output more information about its context.
 
-The ultimate aim is to tweaking the various parameters so the network progressively transforms the shape of the input into the shape of my output. Meanwhile I’m adjusting the third dimension (depth) so that there’s enough “room” to carry forward just the right amount of information from the previous layers. I don’t want my layers to be too small, otherwise there might be too much information lost from the previous layers, and my network will struggle to learn anything. I don’t want them to be too big either, because they’ll take longer to train, and, quite likely, they’ll have enough “memory” to memorize each of my examples separately, instead of being forced to create a summary that might be better able to generalize to never-before-seen examples.
+The ultimate aim is to tweak the various parameters so the network progressively transforms the shape of the input into the shape of my output. Meanwhile I adjust the third dimension (depth) so that there’s enough “room” to carry forward just the right amount of information from the previous layers. I don’t want my layers to be too small, otherwise there might be too much information lost from the previous layers, and my network will struggle to make sense of the inputs. I don’t want them to be too big either, because they’ll take longer to train, and, quite likely, they’ll have enough “memory” to memorize each of my examples individually, instead of being forced to create a summary that might be better at generalizing to never-before-seen examples.
 
-
-> ##### No Fully Connected Layers?
-> Most neural networks, even convolutional ones, use one or more “fully-connected” (a.k.a. “dense”) layers, i.e. the simplest kind of layer, where every neuron in the layer is connected to every neuron in the previous layer. The thing about dense layers is that they have no sense of space (hence the name “dense”). Any spatial information is lost. This makes them great for classification tasks, where your output is a series of labels for the whole input. In my case, the output is as sequential as the input. For each point in the input there’s a probability value in the output representing whether to split there. So I want to keep the spatial information all the way through. No dense layers here.
-
+> ##### No Fully-Connected Layers?
+> Most neural networks, even convolutional ones, use one or more “fully-connected” (a.k.a. “dense”) layers, i.e. the simplest kind of layer, where every neuron in the layer is connected to every neuron in the previous layer. The thing about dense layers is that they have no sense of space (hence the name “dense”). Any spatial information is lost. This makes them great for typical classification tasks, where your output is a series of labels for the whole input. In my case, the output is as sequential as the input. For each point in the input there’s a probability value in the output representing whether to split there. So I want to keep the spatial information all the way through. No dense layers here.
 
 #### PyTorch Model
 
-Before we translate that architecture into PyTorch code, we need PyTorch installed. I followed the very [clear instructions](http://pytorch.org/) on the PyTorch homepage:
+To install PyTorch, I followed the very clear instructions on the [PyTorch homepage](http://pytorch.org/):
 
 ```bash
 pip install http://download.pytorch.org/whl/torch-0.3.0.post4-cp27-none-macosx_10_6_x86_64.whl
 ```
 
-This is how the above structure translates to PyTorch code. You subclass `nn.Module`, and in the constructor you define each layer you’ll need. Note I’m picking padding values carefully to preserve the length of my inputs. So if I have a convolution kernel that’s 7 wide, I pad by 3 on each side so that the kernel still has room to center on position 0 and position n.
+This is how the above structure translates to PyTorch code. I subclass `nn.Module`, and in the constructor I define each layer I need. Note that I’m choosing padding values carefully to preserve the length of my inputs. So if I have a convolution kernel that’s 7 wide, I pad by 3 on each side so that the kernel still has room to center on the first and last positions.
 
 ```python
 import torch.nn as nn
 
 input_channels = 2
 intermediate_channels = 64
+output_channels = 1
 
 class Model(nn.Module):
     def __init__(self):
@@ -293,20 +295,21 @@ class Model(nn.Module):
             nn.ReLU(),
         )
         self.conv4 = nn.Sequential(
-            nn.Conv1d(in_channels=intermediate_channels, out_channels=1, kernel_size=3, padding=1),
+            nn.Conv1d(in_channels=intermediate_channels, out_channels=output_channels, kernel_size=3, padding=1),
             nn.Sigmoid(),
         )
 ```
 
-All the layers use the popular <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a> activation function, except the last one with uses a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a>. That’s so the output values get squashed into the [0, 1] range, so they match the labeled outputs I’m providing (series of ones and zeros), and make sense as probabilities.
+All the layers use the popular <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a> activation function, except the last one which uses a <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a>. That’s so the output values get squashed into the 0–1 range, so they fall somewhere between the outputs I’m providing (series of ones and zeros). Conveniently, numbers in this range can be interpreted as probabilities, which is why the sigmoid activation function is popular in the final layer of neural networks designed for classification tasks.
 
-The next step is to define a `forward()` method, which will actually be called on your data during training and prediction:
+The next step is to define a `forward()` method, which will actually be called on each batch of your data during training:
 
-```python{27-34}
+```python{28-34}
 import torch.nn as nn
 
 input_channels = 2
 intermediate_channels = 64
+output_channels = 1
 
 class Model(nn.Module):
     def __init__(self):
@@ -325,7 +328,7 @@ class Model(nn.Module):
             nn.ReLU(),
         )
         self.conv4 = nn.Sequential(
-            nn.Conv1d(in_channels=intermediate_channels, out_channels=1, kernel_size=3, padding=1),
+            nn.Conv1d(in_channels=intermediate_channels, out_channels=output_channels, kernel_size=3, padding=1),
             nn.Sigmoid(),
         )
 
@@ -336,7 +339,6 @@ class Model(nn.Module):
         x = self.conv4(x)
         x = x.view(-1, x.size(3))
         return x
-
 ```
 
 The `forward` method feeds the data through the convolutional layers, then flattens the output and returns it.
@@ -347,7 +349,7 @@ This method is what makes PyTorch feel really different than TensorFlow. You’r
 
 #### PyTorch Dataset
 
-Creating a dataset is the first step required in feeding data to a neural network for training in PyTorch. All it needs is a constructor, a `__len__` method, and a `__getitem__` method.
+Creating a dataset is the first step required in feeding data to a neural network for training in PyTorch. All you needs to define one is a constructor, a `__len__` method, and a `__getitem__` method.
 
 The constructor is the perfect place to read in my JSON file with all the examples:
 
@@ -357,8 +359,8 @@ import torch
 from torch.utils.data import Dataset
 
 class PointsDataset(Dataset):
-    def __init__(self, csv_file):
-        self.examples = json.load(open(json_file))
+    def __init__(self):
+        self.examples = json.load(open('data.json'))
 ```
 
 Returning the length is easy:
@@ -369,8 +371,8 @@ import torch
 from torch.utils.data import Dataset
 
 class PointsDataset(Dataset):
-    def __init__(self, csv_file):
-        self.examples = json.load(open(csv_file))
+    def __init__(self):
+        self.examples = json.load(open('data.json'))
 
     def __len__(self):
         return len(self.examples)
@@ -378,14 +380,14 @@ class PointsDataset(Dataset):
 
 Finally, I return a single example’s input and output from `__getitem__`. I use `encode()` defined earlier to encode the input. Encoding the output is relatively simple, so I do it inline. I create a new tensor of the right shape, fill it with zeros, and then insert a 1 at every position where there should be a split.
 
-```python{12-19}
+```python{12-20}
 import json
 import torch
 from torch.utils.data import Dataset
 
 class PointsDataset(Dataset):
-    def __init__(self, csv_file):
-        self.examples = json.load(open(csv_file))
+    def __init__(self):
+        self.examples = json.load(open('data.json'))
 
     def __len__(self):
         return len(self.examples)
@@ -395,31 +397,31 @@ class PointsDataset(Dataset):
         input_tensor = encode(example['points'])
         output_tensor = torch.zeros(100)
         for split_position in example['splits']:
-            index = next(i for i, point in enumerate(example['points']) if point[0] > split_position) - 1
-            output_tensor[index] = 1
+            index = next(i for i, point in
+                enumerate(example['points']) if point[0] > split_position)
+            output_tensor[index - 1] = 1
         return input_tensor, output_tensor
-
 ```
 
-I then instantiate the dataset like this:
+I then instantiate the dataset:
 
 ```python
-dataset = PointsDataset(data_file)
+dataset = PointsDataset()
 ```
 
 #### Setting Aside a Validation Set
-We need to set aside some of our data to evaluate how our training is doing. This is called a *validation set*. I like to automatically split out a random subset of examples for this purpose.  PyTorch doesn’t provide an easy way to do that out of the box, so I used [PyTorchNet](https://github.com/pytorch/tnt) for this purpose. It’s not in PyPI, so I installed it straight from GitHub:
+I need to set aside some of our data to evaluate how my training is doing. This is called a *validation set*. I like to automatically split out a random subset of examples for this purpose. PyTorch doesn’t provide an easy way to do that out of the box, so I used [PyTorchNet](https://github.com/pytorch/tnt). It’s not in PyPI, so I installed it straight from GitHub:
 
 ```bash
 pip install git+https://github.com/pytorch/tnt.git
 ```
 
-I use PyTorchNet to shuffle the dataset before splitting it so that the choice is random. I take out 10% of my examples for the validation dataset.
+I shuffle the dataset right before splitting it, so that the split is random. I take out 10% of my examples for the validation dataset.
 
 ```python{1,4}
 from torchnet.dataset import SplitDataset, ShuffleDataset
 
-dataset = PointsDataset(data_file)
+dataset = PointsDataset()
 dataset = SplitDataset(ShuffleDataset(dataset), {'train': 0.9, 'validation': 0.1})
 ```
 
@@ -430,7 +432,7 @@ dataset = SplitDataset(ShuffleDataset(dataset), {'train': 0.9, 'validation': 0.1
 
 #### PyTorch DataLoader
 
-One more hoop to jump through before we can actually start training. DataLoders are how you feed a dataset to a neural network during training in PyTorch. The data loaders will spit out data in batches for training. I want my batches to be random (`shuffle=True`) and quite small, since the dataset is small too.
+One more hoop to jump through before we can actually start training. Data loaders are how you feed a dataset to a neural network during training in PyTorch. They spit out data in batches for training. I created a data loader for my dataset, configured to output batches that are randomized (`shuffle=True`) and small (`batch_size=6`), since the dataset is small too.
 
 ```python{5}
 from torchnet.dataset import SplitDataset, ShuffleDataset
@@ -442,13 +444,13 @@ loader = DataLoader(dataset, shuffle=True, batch_size=6)
 
 #### The Training Loop
 
-We’re ready to start training! First we tell our model it’s time to train:
+Time to start training! First I tell the model it’s time to train:
 
 ```python
 model.train()
 ```
 
-Then we repeat a certain number of times. Each iteration is called an *epoch*. Start with a small number and then experiment to find the optimal number of epochs later.
+Then I repeat a certain number of times. Each iteration is called an *epoch*. I started with a small number and then experimented to find the optimal number of epochs later.
 
 ```python{3}
 model.train()
@@ -464,9 +466,12 @@ model.train()
 for epoch in range(1000):
     dataset.select('train')
 ```
+
 Then iterate over the whole dataset in batches. The data loader will very conveniently give us inputs and outputs for each batch. All we need to do is wrap them in a PyTorch `Variable`.
 
-```python{5-7}
+```python{1,7-10}
+from torch.autograd import Variable
+
 model.train()
 
 for epoch in range(1000):
@@ -510,7 +515,7 @@ for epoch in range(1000):
         loss = F.mse_loss(logits, target)
 ```
 
-Finally, I “backpropagate”, i.e. take that error and use it to correct the weights in the model to be more correct next time. We need an “optimizer” to do this work for us:
+Finally, I *backpropagate*, i.e. take that error and use it to correct the weights in the model to be more correct next time. We need an *optimizer* to do this work for us:
 
 ```python{2,18-20}
 model.train()
@@ -623,7 +628,7 @@ As you can see the network learns pretty quickly. In this particular run, the ac
 
 ### Evaluating
 
-My accuracy results were pretty decent out of the gate. To truly understand how it was performing, I fed the output of the network back into the test UI to visualize how it succeeded and how it failed.
+My accuracy results were pretty decent out of the gate. To truly understand how the network was performing, I fed the output of the network back into the test UI to visualize how it succeeded and how it failed.
 
 There were many difficult examples where it was spot on, and it made me a proud daddy:
 
@@ -657,9 +662,9 @@ I was pretty satisfied with these results. Definitely much better than the brute
 
 Unfortunately, I had to jump through a few hoops in order to successfully convert the PyTorch model to CoreML.
 
-The biggest issue is casting from integers to floats or vice-versa. Casting inside neural networks is pretty common. In my first attempt I fed the network integers (such is my input data), and cast them to floats inside the network. I was able to work around this by only using floats, but I hope this limitation is lifted soon. There’s quite a bit of preprocessing and postprocessing I’m doing that requires casts, and it would be nice to be able to do that in the network. Some layers (such as embeddings) *require* integers to work!
+My first struggle was casting from integers to floats or vice-versa. My first attempt I fed the network integers (such is my input data), but some type cast in the network was causing the CoreML conversion to fail.  I was able to work around this by explicitly casting my inputs to floats in preprocessing.
 
-The other issue I ran into is that ONNX-CoreML does not support <span class="caps">1D</span> convolutions, which is the kind I’m using. Despite being simpler, <span class="caps">1D</span> convolutions are always the underdog, because working with text and sequences is not as cool as working with images. Thankfully, it’s pretty easy to reshape my data to add an extra bogus dimension. I changed the model to use <span class="caps">2D</span> convolutions, and I used the `view()` method on the input tensor to reshape the data to match what the <span class="caps">2D</span> convolutions expect.
+The bigger issue I ran into is that ONNX-CoreML does not support <span class="caps">1D</span> convolutions, which is the kind I’m using. Despite being simpler, <span class="caps">1D</span> convolutions are always the underdog, because working with text and sequences is not as cool as working with images. Thankfully, it’s pretty easy to reshape my data to add an extra bogus dimension. I changed the model to use <span class="caps">2D</span> convolutions, and I used the `view()` method on the input tensor to reshape the data to match what the <span class="caps">2D</span> convolutions expect.
 
 ```python{11,15,19,23,28}
 import torch.nn as nn
@@ -701,7 +706,7 @@ class Model(nn.Module):
 
 #### ONNX
 
-Once those tweaks were done, I was finally able to export the trained model as ONNX. I had to provide the export function an example of what the input shape will look like.
+Once those tweaks were done, I was finally able to export the trained model as ONNX. All I had to do was give the export function an example of what the input shape would look like.
 
 ```python{4-5}
 import torch
@@ -713,7 +718,7 @@ torch.onnx.export(model, dummy_input, 'SplitModel.proto', verbose=True)
 
 #### ONNX-CoreML
 
-To convert the ONNX model to CoreML, we need [ONNX-CoreML](https://github.com/onnx/onnx-coreml).
+To convert the ONNX model to CoreML, I used [ONNX-CoreML](https://github.com/onnx/onnx-coreml).
 
 The version of ONNX-CoreML on PyPI is broken, so I installed the latest version straight from GitHub:
 
@@ -722,7 +727,7 @@ pip install git+https://github.com/onnx/onnx-coreml.git
 ```
 
 > ##### Makefile
-> I love writing Makefiles. They’re like READMEs, but easier to run. I need a few dependencies for this project, many of which have weird install procedures. I also like to use `virtualenv` to install Python libraries, but I don’t want to have to remember to activate it. This Makefile does all the above for me. I just run `make train`.
+> I love writing Makefiles. They’re like READMEs, but easier to run. I need a few dependencies for this project, many of which have unusual install procedures. I also like to use `virtualenv` to install Python libraries, but I don’t want to have to remember to activate it. This Makefile does all the above for me. I just run `make train`.
 > ```makefile
 > VIRTUALENV:=$(shell which virtualenv)
 > ENV=env
@@ -751,7 +756,7 @@ pip install git+https://github.com/onnx/onnx-coreml.git
 > .PHONY: train
 > ```
 
-Load our ONNX model back in:
+I load the ONNX model back in:
 
 ```python{3,7}
 import torch
@@ -783,7 +788,7 @@ coreml_model = convert(
 )
 ```
 
-Finally, we save the CoreML model to a file:
+Finally, I save the CoreML model to a file:
 
 ```python{16}
 import torch
@@ -806,12 +811,12 @@ coreml_model.save('SplitModel.mlmodel')
 
 #### CoreML
 
-Now that we have a trained CoreML model, it’s time to drag your model into Xcode:
+Once I had a trained CoreML model, I dragged the model into Xcode:
 
 ![](../images/pytorch-and-coreml/xcode.png)
 <figcaption>Drag the model in and Xcode will do some magic.</figcaption>
 
-That’s all there is to it! Now I can write some Swift to run the model. First I make sure I’m running on iOS 11 or greater.
+That’s all there was to it! Next step was to run it, using some Swift code. First I make sure I’m running on iOS 11 or greater.
 
 ```swift{4-8}
 import CoreML
@@ -886,7 +891,7 @@ func split(points: [[Float32]]) -> [Int]? {
 }
 ```
 
-We have some predictions! All we need to do is convert the probabilities into a list of indices where the probability is greater than 50%.
+I have some predictions! All I need to do is convert the probabilities into a list of indices where the probability is greater than 50%.
 
 ```swift{25-31}
 import CoreML
