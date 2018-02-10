@@ -10,11 +10,12 @@ dev: gatsby/node_modules
 build: gatsby/node_modules
 	cd gatsby && gatsby build
 
-app/app.yaml: app/app.template.yaml gatsby/buildconfig.ts $(SOURCES) | build
+app/app.yaml: app/app.template.yaml gatsby/buildconfig.ts $(SOURCES)
 	cd gatsby && ts-node buildconfig.ts
 
 serve: app/app.yaml
 	cd app && goapp serve
 
-deploy: app/app.yaml build
+deploy: build
+	cd gatsby && ts-node buildconfig.ts
 	cd app && goapp deploy

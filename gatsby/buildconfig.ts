@@ -17,6 +17,8 @@ function handler(path, add) {
     // Skip
   } else if (/^\/path---/.test(path)) {
     // Skip
+  } else if (/^\/static\/.+\.(png|jpg)$/.test(path)) {
+    // Skip
   } else if (/\.html$/.test(path)) {
     let url = path.replace(/\/index\.html$/, '').replace(/\.html$/, '');
     add({
@@ -66,7 +68,7 @@ function addEntry(info) {
   info.url = info.url.replace(/\./g, '\\.');
   info.secure = 'always';
   info.http_headers = `
-    Strict-Transport-Security: 'max-age=63072000; includeSubDomains; preload'`;
+    Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'`;
   var entry = toYaml(info);
   //console.log(entry);
   entries += entry + '\n';

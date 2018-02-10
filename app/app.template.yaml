@@ -1,5 +1,5 @@
 application: attardi-org
-version: 2
+version: 4
 runtime: go
 api_version: go1
 default_expiration: 30d
@@ -11,10 +11,16 @@ handlers:
 - url: /labels2?/?
   script: _go_app
   secure: always
-- url: /(component|path)---(.+)\.js(\.map)?
+- url: /(component|path)---(.+)\.(\.js(\.map)?)$
   mime_type: application/javascript; charset=UTF-8
-  static_files: public/\1---\2.js\3
-  upload: public/(component|path)---(.+)\.js(\.map)?
+  static_files: public/\1---\2.\3
+  upload: public/(component|path)---(.+)\.(\.js(\.map)?)$
+  secure: always
+  http_headers: 
+    Strict-Transport-Security: 'max-age=63072000; includeSubDomains; preload'
+- url: /static/(.+)\.(jpg|png)$
+  static_files: public/static/\1.\2
+  upload: public/static/(.+)\.(jpg|png)$
   secure: always
   http_headers: 
     Strict-Transport-Security: 'max-age=63072000; includeSubDomains; preload'
@@ -23,13 +29,10 @@ handlers:
   static_files: public/404.html
   upload: public/404.html
   mime_type: text/html; charset=UTF-8
+  expiration: 1m
   secure: always
   http_headers: 
     Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
-
-error_handlers:
-- file: public/404.html
-  mime_type: text/html; charset=UTF-8
 
 skip_files:
 - /app\.template\.yaml

@@ -3,10 +3,10 @@ import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 import {View} from 'glamor/jsxstyle';
 
-import './index.css';
 import './prism.css';
 import {textColor} from '../design/colors';
 import {unit, mobileMargin, maxColumn} from '../design/layout';
+import Grid from '../components/Grid';
 
 interface DefaultLayoutProps extends React.HTMLProps<HTMLDivElement> {
   location: {

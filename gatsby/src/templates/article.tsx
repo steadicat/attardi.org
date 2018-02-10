@@ -30,6 +30,13 @@ import {
 import {unit, maxColumn} from '../design/layout';
 import {Subtitle, Title, DateView, Link, Button, Heading} from '../components/text';
 
+import * as webIcon from '../images/icons/web.svg';
+import * as wikipediaIcon from '../images/icons/wikipedia.svg';
+import * as mailIcon from '../images/icons/mail.svg';
+import * as twitterIcon from '../images/icons/twitter.svg';
+import * as githubIcon from '../images/icons/github.svg';
+import * as appstoreIcon from '../images/icons/appstore.svg';
+
 const commonStyle = {
   '& a': {
     ...sansBoldS,
@@ -119,6 +126,41 @@ const markdownStyle = css({
       ...sansBoldXS,
     },
   },
+  '& a[href]': {
+    background: `no-repeat url(${webIcon}) 0px 3px`,
+    paddingLeft: 18,
+  },
+
+  '& blockquote a[href], & figcaption a[href]': {
+    backgroundSize: '12px 12px',
+    paddingLeft: 14,
+    backgroundPosition: '0 1px',
+  },
+
+  '& a.anchor, & blockquote a.anchor, & figcaption a.anchor': {
+    padding: 0,
+    background: 'none',
+  },
+
+  '& a[title=Wikipedia]': {
+    backgroundImage: `url(${wikipediaIcon})`,
+  },
+
+  '& a[title=Email]': {
+    backgroundImage: `url(${mailIcon})`,
+  },
+
+  '& a[title=Twitter]': {
+    backgroundImage: `url(${twitterIcon})`,
+  },
+
+  '& a[title=GitHub]': {
+    backgroundImage: `url(${githubIcon})`,
+  },
+
+  '& a[title="App Store"]': {
+    backgroundImage: `url(${appstoreIcon})`,
+  },
 });
 
 const tableOfContentsStyle = css({
@@ -138,11 +180,14 @@ const tableOfContentsStyle = css({
     ...sansBoldXS,
   },
   '& .caps': sansCaps,
+  '& a.active .caps': sansBoldCaps,
 });
 
 function onTOCClick(event: React.MouseEvent<HTMLAnchorElement>) {
   try {
-    const id = event.target.href.split('#')[1];
+    let target = event.nativeEvent.target;
+    if (!target.href) target = target.parentNode;
+    const id = target.href.split('#')[1];
     const el = document.getElementById(id);
     el && el.scrollIntoView({behavior: 'smooth', block: 'start'});
     event.preventDefault();
@@ -151,51 +196,67 @@ function onTOCClick(event: React.MouseEvent<HTMLAnchorElement>) {
   }
 }
 
-const sidebarWidth = unit * 12;
+const sidebarWidth = unit * 14;
+let activeHeaderID: string | null = null;
 let activeHeaderLink: Element | null = null;
 
-function setActiveHeaderId(id: string) {
+function setActiveHeaderId(id: string | null) {
+  if (activeHeaderID === id) return;
+  activeHeaderID = id;
+  activeHeaderLink && (activeHeaderLink.className = '');
+  if (!id) return;
   const active = document.querySelector(`[href="${window.location.pathname}#${id}"]`);
   if (!active) return;
-  activeHeaderLink && (activeHeaderLink.className = '');
   active.className = 'active';
   activeHeaderLink = active;
 }
 
 class Body extends React.Component {
-  observer: IntersectionObserver | null = null;
-  previousHeaderIDs: {[id: string]: string} = {};
+  el: HTMLDivElement | null = null;
+  headerPositions: Array<[string, number]> = [];
 
-  ref = el => {
-    if (typeof IntersectionObserver === 'undefined') return;
+  ref = (el: HTMLDivElement | null) => {
+    this.el = el;
     if (!el) {
-      this.observer && this.observer.disconnect();
+      window.removeEventListener('scroll', this.onScroll);
+      window.removeEventListener('resize', this.onResize);
       return;
     }
-    const headers = el.querySelectorAll('h3, h4');
-    this.observer = new IntersectionObserver(
-      entries => {
-        for (const entry of entries) {
-          if (entry.intersectionRatio === 1 && entry.boundingClientRect.top > 100) {
-            setActiveHeaderId(entry.target.id);
-          } else if (
-            entry.intersectionRatio < 1 &&
-            entry.boundingClientRect.top > 100 &&
-            activeHeaderLink
-          ) {
-            const id = this.previousHeaderIDs[entry.target.id];
-            id && setActiveHeaderId(id);
-          }
+    window.addEventListener('scroll', this.onScroll);
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+  };
+
+  resizeTimeout: number | null = null;
+
+  onResize = () => {
+    this.resizeTimeout && cancelAnimationFrame(this.resizeTimeout);
+    this.resizeTimeout = requestAnimationFrame(() => {
+      if (!this.el) return;
+      const headers = this.el.querySelectorAll<HTMLElement>('h3, h4');
+      this.headerPositions = [];
+      for (let i = 0; i < headers.length; i++) {
+        this.headerPositions.push([headers[i].id, headers[i].offsetTop]);
+      }
+      this.onScroll();
+    });
+  };
+
+  scrollTimeout: number | null = null;
+
+  onScroll = () => {
+    this.scrollTimeout && cancelAnimationFrame(this.scrollTimeout);
+    this.scrollTimeout = requestAnimationFrame(() => {
+      const scroll = window.scrollY + window.innerHeight / 3;
+      let lastID: string | null = null;
+      for (const [id, position] of this.headerPositions) {
+        if (position > scroll) {
+          setActiveHeaderId(lastID);
+          break;
         }
-      },
-      {threshold: 1, rootMargin: '0px 0px -66% 0px'},
-    );
-    let lastID = null;
-    for (let i = 0; i < headers.length; i++) {
-      this.previousHeaderIDs[headers[i].id] = lastID;
-      this.observer.observe(headers[i]);
-      lastID = headers[i].id;
-    }
+        lastID = id;
+      }
+    });
   };
 
   render() {
