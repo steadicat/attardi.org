@@ -2,9 +2,7 @@ import * as React from 'react';
 import {View} from 'glamor/jsxstyle';
 import {css} from 'glamor';
 import {
-  sans,
   sansBold,
-  sansBoldXL,
   sansBoldL,
   sansBoldM,
   sansBoldS,
@@ -15,8 +13,6 @@ import {
   sansBoldCaps,
   sansCaps,
   serifS,
-  sansRegular,
-  mono,
   monoS,
 } from '../design/text';
 import {
@@ -137,7 +133,7 @@ const markdownStyle = css({
     backgroundPosition: '0 1px',
   },
 
-  '& a.anchor, & blockquote a.anchor, & figcaption a.anchor': {
+  '& a.anchor, & blockquote a.anchor, & figcaption a.anchor, & .prevNext a': {
     padding: 0,
     background: 'none',
   },
@@ -161,6 +157,21 @@ const markdownStyle = css({
   '& a[title="App Store"]': {
     backgroundImage: `url(${appstoreIcon})`,
   },
+
+  '& .prevNext': {
+    display: 'flex',
+    marginTop: -unit / 4,
+    marginBottom: unit / 4,
+    '& a': {
+      flex: 1,
+      textAlign: 'center',
+      ...sansXS,
+      lineHeight: `${unit * 2}px`,
+    },
+  },
+  '@media(min-width: 960px)': {
+    '& .prevNext': {display: 'none'},
+  },
 });
 
 const tableOfContentsStyle = css({
@@ -183,9 +194,11 @@ const tableOfContentsStyle = css({
   '& a.active .caps': sansBoldCaps,
 });
 
-function onTOCClick(event: React.MouseEvent<HTMLAnchorElement>) {
+function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
   try {
-    let target = event.nativeEvent.target;
+    let target = event.nativeEvent.target as
+      | HTMLAnchorElement
+      | {parentNode: HTMLAnchorElement; href: undefined};
     if (!target.href) target = target.parentNode;
     const id = target.href.split('#')[1];
     const el = document.getElementById(id);
@@ -211,9 +224,13 @@ function setActiveHeaderId(id: string | null) {
   activeHeaderLink = active;
 }
 
-class Body extends React.Component {
+class Body extends React.Component<{dangerouslySetInnerHTML: {__html: string}}> {
   el: HTMLDivElement | null = null;
   headerPositions: Array<[string, number]> = [];
+
+  shouldComponentUpdate() {
+    return false;
+  }
 
   ref = (el: HTMLDivElement | null) => {
     this.el = el;
@@ -225,6 +242,7 @@ class Body extends React.Component {
     window.addEventListener('scroll', this.onScroll);
     window.addEventListener('resize', this.onResize);
     this.onResize();
+    this.addPrevNextLinks(el);
   };
 
   resizeTimeout: number | null = null;
@@ -260,8 +278,33 @@ class Body extends React.Component {
     });
   };
 
+  addPrevNextLinks(el: HTMLElement) {
+    const headers = el.querySelectorAll<HTMLElement>('h3, h4');
+    for (let i = 0; i < headers.length; i++) {
+      if (headers[i + 1] === headers[i].nextElementSibling) continue;
+      const links = document.createElement('div');
+      links.className = 'prevNext';
+      let previous = headers[i - 1];
+      if (previous === headers[i].previousElementSibling) previous = headers[i - 2];
+      if (previous) {
+        const previousLink = document.createElement('a');
+        previousLink.href = `#${previous.id}`;
+        previousLink.innerText = '▴ Previous';
+        links.appendChild(previousLink);
+      }
+      const next = headers[i + 1];
+      if (next) {
+        const nextLink = document.createElement('a');
+        nextLink.href = `#${next.id}`;
+        nextLink.innerText = '▾ Next';
+        links.appendChild(nextLink);
+      }
+      headers[i].insertAdjacentElement('afterend', links);
+    }
+  }
+
   render() {
-    return <div {...this.props} ref={this.ref} />;
+    return <div ref={this.ref} {...this.props} />;
   }
 }
 
@@ -298,7 +341,7 @@ const ArticlePage = ({
         __html: tableOfContents.replace(/[A-Z]{2,8}/g, '<span class="caps">$&</span>'),
       }}
       media={['(max-width: 959px)', {display: 'none'}]}
-      onClick={onTOCClick}
+      onClick={onLinkClick}
     />
     <View
       media={[
@@ -310,7 +353,7 @@ const ArticlePage = ({
       </Heading>
       <Title marginTop={unit}>{title}</Title>
       <DateView date={date} />
-      <Body {...markdownStyle} dangerouslySetInnerHTML={{__html: html}} />
+      <Body dangerouslySetInnerHTML={{__html: html}} {...markdownStyle} onClick={onLinkClick} />
       <View marginTop={unit * 4}>
         <Heading>
           <Link to="/">Stefano J. Attardi</Link>
@@ -339,9 +382,6 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-// Please note that you can use https://github.com/dotansimha/graphql-code-generator
-// to generate all types from graphQL schema
 
 interface ArticlePageProps {
   data: {
