@@ -331,7 +331,13 @@ const Sidebar = ({title, tableOfContents}) => (
     {...tableOfContentsStyle}
     media={['(max-width: 959px)', {display: 'none'}]}
     onClick={onLinkClick}>
-    <Link to="/" {...sansBoldXS} opacity={0} className="show" transition="0.6s opacity">
+    <Link
+      to="/"
+      {...sansBoldXS}
+      opacity={0.01}
+      className="show"
+      transition="0.6s opacity"
+      transform="translateZ(0)">
       Stefano J. Attardi
     </Link>
     <Link
@@ -340,9 +346,10 @@ const Sidebar = ({title, tableOfContents}) => (
       color={textColor}
       marginBottom={unit}
       display="block"
-      opacity={0}
+      opacity={0.01}
       className="show"
-      transition="0.6s opacity">
+      transition="0.6s opacity"
+      transform="translateZ(0)">
       {title}
     </Link>
     <div
