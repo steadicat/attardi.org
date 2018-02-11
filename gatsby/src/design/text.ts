@@ -7,9 +7,9 @@ const s = {fontSize: 17, lineHeight: `${unit * 1.5}px`};
 const xs = {fontSize: 12, lineHeight: `${unit}px`};
 
 // Font variants
-export const sans = 'Rubik, sans-serif';
-export const serif = '"Zilla Slab", serif';
-export const mono = '"PT Mono", monospace';
+export const sans = 'Rubik, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+export const serif = '"Zilla Slab", Rockwell, "Lucida Bright", serif';
+export const mono = '"PT Mono", "SF Mono", Consolas, Monaco, monospace';
 
 export const serifRegular = {fontFamily: serif, fontWeight: 400};
 const serifMedium = {fontFamily: serif, fontWeight: 500};
@@ -30,7 +30,11 @@ export const sansBoldXS = {...sansBold, ...xs};
 
 export const serifS = {...serifRegular, ...s, fontSize: 19};
 
-export const monoXS = {...monoRegular, fontSize: 11, lineHeight: `${unit}px`};
+export const monoXS = {
+  ...monoRegular,
+  fontSize: 11,
+  lineHeight: `${unit}px`,
+};
 export const monoS = {...monoRegular, fontSize: 13};
 
 export const sansCaps = {

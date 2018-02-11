@@ -22,6 +22,7 @@ import {
   grayBackground,
   gray,
   darkerGrayBackground,
+  textColor,
 } from '../design/colors';
 import {unit, maxColumn} from '../design/layout';
 import {Subtitle, Title, DateView, Link, Button, Heading} from '../components/text';
@@ -176,22 +177,22 @@ const markdownStyle = css({
 
 const tableOfContentsStyle = css({
   ...commonStyle,
-  '& ul': {margin: 0, padding: 0, listStyleType: 'none', paddingLeft: unit},
-  '& a.active::before': {content: '▸', position: 'absolute', left: 0},
-  '&>ul': {paddingLeft: 0},
-  '&>ul>li': {marginBottom: unit / 2},
+  '& a': sansBoldXS,
   '& p': {margin: 0},
-  '& a': {
+  '& ul': {margin: 0, padding: 0, listStyleType: 'none', paddingLeft: unit},
+  '&>div>ul': {paddingLeft: 0},
+  '&>div>ul>li': {marginBottom: unit / 2},
+  '&>div a': {
     ...sansXS,
     color: gray,
     textDecoration: 'none',
     transition: '0.5s color, border-color',
-  },
-  '& a.active': {
-    ...sansBoldXS,
+    '&.active': sansBoldXS,
+    '&.active::before': {content: '▸', position: 'absolute', left: 0},
   },
   '& .caps': sansCaps,
   '& a.active .caps': sansBoldCaps,
+  '&.isScrolled .show': {opacity: 1},
 });
 
 function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -200,6 +201,7 @@ function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
       | HTMLAnchorElement
       | {parentNode: HTMLAnchorElement; href: undefined};
     if (!target.href) target = target.parentNode;
+    if (!target.href) return;
     const id = target.href.split('#')[1];
     const el = document.getElementById(id);
     el && el.scrollIntoView({behavior: 'smooth', block: 'start'});
@@ -217,6 +219,10 @@ function setActiveHeaderId(id: string | null) {
   if (activeHeaderID === id) return;
   activeHeaderID = id;
   activeHeaderLink && (activeHeaderLink.className = '');
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) {
+    sidebar.className = id ? 'isScrolled' : '';
+  }
   if (!id) return;
   const active = document.querySelector(`[href="${window.location.pathname}#${id}"]`);
   if (!active) return;
@@ -289,14 +295,14 @@ class Body extends React.Component<{dangerouslySetInnerHTML: {__html: string}}> 
       if (previous) {
         const previousLink = document.createElement('a');
         previousLink.href = `#${previous.id}`;
-        previousLink.innerText = '▴ Previous';
+        previousLink.innerText = '△ Previous';
         links.appendChild(previousLink);
       }
       const next = headers[i + 1];
       if (next) {
         const nextLink = document.createElement('a');
         nextLink.href = `#${next.id}`;
-        nextLink.innerText = '▾ Next';
+        nextLink.innerText = '▽ Next';
         links.appendChild(nextLink);
       }
       headers[i].insertAdjacentElement('afterend', links);
@@ -307,6 +313,45 @@ class Body extends React.Component<{dangerouslySetInnerHTML: {__html: string}}> 
     return <div ref={this.ref} {...this.props} />;
   }
 }
+
+const Sidebar = ({title, tableOfContents}) => (
+  <View
+    id="sidebar"
+    position="sticky"
+    top={0}
+    maxHeight="100vh"
+    marginLeft={`calc((100vw - ${maxColumn}px - ${sidebarWidth}px) / 4)`}
+    marginRight={`calc((100vw - ${maxColumn}px - ${sidebarWidth}px) / -4)`}
+    boxSizing="border-box"
+    width={sidebarWidth}
+    overflow="auto"
+    flexShrink={0}
+    marginTop={555}
+    padding={unit}
+    {...tableOfContentsStyle}
+    media={['(max-width: 959px)', {display: 'none'}]}
+    onClick={onLinkClick}>
+    <Link to="/" {...sansBoldXS} opacity={0} className="show" transition="0.6s opacity">
+      Stefano J. Attardi
+    </Link>
+    <Link
+      href="#top"
+      {...sansBoldXS}
+      color={textColor}
+      marginBottom={unit}
+      display="block"
+      opacity={0}
+      className="show"
+      transition="0.6s opacity">
+      {title}
+    </Link>
+    <div
+      dangerouslySetInnerHTML={{
+        __html: tableOfContents.replace(/[A-Z]{2,8}/g, '<span class="caps">$&</span>'),
+      }}
+    />
+  </View>
+);
 
 const ArticlePage = ({
   data: {markdownRemark: {frontmatter: {title, date}, html, tableOfContents}},
@@ -324,25 +369,7 @@ const ArticlePage = ({
         paddingBottom: 4 * unit,
       },
     ]}>
-    <View
-      position="sticky"
-      top={0}
-      maxHeight="100vh"
-      marginLeft={`calc((100vw - ${maxColumn}px - ${sidebarWidth}px) / 4)`}
-      marginRight={`calc((100vw - ${maxColumn}px - ${sidebarWidth}px) / -4)`}
-      boxSizing="border-box"
-      width={sidebarWidth}
-      overflow="auto"
-      flexShrink={0}
-      marginTop={540}
-      padding={unit}
-      {...tableOfContentsStyle}
-      dangerouslySetInnerHTML={{
-        __html: tableOfContents.replace(/[A-Z]{2,8}/g, '<span class="caps">$&</span>'),
-      }}
-      media={['(max-width: 959px)', {display: 'none'}]}
-      onClick={onLinkClick}
-    />
+    <Sidebar title={title} tableOfContents={tableOfContents} />
     <View
       media={[
         '(min-width: 960px)',
@@ -351,7 +378,9 @@ const ArticlePage = ({
       <Heading marginTop={unit}>
         <Link to="/">Stefano J. Attardi</Link>
       </Heading>
-      <Title marginTop={unit}>{title}</Title>
+      <Title id="top" marginTop={unit}>
+        {title}
+      </Title>
       <DateView date={date} />
       <Body dangerouslySetInnerHTML={{__html: html}} {...markdownStyle} onClick={onLinkClick} />
       <View marginTop={unit * 4}>

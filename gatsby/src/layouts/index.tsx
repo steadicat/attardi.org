@@ -40,10 +40,12 @@ class DefaultLayout extends React.PureComponent<DefaultLayoutProps, void> {
   }
 }
 
-window.ga = window.ga || ((...args) => (ga.q = ga.q || []).push(args));
+if (typeof window !== 'undefined') {
+  window.ga = window.ga || ((...args) => (ga.q = ga.q || []).push(args));
 
-ga('create', 'UA-1809956-1', 'auto');
-ga('set', 'transport', 'beacon');
-ga('send', 'pageview');
+  ga('create', 'UA-1809956-1', 'auto');
+  ga('set', 'transport', 'beacon');
+  ga('send', 'pageview');
+}
 
 export default DefaultLayout;

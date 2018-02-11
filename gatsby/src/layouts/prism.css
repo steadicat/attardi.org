@@ -37,6 +37,7 @@
    -webkit-hyphens: none;
    -ms-hyphens: none;
    hyphens: none;
+   -webkit-text-size-adjust: none;
 
    font-variant-ligatures: 'none';
 

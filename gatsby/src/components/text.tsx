@@ -18,12 +18,14 @@ export const Title = ({
   children,
   marginTop = 0,
   marginBottom = 0,
+  id,
 }: {
   children: React.ReactNode;
   marginTop?: number;
   marginBottom?: number;
+  id?: string;
 }) => (
-  <View component="h1" {...sansBoldXL} marginTop={marginTop} marginBottom={marginBottom}>
+  <View component="h1" {...sansBoldXL} marginTop={marginTop} marginBottom={marginBottom} id={id}>
     {children}
   </View>
 );
@@ -111,6 +113,7 @@ export const Link = ({
   children,
   to,
   href,
+  ...props
 }: {
   children: React.ReactNode;
   to?: string;
@@ -128,7 +131,8 @@ export const Link = ({
     transition="0.5s color"
     textDecoration="none"
     to={to}
-    href={href}>
+    href={href}
+    {...props}>
     {children}
   </View>
 );
