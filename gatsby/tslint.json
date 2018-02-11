@@ -1,21 +1,18 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
-    "jsRules": {},
-    "rules": {
-        "interface-name": [ "never-prefix" ],
-        "member-access": [
-            false
-        ],
-        "ordered-imports": [
-            false
-        ],
-        "no-console": [
-            false
-        ],
-        "no-var-requires": false
-    },
-    "rulesDirectory": []
+  "extends": ["tslint:recommended", "tslint-eslint-rules", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    "no-unused-expression": false,
+    "arrow-parens": false,
+    "curly": false,
+    "member-ordering": false,
+    "forin": true,
+    "interface-name": true,
+    "interface-over-type-literal": false,
+    "jsx-boolean-value": true,
+    "member-access": true,
+    "no-empty": true,
+    "object-literal-sort-keys": false,
+    "max-classes-per-file": false,
+    "jsx-no-lambda": false
+  }
 }

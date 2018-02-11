@@ -7,6 +7,7 @@
   "license": "MIT",
   "main": "n/a",
   "dependencies": {
+    "@types/google.analytics": "^0.0.37",
     "@types/node": "^9.4.1",
     "@types/react": "16.0.36",
     "@types/react-dom": "16.0.3",
@@ -30,6 +31,7 @@
     "prettier": "^1.8.2",
     "react-helmet": "^5.2.0",
     "sharp": "^0.19.0",
-    "ts-node": "^4.1.0"
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1"
   }
 }

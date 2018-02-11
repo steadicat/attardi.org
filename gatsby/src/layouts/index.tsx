@@ -1,12 +1,10 @@
 import * as React from 'react';
-import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 import {View} from 'glamor/jsxstyle';
 
 import './prism.css';
 import {textColor} from '../design/colors';
 import {unit, mobileMargin, maxColumn} from '../design/layout';
-import Grid from '../components/Grid';
 
 interface DefaultLayoutProps extends React.HTMLProps<HTMLDivElement> {
   location: {
@@ -36,9 +34,16 @@ class DefaultLayout extends React.PureComponent<DefaultLayoutProps, void> {
           />
         </Helmet>
         {this.props.children()}
+        <script async src="https://www.google-analytics.com/analytics.js" />
       </View>
     );
   }
 }
+
+window.ga = window.ga || ((...args) => (ga.q = ga.q || []).push(args));
+
+ga('create', 'UA-1809956-1', 'auto');
+ga('set', 'transport', 'beacon');
+ga('send', 'pageview');
 
 export default DefaultLayout;

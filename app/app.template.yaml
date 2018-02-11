@@ -11,18 +11,19 @@ handlers:
 - url: /labels2?/?
   script: _go_app
   secure: always
-- url: /(component|path)---(.+)\.(\.js(\.map)?)$
+- url: /(component|path)---(.+)\.js$
   mime_type: application/javascript; charset=UTF-8
-  static_files: public/\1---\2.\3
-  upload: public/(component|path)---(.+)\.(\.js(\.map)?)$
+  static_files: public/\1---\2.js
+  upload: public/(component|path)---(.+)\.js$
   secure: always
-  http_headers: 
+  http_headers:
     Strict-Transport-Security: 'max-age=63072000; includeSubDomains; preload'
-- url: /static/(.+)\.(jpg|png)$
-  static_files: public/static/\1.\2
-  upload: public/static/(.+)\.(jpg|png)$
+- url: /(component|path)---(.+)\.js\.map$
+  mime_type: application/json; charset=UTF-8
+  static_files: public/\1---\2.js.map
+  upload: public/(component|path)---(.+)\.js\.map$
   secure: always
-  http_headers: 
+  http_headers:
     Strict-Transport-Security: 'max-age=63072000; includeSubDomains; preload'
 %STATIC%
 - url: /.*
@@ -31,8 +32,10 @@ handlers:
   mime_type: text/html; charset=UTF-8
   expiration: 1m
   secure: always
-  http_headers: 
+  http_headers:
     Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
 
 skip_files:
-- /app\.template\.yaml
+  - /app\.yaml
+  - /app\.template\.yaml
+  

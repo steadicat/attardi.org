@@ -62,7 +62,7 @@ const markdownStyle = css({
   '& h3 + h4': {marginTop: unit / 2},
   '& h5': {...sansBoldXS, marginTop: 0, marginBottom: unit / 4},
   '& strong': sansBold,
-  '& pre[class*="language"], code': {...monoXS, fontVariantLigatures: 'none'},
+  '& .gatsby-highlight, code': monoXS,
   '& p>code': {
     ...monoS,
     background: darkerGrayBackground,
@@ -100,7 +100,7 @@ const markdownStyle = css({
       textIndent: unit,
     },
     '& p>code': monoXS,
-    '& pre': {
+    '& .gatsby-highlight': {
       background: darkerGrayBackground,
       marginBottom: 0,
       color: gray,
@@ -252,10 +252,11 @@ class Body extends React.Component {
       for (const [id, position] of this.headerPositions) {
         if (position > scroll) {
           setActiveHeaderId(lastID);
-          break;
+          return;
         }
         lastID = id;
       }
+      setActiveHeaderId(lastID);
     });
   };
 

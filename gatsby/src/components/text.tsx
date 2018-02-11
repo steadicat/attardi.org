@@ -98,7 +98,7 @@ const months = [
 ];
 
 function format(date: Date) {
-  return `${months[date.getMonth()]} ${date.getDate()},  ${date.getFullYear()}`;
+  return `${months[date.getUTCMonth()]} ${date.getUTCDate()},  ${date.getUTCFullYear()}`;
 }
 
 export const DateView = ({date}: {date: string}) => (
