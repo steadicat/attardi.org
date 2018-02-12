@@ -1,8 +1,8 @@
 application: attardi-org
-version: 4
+version: 3
 runtime: go
 api_version: go1
-default_expiration: 30d
+default_expiration: 1m
 
 handlers:
 - url: /email
@@ -15,16 +15,25 @@ handlers:
   mime_type: application/javascript; charset=UTF-8
   static_files: public/\1---\2.js
   upload: public/(component|path)---(.+)\.js$
+  expiration: 1m
   secure: always
   http_headers:
-    Strict-Transport-Security: 'max-age=63072000; includeSubDomains; preload'
+    Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
 - url: /(component|path)---(.+)\.js\.map$
   mime_type: application/json; charset=UTF-8
   static_files: public/\1---\2.js.map
   upload: public/(component|path)---(.+)\.js\.map$
+  expiration: 1m
   secure: always
   http_headers:
-    Strict-Transport-Security: 'max-age=63072000; includeSubDomains; preload'
+    Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
+- url: /static\/(.+)\.(png|jpg)$
+  static_files: public/static/\1.\2
+  upload: public/static\/(.+)\.(png|jpg)$
+  expiration: 1m
+  secure: always
+  http_headers:
+    Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
 %STATIC%
 - url: /.*
   static_files: public/404.html

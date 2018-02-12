@@ -5,11 +5,11 @@
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="mail" stroke="#979797">
+        <g id="mail" stroke="#CCCCCC">
             <rect id="Rectangle-2" x="1.5" y="4.5" width="13" height="8"></rect>
-            <path d="M1.5,4.5 L6.17086772,8.09297517 C7.24922297,8.92247921 8.75077703,8.92247921 9.82913228,8.09297517 L14.5,4.5" id="Path-4"></path>
-            <path d="M1.5,12.5 L5,9.5" id="Line"></path>
-            <path d="M14.5,12.5 L11,9.5" id="Line-Copy"></path>
+            <polyline id="Path-4" points="1.5 4.5 8 9.5 14.5 4.5"></polyline>
+            <path d="M1.5,12.5 L5.50256348,10.0284424" id="Line"></path>
+            <path d="M14.5,12.5 L10.5152588,10.0512695" id="Line-Copy"></path>
         </g>
     </g>
 </svg>

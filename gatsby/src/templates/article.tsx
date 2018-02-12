@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Helmet from 'react-helmet';
 import {View} from 'glamor/jsxstyle';
 import {css} from 'glamor';
 import {
@@ -173,6 +174,25 @@ const markdownStyle = css({
   '@media(min-width: 960px)': {
     '& .prevNext': {display: 'none'},
   },
+  '& a.anchor, & blockquote a.anchor': {
+    opacity: 0.3,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    padding: 2,
+    float: 'none',
+    marginRight: -4,
+    marginLeft: -16,
+    paddingRight: 6,
+    '&>svg': {
+      display: 'block',
+      width: 12,
+      height: 12,
+    },
+  },
+  '& .thanks': {
+    fontStyle: 'italic',
+    color: gray,
+  },
 });
 
 const tableOfContentsStyle = css({
@@ -196,6 +216,7 @@ const tableOfContentsStyle = css({
 });
 
 function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
+  if (event.altKey || event.ctrlKey || event.metaKey || event.altKey) return;
   try {
     let target = event.nativeEvent.target as
       | HTMLAnchorElement
@@ -203,8 +224,14 @@ function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!target.href) target = target.parentNode;
     if (!target.href) return;
     const id = target.href.split('#')[1];
+    if (!id) return;
     const el = document.getElementById(id);
     el && el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    if (id === 'top') {
+      history.replaceState(null, '', `${window.location.pathname}`);
+    } else {
+      history.replaceState(null, '', `${window.location.pathname}#${id}`);
+    }
     event.preventDefault();
   } catch (err) {
     console.warn(err);
@@ -361,7 +388,13 @@ const Sidebar = ({title, tableOfContents}) => (
 );
 
 const ArticlePage = ({
-  data: {markdownRemark: {frontmatter: {title, date}, html, tableOfContents}},
+  data: {
+    markdownRemark: {
+      frontmatter: {title, date, description, featuredImage: {childImageSharp: {original: {src}}}},
+      html,
+      tableOfContents,
+    },
+  },
 }: ArticlePageProps) => (
   <View
     media={[
@@ -376,6 +409,16 @@ const ArticlePage = ({
         paddingBottom: 4 * unit,
       },
     ]}>
+    <Helmet title={title}>
+      <meta name="og:type" content="article" />
+      <meta name="og:image" content={`https://attardi.org${src}`} />
+      <meta name="og:description" content={description} />
+      <meta name="twitter:site" content="@steadicat" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:image:src" content={`https://attardi.org${src}`} />
+      <meta name="twitter:description" content={description} />
+    </Helmet>
     <Sidebar title={title} tableOfContents={tableOfContents} />
     <View
       media={[
@@ -404,6 +447,9 @@ const ArticlePage = ({
   </View>
 );
 
+if (true) {
+}
+
 export default ArticlePage;
 
 export const pageQuery = graphql`
@@ -412,6 +458,14 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date
+        description
+        featuredImage {
+          childImageSharp {
+            original {
+              src
+            }
+          }
+        }
       }
       html
       tableOfContents
@@ -425,6 +479,14 @@ interface ArticlePageProps {
       frontmatter: {
         title: string;
         date: string;
+        description: string;
+        featuredImage: {
+          childImageSharp: {
+            original: {
+              src: string;
+            };
+          };
+        };
       };
       html: string;
       tableOfContents: string;

@@ -156,4 +156,7 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
   </div>
 );
 
+if (false) {
+}
+
 export default IndexPage;

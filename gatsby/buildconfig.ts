@@ -66,6 +66,7 @@ function addEntry(info) {
     delete info.file;
   }
   info.url = info.url.replace(/\./g, '\\.');
+  info.expiration = '1m';
   info.secure = 'always';
   info.http_headers = `
     Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'`;

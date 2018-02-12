@@ -23,21 +23,32 @@ class DefaultLayout extends React.PureComponent<DefaultLayoutProps, void> {
         marginBottom={unit * 4}
         color={textColor}>
         <Helmet
-          title="Stefano J. Attardi"
-          meta={[
-            {name: 'description', content: 'Sample'},
-            {name: 'keywords', content: 'sample, something'},
-          ]}>
+          titleTemplate="%s - Stefano J. Attardi"
+          defaultTitle="Stefano J. Attardi: UI Engineering and Design consultant">
+          <meta
+            name="description"
+            content="UI Engineering and Design consultant, specializing in React and React performance. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
+          />
+          <meta
+            name="og:description"
+            content="UI Engineering and Design consultant, specializing in React and React performance. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
+          />
           <link
             href="//fonts.googleapis.com/css?family=Zilla+Slab:400,400i,500|Rubik:600,500,400,300|PT+Mono:400"
             rel="stylesheet"
           />
+          <meta property="og:site_name" content="attardi.org" />
+          <meta name="og:type" content="website" />
+          <meta name="og:url" content={`https://attardi.org${this.props.location.pathname}`} />
         </Helmet>
         {this.props.children()}
         <script async src="https://www.google-analytics.com/analytics.js" />
       </View>
     );
   }
+}
+
+if (false) {
 }
 
 if (typeof window !== 'undefined') {

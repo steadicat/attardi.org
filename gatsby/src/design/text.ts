@@ -39,7 +39,7 @@ export const monoS = {...monoRegular, fontSize: 13};
 
 export const sansCaps = {
   ...sansMedium,
-  fontSize: '76%',
+  fontSize: '78%',
   letterSpacing: '1px',
   paddingLeft: '1px',
   paddingRight: '1px',
@@ -47,7 +47,7 @@ export const sansCaps = {
 };
 export const sansBoldCaps = {
   ...sansExtraBold,
-  fontSize: '76%',
+  fontSize: '78%',
   letterSpacing: '1px',
   paddingLeft: '1px',
   paddingRight: '1px',
