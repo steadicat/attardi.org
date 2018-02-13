@@ -1,5 +1,5 @@
 application: attardi-org
-version: 3
+version: 2
 runtime: go
 api_version: go1
 default_expiration: 1m
