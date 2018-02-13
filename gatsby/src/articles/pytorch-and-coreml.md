@@ -1085,7 +1085,7 @@ I hope this inspires you to start sprinkling neural nets into your apps as well,
 Pick one. Or two. Or all. I don’t care. You do you:
 
 - <a title="App Store" href="https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157">Get the app</a>, or tell a watch lover friend.
-- Comment [on Hacker News](https://news.ycombinator.com/item?id=16359447), or ask me a question on Twitter (<a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>).
+- Comment [on Hacker News](https://news.ycombinator.com/item?id=16364826), or ask me a question on Twitter (<a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>).
 - Check out the full code <a title="GitHub" href="https://github.com/steadicat/pytorch-coreml-example">on GitHub</a>.
 - See the training data and [try out the test UI here](/pytorch-and-coreml-test-ui/).
 - Come up with one problem in your app that you can solve with neural networks.
