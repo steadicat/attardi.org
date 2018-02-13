@@ -507,7 +507,7 @@ for epoch in range(1000):
         float_mask = mask.float()
         masked_logits = logits.mul(float_mask)
         masked_target = target.mul(float_mask)
-        loss = F.mse_loss(logits, target)
+        loss = F.mse_loss(masked_logits, masked_target)
 ```
 
 Finally, I *backpropagate*, i.e. take that error and use it to tweak the model to be more correct next time. I need an *optimizer* to do this work for me:
@@ -528,7 +528,7 @@ for epoch in range(1000):
         float_mask = mask.float()
         masked_logits = logits.mul(float_mask)
         masked_target = target.mul(float_mask)
-        loss = F.mse_loss(logits, target)
+        loss = F.mse_loss(masked_logits, masked_target)
         
         optimizer.zero_grad()
         loss.backward()
