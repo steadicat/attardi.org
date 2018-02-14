@@ -10,14 +10,14 @@ This is the story of how I trained a simple <a title="Wikipedia" href="https://e
 I’ll walk you through every step, from problem all the way to App Store. On the way we’ll take a quick detour into an alternative approach using simple math (fail), through tool building, dataset generation, neural network architecting, and PyTorch training. We’ll endure the treacherous CoreML model converting to finally reach the React Native&nbsp;UI.
 
 If this feels like too long a journey, not to worry. You can click the left side of this page to skip around. And if you’re just looking for a tl;dr, here are some links:
-<a title="GitHub" href="https://github.com/steadicat/pytorch-coreml-example">code</a>, [test UI](/pytorch-and-coreml-test-ui/), <a title="App Store" href="https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157">iOS app</a>, and <a title="Twitter" href="https://twitter.com/steadicat">my Twitter</a>.
+<a title="GitHub" href="https://github.com/steadicat/pytorch-coreml-example">code</a>, [test UI](/pytorch-and-coreml-test-ui/), <a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">iOS app</a>, and <a title="Twitter" href="https://twitter.com/steadicat">my Twitter</a>.
 
 ### The Challenge
 
-I recently built <a title="App Store" href="https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157">a little iOS app</a> for mechanical watch fanciers to track the accuracy of their watches over time.
+I recently built <a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">a little iOS app</a> for mechanical watch fanciers to track the accuracy of their watches over time.
 
 ![](../images/pytorch-and-coreml/app-store.png)
-<figcaption><a title="App Store" href="https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157">Movement - Watch Tracker</a> introducing itself in the App Store.</figcaption>
+<figcaption><a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">Movement - Watch Tracker</a> introducing itself in the App Store.</figcaption>
 
 In the app, watch owners add measurements by tapping the screen when their watch shows a certain time. Over time these measurements tell the story of how each watch is performing.
 
@@ -1084,7 +1084,7 @@ I hope this inspires you to start sprinkling neural nets into your apps as well,
 
 Pick one. Or two. Or all. I don’t care. You do you:
 
-- <a title="App Store" href="https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157">Get the app</a>, or tell a watch lover friend.
+- <a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">Get the app</a>, or tell a watch lover friend.
 - Comment [on Hacker News](https://news.ycombinator.com/item?id=16364826), or ask me a question on Twitter (<a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>).
 - Check out the full code <a title="GitHub" href="https://github.com/steadicat/pytorch-coreml-example">on GitHub</a>.
 - See the training data and [try out the test UI here](/pytorch-and-coreml-test-ui/).

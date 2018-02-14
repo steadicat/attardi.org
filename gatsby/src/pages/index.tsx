@@ -97,7 +97,7 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
         Projects
       </Heading>
       {ProjectRow(
-        'https://itunes.apple.com/us/app/movement-watch-tracker/id1329445157',
+        'https://itunes.apple.com/app/movement-watch-tracker/id1329445157',
         'Movement',
         'iOS app to set and track mechanical watches.',
         true,
@@ -150,7 +150,7 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
         <Link href="https://twitter.com/steadicat">Twitter</Link>
       </View>
       <View {...sansBoldS}>
-        <Link href="https://github.com/steadicat">Github</Link>
+        <Link href="https://github.com/steadicat">GitHub</Link>
       </View>
     </View>
   </div>
