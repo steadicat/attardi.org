@@ -30,7 +30,7 @@ handlers:
 - url: /static\/(.+)\.(png|jpg)$
   static_files: public/static/\1.\2
   upload: public/static\/(.+)\.(png|jpg)$
-  expiration: 1m
+  expiration: 30d
   secure: always
   http_headers:
     Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
