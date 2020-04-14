@@ -1,9 +1,12 @@
 import * as React from 'react';
+import {graphql} from 'gatsby';
 import {View} from 'glamor/jsxstyle';
 import {Title, Subtitle, Link, Heading, Subheading, DateView, Button} from '../components/text';
-import {accentColor, gray, white, linkColor} from '../design/colors';
-import {sansXS, sansCaps, sansM, sansBoldS, sansBoldL} from '../design/text';
+import {accentColor, gray} from '../design/colors';
+import {sansXS, sansCaps, sansM, sansBoldS} from '../design/text';
 import {unit} from '../design/layout';
+import Layout from '../components/Layout';
+
 
 export const pageQuery = graphql`
   query IndexQuery {
@@ -27,6 +30,7 @@ export const pageQuery = graphql`
 // to generate all types from graphQL schema
 
 interface IndexPageProps {
+  location: {pathname: string},
   data: {
     allMarkdownRemark: {
       edges: Array<{
@@ -59,7 +63,7 @@ const NewTag = () => (
   </View>
 );
 
-const ProjectRow = (url, title, description, isNew = false) => [
+const ProjectRow = (url: string, title: string, description: string, isNew = false) => [
   <Subheading key={url} media={['(max-width: 480px)', {marginTop: unit}]}>
     <Link href={url}>{title}</Link> {isNew && <NewTag />}
   </Subheading>,
@@ -68,8 +72,9 @@ const ProjectRow = (url, title, description, isNew = false) => [
   </View>,
 ];
 
-const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
-  <div>
+const IndexPage = ({data: {allMarkdownRemark: {edges}}, location}: IndexPageProps) => (
+  <Layout location={location}>
+    <div>
     <View paddingTop={unit * 2} paddingBottom={unit * 2}>
       <Title>Stefano J. Attardi</Title>
       <Subtitle marginTop={unit} marginBottom={unit}>
@@ -93,7 +98,7 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
         gridGap: unit,
       }}
       media={['(max-width: 480px)', {display: 'block'}]}>
-      <Heading css={{gridColumn: '1/3'}} marginTop={unit * 2}>
+      <Heading gridColumn="1/3" marginTop={unit * 2}>
         Projects
       </Heading>
       {ProjectRow(
@@ -123,7 +128,7 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
         'Napkin',
         'Experimental spreadsheet-as-documents web app.',
       )}
-      <Heading css={{gridColumn: '1/3'}} marginTop={unit * 2}>
+      <Heading gridColumn="1/3" marginTop={unit * 2}>
         Code
       </Heading>
       {ProjectRow(
@@ -153,10 +158,8 @@ const IndexPage = ({data: {allMarkdownRemark: {edges}}}: IndexPageProps) => (
         <Link href="https://github.com/steadicat">GitHub</Link>
       </View>
     </View>
-  </div>
+    </div>
+  </Layout>
 );
-
-if (false) {
-}
 
 export default IndexPage;

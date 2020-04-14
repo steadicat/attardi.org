@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Helmet from 'react-helmet';
+import {graphql} from 'gatsby';
+import {Helmet} from 'react-helmet';
 import {View} from 'glamor/jsxstyle';
 import {css} from 'glamor';
 import {
@@ -341,7 +342,7 @@ class Body extends React.Component<{dangerouslySetInnerHTML: {__html: string}}> 
   }
 }
 
-const Sidebar = ({title, tableOfContents}) => (
+const Sidebar = ({title, tableOfContents}: {title: string, tableOfContents: string}) => (
   <View
     id="sidebar"
     position="sticky"

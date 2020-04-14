@@ -48,14 +48,14 @@ export const Heading = ({
   children,
   marginTop = 0,
   marginBottom = 0,
-  css,
+  gridColumn,
 }: {
   children: React.ReactNode;
   marginTop?: number;
   marginBottom?: number;
-  css?: React.CSSProperties;
+  gridColumn?: string;
 }) => (
-  <View component="h2" {...sansBoldL} marginTop={marginTop} marginBottom={marginBottom} css={css}>
+  <View component="h2" {...sansBoldL} marginTop={marginTop} marginBottom={marginBottom} /* TODO */ style={{gridColumn}}>
     {children}
   </View>
 );
@@ -71,7 +71,7 @@ export const Subheading = ({
   marginTop?: number;
   marginBottom?: number;
   css?: React.CSSProperties;
-  media?: Array<[string, React.CSSProperties]>;
+  media?: [string, React.CSSProperties][];
 }) => (
   <View
     component="h3"
