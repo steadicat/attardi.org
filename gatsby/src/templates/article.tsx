@@ -82,9 +82,9 @@ const markdownStyle = css({
     marginTop: unit / 2,
     background: grayBackground,
     borderLeft: `3px solid ${gray}`,
-    padding: [unit * 0.75, unit, unit * 0.75, unit].map(x => `${x}px`).join(' '),
+    padding: [unit * 0.75, unit, unit * 0.75, unit].map((x) => `${x}px`).join(' '),
     color: gray,
-    margin: [unit, 0].map(x => `${x}px`).join(' '),
+    margin: [unit, 0].map((x) => `${x}px`).join(' '),
     '& h4': {
       margin: 0,
       color: gray,
@@ -342,7 +342,7 @@ class Body extends React.Component<{dangerouslySetInnerHTML: {__html: string}}> 
   }
 }
 
-const Sidebar = ({title, tableOfContents}: {title: string, tableOfContents: string}) => (
+const Sidebar = ({title, tableOfContents}: {title: string; tableOfContents: string}) => (
   <View
     id="sidebar"
     position="sticky"
@@ -391,7 +391,16 @@ const Sidebar = ({title, tableOfContents}: {title: string, tableOfContents: stri
 const ArticlePage = ({
   data: {
     markdownRemark: {
-      frontmatter: {title, date, description, featuredImage: {childImageSharp: {original: {src}}}},
+      frontmatter: {
+        title,
+        date,
+        description,
+        featuredImage: {
+          childImageSharp: {
+            original: {src},
+          },
+        },
+      },
       html,
       tableOfContents,
     },

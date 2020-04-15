@@ -48,7 +48,7 @@ function toYaml(obj) {
   return (
     '- ' +
     Object.keys(obj)
-      .map(key => {
+      .map((key) => {
         return key + ': ' + obj[key];
       })
       .join('\n  ')
@@ -86,7 +86,7 @@ function walk(dir, callback) {
   }
 }
 
-walk('.', function(file) {
+walk('.', function (file) {
   if (/\/\./.test(file)) return;
   return handler(file.substring(1), addEntry);
 });

@@ -5,7 +5,7 @@ import {unit} from '../design/layout';
 import Layout from '../components/Layout';
 
 interface NotFoundPageProps {
-  location: {pathname: string}
+  location: {pathname: string};
 }
 
 const NotFoundPage = ({location}: NotFoundPageProps) => (

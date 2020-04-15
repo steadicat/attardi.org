@@ -55,7 +55,12 @@ export const Heading = ({
   marginBottom?: number;
   gridColumn?: string;
 }) => (
-  <View component="h2" {...sansBoldL} marginTop={marginTop} marginBottom={marginBottom} /* TODO */ style={{gridColumn}}>
+  <View
+    component="h2"
+    {...sansBoldL}
+    marginTop={marginTop}
+    marginBottom={marginBottom}
+    /* TODO */ style={{gridColumn}}>
     {children}
   </View>
 );
