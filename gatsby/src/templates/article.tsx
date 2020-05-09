@@ -35,6 +35,7 @@ import * as mailIcon from '../images/icons/mail.svg';
 import * as twitterIcon from '../images/icons/twitter.svg';
 import * as githubIcon from '../images/icons/github.svg';
 import * as appstoreIcon from '../images/icons/appstore.svg';
+import Layout from '../components/Layout';
 
 const commonStyle = {
   '& a': {
@@ -382,7 +383,7 @@ const Sidebar = ({title, tableOfContents}: {title: string; tableOfContents: stri
     </Link>
     <div
       dangerouslySetInnerHTML={{
-        __html: tableOfContents.replace(/[A-Z]{2,8}/g, '<span class="caps">$&</span>'),
+        __html: tableOfContents, //.replace(/[A-Z]{2,8}/g, '<span class="caps">$&</span>'),
       }}
     />
   </View>
@@ -405,65 +406,65 @@ const ArticlePage = ({
       tableOfContents,
     },
   },
+  location,
 }: ArticlePageProps) => (
-  <View
-    media={[
-      '(min-width: 960px)',
-      {
-        display: 'flex',
-        alignItems: 'flex-start',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        paddingBottom: 4 * unit,
-      },
-    ]}>
-    <Helmet title={title}>
-      <meta name="og:type" content="article" />
-      <meta name="og:image" content={`https://attardi.org${src}`} />
-      <meta name="og:description" content={description} />
-      <meta name="twitter:site" content="@steadicat" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:image:src" content={`https://attardi.org${src}`} />
-      <meta name="twitter:description" content={description} />
-    </Helmet>
-    <Sidebar title={title} tableOfContents={tableOfContents} />
+  <Layout location={location}>
     <View
       media={[
         '(min-width: 960px)',
-        {maxWidth: maxColumn, marginLeft: 'auto', marginRight: 'auto'},
+        {
+          display: 'flex',
+          alignItems: 'flex-start',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          paddingBottom: 4 * unit,
+        },
       ]}>
-      <Heading marginTop={unit}>
-        <Link to="/">Stefano J. Attardi</Link>
-      </Heading>
-      <Title id="top" marginTop={unit}>
-        {title}
-      </Title>
-      <DateView date={date} />
-      <Body dangerouslySetInnerHTML={{__html: html}} {...markdownStyle} onClick={onLinkClick} />
-      <View marginTop={unit * 4}>
-        <Heading>
+      <Helmet title={title}>
+        <meta name="og:type" content="article" />
+        <meta name="og:image" content={`https://attardi.org${src}`} />
+        <meta name="og:description" content={description} />
+        <meta name="twitter:site" content="@steadicat" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:image:src" content={`https://attardi.org${src}`} />
+        <meta name="twitter:description" content={description} />
+      </Helmet>
+      <Sidebar title={title} tableOfContents={tableOfContents} />
+      <View
+        media={[
+          '(min-width: 960px)',
+          {maxWidth: maxColumn, marginLeft: 'auto', marginRight: 'auto'},
+        ]}>
+        <Heading marginTop={unit}>
           <Link to="/">Stefano J. Attardi</Link>
         </Heading>
-        <Subtitle>
-          UI Engineering and Design consultant, specializing in React and React performance.
-          Consulting as <Link href="https://rationalcreation.com/">Rational Creation</Link>.
-        </Subtitle>
-        <Button href="/email">Get in Touch</Button>
+        <Title id="top" marginTop={unit}>
+          {title}
+        </Title>
+        <DateView date={date} />
+        <Body dangerouslySetInnerHTML={{__html: html}} {...markdownStyle} onClick={onLinkClick} />
+        <View marginTop={unit * 4}>
+          <Heading>
+            <Link to="/">Stefano J. Attardi</Link>
+          </Heading>
+          <Subtitle>
+            UI Engineering and Design consultant, specializing in React and React performance.
+            Consulting as <Link href="https://rationalcreation.com/">Rational Creation</Link>.
+          </Subtitle>
+          <Button href="/email">Get in Touch</Button>
+        </View>
       </View>
     </View>
-  </View>
+  </Layout>
 );
-
-if (true) {
-}
 
 export default ArticlePage;
 
 export const pageQuery = graphql`
-  query ArticlePageQuery($slug: String!) {
+  query($slug: String!) {
     markdownRemark(fields: {slug: {eq: $slug}}) {
       frontmatter {
         title

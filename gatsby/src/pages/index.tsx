@@ -8,7 +8,7 @@ import {unit} from '../design/layout';
 import Layout from '../components/Layout';
 
 export const pageQuery = graphql`
-  query IndexQuery {
+  {
     allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
       edges {
         node {
