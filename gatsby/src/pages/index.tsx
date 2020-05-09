@@ -82,8 +82,7 @@ const IndexPage = ({
       <View paddingTop={unit * 2} paddingBottom={unit * 2}>
         <Title>Stefano J. Attardi</Title>
         <Subtitle marginTop={unit} marginBottom={unit}>
-          UI Engineering and Design consultant, specializing in React and React performance.
-          Consulting as <Link href="https://rationalcreation.com/">Rational Creation</Link>.
+          Engineering Manager at <Link href="https://coinbase.com/">Coinbase</Link>.
         </Subtitle>
         <Button href="/email">Get in Touch</Button>
       </View>
