@@ -2,6 +2,10 @@ export CLOUDSDK_CORE_PROJECT=attardi-org
 
 SOURCES := $(shell find gatsby/src -name \*.ts -o -name \*.tsx -o -name \*.md)
 
+clean:
+	rm -rf app/public ; rm -rf gatsby/public ; rm -rf gatsby/.cache
+.PHONY: clean
+
 gatsby/node_modules: gatsby/package.json
 	cd gatsby && yarn install
 	touch gatsby/node_modules
@@ -22,7 +26,7 @@ serve: app/app.yaml
 	cd app && go run
 
 deploy: app/public app/app.yaml
-	cd app && gcloud app deploy --version 1 --no-promote
+	cd app && gcloud app deploy --version 3 --no-promote
 
 deploy-www:
 	cd app-www && gcloud app deploy --version 1

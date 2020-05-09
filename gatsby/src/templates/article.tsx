@@ -178,13 +178,11 @@ const markdownStyle = css({
   },
   '& a.anchor, & blockquote a.anchor': {
     opacity: 0.3,
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    padding: 2,
-    float: 'none',
-    marginRight: -4,
-    marginLeft: -16,
-    paddingRight: 6,
+    padding: 4,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    paddingRight: 20 - 12,
+    marginLeft: -20,
     '&>svg': {
       display: 'block',
       width: 12,
