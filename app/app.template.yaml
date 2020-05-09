@@ -1,15 +1,12 @@
-application: attardi-org
-version: 2
-runtime: go
-api_version: go1
+runtime: go112
 default_expiration: 1m
 
 handlers:
 - url: /email
-  script: _go_app
+  script: auto
   secure: always
 - url: /labels2?/?
-  script: _go_app
+  script: auto
   secure: always
 - url: /(component|path)---(.+)\.js$
   mime_type: application/javascript; charset=UTF-8
@@ -43,8 +40,4 @@ handlers:
   secure: always
   http_headers:
     Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
-
-skip_files:
-  - /app\.yaml
-  - /app\.template\.yaml
   

@@ -1,4 +1,0 @@
-package redirect
-
-func init() {
-}

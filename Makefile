@@ -1,3 +1,5 @@
+export CLOUDSDK_CORE_PROJECT=attardi-org
+
 SOURCES := $(shell find gatsby/src -name \*.ts -o -name \*.tsx -o -name \*.md)
 
 gatsby/node_modules: gatsby/package.json
@@ -7,15 +9,23 @@ gatsby/node_modules: gatsby/package.json
 dev: gatsby/node_modules
 	cd gatsby && gatsby develop
 
-build: gatsby/node_modules
+gatsby/public: gatsby/node_modules $(SOURCES)
 	cd gatsby && gatsby build
 
-app/app.yaml: app/app.template.yaml gatsby/buildconfig.ts $(SOURCES)
-	cd gatsby && ts-node buildconfig.ts
+app/public: gatsby/public
+	mv gatsby/public app/public
+
+app/app.yaml: app/app.template.yaml gatsby/buildconfig.ts $(SOURCES) | app/public
+	cd gatsby && ts-node -T buildconfig.ts
 
 serve: app/app.yaml
-	cd app && goapp serve
+	cd app && go run
 
-deploy: build
-	cd gatsby && ts-node buildconfig.ts
-	cd app && goapp deploy
+deploy: app/public app/app.yaml
+	cd app && gcloud app deploy --version 1 --no-promote
+
+deploy-www:
+	cd app-www && gcloud app deploy --version 1
+
+deploy-maria:
+	cd app-maria && gcloud app deploy --version 1
