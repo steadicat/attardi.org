@@ -1,0 +1,6 @@
+service: rationalcreation-www
+runtime: go112
+
+handlers:
+  - url: /.*
+    script: auto

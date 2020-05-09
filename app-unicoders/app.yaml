@@ -1,0 +1,22 @@
+service: unicoders
+runtime: go112
+
+handlers:
+  - url: /styles
+    static_dir: styles
+    mime_type: text/css; charset=utf-8
+  - url: /(.+)/
+    static_files: \1/index.html
+    upload: (.+)/index.html
+    mime_type: text/html; charset=utf-8
+  - url: /(.+)
+    static_files: \1/index.html
+    upload: (.+)/index.html
+    mime_type: text/html; charset=utf-8
+  - url: /
+    static_files: index.html
+    upload: index.html
+    mime_type: text/html; charset=utf-8
+
+error_handlers:
+  - file: error.html

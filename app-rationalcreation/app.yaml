@@ -1,0 +1,21 @@
+service: rationalcreation
+runtime: go112
+
+handlers:
+  - url: /
+    static_files: index.html
+    upload: index.html
+    mime_type: text/html; charset=utf-8
+    secure: always
+    http_headers:
+      Strict-Transport-Security: "max-age=31536000; includeSubDomains; preload"
+  - url: /movement-privacy-policy
+    static_files: movement-privacy-policy.html
+    upload: movement-privacy-policy.html
+    mime_type: text/html; charset=utf-8
+    secure: always
+    http_headers:
+      Strict-Transport-Security: "max-age=31536000; includeSubDomains; preload"
+
+error_handlers:
+  - file: error.html

@@ -1,5 +1,3 @@
-application: attardi-org
-
 dispatch:
   - url: "maria.attardi.org/*"
     module: maria
@@ -9,3 +7,19 @@ dispatch:
     module: default
   - url: "*.attardi.org/*"
     module: www
+  - url: "rationalcreation.com/*"
+    module: rationalcreation
+  - url: "*.rationalcreation.com/*"
+    module: rationalcreation-www
+  - url: "reactperf.com/*"
+    module: rationalcreation-www
+  - url: "*.reactperf.com/*"
+    module: rationalcreation-www
+  - url: "unicoders.org/*"
+    module: unicoders
+  - url: "*.unicoders.org/*"
+    module: unicoders
+  - url: "verbamanent.org/*"
+    module: verbamanent
+  - url: "*.verbamanent.org/*"
+    module: verbamanent

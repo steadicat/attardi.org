@@ -26,10 +26,25 @@ serve: app/app.yaml
 	cd app && go run
 
 deploy: app/public app/app.yaml
-	cd app && gcloud app deploy --version 3 --no-promote
+	cd app && gcloud app deploy
 
 deploy-www:
-	cd app-www && gcloud app deploy --version 1
+	cd app-www && gcloud app deploy
 
 deploy-maria:
-	cd app-maria && gcloud app deploy --version 1
+	cd app-maria && gcloud app deploy
+
+deploy-rationalcreation:
+	cd app-rationalcreation && gcloud app deploy
+	
+deploy-rationalcreation-www:
+	cd app-rationalcreation-www && gcloud app deploy
+
+deploy-unicoders:
+	cd app-unicoders && gcloud app deploy
+
+deploy-verbamanent:
+	cd app-verbamanent && gcloud app deploy
+
+dispatch:
+	gcloud app deploy dispatch.yaml
