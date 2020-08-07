@@ -30,7 +30,7 @@
     "gatsby-transformer-sharp": "^2.5.2",
     "glamor": "^2.20.40",
     "prettier": "^2.0.5",
-    "prismjs": "^1.20.0",
+    "prismjs": "^1.21.0",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
     "sharp": "^0.25.2",
