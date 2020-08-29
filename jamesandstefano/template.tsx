@@ -1,6 +1,14 @@
 import * as React from "react";
 
-export const Template = ({ name }: { name: string }) => (
+export const Template = ({
+  id,
+  name,
+  language: _,
+}: {
+  id: string;
+  name: string;
+  language: (en: string, it: string) => string;
+}) => (
   <html>
     <head>
       <title>James &amp; Stefano</title>
@@ -107,9 +115,13 @@ export const Template = ({ name }: { name: string }) => (
             style={{ background: "#000", opacity: 0.7 }}
           ></div>
           <div className="text" style={{ fontSize: "120px", height: "100vh" }}>
-            <div>Dear {name},</div>
+            <div>
+              {_("Dear", "")} {name},
+            </div>
             <div id="scroll" style={{ opacity: 0, transition: "opacity 3s" }}>
-              <div style={{ fontSize: "24px", marginTop: "10vh" }}>Scroll</div>
+              <div style={{ fontSize: "24px", marginTop: "10vh" }}>
+                {_("Scroll", "Scorri")}
+              </div>
               <div style={{ fontSize: "24px", transform: "rotate(80deg)" }}>
                 ›
               </div>
@@ -121,33 +133,36 @@ export const Template = ({ name }: { name: string }) => (
             <div>Stefano Attardi</div>
           </div>
           <div className="text">
-            <div>kindly request</div>
-            <div>your presence</div>
+            <div>{_("kindly request", "richiedono cortesemente")}</div>
+            <div>{_("your presence", "la vostra presenza")}</div>
           </div>
           <div className="text">
-            <div style={{ fontSize: "60px" }}>on the</div>
-            <div>29th of May, 2021</div>
+            <div style={{ fontSize: "60px" }}>{_("on the", "il")}</div>
+            <div>{_("29th of May, 2021", "29 Maggio 2021")}</div>
           </div>
           <div className="text">
-            <div style={{ fontSize: "60px" }}>in</div>
+            <div style={{ fontSize: "60px" }}>{_("in", "a")}</div>
             <div>Arquà Petrarca,</div>
-            <div style={{ fontSize: "60px" }}>Italy</div>
+            <div style={{ fontSize: "60px" }}>{_("Italy", "PD")}</div>
           </div>
           <div className="text">
-            <div>to celebrate</div>
-            <div>their commitment</div>
+            <div>{_("to celebrate", "per celebrare")}</div>
+            <div>{_("their commitment", "la loro unione")}</div>
           </div>
           <div className="text">
-            <div>to a life of...</div>
+            <div>{_("to a life of...", "e una vita di...")}</div>
           </div>
           <div id="sin" className="sin">
-            <img src="images/sin.png" style={{ maxWidth: "60%" }} />
+            <img
+              src={_("images/sin.png", "images/vizi.png")}
+              style={{ maxWidth: "60%" }}
+            />
           </div>
         </div>
       </div>
       <div id="loading">
         <div className="text" style={{ fontSize: "24px", height: "100vh" }}>
-          Please wait...
+          {_("Please wait...", "Aspetta...")}
         </div>
       </div>
       <script src="main.js"></script>

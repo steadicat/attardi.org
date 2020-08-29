@@ -35,11 +35,23 @@ async function main() {
     console.log(records);
 
     for (const {
-      fields: { Code, Email, Language, Name },
+      id,
+      fields: { Code, Name, Language },
     } of records) {
-      const html = ReactDOMServer.renderToString(<Template name={Name} />);
-      console.log(`Building ./pages/${Code}.html...`);
-      fs.writeFileSync(`./pages/${Code}.html`, `<!DOCTYPE html>\n${html}`);
+      const html = ReactDOMServer.renderToString(
+        <Template
+          id={id}
+          name={Name}
+          language={(en: string, it: string) =>
+            Language === "English" ? en : it
+          }
+        />
+      );
+      console.log(`Building ./save-the-date/${Code}.html...`);
+      fs.writeFileSync(
+        `./save-the-date/${Code}.html`,
+        `<!DOCTYPE html>\n${html}`
+      );
     }
   } catch (err) {
     console.error(err);

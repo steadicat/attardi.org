@@ -47,7 +47,7 @@ deploy-verbamanent:
 	cd app-verbamanent && gcloud app deploy
 
 build-jamesandstefano:
-	cd jamesandstefano && yarn run ts-node build.tsx
+	cd jamesandstefano && yarn run ts-node -T build.tsx
 
 deploy-jamesandstefano: build-jamesandstefano
 	cd jamesandstefano && gcloud app deploy
