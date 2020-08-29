@@ -23,3 +23,7 @@ dispatch:
     module: verbamanent
   - url: "*.verbamanent.org/*"
     module: verbamanent
+  - url: "jamesandstefano.com/*"
+    module: jamesandstefano
+  - url: "*.jamesandstefano.com/*"
+    module: jamesandstefano

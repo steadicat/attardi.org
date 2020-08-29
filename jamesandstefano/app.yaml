@@ -1,0 +1,18 @@
+service: jamesandstefano
+runtime: go111
+
+handlers:
+  - url: /save-the-date/images
+    static_dir: images
+  - url: /save-the-date/main\.js
+    static_files: main.js
+    upload: main\.js
+    mime_type: application/javascript; charset=utf-8
+  - url: /save-the-date/([\w-]+)$
+    static_files: pages/\1.html
+    upload: pages/(.*)\.html
+    mime_type: text/html; charset=utf-8
+  - url: /.*
+    static_files: index.html
+    upload: index.html
+    mime_type: text/html; charset=utf-8

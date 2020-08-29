@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>James &amp; Stefano</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      html {
+        background: #000;
+      }
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        background: repeat-y url(/save-the-date/images/background.png) left top;
+        background-size: 100% auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="background"
+      style="
+        transform: translate3d(0, 0, -50px) scale(1.5) rotateZ(180deg);
+        opacity: 0.5;
+      "
+    ></div>
+    <div
+      class="background"
+      style="transform: translate3d(0, 0, -25px) scale(1.25); opacity: 1"
+    ></div>
+    <div class="background" style="background: #000; opacity: 0.5"></div>
+  </body>
+</html>

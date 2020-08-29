@@ -1,0 +1,6 @@
+- Backend
+- Forms
+- Fixed flower placement
+- Responsive design
+- Italian version
+- Email design

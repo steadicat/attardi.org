@@ -23,7 +23,7 @@ app/app.yaml: app/app.template.yaml gatsby/buildconfig.ts $(SOURCES) | app/publi
 	cd gatsby && ts-node -T buildconfig.ts
 
 serve: app/app.yaml
-	cd app && go run
+	cd app && go run main.go
 
 deploy: app/public app/app.yaml
 	cd app && gcloud app deploy
@@ -45,6 +45,12 @@ deploy-unicoders:
 
 deploy-verbamanent:
 	cd app-verbamanent && gcloud app deploy
+
+build-jamesandstefano:
+	cd jamesandstefano && yarn run ts-node build.tsx
+
+deploy-jamesandstefano: build-jamesandstefano
+	cd jamesandstefano && gcloud app deploy
 
 dispatch:
 	gcloud app deploy dispatch.yaml

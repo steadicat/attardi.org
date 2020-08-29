@@ -1,0 +1,17 @@
+{
+  "name": "jamesandstefano",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@types/node-fetch": "^2.5.7",
+    "@types/react": "^16.9.48",
+    "@types/react-dom": "^16.9.8",
+    "node-fetch": "^2.6.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  }
+}

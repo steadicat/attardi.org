@@ -3,4 +3,5 @@
 /app/public/
 /gatsby/public/
 /app/public
-/gatsby/node_modules/
+node_modules
+jamesandstefano/pages/*
