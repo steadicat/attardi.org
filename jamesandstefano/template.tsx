@@ -9,7 +9,7 @@ const SmallText = ({
   style?: React.CSSProperties;
   className?: string;
 }) => (
-  <div className={className} style={{ fontSize: "60px", ...style }}>
+  <div className={className} style={{ fontSize: "5vw", ...style }}>
     {children}
   </div>
 );
@@ -23,7 +23,7 @@ const TinyText = ({
   style?: React.CSSProperties;
   className?: string;
 }) => (
-  <div className={className} style={{ fontSize: "24px", ...style }}>
+  <div className={className} style={{ fontSize: "2vw", ...style }}>
     {children}
   </div>
 );
@@ -84,6 +84,7 @@ export const Template = ({
       }
       html {
         background: #000;
+        font: italic 8vw/1.2 "Playfair Display", serif;
       }
       #scroller {
         position: relative;
@@ -113,7 +114,6 @@ export const Template = ({
         display: flex;
         align-items: center;
         justify-content: center;
-        font: italic 100px/1.2 "Playfair Display", serif;
         color: #eee;
         flex-direction: column;
         align-items: center;
@@ -140,7 +140,6 @@ export const Template = ({
         left: 0;
         right: 0;
         bottom: 0;
-        font: italic 100px/1.2 "Playfair Display", serif;
         color: #ccc;
         background: #000;
         transition: opacity 500ms;
@@ -148,7 +147,7 @@ export const Template = ({
       }
       .button {
         font: inherit;
-        line-height: 60px;
+        line-height: 8vw;
         background: transparent;
         color: white;
         display: block;
@@ -158,9 +157,9 @@ export const Template = ({
         cursor: pointer;
       }
       .select {
-        width: 120px;
-        line-height: 60px;
-        padding: 0 20px;
+        width: 12vw;
+        line-height: 8vw;
+        padding: 0 2vw;
         font: inherit;
         color: white;
         border: 2px solid white;
@@ -168,33 +167,35 @@ export const Template = ({
         display: inline-block;
         vertical-align: baseline;
         outline: none;
-        margin-right: 10px;
-        margin-bottom: 10px;
+        margin-right: 1vw;
+        margin-bottom: 1vw;
       }
       .textarea {
-        line-height: 60px;
-        height: 180px;
+        line-height: 8vw;
+        height: 20vh;
+        width: 100%;
+        box-sizing: border-box;
         font: inherit;
         color: white;
         border: 2px solid white;
         background: transparent;
         outline: none;
-        margin-top: 10px;
+        margin-top: 2vh;
       }
       .hidden {
         display: none;
       }
       .checkbox {
-        width: 60px;
-        height: 60px;
-        font-size: 70px;
-        line-height: 50px;
+        width: 5vw;
+        height: 5vw;
+        font-size: 6vw;
+        line-height: 4.5vw;
         border: 2px solid white;
         display: inline-block;
         vertical-align: baseline;
         color: transparent;
-        margin-right: 20px;
-        margin-bottom: 10px;
+        margin-right: 4vw;
+        margin-bottom: 1vh;
       }
       .checkbox.checked {
         color: white;
@@ -236,8 +237,8 @@ export const Template = ({
               style={{
                 opacity: 0,
                 transition: "opacity 3s",
-                marginTop: "10vh",
-                marginBottom: "-10vh",
+                marginTop: "8vh",
+                marginBottom: "-8vh",
               }}
             >
               <TinyText>{_("Scroll", "Scorri")}</TinyText>
@@ -248,9 +249,9 @@ export const Template = ({
             <div>James Nguyen</div>
             <SmallText
               style={{
-                marginTop: "10vh",
-                paddingBottom: "10vh",
-                marginBottom: "-20px",
+                marginTop: "8vh",
+                paddingBottom: "8vh",
+                marginBottom: "-2vh",
               }}
             >
               &amp;
@@ -284,9 +285,13 @@ export const Template = ({
             />
           </div>
           <div className="text">
-            <div style={{ marginBottom: "20px" }}>Will you attend?</div>
+            <div style={{ marginBottom: "4vh" }}>Will you attend?</div>
             <SmallText style={{ display: "inline-block", textAlign: "left" }}>
-              <div id="yes" className="response">
+              <div
+                id="yes"
+                className="response"
+                style={{ marginBottom: "4vh" }}
+              >
                 <Checkbox id="yes-checkbox" />
                 Yes, with pleasure
               </div>
@@ -320,7 +325,9 @@ export const Template = ({
                 </Select>
                 Children (12 or under)
               </div>
-              <div>Address (for the invitation):</div>
+              <div style={{ marginTop: "4vh" }}>
+                Address (for the invitation):
+              </div>
               <Textarea name="address" />
               <Button>Confirm</Button>
             </form>
@@ -337,7 +344,7 @@ export const Template = ({
         </div>
       </div>
       <div id="loading">
-        <div className="text" style={{ fontSize: "24px", height: "100vh" }}>
+        <div className="text" style={{ fontSize: "2vw", height: "100vh" }}>
           {_("Please wait...", "Aspetta...")}
         </div>
       </div>

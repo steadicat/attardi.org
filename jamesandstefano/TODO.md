@@ -1,7 +1,7 @@
-- Responsive design
-- Fix Stacking of SIN and flowers
-- [Spacing] Forms spacing polish
+- [Mobile] Flower responsive design
+- [Scroll] Align scroll with form
 - [Scroll] Prevent scroll up after submit
+- Fix Stacking of SIN and flowers
 - Fixed flower placement
 - Email design
 - [Scroll] Pause on SIN
