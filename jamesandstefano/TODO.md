@@ -1,8 +1,10 @@
 - [Mobile] Flower responsive design
 - [Scroll] Prevent scroll up after submit
 - [Scroll] Pause on SIN
-- Fix Stacking of SIN and flowers
-- Fixed flower placement
+- [Mobile] Fix misalignment of flowers
+- [Bug] Fix bottom scroll
+- [Bug] Fix Stacking of SIN and flowers
+- [Polish] Fixed flower placement
 - Email design
 - Test in browsers
 - Background line

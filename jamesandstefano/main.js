@@ -41,7 +41,7 @@ function jitter(n, ratio = 0.5) {
 }
 
 const perspective = 100;
-const slides = 12;
+const slides = 8;
 
 /**
  * @param {HTMLImageElement[]} images

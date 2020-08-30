@@ -92,13 +92,13 @@ export const Template = ({
         height: 100%;
         perspective: 100px;
         perspective-origin: 50% 50%;
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }
       #scroller-content {
         transform-style: preserve-3d;
         position: relative;
-        overflow: hidden;
       }
       .background {
         position: absolute;
