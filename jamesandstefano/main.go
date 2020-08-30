@@ -31,9 +31,10 @@ type recordUpdate struct {
 }
 
 type fields struct {
-	Address string
-	Adults  int
-	Kids    int
+	Response string
+	Address  string
+	Adults   int
+	Kids     int
 }
 
 type apiError struct {
@@ -57,7 +58,7 @@ func handleServerError(err error, message string, w http.ResponseWriter) {
 	}
 }
 
-func handleBadRequest(err error, message string, w http.ResponseWriter) {
+func handleBadRequest(message string, w http.ResponseWriter) {
 	w.WriteHeader(400)
 	encoder := json.NewEncoder(w)
 	if err := encoder.Encode(errorResponse{Ok: false, Message: message}); err != nil {
@@ -71,16 +72,19 @@ func rsvpHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	id := r.PostFormValue("id")
+	if id == "" {
+		handleBadRequest("Missing ID", w)
+		return
+	}
+	response := r.PostFormValue("response")
 	address := r.PostFormValue("address")
 	adults, err := strconv.Atoi(r.PostFormValue("adults"))
 	if err != nil {
-		handleBadRequest(err, "Invalid number of adults. Please try again.", w)
-		return
+		adults = 1
 	}
 	kids, err := strconv.Atoi(r.PostFormValue("kids"))
 	if err != nil {
-		handleBadRequest(err, "Invalid number of kids. Please try again.", w)
-		return
+		kids = 0
 	}
 
 	url := fmt.Sprintf(`https://api.airtable.com/v0/%s/%s`, url.PathEscape(base), url.PathEscape(baseName))
@@ -92,9 +96,10 @@ func rsvpHandler(w http.ResponseWriter, r *http.Request) {
 			recordUpdate{
 				ID: id,
 				Fields: fields{
-					Address: address,
-					Adults:  adults,
-					Kids:    kids,
+					Response: response,
+					Address:  address,
+					Adults:   adults,
+					Kids:     kids,
 				},
 			},
 		},
@@ -160,15 +165,15 @@ func main() {
 
 	http.HandleFunc("/rsvp", rsvpHandler)
 
-	http.HandleFunc("/save-the-date/main.js", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/savethedate/main.js", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./main.js")
 	})
 
 	fs1 := http.FileServer(http.Dir("./images"))
-	http.Handle("/save-the-date/images/", http.StripPrefix("/save-the-date/images/", fs1))
+	http.Handle("/savethedate/images/", http.StripPrefix("/savethedate/images/", fs1))
 
-	fs2 := http.FileServer(http.Dir("./save-the-date"))
-	http.Handle("/save-the-date/", http.StripPrefix("/save-the-date/", fs2))
+	fs2 := http.FileServer(http.Dir("./savethedate"))
+	http.Handle("/savethedate/", http.StripPrefix("/savethedate/", fs2))
 
 	log.Printf("Listening on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {

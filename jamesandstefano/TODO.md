@@ -1,5 +1,13 @@
-- Forms
+- Secrets
+- Fix spacing of first two slides
+- Forms polish
 - Fixed flower placement
 - Responsive design
 - Email design
+- Pause on SIN
 - Background line
+- Favicon
+- Social media preview
+- Error handling
+- 404 page
+- Map

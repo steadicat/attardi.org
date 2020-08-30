@@ -4,15 +4,15 @@ runtime: go111
 handlers:
   - url: /rsvp
     script: auto
-  - url: /save-the-date/images
+  - url: /savethedate/images
     static_dir: images
-  - url: /save-the-date/main\.js
+  - url: /savethedate/main\.js
     static_files: main.js
     upload: main\.js
     mime_type: application/javascript; charset=utf-8
-  - url: /save-the-date/([\w-]+)$
-    static_files: save-the-date/\1.html
-    upload: save-the-date/(.*)\.html
+  - url: /savethedate/([\w-]+)$
+    static_files: savethedate/\1.html
+    upload: savethedate/(.*)\.html
     mime_type: text/html; charset=utf-8
   - url: /.*
     static_files: index.html
@@ -21,3 +21,6 @@ handlers:
 
 error_handlers:
   - file: index.html
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: "myapp.settings"

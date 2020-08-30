@@ -47,9 +47,9 @@ async function main() {
           }
         />
       );
-      console.log(`Building ./save-the-date/${Code}.html...`);
+      console.log(`Building ./savethedate/${Code}.html...`);
       fs.writeFileSync(
-        `./save-the-date/${Code}.html`,
+        `./savethedate/${Code}.html`,
         `<!DOCTYPE html>\n${html}`
       );
     }

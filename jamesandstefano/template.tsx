@@ -1,5 +1,33 @@
 import * as React from "react";
 
+const SmallText = ({
+  children,
+  style,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) => <div style={{ fontSize: "60px", ...style }}>{children}</div>;
+
+const Checkbox = ({ id }: { id: string }) => (
+  <div id={id} className="checkbox">
+    ❧
+  </div>
+);
+
+const Select = ({ children }: { children: JSX.Element[] }) => (
+  <select className="select">{children}</select>
+);
+
+const Button = ({ children }: { children: string }) => (
+  <button type="submit" className="button">
+    {children}
+  </button>
+);
+
+const Textarea = ({ name }: { name: string }) => (
+  <textarea className="textarea" name={name} />
+);
+
 export const Template = ({
   id,
   name,
@@ -89,7 +117,64 @@ export const Template = ({
         background: #000;
         transition: opacity 500ms;
         pointer-events: none;
-      }`,
+      }
+      .button {
+        font: inherit;
+        line-height: 60px;
+        background: transparent;
+        color: white;
+        display: block;
+        margin: 0 auto;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+      .select {
+        width: 120px;
+        line-height: 60px;
+        padding: 0 20px;
+        font: inherit;
+        color: white;
+        border: 2px solid white;
+        background: transparent;
+        display: inline-block;
+        vertical-align: baseline;
+        outline: none;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+      .textarea {
+        line-height: 60px;
+        height: 180px;
+        font: inherit;
+        color: white;
+        border: 2px solid white;
+        background: transparent;
+        outline: none;
+        margin-top: 10px;
+      }
+      .hidden {
+        display: none;
+      }
+      .checkbox {
+        width: 60px;
+        height: 60px;
+        font-size: 70px;
+        line-height: 50px;
+        border: 2px solid white;
+        display: inline-block;
+        vertical-align: baseline;
+        color: transparent;
+        margin-right: 20px;
+        margin-bottom: 10px;
+      }
+      .checkbox.checked {
+        color: white;
+      }
+      .response {
+        cursor: pointer;
+      }
+      `,
         }}
       />
     </head>
@@ -157,6 +242,59 @@ export const Template = ({
               src={_("images/sin.png", "images/vizio.png")}
               style={{ maxWidth: "60%" }}
             />
+          </div>
+          <div className="text">
+            <SmallText style={{ marginBottom: "10px" }}>
+              Will you attend?
+            </SmallText>
+            <SmallText style={{ display: "inline-block", textAlign: "left" }}>
+              <div id="yes" className="response">
+                <Checkbox id="yes-checkbox" />
+                Yes, with pleasure
+              </div>
+              <div id="no" className="response">
+                <Checkbox id="no-checkbox" />
+                No, with regret
+              </div>
+            </SmallText>
+          </div>
+          <div className="text yes hidden" style={{ fontSize: "60px" }}>
+            <form
+              id="form"
+              style={{ display: "inline-block", textAlign: "left" }}
+            >
+              <input id="id" type="hidden" value={id} />
+              <div>
+                <Select>
+                  <option>1</option>
+                  <option>2</option>
+                </Select>
+                Adults
+              </div>
+
+              <div>
+                <Select>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </Select>
+                Children (12 or under)
+              </div>
+              <div>Address (for the invitation):</div>
+              <Textarea name="address" />
+              <Button>Confirm</Button>
+            </form>
+          </div>
+          <div className="text no hidden">
+            <SmallText>We are sorry to hear</SmallText>
+            <SmallText>you will not be able to attend.</SmallText>
+          </div>
+          <div id="confirm" className="text hidden">
+            <div>Thank you</div>
+            <SmallText>We look forward to</SmallText>
+            <SmallText>seeing you in Italy</SmallText>
           </div>
         </div>
       </div>

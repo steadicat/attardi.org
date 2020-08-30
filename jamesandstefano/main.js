@@ -81,7 +81,76 @@ function populate(images, top, bottom, iterations) {
 
 const slideHeight = screenHeight * 1.5;
 
+/**
+ * @param {'Yes' | 'No'} response
+ */
+async function setResponse(response) {
+  const yesCheck = document.getElementById("yes-checkbox");
+  const noCheck = document.getElementById("no-checkbox");
+  if (response === "Yes") {
+    yesCheck.classList.add("checked");
+    noCheck.classList.remove("checked");
+  } else {
+    yesCheck.classList.remove("checked");
+    noCheck.classList.add("checked");
+  }
+  for (const el of Array.from(document.querySelectorAll(".yes"))) {
+    if (response === "Yes") {
+      el.classList.remove("hidden");
+    } else {
+      el.classList.add("hidden");
+    }
+  }
+  for (const el of Array.from(document.querySelectorAll(".no"))) {
+    if (response === "No") {
+      el.classList.remove("hidden");
+    } else {
+      el.classList.add("hidden");
+    }
+  }
+  document
+    .getElementById("scroller")
+    .scrollBy({ top: slideHeight, behavior: "smooth" });
+
+  const id = document.getElementById("id");
+  await fetch("/rsvp", {
+    method: "POST",
+    body: new URLSearchParams([
+      ["id", id.getAttribute("value")],
+      ["response", response],
+    ]),
+  });
+}
+
 async function main() {
+  const yes = document.getElementById("yes");
+  if (yes) {
+    yes.addEventListener("click", () => {
+      setResponse("Yes");
+    });
+  }
+
+  const no = document.getElementById("no");
+  if (no) {
+    no.addEventListener("click", () => {
+      setResponse("No");
+    });
+  }
+
+  const form = document.getElementById("form");
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const confirm = document.getElementById("confirm");
+      if (confirm) {
+        confirm.classList.remove("hidden");
+      }
+      document
+        .getElementById("scroller")
+        .scrollBy({ top: slideHeight, behavior: "smooth" });
+    });
+  }
+
   const [images] = await Promise.all([
     Promise.all(flowers.map(loadImage)),
     Promise.all(preloads.map(loadImage)),
@@ -104,7 +173,7 @@ async function main() {
   const sin = document.getElementById("sin");
   const sinScreen = 6;
   if (sin) {
-    content?.appendChild(sin);
+    // content?.appendChild(sin);
     let middle = screenHeight + (sinScreen + 0.5) * slideHeight;
     let top = middle - screenHeight / 2;
     let bottom = middle + screenHeight / 2;
