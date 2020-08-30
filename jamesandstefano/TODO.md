@@ -1,9 +1,10 @@
 - [Mobile] Flower responsive design
 - [Scroll] Prevent scroll up after submit
+- [Scroll] Pause on SIN
 - Fix Stacking of SIN and flowers
 - Fixed flower placement
 - Email design
-- [Scroll] Pause on SIN
+- Test in browsers
 - Background line
 - Favicon
 - Social media preview

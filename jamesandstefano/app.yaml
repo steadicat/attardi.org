@@ -22,5 +22,5 @@ handlers:
 error_handlers:
   - file: index.html
 
-include:
+includes:
   - secrets.yaml

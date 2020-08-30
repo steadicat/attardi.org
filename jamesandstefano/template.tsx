@@ -194,7 +194,7 @@ export const Template = ({
         display: inline-block;
         vertical-align: baseline;
         color: transparent;
-        margin-right: 4vw;
+        margin-right: 2vw;
         margin-bottom: 1vh;
       }
       .checkbox.checked {
@@ -249,8 +249,8 @@ export const Template = ({
             <div>James Nguyen</div>
             <SmallText
               style={{
-                marginTop: "8vh",
-                paddingBottom: "8vh",
+                marginTop: "6vh",
+                paddingBottom: "6vh",
                 marginBottom: "-2vh",
               }}
             >
@@ -276,16 +276,18 @@ export const Template = ({
             <div>{_("their commitment", "la loro unione")}</div>
           </div>
           <div className="text">
-            <div>{_("to a life of...", "e una vita vissuta nel...")}</div>
+            <div>{_("to a life of...", "e una vita di...")}</div>
           </div>
           <div id="sin" className="sin">
             <img
-              src={_("images/sin.png", "images/vizio.png")}
-              style={{ maxWidth: "60%" }}
+              src={_("images/sin.png", "images/vizi.png")}
+              style={{ maxWidth: "80%" }}
             />
           </div>
           <div className="text">
-            <div style={{ marginBottom: "4vh" }}>Will you attend?</div>
+            <div style={{ marginBottom: "4vh" }}>
+              {_("Will you attend?", "Sarete presenti?")}
+            </div>
             <SmallText style={{ display: "inline-block", textAlign: "left" }}>
               <div
                 id="yes"
@@ -293,11 +295,11 @@ export const Template = ({
                 style={{ marginBottom: "4vh" }}
               >
                 <Checkbox id="yes-checkbox" />
-                Yes, with pleasure
+                {_("Yes, with pleasure", "Sì, con piacere")}
               </div>
               <div id="no" className="response">
                 <Checkbox id="no-checkbox" />
-                No, with regret
+                {_("No, with regret", "No, con duolo")}
               </div>
             </SmallText>
           </div>
@@ -312,7 +314,7 @@ export const Template = ({
                   <option>1</option>
                   <option>2</option>
                 </Select>
-                Adults
+                {_("Adults", "Adulti")}
               </div>
 
               <div>
@@ -323,23 +325,35 @@ export const Template = ({
                   <option>3</option>
                   <option>4</option>
                 </Select>
-                Children (12 or under)
+                {_("Children", "Bambini")}
+                <TinyText style={{ display: "inline" }}>
+                  {_(" (12 or under)", " (fino a 12 anni)")}
+                </TinyText>
               </div>
               <div style={{ marginTop: "4vh" }}>
-                Address (for the invitation):
+                {_("Address:", "Indirizzo:")}
+                <TinyText style={{ display: "inline" }}>
+                  {_(" (for the invitation)", " (per l’invito)")}
+                </TinyText>
               </div>
               <Textarea name="address" />
-              <Button>Confirm</Button>
+              <Button>{_("Confirm", "Conferma")}</Button>
             </form>
           </SmallText>
           <div className="text no hidden">
-            <SmallText>We are sorry to hear</SmallText>
-            <SmallText>you will not be able to attend.</SmallText>
+            <SmallText>{_("We are sorry to hear", "Sentiremo la")}</SmallText>
+            <SmallText>
+              {_("you will not be able to attend.", "vostra mancanza.")}
+            </SmallText>
           </div>
           <div id="confirm" className="text hidden">
-            <div>Thank you</div>
-            <SmallText>We look forward to</SmallText>
-            <SmallText>seeing you in Italy.</SmallText>
+            <div style={{ marginBottom: "4vh" }}>
+              {_("Thank you", "Grazie")}
+            </div>
+            <SmallText>
+              {_("We look forward to", "Non vediamo l’ora")}
+            </SmallText>
+            <SmallText>{_("seeing you in Italy.", "di ricevervi.")}</SmallText>
           </div>
         </div>
       </div>

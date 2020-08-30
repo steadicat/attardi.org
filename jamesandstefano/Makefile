@@ -1,3 +1,5 @@
+export CLOUDSDK_CORE_PROJECT=attardi-org
+
 include Secrets
 
 words:

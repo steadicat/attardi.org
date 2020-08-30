@@ -46,7 +46,5 @@ deploy-unicoders:
 deploy-verbamanent:
 	cd app-verbamanent && gcloud app deploy
 
-
-
 dispatch:
 	gcloud app deploy dispatch.yaml
