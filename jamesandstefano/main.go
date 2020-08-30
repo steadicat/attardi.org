@@ -44,7 +44,6 @@ type apiError struct {
 	} `json:"error"`
 }
 
-const apiKey = "*****************"
 const base = "appX8ncwIIqYiABo7"
 const baseName = "Save the date"
 
@@ -69,6 +68,7 @@ func handleBadRequest(message string, w http.ResponseWriter) {
 }
 
 func rsvpHandler(w http.ResponseWriter, r *http.Request) {
+	apiKey := os.Getenv("AIRTABLE_API_KEY")
 	w.Header().Set("Content-Type", "application/json")
 
 	id := r.PostFormValue("id")
@@ -93,7 +93,7 @@ func rsvpHandler(w http.ResponseWriter, r *http.Request) {
 
 	body, err := json.Marshal(updateBody{
 		Records: []recordUpdate{
-			recordUpdate{
+			{
 				ID: id,
 				Fields: fields{
 					Response: response,
@@ -165,15 +165,17 @@ func main() {
 
 	http.HandleFunc("/rsvp", rsvpHandler)
 
-	http.HandleFunc("/savethedate/main.js", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "./main.js")
-	})
+	if os.Getenv("DEV") == "true" {
+		http.HandleFunc("/savethedate/main.js", func(w http.ResponseWriter, r *http.Request) {
+			http.ServeFile(w, r, "./main.js")
+		})
 
-	fs1 := http.FileServer(http.Dir("./images"))
-	http.Handle("/savethedate/images/", http.StripPrefix("/savethedate/images/", fs1))
+		fs1 := http.FileServer(http.Dir("./images"))
+		http.Handle("/savethedate/images/", http.StripPrefix("/savethedate/images/", fs1))
 
-	fs2 := http.FileServer(http.Dir("./savethedate"))
-	http.Handle("/savethedate/", http.StripPrefix("/savethedate/", fs2))
+		fs2 := http.FileServer(http.Dir("./savethedate"))
+		http.Handle("/savethedate/", http.StripPrefix("/savethedate/", fs2))
+	}
 
 	log.Printf("Listening on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {

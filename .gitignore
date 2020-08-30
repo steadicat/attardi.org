@@ -5,3 +5,5 @@
 /app/public
 node_modules
 jamesandstefano/savethedate/*
+jamesandstefano/secrets.yaml
+jamesandstefano/Secrets

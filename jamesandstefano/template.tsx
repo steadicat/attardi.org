@@ -294,7 +294,7 @@ export const Template = ({
           <div id="confirm" className="text hidden">
             <div>Thank you</div>
             <SmallText>We look forward to</SmallText>
-            <SmallText>seeing you in Italy</SmallText>
+            <SmallText>seeing you in Italy.</SmallText>
           </div>
         </div>
       </div>
@@ -303,7 +303,7 @@ export const Template = ({
           {_("Please wait...", "Aspetta...")}
         </div>
       </div>
-      <script src="main.js"></script>
+      <script src="main.js" />
     </body>
   </html>
 );
