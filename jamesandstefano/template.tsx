@@ -34,8 +34,16 @@ const Checkbox = ({ id }: { id: string }) => (
   </div>
 );
 
-const Select = ({ children }: { children: JSX.Element[] }) => (
-  <select className="select">{children}</select>
+const Select = ({
+  children,
+  name,
+}: {
+  children: JSX.Element[];
+  name: string;
+}) => (
+  <select className="select" name={name}>
+    {children}
+  </select>
 );
 
 const Button = ({ children }: { children: string }) => (
@@ -293,9 +301,9 @@ export const Template = ({
               id="form"
               style={{ display: "inline-block", textAlign: "left" }}
             >
-              <input id="id" type="hidden" value={id} />
+              <input id="id" type="hidden" name="id" value={id} />
               <div>
-                <Select>
+                <Select name="adults">
                   <option>1</option>
                   <option>2</option>
                 </Select>
@@ -303,7 +311,7 @@ export const Template = ({
               </div>
 
               <div>
-                <Select>
+                <Select name="kids">
                   <option>0</option>
                   <option>1</option>
                   <option>2</option>

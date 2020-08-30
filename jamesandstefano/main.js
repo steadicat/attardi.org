@@ -13,6 +13,7 @@ const flowers = [
 
 const preloads = ["images/background.png", "images/sin.png"];
 
+const scroller = document.getElementById("scroller");
 const content = document.getElementById("scroller-content");
 const canvasWidth = document.body.clientWidth;
 const screenHeight = window.innerHeight;
@@ -88,11 +89,11 @@ async function setResponse(response) {
   const yesCheck = document.getElementById("yes-checkbox");
   const noCheck = document.getElementById("no-checkbox");
   if (response === "Yes") {
-    yesCheck.classList.add("checked");
-    noCheck.classList.remove("checked");
+    yesCheck && yesCheck.classList.add("checked");
+    noCheck && noCheck.classList.remove("checked");
   } else {
-    yesCheck.classList.remove("checked");
-    noCheck.classList.add("checked");
+    yesCheck && yesCheck.classList.remove("checked");
+    noCheck && noCheck.classList.add("checked");
   }
   for (const el of Array.from(document.querySelectorAll(".yes"))) {
     if (response === "Yes") {
@@ -108,46 +109,48 @@ async function setResponse(response) {
       el.classList.add("hidden");
     }
   }
-  document
-    .getElementById("scroller")
-    .scrollBy({ top: slideHeight, behavior: "smooth" });
+  scroller && scroller.scrollBy({ top: slideHeight, behavior: "smooth" });
 
-  const id = document.getElementById("id");
-  await fetch("/rsvp", {
-    method: "POST",
-    body: new URLSearchParams([
-      ["id", id.getAttribute("value")],
-      ["response", response],
-    ]),
-  });
+  const idElement = document.getElementById("id");
+  const id = idElement ? idElement.getAttribute("value") : null;
+  if (id) {
+    await fetch("/rsvp", {
+      method: "POST",
+      body: new URLSearchParams([
+        ["id", id],
+        ["response", response],
+      ]),
+    });
+  }
 }
 
 async function main() {
   const yes = document.getElementById("yes");
-  if (yes) {
-    yes.addEventListener("click", () => {
-      setResponse("Yes");
-    });
-  }
+  yes && yes.addEventListener("click", () => setResponse("Yes"));
 
   const no = document.getElementById("no");
-  if (no) {
-    no.addEventListener("click", () => {
-      setResponse("No");
-    });
-  }
+  no && no.addEventListener("click", () => setResponse("No"));
 
   const form = document.getElementById("form");
   if (form) {
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const confirm = document.getElementById("confirm");
       if (confirm) {
         confirm.classList.remove("hidden");
       }
-      document
-        .getElementById("scroller")
-        .scrollBy({ top: slideHeight, behavior: "smooth" });
+
+      const idElement = document.getElementById("id");
+      const id = idElement ? idElement.getAttribute("value") : null;
+      const { currentTarget } = event;
+      if (id && currentTarget) {
+        await fetch("/rsvp", {
+          method: "POST",
+          body: new FormData(/** @type {HTMLFormElement} */ currentTarget),
+        });
+      }
+
+      scroller && scroller.scrollBy({ top: slideHeight, behavior: "smooth" });
     });
   }
 
@@ -181,7 +184,8 @@ async function main() {
   }
 
   await new Promise((resolve) => setTimeout(resolve, 3000));
-  document.getElementById("scroll").style.opacity = "1";
+  const scroll = document.getElementById("scroll");
+  scroll && (scroll.style.opacity = "1");
 }
 
 main();

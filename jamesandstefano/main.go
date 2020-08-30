@@ -31,10 +31,10 @@ type recordUpdate struct {
 }
 
 type fields struct {
-	Response string
-	Address  string
-	Adults   int
-	Kids     int
+	Response string `json:",omitempty"`
+	Address  string `json:",omitempty"`
+	Adults   *int   `json:",omitempty"`
+	Kids     *int   `json:",omitempty"`
 }
 
 type apiError struct {
@@ -80,25 +80,34 @@ func rsvpHandler(w http.ResponseWriter, r *http.Request) {
 	address := r.PostFormValue("address")
 	adults, err := strconv.Atoi(r.PostFormValue("adults"))
 	if err != nil {
-		adults = 1
+		adults = -1
 	}
 	kids, err := strconv.Atoi(r.PostFormValue("kids"))
 	if err != nil {
-		kids = 0
+		kids = -1
 	}
 
 	url := fmt.Sprintf(`https://api.airtable.com/v0/%s/%s`, url.PathEscape(base), url.PathEscape(baseName))
 
+	var fields fields
+	if response != "" {
+		fields.Response = response
+	}
+	if address != "" {
+		fields.Address = address
+	}
+	if adults != -1 {
+		fields.Adults = &adults
+	}
+	if kids != -1 {
+		fields.Kids = &kids
+	}
+
 	body, err := json.Marshal(updateBody{
 		Records: []recordUpdate{
 			{
-				ID: id,
-				Fields: fields{
-					Response: response,
-					Address:  address,
-					Adults:   adults,
-					Kids:     kids,
-				},
+				ID:     id,
+				Fields: fields,
 			},
 		},
 	})

@@ -1,8 +1,10 @@
-- Forms polish
-- Fixed flower placement
 - Responsive design
+- Fix Stacking of SIN and flowers
+- [Spacing] Forms spacing polish
+- [Scroll] Prevent scroll up after submit
+- Fixed flower placement
 - Email design
-- Pause on SIN
+- [Scroll] Pause on SIN
 - Background line
 - Favicon
 - Social media preview
