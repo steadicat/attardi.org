@@ -89,8 +89,6 @@ func rsvpHandler(w http.ResponseWriter, r *http.Request) {
 
 	url := fmt.Sprintf(`https://api.airtable.com/v0/%s/%s`, url.PathEscape(base), url.PathEscape(baseName))
 
-	log.Printf("%s %s %s %s", url, address, adults, kids)
-
 	body, err := json.Marshal(updateBody{
 		Records: []recordUpdate{
 			{

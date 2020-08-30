@@ -9,7 +9,7 @@ dev:
 .PHONY: dev
 
 build:
-	yarn run ts-node -T build.tsx
+	AIRTABLE_API_KEY=$(AIRTABLE_API_KEY) yarn run ts-node -T build.tsx
 .PHONY: build
 
 deploy: build

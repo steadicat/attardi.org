@@ -1,4 +1,3 @@
-- Fix spacing of first two slides
 - Forms polish
 - Fixed flower placement
 - Responsive design

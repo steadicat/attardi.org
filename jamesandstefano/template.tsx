@@ -3,10 +3,30 @@ import * as React from "react";
 const SmallText = ({
   children,
   style,
+  className,
 }: {
   children: React.ReactNode;
   style?: React.CSSProperties;
-}) => <div style={{ fontSize: "60px", ...style }}>{children}</div>;
+  className?: string;
+}) => (
+  <div className={className} style={{ fontSize: "60px", ...style }}>
+    {children}
+  </div>
+);
+
+const TinyText = ({
+  children,
+  style,
+  className,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
+}) => (
+  <div className={className} style={{ fontSize: "24px", ...style }}>
+    {children}
+  </div>
+);
 
 const Checkbox = ({ id }: { id: string }) => (
   <div id={id} className="checkbox">
@@ -199,22 +219,34 @@ export const Template = ({
             className="background"
             style={{ background: "#000", opacity: 0.7 }}
           ></div>
-          <div className="text" style={{ fontSize: "120px", height: "100vh" }}>
+          <div className="text" style={{ height: "100vh" }}>
             <div>
               {_("Dear", "")} {name},
             </div>
-            <div id="scroll" style={{ opacity: 0, transition: "opacity 3s" }}>
-              <div style={{ fontSize: "24px", marginTop: "10vh" }}>
-                {_("Scroll", "Scorri")}
-              </div>
-              <div style={{ fontSize: "24px", transform: "rotate(80deg)" }}>
-                ›
-              </div>
+            <div
+              id="scroll"
+              style={{
+                opacity: 0,
+                transition: "opacity 3s",
+                marginTop: "10vh",
+                marginBottom: "-10vh",
+              }}
+            >
+              <TinyText>{_("Scroll", "Scorri")}</TinyText>
+              <TinyText style={{ transform: "rotate(80deg)" }}>›</TinyText>
             </div>
           </div>
           <div className="text">
             <div>James Nguyen</div>
-            <div style={{ fontSize: "60px", marginBottom: "-20px" }}>&amp;</div>
+            <SmallText
+              style={{
+                marginTop: "10vh",
+                paddingBottom: "10vh",
+                marginBottom: "-20px",
+              }}
+            >
+              &amp;
+            </SmallText>
             <div>Stefano Attardi</div>
           </div>
           <div className="text">
@@ -222,13 +254,13 @@ export const Template = ({
             <div>{_("your presence", "la vostra presenza")}</div>
           </div>
           <div className="text">
-            <div style={{ fontSize: "60px" }}>{_("on the", "il")}</div>
+            <SmallText>{_("on the", "il")}</SmallText>
             <div>{_("29th of May, 2021", "29 Maggio 2021")}</div>
           </div>
           <div className="text">
-            <div style={{ fontSize: "60px" }}>{_("in", "a")}</div>
+            <SmallText>{_("in", "a")}</SmallText>
             <div>Arquà Petrarca,</div>
-            <div style={{ fontSize: "60px" }}>{_("Italy", "PD")}</div>
+            <SmallText>{_("Italy", "PD")}</SmallText>
           </div>
           <div className="text">
             <div>{_("to celebrate", "per celebrare")}</div>
@@ -244,9 +276,7 @@ export const Template = ({
             />
           </div>
           <div className="text">
-            <SmallText style={{ marginBottom: "10px" }}>
-              Will you attend?
-            </SmallText>
+            <div style={{ marginBottom: "20px" }}>Will you attend?</div>
             <SmallText style={{ display: "inline-block", textAlign: "left" }}>
               <div id="yes" className="response">
                 <Checkbox id="yes-checkbox" />
@@ -258,7 +288,7 @@ export const Template = ({
               </div>
             </SmallText>
           </div>
-          <div className="text yes hidden" style={{ fontSize: "60px" }}>
+          <SmallText className="text yes hidden">
             <form
               id="form"
               style={{ display: "inline-block", textAlign: "left" }}
@@ -286,7 +316,7 @@ export const Template = ({
               <Textarea name="address" />
               <Button>Confirm</Button>
             </form>
-          </div>
+          </SmallText>
           <div className="text no hidden">
             <SmallText>We are sorry to hear</SmallText>
             <SmallText>you will not be able to attend.</SmallText>

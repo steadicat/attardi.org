@@ -4,7 +4,7 @@ import * as fs from "fs";
 import { Template } from "./template";
 import fetch from "node-fetch";
 
-const apiKey = "*****************";
+const apiKey = process.env.AIRTABLE_API_KEY;
 const base = "appX8ncwIIqYiABo7";
 const baseName = "Save the date";
 const viewName = "Tier 1";
