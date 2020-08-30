@@ -2,3 +2,4 @@
 - Fixed flower placement
 - Responsive design
 - Email design
+- Background line

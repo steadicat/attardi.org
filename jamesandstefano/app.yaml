@@ -12,9 +12,12 @@ handlers:
     mime_type: application/javascript; charset=utf-8
   - url: /save-the-date/([\w-]+)$
     static_files: save-the-date/\1.html
-    upload: pages/(.*)\.html
+    upload: save-the-date/(.*)\.html
     mime_type: text/html; charset=utf-8
   - url: /.*
     static_files: index.html
     upload: index.html
     mime_type: text/html; charset=utf-8
+
+error_handlers:
+  - file: index.html

@@ -150,11 +150,11 @@ export const Template = ({
             <div>{_("their commitment", "la loro unione")}</div>
           </div>
           <div className="text">
-            <div>{_("to a life of...", "e una vita di...")}</div>
+            <div>{_("to a life of...", "e una vita vissuta nel...")}</div>
           </div>
           <div id="sin" className="sin">
             <img
-              src={_("images/sin.png", "images/vizi.png")}
+              src={_("images/sin.png", "images/vizio.png")}
               style={{ maxWidth: "60%" }}
             />
           </div>
