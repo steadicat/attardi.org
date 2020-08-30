@@ -109,7 +109,8 @@ async function setResponse(response) {
       el.classList.add("hidden");
     }
   }
-  scroller && scroller.scrollBy({ top: slideHeight, behavior: "smooth" });
+  scroller &&
+    scroller.scrollTo({ top: topOfScreen(formScreen), behavior: "smooth" });
 
   const idElement = document.getElementById("id");
   const id = idElement ? idElement.getAttribute("value") : null;
@@ -122,6 +123,16 @@ async function setResponse(response) {
       ]),
     });
   }
+}
+
+const sinScreen = 6;
+const formScreen = 8;
+
+/** @param {number} n */
+function topOfScreen(n) {
+  let middle = screenHeight + (n + 0.5) * slideHeight;
+  let top = middle - screenHeight / 2;
+  return top;
 }
 
 async function main() {
@@ -150,7 +161,11 @@ async function main() {
         });
       }
 
-      scroller && scroller.scrollBy({ top: slideHeight, behavior: "smooth" });
+      scroller &&
+        scroller.scrollTo({
+          top: topOfScreen(formScreen + 1),
+          behavior: "smooth",
+        });
     });
   }
 
@@ -174,13 +189,10 @@ async function main() {
   }
 
   const sin = document.getElementById("sin");
-  const sinScreen = 6;
   if (sin) {
     // content?.appendChild(sin);
-    let middle = screenHeight + (sinScreen + 0.5) * slideHeight;
-    let top = middle - screenHeight / 2;
-    let bottom = middle + screenHeight / 2;
-    populate(images, top, bottom, sinScreen);
+    const top = topOfScreen(sinScreen);
+    populate(images, top, top + screenHeight, sinScreen);
   }
 
   await new Promise((resolve) => setTimeout(resolve, 3000));

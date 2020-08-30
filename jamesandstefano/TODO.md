@@ -1,5 +1,4 @@
 - [Mobile] Flower responsive design
-- [Scroll] Align scroll with form
 - [Scroll] Prevent scroll up after submit
 - Fix Stacking of SIN and flowers
 - Fixed flower placement
