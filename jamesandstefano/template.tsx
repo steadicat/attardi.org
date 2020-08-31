@@ -53,7 +53,7 @@ const Button = ({ children }: { children: string }) => (
 );
 
 const Textarea = ({ name }: { name: string }) => (
-  <textarea className="slide textarea" name={name} />
+  <textarea className="textarea" name={name} />
 );
 
 export const Template = ({
@@ -228,7 +228,7 @@ export const Template = ({
       </div>
       <div id="loading">
         <div
-          className="slide text"
+          className="short-slide text"
           style={{ fontSize: "2vw", height: "100vh" }}
         >
           {_("Please wait...", "Aspetta...")}

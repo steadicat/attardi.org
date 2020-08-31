@@ -15,7 +15,6 @@ const preloads = ["images/background.png", "images/sin.png"];
 
 const scroller = document.getElementById("scroller");
 const content = document.getElementById("scroller-content");
-const canvasWidth = document.body.clientWidth;
 const screenHeight = window.innerHeight;
 const canvasHeight = content?.offsetHeight ?? document.body.clientHeight;
 
@@ -41,7 +40,7 @@ function jitter(n, ratio = 0.5) {
 }
 
 const perspective = 100;
-const slides = 8;
+const slides = 10;
 
 /**
  * @param {HTMLImageElement[]} images
@@ -50,6 +49,7 @@ const slides = 8;
  * @param {number} iterations
  */
 function populate(images, top, bottom, iterations) {
+  console.log(top / screenHeight, bottom / screenHeight);
   let z = 0;
   for (let iteration = 0; iteration < iterations; iteration++) {
     images.sort(() => (Math.random() > 0.5 ? 1 : -1));
@@ -60,15 +60,16 @@ function populate(images, top, bottom, iterations) {
       const scale = (perspective - z) / perspective;
       const img = document.createElement("img");
 
-      let left = Math.random() * canvasWidth - w / 2;
+      let left = Math.random() * 100;
       if (/4\.png/.test(src)) {
-        left = Math.random() < 0.5 ? 0 : canvasWidth - w / 2;
+        left = Math.random() < 0.5 ? 0 : 100;
       }
       img.className = "flower";
       img.src = src;
       img.style.width = `${w}px`;
       img.style.height = `${h}px`;
-      img.style.transform = `translate3d(${left}px, ${
+      img.style.left = `${-w / 2}px`;
+      img.style.transform = `translate3d(calc(${left}vw - ${w / 2}px), ${
         top + Math.random() * (bottom - top) - h / 2
       }px, ${jitter(z)}px) scale(${jitter(scale * 1.3)}) rotateZ(${
         left === 0 ? "180deg" : "0"
@@ -110,7 +111,10 @@ async function setResponse(response) {
     }
   }
   scroller &&
-    scroller.scrollTo({ top: topOfScreen(formScreen), behavior: "smooth" });
+    scroller.scrollTo({
+      top: slideMiddle(formScreen) - screenHeight / 2,
+      behavior: "smooth",
+    });
 
   const idElement = document.getElementById("id");
   const id = idElement ? idElement.getAttribute("value") : null;
@@ -129,10 +133,8 @@ const sinScreen = 6;
 const formScreen = 8;
 
 /** @param {number} n */
-function topOfScreen(n) {
-  let middle = screenHeight + (n + 0.5) * slideHeight;
-  let top = middle - screenHeight / 2;
-  return top;
+function slideMiddle(n) {
+  return screenHeight + n * slideHeight + slideHeight / 2;
 }
 
 const slideElements = /** @type {HTMLElement[]} */ (Array.from(
@@ -181,7 +183,7 @@ async function main() {
 
       scroller &&
         scroller.scrollTo({
-          top: topOfScreen(formScreen + 1),
+          top: slideMiddle(formScreen + 1) - screenHeight / 2,
           behavior: "smooth",
         });
     });
@@ -200,19 +202,19 @@ async function main() {
     loading.style.opacity = "0";
   }
 
-  populate(images, 0, screenHeight * 0.25, 2);
+  populate(images, 0, screenHeight * 0.33, 2);
 
   for (let slide = 0; slide < slides; slide++) {
-    let middle = screenHeight * 1 + slide * slideHeight;
-    let top = middle - screenHeight * 0.33;
-    let bottom = middle + screenHeight * 0.33;
+    const middle = slideMiddle(slide) - slideHeight / 2;
+    const top = middle - screenHeight * 0.33;
+    const bottom = middle + screenHeight * 0.33;
     populate(images, top, bottom, 4);
   }
 
   const sin = document.getElementById("sin");
   if (sin) {
     // content?.appendChild(sin);
-    const top = topOfScreen(sinScreen);
+    const top = slideMiddle(sinScreen) - screenHeight / 2;
     populate(images, top, top + screenHeight, sinScreen);
   }
 
