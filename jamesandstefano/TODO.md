@@ -1,4 +1,3 @@
-- [Polish] Fixed flower placement
 - [Mobile] Responsive vertical positioning of flowers
 - [Bug] Fix bottom scroll
 - [Scroll] Pause on SIN
