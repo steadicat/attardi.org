@@ -1,59 +1,9 @@
 import * as React from "react";
 
-const SmallText = ({
-  children,
-  style,
-  className,
-}: {
-  children: React.ReactNode;
-  style?: React.CSSProperties;
-  className?: string;
-}) => (
-  <div className={className} style={{ fontSize: "5vw", ...style }}>
-    {children}
-  </div>
-);
-
-const TinyText = ({
-  children,
-  style,
-  className,
-}: {
-  children: React.ReactNode;
-  style?: React.CSSProperties;
-  className?: string;
-}) => (
-  <div className={className} style={{ fontSize: "2vw", ...style }}>
-    {children}
-  </div>
-);
-
 const Checkbox = ({ id }: { id: string }) => (
   <div id={id} className="checkbox">
     ❧
   </div>
-);
-
-const Select = ({
-  children,
-  name,
-}: {
-  children: JSX.Element[];
-  name: string;
-}) => (
-  <select className="select" name={name}>
-    {children}
-  </select>
-);
-
-const Button = ({ children }: { children: string }) => (
-  <button type="submit" className="button">
-    {children}
-  </button>
-);
-
-const Textarea = ({ name }: { name: string }) => (
-  <textarea className="textarea" name={name} />
 );
 
 export const Template = ({
@@ -110,13 +60,16 @@ export const Template = ({
                 marginBottom: "-8vh",
               }}
             >
-              <TinyText>{_("Scroll", "Scorri")}</TinyText>
-              <TinyText style={{ transform: "rotate(80deg)" }}>›</TinyText>
+              <div className="tiny-text">{_("Scroll", "Scorri")}</div>
+              <div className="tiny-text" style={{ transform: "rotate(80deg)" }}>
+                ›
+              </div>
             </div>
           </div>
           <div className="slide text">
             <div>James Nguyen</div>
-            <SmallText
+            <div
+              className="small-text"
               style={{
                 marginTop: "6vh",
                 paddingBottom: "6vh",
@@ -124,7 +77,7 @@ export const Template = ({
               }}
             >
               &amp;
-            </SmallText>
+            </div>
             <div>Stefano Attardi</div>
           </div>
           <div className="slide text">
@@ -132,13 +85,13 @@ export const Template = ({
             <div>{_("your presence", "la vostra presenza")}</div>
           </div>
           <div className="slide text">
-            <SmallText>{_("on the", "il")}</SmallText>
+            <div className="small-text">{_("on the", "il")}</div>
             <div>{_("29th of May, 2021", "29 Maggio 2021")}</div>
           </div>
           <div className="slide text">
-            <SmallText>{_("in", "a")}</SmallText>
+            <div className="small-text">{_("in", "a")}</div>
             <div>Arquà Petrarca,</div>
-            <SmallText>{_("Italy", "PD")}</SmallText>
+            <div className="small-text">{_("Italy", "PD")}</div>
           </div>
           <div className="slide text">
             <div>{_("to celebrate", "per celebrare")}</div>
@@ -157,7 +110,10 @@ export const Template = ({
             <div style={{ marginBottom: "4vh" }}>
               {_("Will you attend?", "Sarete presenti?")}
             </div>
-            <SmallText style={{ display: "inline-block", textAlign: "left" }}>
+            <div
+              className="small-text"
+              style={{ display: "inline-block", textAlign: "left" }}
+            >
               <div
                 id="yes"
                 className="response"
@@ -170,59 +126,65 @@ export const Template = ({
                 <Checkbox id="no-checkbox" />
                 {_("No, with regret", "No, con duolo")}
               </div>
-            </SmallText>
+            </div>
           </div>
-          <SmallText className="slide text yes hidden">
+          <div className="slide text yes hidden small-text">
             <form
               id="form"
               style={{ display: "inline-block", textAlign: "left" }}
             >
               <input id="id" type="hidden" name="id" value={id} />
               <div>
-                <Select name="adults">
+                <select name="adults" className="select">
                   <option>1</option>
                   <option>2</option>
-                </Select>
+                </select>
                 {_("Adults", "Adulti")}
               </div>
 
               <div>
-                <Select name="kids">
+                <select name="kids" className="select">
                   <option>0</option>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
                   <option>4</option>
-                </Select>
+                </select>
                 {_("Children", "Bambini")}
-                <TinyText style={{ display: "inline" }}>
+                <span className="tiny-text">
                   {_(" (12 or under)", " (fino a 12 anni)")}
-                </TinyText>
+                </span>
               </div>
               <div style={{ marginTop: "4vh" }}>
                 {_("Address:", "Indirizzo:")}
-                <TinyText style={{ display: "inline" }}>
+                <span className="tiny-text">
                   {_(" (for the invitation)", " (per l’invito)")}
-                </TinyText>
+                </span>
               </div>
-              <Textarea name="address" />
-              <Button>{_("Confirm", "Conferma")}</Button>
+              <textarea name="address" className="textarea" />
+              <button type="submit" className="button">
+                {_("Confirm", "Conferma")}
+              </button>
             </form>
-          </SmallText>
+          </div>
           <div className="slide text no hidden">
-            <SmallText>{_("We are sorry to hear", "Sentiremo la")}</SmallText>
-            <SmallText>
+            <div className="small-text">
+              {_("We are sorry to hear", "Sentiremo la")}
+            </div>
+            <div className="small-text">
               {_("you will not be able to attend.", "vostra mancanza.")}
-            </SmallText>
+            </div>
           </div>
           <div id="confirm" className="slide text hidden">
             <div style={{ marginBottom: "4vh" }}>
               {_("Thank you", "Grazie")}
             </div>
-            <SmallText>
+            <div className="small-text">
               {_("We look forward to", "Non vediamo l’ora")}
-            </SmallText>
-            <SmallText>{_("seeing you in Italy.", "di ricevervi.")}</SmallText>
+            </div>
+            <div className="small-text">
+              {_("seeing you in Italy.", "di ricevervi.")}
+            </div>
           </div>
         </div>
       </div>

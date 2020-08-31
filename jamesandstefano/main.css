@@ -7,7 +7,13 @@ body {
 }
 html {
   background: #000;
-  font: italic 8vw/1.2 "Playfair Display", serif;
+  font: italic 10vmin/1.2 "Playfair Display", serif;
+}
+.small-text {
+  font-size: 66.6%;
+}
+.tiny-text {
+  font-size: 33.3%;
 }
 #scroller {
   position: relative;
