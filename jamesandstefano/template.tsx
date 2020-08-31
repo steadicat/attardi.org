@@ -53,16 +53,18 @@ const Button = ({ children }: { children: string }) => (
 );
 
 const Textarea = ({ name }: { name: string }) => (
-  <textarea className="textarea" name={name} />
+  <textarea className="slide textarea" name={name} />
 );
 
 export const Template = ({
   id,
   name,
+  css,
   language: _,
 }: {
   id: string;
   name: string;
+  css: string;
   language: (en: string, it: string) => string;
 }) => (
   <html>
@@ -72,140 +74,7 @@ export const Template = ({
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&amp;display=swap"
         rel="stylesheet"
       />
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: hidden;
-      }
-      html {
-        background: #000;
-        font: italic 8vw/1.2 "Playfair Display", serif;
-      }
-      #scroller {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        perspective: 100px;
-        perspective-origin: 50% 50%;
-        overflow-x: hidden;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      #scroller-content {
-        transform-style: preserve-3d;
-        position: relative;
-      }
-      .background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-        background: repeat-y url(images/background.png) left top;
-        background-size: 100% auto;
-      }
-      .text {
-        height: 150vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #eee;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: relative;
-        z-index: 1000;
-      }
-      .sin {
-        height: 150vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-      .flower {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-      #loading {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        color: #ccc;
-        background: #000;
-        transition: opacity 500ms;
-        pointer-events: none;
-      }
-      .button {
-        font: inherit;
-        line-height: 8vw;
-        background: transparent;
-        color: white;
-        display: block;
-        margin: 0 auto;
-        border: none;
-        outline: none;
-        cursor: pointer;
-      }
-      .select {
-        width: 12vw;
-        line-height: 8vw;
-        padding: 0 2vw;
-        font: inherit;
-        color: white;
-        border: 2px solid white;
-        background: transparent;
-        display: inline-block;
-        vertical-align: baseline;
-        outline: none;
-        margin-right: 1vw;
-        margin-bottom: 1vw;
-      }
-      .textarea {
-        line-height: 8vw;
-        height: 20vh;
-        width: 100%;
-        box-sizing: border-box;
-        font: inherit;
-        color: white;
-        border: 2px solid white;
-        background: transparent;
-        outline: none;
-        margin-top: 2vh;
-      }
-      .hidden {
-        display: none;
-      }
-      .checkbox {
-        width: 5vw;
-        height: 5vw;
-        font-size: 6vw;
-        line-height: 4.5vw;
-        border: 2px solid white;
-        display: inline-block;
-        vertical-align: baseline;
-        color: transparent;
-        margin-right: 2vw;
-        margin-bottom: 1vh;
-      }
-      .checkbox.checked {
-        color: white;
-      }
-      .response {
-        cursor: pointer;
-      }
-      `,
-        }}
-      />
+      <style dangerouslySetInnerHTML={{ __html: css }} />
     </head>
     <body>
       <div id="scroller">
@@ -228,7 +97,7 @@ export const Template = ({
             className="background"
             style={{ background: "#000", opacity: 0.7 }}
           ></div>
-          <div className="text" style={{ height: "100vh" }}>
+          <div className="short-slide text" style={{ height: "100vh" }}>
             <div>
               {_("Dear", "")} {name},
             </div>
@@ -245,7 +114,7 @@ export const Template = ({
               <TinyText style={{ transform: "rotate(80deg)" }}>›</TinyText>
             </div>
           </div>
-          <div className="text">
+          <div className="slide text">
             <div>James Nguyen</div>
             <SmallText
               style={{
@@ -258,33 +127,33 @@ export const Template = ({
             </SmallText>
             <div>Stefano Attardi</div>
           </div>
-          <div className="text">
+          <div className="slide text">
             <div>{_("kindly request", "richiedono cortesemente")}</div>
             <div>{_("your presence", "la vostra presenza")}</div>
           </div>
-          <div className="text">
+          <div className="slide text">
             <SmallText>{_("on the", "il")}</SmallText>
             <div>{_("29th of May, 2021", "29 Maggio 2021")}</div>
           </div>
-          <div className="text">
+          <div className="slide text">
             <SmallText>{_("in", "a")}</SmallText>
             <div>Arquà Petrarca,</div>
             <SmallText>{_("Italy", "PD")}</SmallText>
           </div>
-          <div className="text">
+          <div className="slide text">
             <div>{_("to celebrate", "per celebrare")}</div>
             <div>{_("their commitment", "la loro unione")}</div>
           </div>
-          <div className="text">
+          <div className="slide text">
             <div>{_("to a life of...", "e una vita di...")}</div>
           </div>
-          <div id="sin" className="sin">
+          <div id="sin" className="slide sin">
             <img
               src={_("images/sin.png", "images/vizi.png")}
               style={{ maxWidth: "80%" }}
             />
           </div>
-          <div className="text">
+          <div className="slide text">
             <div style={{ marginBottom: "4vh" }}>
               {_("Will you attend?", "Sarete presenti?")}
             </div>
@@ -303,7 +172,7 @@ export const Template = ({
               </div>
             </SmallText>
           </div>
-          <SmallText className="text yes hidden">
+          <SmallText className="slide text yes hidden">
             <form
               id="form"
               style={{ display: "inline-block", textAlign: "left" }}
@@ -340,13 +209,13 @@ export const Template = ({
               <Button>{_("Confirm", "Conferma")}</Button>
             </form>
           </SmallText>
-          <div className="text no hidden">
+          <div className="slide text no hidden">
             <SmallText>{_("We are sorry to hear", "Sentiremo la")}</SmallText>
             <SmallText>
               {_("you will not be able to attend.", "vostra mancanza.")}
             </SmallText>
           </div>
-          <div id="confirm" className="text hidden">
+          <div id="confirm" className="slide text hidden">
             <div style={{ marginBottom: "4vh" }}>
               {_("Thank you", "Grazie")}
             </div>
@@ -358,7 +227,10 @@ export const Template = ({
         </div>
       </div>
       <div id="loading">
-        <div className="text" style={{ fontSize: "2vw", height: "100vh" }}>
+        <div
+          className="slide text"
+          style={{ fontSize: "2vw", height: "100vh" }}
+        >
           {_("Please wait...", "Aspetta...")}
         </div>
       </div>

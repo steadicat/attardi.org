@@ -30,6 +30,8 @@ async function main() {
     createdTime: string;
   };
 
+  const css = fs.readFileSync("./main.css");
+
   try {
     const { records } = (await response.json()) as { records: Record[] };
     console.log(records);
@@ -45,6 +47,7 @@ async function main() {
           language={(en: string, it: string) =>
             Language === "English" ? en : it
           }
+          css={css.toString()}
         />
       );
       console.log(`Building ./savethedate/${Code}.html...`);

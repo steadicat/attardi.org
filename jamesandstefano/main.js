@@ -95,14 +95,14 @@ async function setResponse(response) {
     yesCheck && yesCheck.classList.remove("checked");
     noCheck && noCheck.classList.add("checked");
   }
-  for (const el of Array.from(document.querySelectorAll(".yes"))) {
+  for (const el of Array.from(document.getElementsByClassName("yes"))) {
     if (response === "Yes") {
       el.classList.remove("hidden");
     } else {
       el.classList.add("hidden");
     }
   }
-  for (const el of Array.from(document.querySelectorAll(".no"))) {
+  for (const el of Array.from(document.getElementsByClassName("no"))) {
     if (response === "No") {
       el.classList.remove("hidden");
     } else {
@@ -135,6 +135,24 @@ function topOfScreen(n) {
   return top;
 }
 
+const slideElements = /** @type {HTMLElement[]} */ (Array.from(
+  document.getElementsByClassName("slide")
+));
+const shortSlideElements = /** @type {HTMLElement[]} */ (Array.from(
+  document.getElementsByClassName("short-slide")
+));
+
+function resize() {
+  const screenHeight = window.innerHeight;
+
+  for (const slide of slideElements) {
+    slide.style.height = `${screenHeight * 1.5}px`;
+  }
+  for (const slide of shortSlideElements) {
+    slide.style.height = `${screenHeight}px`;
+  }
+}
+
 async function main() {
   const yes = document.getElementById("yes");
   yes && yes.addEventListener("click", () => setResponse("Yes"));
@@ -157,7 +175,7 @@ async function main() {
       if (id && currentTarget) {
         await fetch("/rsvp", {
           method: "POST",
-          body: new FormData(/** @type {HTMLFormElement} */ currentTarget),
+          body: new FormData(/** @type {HTMLFormElement} */ (currentTarget)),
         });
       }
 
@@ -168,6 +186,9 @@ async function main() {
         });
     });
   }
+
+  window.addEventListener("resize", resize);
+  resize();
 
   const [images] = await Promise.all([
     Promise.all(flowers.map(loadImage)),

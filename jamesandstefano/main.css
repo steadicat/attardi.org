@@ -1,0 +1,132 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+html {
+  background: #000;
+  font: italic 8vw/1.2 "Playfair Display", serif;
+}
+#scroller {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 100px;
+  perspective-origin: 50% 50%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#scroller-content {
+  transform-style: preserve-3d;
+  position: relative;
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: repeat-y url(images/background.png) left top;
+  background-size: 100% auto;
+}
+.short-slide {
+  height: 100vh;
+}
+.slide {
+  height: 150vh;
+}
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eee;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 1000;
+}
+.sin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.flower {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #ccc;
+  background: #000;
+  transition: opacity 500ms;
+  pointer-events: none;
+}
+.button {
+  font: inherit;
+  line-height: 8vw;
+  background: transparent;
+  color: white;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.select {
+  width: 12vw;
+  line-height: 8vw;
+  padding: 0 2vw;
+  font: inherit;
+  color: white;
+  border: 2px solid white;
+  background: transparent;
+  display: inline-block;
+  vertical-align: baseline;
+  outline: none;
+  margin-right: 1vw;
+  margin-bottom: 1vw;
+}
+.textarea {
+  line-height: 8vw;
+  height: 20vh;
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  color: white;
+  border: 2px solid white;
+  background: transparent;
+  outline: none;
+  margin-top: 2vh;
+}
+.hidden {
+  display: none;
+}
+.checkbox {
+  width: 5vw;
+  height: 5vw;
+  font-size: 6vw;
+  line-height: 4.5vw;
+  border: 2px solid white;
+  display: inline-block;
+  vertical-align: baseline;
+  color: transparent;
+  margin-right: 2vw;
+  margin-bottom: 1vh;
+}
+.checkbox.checked {
+  color: white;
+}
+.response {
+  cursor: pointer;
+}
