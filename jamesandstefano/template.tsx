@@ -32,14 +32,15 @@ export const Template = ({
           <div
             className="background"
             style={{
-              transform: "translate3d(0, 0, -50px) scale(1.5) rotateZ(180deg)",
+              transform:
+                "translate3d(0, -382vh, -50px) scale(1.5) rotateZ(180deg)",
               opacity: 0.5,
             }}
           ></div>
           <div
             className="background"
             style={{
-              transform: "translate3d(0, 0, -25px) scale(1.25)",
+              transform: "translate3d(0, -191vh, -25px) scale(1.25)",
               opacity: 1,
             }}
           ></div>

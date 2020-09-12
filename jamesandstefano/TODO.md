@@ -1,15 +1,14 @@
-- [Mobile] Responsive vertical positioning of flowers
 - [Bug] Fix bottom scroll
 - [Scroll] Pause on SIN
-- [Bug] Fix Stacking of SIN and flowers
-- [Bug] Fix Stacking of SIN and form
 - [Polish] Custom number selector design
-- [Scroll] Prevent scroll up after submit
 - Email design
 - Test in browsers
-- Background line
 - Favicon
 - Social media preview
-- Error handling
 - 404 page
 - Map
+
+# Wontfix
+
+- Background line
+- Form error handling
