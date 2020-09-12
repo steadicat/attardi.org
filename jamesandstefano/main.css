@@ -34,9 +34,10 @@ html {
   top: 0;
   left: 0;
   right: 0;
-  height: 1600vh;
+  height: 1300vh;
   background: repeat-y url(images/background.png) left top;
   background-size: 100% auto;
+  transform-origin: 50% top;
 }
 .short-slide {
   height: 100vh;

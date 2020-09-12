@@ -4,6 +4,7 @@
     "target": "ES2017",
     "jsx": "react",
     "strict": true,
+    "noEmit": true,
     "allowJs": true,
     "checkJs": true
   }

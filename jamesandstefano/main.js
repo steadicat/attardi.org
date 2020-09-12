@@ -16,163 +16,163 @@ const flowerData = [
   [
     {
       id: 6,
-      x: 83.09823997848287,
-      y: 0.23202969621702585,
-      z: 0.12544867738624665,
-      scale: 1.5506552728740342,
-      rotate: 0,
-    },
-    {
-      id: 2,
-      x: 27.743436731241133,
-      y: 0.031308216509688076,
-      z: 0.8493278055135309,
-      scale: 1.0597965139525687,
-      rotate: 0,
-    },
-    {
-      id: 4,
-      x: 45.610146619478506,
-      y: 0.12888435088373498,
-      z: 2.052288604133457,
-      scale: 1.5318407733685895,
-      rotate: 0,
-    },
-    {
-      id: 7,
-      x: 24.236696279142244,
-      y: 0.31496063718694506,
-      z: 2.553728554222789,
-      scale: 1.333518040900089,
+      x: 7.4987599831373375,
+      y: 0.3022324469524129,
+      z: 0.12802211637899497,
+      scale: 1.271134328370467,
       rotate: 0,
     },
     {
       id: 9,
-      x: 1.2147380180905332,
-      y: 0.09212516154368093,
-      z: 3.9399580009237303,
-      scale: 0.7793135682706067,
+      x: 32.56250075174445,
+      y: 0.04672194845902365,
+      z: 1.0550136535748553,
+      scale: 1.5244357091670087,
       rotate: 0,
     },
     {
-      id: 5,
-      x: 37.513066487293,
-      y: 0.0947951940548785,
-      z: 4.866814309918128,
-      scale: 1.3641362891812743,
+      id: 0,
+      x: 10.899664891420557,
+      y: 0.28618019416450313,
+      z: 2.4168728810598044,
+      scale: 1.2412801807287093,
+      rotate: 0,
+    },
+    {
+      id: 7,
+      x: 60.70601969540827,
+      y: 0.23306517287890632,
+      z: 3.188220456028322,
+      scale: 1.6071080624127276,
       rotate: 0,
     },
     {
       id: 1,
-      x: 21.181390193220494,
-      y: 0.06379402451072907,
-      z: 6.333685734382206,
-      scale: 1.2690244177137004,
+      x: 92.59024288957951,
+      y: 0.020313404231838077,
+      z: 3.7463472922482,
+      scale: 1.5284774004612671,
+      rotate: 0,
+    },
+    {
+      id: 4,
+      x: 51.976877349475316,
+      y: 0.1768628052346098,
+      z: 4.636001489555447,
+      scale: 1.067948564958029,
+      rotate: 0,
+    },
+    {
+      id: 2,
+      x: 50.281273914980076,
+      y: 0.29824327177380827,
+      z: 5.711909332244608,
+      scale: 1.2450185187067264,
       rotate: 0,
     },
     {
       id: 3,
       x: 0,
-      y: 0.28303573965357365,
-      z: 6.912422052583249,
-      scale: 1.4086111874990623,
+      y: 0.16363215642244716,
+      z: 6.791234853109378,
+      scale: 1.3201887283782643,
       rotate: 180,
     },
     {
+      id: 5,
+      x: 89.87580765641097,
+      y: 0.20494657453367424,
+      z: 7.978941680143123,
+      scale: 1.5379999125980377,
+      rotate: 0,
+    },
+    {
       id: 8,
-      x: 99.8958724184227,
-      y: 0.2999044598857761,
-      z: 7.582610369763705,
-      scale: 1.2988405911374454,
+      x: 67.47269638219453,
+      y: 0.06207568010825364,
+      z: 8.912638659239429,
+      scale: 1.534485669845137,
+      rotate: 0,
+    },
+    {
+      id: 8,
+      x: 27.37734787410271,
+      y: 0.17582237340189102,
+      z: 9.698909042680624,
+      scale: 1.0222273156072412,
+      rotate: 0,
+    },
+    {
+      id: 2,
+      x: 12.780526674725113,
+      y: 0.049387103278520764,
+      z: 11.134728031476072,
+      scale: 1.1907575732672224,
+      rotate: 0,
+    },
+    {
+      id: 1,
+      x: 49.8741666532188,
+      y: 0.08304625110761935,
+      z: 11.95152965762576,
+      scale: 1.1662813739950104,
       rotate: 0,
     },
     {
       id: 0,
-      x: 24.175509185778445,
-      y: 0.011493131642422664,
-      z: 8.745055323325166,
-      scale: 0.8818068840957765,
+      x: 31.864460170893615,
+      y: 0.07154973071357204,
+      z: 12.924475198018154,
+      scale: 0.9854656045656918,
       rotate: 0,
     },
     {
       id: 6,
-      x: 64.24717929787195,
-      y: 0.12381781455198058,
-      z: 10.231993615205194,
-      scale: 1.022045834736329,
-      rotate: 0,
-    },
-    {
-      id: 8,
-      x: 28.135641360638886,
-      y: 0.039235881090085724,
-      z: 10.744481612405313,
-      scale: 1.3987599693975599,
-      rotate: 0,
-    },
-    {
-      id: 0,
-      x: 32.72702473661428,
-      y: 0.00783146015887221,
-      z: 12.455065802517593,
-      scale: 1.535614447429388,
+      x: 17.957056868982036,
+      y: 0.32001710467016287,
+      z: 14.321794990378079,
+      scale: 1.3181511571530942,
       rotate: 0,
     },
     {
       id: 9,
-      x: 23.910667609374812,
-      y: 0.04646010479423724,
-      z: 12.998460459828038,
-      scale: 1.5860323113462136,
-      rotate: 0,
-    },
-    {
-      id: 1,
-      x: 97.55048092284733,
-      y: 0.03088549778191729,
-      z: 13.94669015523184,
-      scale: 0.8673272249052968,
-      rotate: 0,
-    },
-    {
-      id: 2,
-      x: 27.006769583874267,
-      y: 0.20168784465243833,
-      z: 14.8971098349398,
-      scale: 1.1044002012641323,
+      x: 51.8421041741465,
+      y: 0.13405716225065623,
+      z: 15.145941051694253,
+      scale: 0.9112358558082414,
       rotate: 0,
     },
     {
       id: 7,
-      x: 33.189836820937856,
-      y: 0.23066671947825976,
-      z: 16.2510316550136,
-      scale: 1.1119334582593876,
+      x: 17.749914819794952,
+      y: 0.26038675669711087,
+      z: 15.964787193784272,
+      scale: 1.326942199265816,
+      rotate: 0,
+    },
+    {
+      id: 5,
+      x: 18.733857812987974,
+      y: 0.2955528834903206,
+      z: 17.089978738562117,
+      scale: 1.334908334534682,
+      rotate: 0,
+    },
+    {
+      id: 4,
+      x: 11.87215191008464,
+      y: 0.02660508060735961,
+      z: 17.921527550174094,
+      scale: 0.8840335974906874,
       rotate: 0,
     },
     {
       id: 3,
       x: 0,
-      y: 0.23350980776077795,
-      z: 16.937115630872384,
-      scale: 1.5281133877201853,
+      y: 0.3123272413415661,
+      z: 19.01731912024607,
+      scale: 1.1277387283615983,
       rotate: 180,
-    },
-    {
-      id: 5,
-      x: 9.212714924476483,
-      y: 0.005761162059838241,
-      z: 18.31206629986649,
-      scale: 1.4440625068236803,
-      rotate: 0,
-    },
-    {
-      id: 4,
-      x: 55.046530242631064,
-      y: 0.12069698140872115,
-      z: 19.41665664123242,
-      scale: 0.9515392828713121,
-      rotate: 0,
     },
   ],
   [
@@ -3910,6 +3910,9 @@ function jitter(n, ratio = 0.5) {
 
 const perspective = 100;
 const slides = 10;
+let slidesToDecorate = 8;
+/** @type {HTMLImageElement[] | null} */
+let loadedImages = null;
 
 /**
  * @typedef {Object} FlowerData
@@ -4015,10 +4018,14 @@ async function setResponse(response) {
       el.classList.add("hidden");
     }
   }
-  // const backgrounds = document.getElementsByClassName("background");
-  // for (const bg of backgrounds) {
-  //   /** @type HTMLElement **/ (bg).style.height = "1450vh";
-  // }
+
+  slidesToDecorate = 9;
+  positionAllFlowers();
+
+  const backgrounds = document.getElementsByClassName("background");
+  for (const bg of backgrounds) {
+    /** @type HTMLElement **/ (bg).style.height = "1450vh";
+  }
 
   scroller &&
     scroller.scrollTo({
@@ -4027,7 +4034,10 @@ async function setResponse(response) {
     });
 
   if (response === "No") {
-    scroller && (scroller.style.overflow = "hidden");
+    if (scroller) {
+      scroller.style.overflow = "hidden";
+      scroller.addEventListener("scroll", (event) => event.preventDefault());
+    }
   }
 
   const idElement = document.getElementById("id");
@@ -4069,15 +4079,15 @@ function resize() {
   }
 }
 
-/** @param {HTMLImageElement[]} images */
-function positionAllFlowers(images) {
+function positionAllFlowers() {
+  if (!loadedImages) return;
   const screenHeight = window.innerHeight;
 
-  positionFlowers(images, flowerData[0], screenHeight);
-  for (let slide = 0; slide < slides - 1; slide++) {
-    positionFlowers(images, flowerData[1 + slide], screenHeight);
+  positionFlowers(loadedImages, flowerData[0], screenHeight);
+  for (let slide = 0; slide < slidesToDecorate; slide++) {
+    positionFlowers(loadedImages, flowerData[1 + slide], screenHeight);
   }
-  positionFlowers(images, flowerData[slides + 1], screenHeight);
+  positionFlowers(loadedImages, flowerData[slides + 1], screenHeight);
 }
 
 async function main() {
@@ -4095,10 +4105,14 @@ async function main() {
       if (confirm) {
         confirm.classList.remove("hidden");
       }
-      // const backgrounds = document.getElementsByClassName("background");
-      // for (const bg of backgrounds) {
-      //   /** @type HTMLElement **/ (bg).style.height = "1600vh";
-      // }
+
+      slidesToDecorate = 10;
+      positionAllFlowers();
+
+      const backgrounds = document.getElementsByClassName("background");
+      for (const bg of backgrounds) {
+        /** @type HTMLElement **/ (bg).style.height = "1600vh";
+      }
 
       const idElement = document.getElementById("id");
       const id = idElement ? idElement.getAttribute("value") : null;
@@ -4110,13 +4124,14 @@ async function main() {
         });
       }
 
-      scroller &&
+      if (scroller) {
         scroller.scrollTo({
           top: slideMiddle(formScreen + 1) - screenHeight / 2,
           behavior: "smooth",
         });
-
-      scroller && (scroller.style.overflow = "hidden");
+        scroller.style.overflow = "hidden";
+        scroller.addEventListener("scroll", (event) => event.preventDefault());
+      }
     });
   }
 
@@ -4156,13 +4171,14 @@ async function main() {
       6
     ));
 
-  console.log(JSON.stringify(flowerData));
+  if (location.hostname === "localhost") {
+    console.log(JSON.stringify(flowerData));
+  }
 
-  window.addEventListener("resize", () => positionAllFlowers(images));
-  window.addEventListener("orientationchange", () =>
-    positionAllFlowers(images)
-  );
-  positionAllFlowers(images);
+  loadedImages = images;
+  window.addEventListener("resize", positionAllFlowers);
+  window.addEventListener("orientationchange", positionAllFlowers);
+  positionAllFlowers();
 
   await new Promise((resolve) => setTimeout(resolve, 3000));
   const scroll = document.getElementById("scroll");

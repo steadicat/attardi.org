@@ -33,14 +33,14 @@ export const Template = ({
             className="background"
             style={{
               transform:
-                "translate3d(0, -382vh, -50px) scale(1.5) rotateZ(180deg)",
+                "translate3d(0, 1323vh, -50px) scale(1.5) rotateZ(180deg)",
               opacity: 0.5,
             }}
           ></div>
           <div
             className="background"
             style={{
-              transform: "translate3d(0, -191vh, -25px) scale(1.25)",
+              transform: "translate3d(0, -315vh, -25px) scale(1.25)",
               opacity: 1,
             }}
           ></div>
@@ -99,7 +99,7 @@ export const Template = ({
             <div>{_("their commitment", "la loro unione")}</div>
           </div>
           <div className="slide text">
-            <div>{_("to a life of...", "e una vita di...")}</div>
+            <div>{_("to a life of...", "e una vita piena di...")}</div>
           </div>
           <div id="sin" className="slide sin">
             <img

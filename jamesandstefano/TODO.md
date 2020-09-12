@@ -4,11 +4,14 @@
 - Email design
 - Test in browsers
 - Favicon
-- Social media preview
-- 404 page
-- Map
+- Prevent scroll after submit on mobile
+- Smooth scroll on mobile after clicks
+- Fix vertical rhythm on mobile
 
 # Wontfix
 
+- Social media preview
+- Map
+- 404 page
 - Background line
 - Form error handling
