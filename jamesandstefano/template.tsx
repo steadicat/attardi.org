@@ -32,15 +32,14 @@ export const Template = ({
           <div
             className="background"
             style={{
-              transform:
-                "translate3d(0, 1466vh, -50px) scale(1.5) rotateZ(180deg)",
+              transform: "translate3d(0, 0, -50px) scale(1.5) rotateZ(180deg)",
               opacity: 0.5,
             }}
           ></div>
           <div
             className="background"
             style={{
-              transform: "translate3d(0, -354vh, -25px) scale(1.25)",
+              transform: "translate3d(0, 0, -25px) scale(1.25)",
               opacity: 1,
             }}
           ></div>
@@ -48,7 +47,6 @@ export const Template = ({
             className="background"
             style={{ background: "#000", opacity: 0.7 }}
           ></div>
-          <div className="short-slide gradient"></div>
           <div className="short-slide text" style={{ height: "100vh" }}>
             <div>
               {_("Dear", "")} {name},
@@ -132,7 +130,7 @@ export const Template = ({
               </div>
             </div>
           </div>
-          <div className="slide text yes hidden small-text">
+          <div className="slide text yes small-text">
             <form
               id="form"
               style={{ display: "inline-block", textAlign: "left" }}
@@ -179,7 +177,7 @@ export const Template = ({
               {_("you will not be able to attend.", "vostra mancanza.")}
             </div>
           </div>
-          <div id="confirm" className="slide text hidden">
+          <div id="confirm" className="slide text">
             <div style={{ marginBottom: "4vh" }}>
               {_("Thank you", "Grazie")}
             </div>

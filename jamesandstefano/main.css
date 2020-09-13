@@ -34,17 +34,9 @@ html {
   top: 0;
   left: 0;
   right: 0;
-  height: 1450vh;
+  height: 100%;
   background: repeat-y url(images/background.png) left top;
   background-size: 100% auto;
-  transform-origin: 50% top;
-}
-.gradient {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 .short-slide {
   height: 100vh;

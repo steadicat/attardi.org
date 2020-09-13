@@ -3428,8 +3428,8 @@ function jitter(n, ratio = 0.5) {
 }
 
 const perspective = 100;
-const slides = 11;
-let slidesToDecorate = 9;
+const slides = 12;
+let visibleSlides = 8;
 /** @type {HTMLImageElement[] | null} */
 let loadedImages = null;
 
@@ -3538,13 +3538,7 @@ async function setResponse(response) {
     }
   }
 
-  slidesToDecorate = 10;
-  positionAllFlowers();
-
-  const backgrounds = document.getElementsByClassName("background");
-  for (const bg of backgrounds) {
-    /** @type HTMLElement **/ (bg).style.height = "1600vh";
-  }
+  visibleSlides = 9;
 
   scroller &&
     scroller.scrollTo({
@@ -3553,10 +3547,10 @@ async function setResponse(response) {
     });
 
   if (response === "No") {
-    if (scroller) {
-      scroller.style.overflow = "hidden";
-      scroller.addEventListener("scroll", (event) => event.preventDefault());
-    }
+    // if (scroller) {
+    //   scroller.style.overflow = "hidden";
+    //   scroller.addEventListener("scroll", (event) => event.preventDefault());
+    // }
   }
 
   const idElement = document.getElementById("id");
@@ -3609,7 +3603,7 @@ function positionAllFlowers() {
   const screenHeight = window.innerHeight;
 
   positionFlowers(loadedImages, flowerData[0], screenHeight);
-  for (let slide = 0; slide < slidesToDecorate; slide++) {
+  for (let slide = 0; slide < slides; slide++) {
     if (slide === sinScreen + 1) continue;
     positionFlowers(loadedImages, flowerData[1 + slide], screenHeight);
   }
@@ -3627,18 +3621,10 @@ async function main() {
   if (form) {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      const confirm = document.getElementById("confirm");
-      if (confirm) {
-        confirm.classList.remove("hidden");
-      }
-
-      slidesToDecorate = 10;
-      positionAllFlowers();
-
-      const backgrounds = document.getElementsByClassName("background");
-      for (const bg of backgrounds) {
-        /** @type HTMLElement **/ (bg).style.height = "1750vh";
-      }
+      // const confirm = document.getElementById("confirm");
+      // if (confirm) {
+      //   confirm.classList.remove("hidden");
+      // }
 
       const idElement = document.getElementById("id");
       const id = idElement ? idElement.getAttribute("value") : null;
@@ -3650,16 +3636,15 @@ async function main() {
         });
       }
 
-      slidesToDecorate = 11;
-      positionAllFlowers();
+      visibleSlides = 10;
 
       if (scroller) {
         scroller.scrollTo({
           top: slideMiddle(formScreen + 1) - screenHeight / 2,
           behavior: "smooth",
         });
-        scroller.style.overflow = "hidden";
-        scroller.addEventListener("scroll", (event) => event.preventDefault());
+        // scroller.style.overflow = "hidden";
+        // scroller.addEventListener("scroll", (event) => event.preventDefault());
       }
     });
   }
@@ -3667,6 +3652,18 @@ async function main() {
   window.addEventListener("resize", resize);
   window.addEventListener("orientationchange", resize);
   resize();
+
+  if (scroller) {
+    scroller.addEventListener("scroll", (event) => {
+      const screenMiddle = scroller.scrollTop + screenHeight / 2;
+      if (screenMiddle > slideMiddle(visibleSlides)) {
+        event.preventDefault();
+        scroller.scrollTo({
+          top: slideMiddle(visibleSlides) - screenHeight / 2,
+        });
+      }
+    });
+  }
 
   const [images] = await Promise.all([
     Promise.all(flowers.map(loadImage)),
