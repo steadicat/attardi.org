@@ -4,20 +4,25 @@ runtime: go111
 handlers:
   - url: /rsvp
     script: auto
+    secure: always
   - url: /savethedate/images
     static_dir: images
+    secure: always
   - url: /savethedate/main\.js
     static_files: main.js
     upload: main\.js
     mime_type: application/javascript; charset=utf-8
+    secure: always
   - url: /savethedate/([\w-]+)$
     static_files: savethedate/\1.html
     upload: savethedate/(.*)\.html
     mime_type: text/html; charset=utf-8
+    secure: always
   - url: /.*
     static_files: index.html
     upload: index.html
     mime_type: text/html; charset=utf-8
+    secure: always
 
 error_handlers:
   - file: index.html
