@@ -1,10 +1,7 @@
-- [Bug] Fix bottom scroll
 - [Polish] Custom number selector design
 - Email design
 - Test in browsers
 - Favicon
-- Prevent scroll after submit on mobile
-- Smooth scroll on mobile after clicks
 - Fix vertical rhythm on mobile
 
 # Wontfix
