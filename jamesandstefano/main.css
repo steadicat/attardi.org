@@ -135,7 +135,7 @@ html {
   line-height: 3.5vw;
   border: 2px solid white;
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   color: transparent;
   margin-right: 2vw;
 }

@@ -171,10 +171,10 @@ export const Template = ({
           </div>
           <div className="slide text no hidden">
             <div className="small-text">
-              {_("We are sorry to hear", "Sentiremo la")}
+              {_("We regret that you", "Sentiremo la")}
             </div>
             <div className="small-text">
-              {_("you will not be able to attend.", "vostra mancanza.")}
+              {_("will not be able to attend.", "vostra mancanza.")}
             </div>
           </div>
           <div id="confirm" className="slide text">
