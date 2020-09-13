@@ -92,7 +92,7 @@ html {
   font: inherit;
   line-height: 8vw;
   background: transparent;
-  color: white;
+  color: #eee;
   display: block;
   margin: 0 auto;
   border: none;
@@ -104,8 +104,8 @@ html {
   line-height: 8vw;
   padding: 0 2vw;
   font: inherit;
-  color: white;
-  border: 2px solid white;
+  color: #eee;
+  border: 2px solid #eee;
   background: transparent;
   display: inline-block;
   vertical-align: baseline;
@@ -119,8 +119,8 @@ html {
   width: 100%;
   box-sizing: border-box;
   font: inherit;
-  color: white;
-  border: 2px solid white;
+  color: #eee;
+  border: 2px solid #eee;
   background: transparent;
   outline: none;
   margin-top: 2vh;
@@ -133,12 +133,12 @@ html {
   height: 4vw;
   font-size: 5vw;
   line-height: 3.5vw;
-  border: 2px solid white;
+  border: 2px solid #eee;
   color: transparent;
   margin-right: 2vw;
 }
 .checkbox.checked {
-  color: white;
+  color: #eee;
 }
 .response {
   cursor: pointer;
