@@ -25,6 +25,8 @@ export const Template = ({
         rel="stylesheet"
       />
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      <link rel="apple-touch-icon" href="/savethedate/images/7.png" />
+      <link rel="icon" href="/savethedate/images/7.png" />
     </head>
     <body>
       <div id="scroller">
