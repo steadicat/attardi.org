@@ -112,7 +112,7 @@ export const Template = ({
           </div>
           <div className="slide text">
             <div style={{ marginBottom: "4vh" }}>
-              {_("Will you attend?", "Sarete presenti?")}
+              {_("Are you able to attend?", "Siete disponibili?")}
             </div>
             <div
               className="small-text"
@@ -135,7 +135,11 @@ export const Template = ({
           <div className="slide text yes small-text">
             <form
               id="form"
-              style={{ display: "inline-block", textAlign: "left" }}
+              style={{
+                display: "inline-block",
+                textAlign: "left",
+                visibility: "hidden",
+              }}
             >
               <input id="id" type="hidden" name="id" value={id} />
               <div>
@@ -187,7 +191,7 @@ export const Template = ({
               {_("We look forward to", "Non vediamo l’ora")}
             </div>
             <div className="small-text">
-              {_("seeing you in Italy.", "di ricevervi.")}
+              {_("seeing you in Italy!", "di ricevervi!")}
             </div>
           </div>
         </div>
