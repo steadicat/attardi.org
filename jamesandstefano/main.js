@@ -4826,6 +4826,11 @@ async function setResponse(response) {
 
   visibleSlides = 9;
 
+  const form = document.getElementById("form");
+  if (form) {
+    form.style.visibility = "visible";
+  }
+
   scroller &&
     scroller.scrollTo({
       top: slideMiddle(formScreen) - screenHeight / 2,

@@ -1,11 +1,14 @@
-- Hide form until needed
-- [Polish] Custom number selector design
 - Email design
 - Test in browsers
-- Favicon
+
+# Maybe
+
+- JS build
+- Reactive
 
 # Wontfix
 
+- Custom number selector design
 - Social media preview
 - Map
 - 404 page
