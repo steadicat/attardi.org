@@ -34,16 +34,26 @@ html {
   top: 0;
   left: 0;
   right: 0;
-  height: 1300vh;
+  height: 1450vh;
   background: repeat-y url(images/background.png) left top;
   background-size: 100% auto;
   transform-origin: 50% top;
+}
+.gradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 .short-slide {
   height: 100vh;
 }
 .slide {
   height: 150vh;
+}
+.long-slide {
+  height: 300vh;
 }
 .text {
   display: flex;
@@ -58,10 +68,16 @@ html {
   z-index: 1000;
 }
 .sin {
+  position: relative;
+}
+.sinImage {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 .flower {
   position: absolute;

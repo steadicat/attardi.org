@@ -33,14 +33,14 @@ export const Template = ({
             className="background"
             style={{
               transform:
-                "translate3d(0, 1323vh, -50px) scale(1.5) rotateZ(180deg)",
+                "translate3d(0, 1466vh, -50px) scale(1.5) rotateZ(180deg)",
               opacity: 0.5,
             }}
           ></div>
           <div
             className="background"
             style={{
-              transform: "translate3d(0, -315vh, -25px) scale(1.25)",
+              transform: "translate3d(0, -354vh, -25px) scale(1.25)",
               opacity: 1,
             }}
           ></div>
@@ -48,6 +48,7 @@ export const Template = ({
             className="background"
             style={{ background: "#000", opacity: 0.7 }}
           ></div>
+          <div className="short-slide gradient"></div>
           <div className="short-slide text" style={{ height: "100vh" }}>
             <div>
               {_("Dear", "")} {name},
@@ -101,11 +102,13 @@ export const Template = ({
           <div className="slide text">
             <div>{_("to a life of...", "e una vita piena di...")}</div>
           </div>
-          <div id="sin" className="slide sin">
-            <img
-              src={_("images/sin.png", "images/vizi.png")}
-              style={{ maxWidth: "80%" }}
-            />
+          <div id="sin" className="long-slide sin">
+            <div className="sinImage short-slide">
+              <img
+                src={_("images/sin.png", "images/vizi.png")}
+                style={{ maxWidth: "80%" }}
+              />
+            </div>
           </div>
           <div className="slide text">
             <div style={{ marginBottom: "4vh" }}>

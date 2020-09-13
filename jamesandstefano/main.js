@@ -3395,488 +3395,7 @@ const flowerData = [
       rotate: 0,
     },
   ],
-  [
-    {
-      id: 0,
-      x: 41.96743338843378,
-      y: 11.245925081402952,
-      z: 0.2982591808573183,
-      scale: 1.6437746663980775,
-      rotate: 0,
-    },
-    {
-      id: 6,
-      x: 52.34835829326438,
-      y: 11.207786997407656,
-      z: 0.8538271382691498,
-      scale: 1.5414540681526263,
-      rotate: 0,
-    },
-    {
-      id: 1,
-      x: 20.83001951194221,
-      y: 10.312885867624548,
-      z: 1.523037091217137,
-      scale: 1.1183742160823853,
-      rotate: 0,
-    },
-    {
-      id: 5,
-      x: 25.988830592005783,
-      y: 10.287600526122104,
-      z: 3.219523185447005,
-      scale: 1.397588344069814,
-      rotate: 0,
-    },
-    {
-      id: 9,
-      x: 98.45293643007781,
-      y: 10.916650289823915,
-      z: 3.7974449519660665,
-      scale: 0.7924849645425855,
-      rotate: 0,
-    },
-    {
-      id: 4,
-      x: 25.918221712322698,
-      y: 10.912404164980988,
-      z: 4.589176653474453,
-      scale: 0.7981931644932474,
-      rotate: 0,
-    },
-    {
-      id: 3,
-      x: 0,
-      y: 10.730197128518961,
-      z: 5.529586354189606,
-      scale: 1.0816602833973084,
-      rotate: 180,
-    },
-    {
-      id: 7,
-      x: 86.404460980407,
-      y: 10.624506577382563,
-      z: 7.4672366927575045,
-      scale: 1.6849067676898917,
-      rotate: 0,
-    },
-    {
-      id: 2,
-      x: 80.50300778697932,
-      y: 11.120854724757429,
-      z: 7.940086051966011,
-      scale: 1.3371199618469838,
-      rotate: 0,
-    },
-    {
-      id: 8,
-      x: 76.38414013244738,
-      y: 11.176891272370773,
-      z: 9.408335182021034,
-      scale: 1.3108599079150172,
-      rotate: 0,
-    },
-    {
-      id: 7,
-      x: 63.18457859385875,
-      y: 10.957026560582486,
-      z: 9.627990032540614,
-      scale: 1.0979655188787136,
-      rotate: 0,
-    },
-    {
-      id: 6,
-      x: 2.707830613222262,
-      y: 10.955248579344026,
-      z: 11.089707153185177,
-      scale: 1.3482751880215622,
-      rotate: 0,
-    },
-    {
-      id: 8,
-      x: 28.87487932658146,
-      y: 10.489979477808781,
-      z: 11.705452352814117,
-      scale: 1.5476455073556208,
-      rotate: 0,
-    },
-    {
-      id: 4,
-      x: 98.6361048794669,
-      y: 10.389430310764268,
-      z: 13.323447949250404,
-      scale: 1.3605412177909841,
-      rotate: 0,
-    },
-    {
-      id: 2,
-      x: 10.647159223985803,
-      y: 10.897110225712558,
-      z: 13.63765640455961,
-      scale: 1.3200881423526938,
-      rotate: 0,
-    },
-    {
-      id: 1,
-      x: 18.986232583829455,
-      y: 10.62171874756752,
-      z: 15.28914352027525,
-      scale: 0.6800461249186383,
-      rotate: 0,
-    },
-    {
-      id: 0,
-      x: 95.54594967847017,
-      y: 10.320982570536879,
-      z: 15.787637434466886,
-      scale: 0.9083827711089869,
-      rotate: 0,
-    },
-    {
-      id: 3,
-      x: 100,
-      y: 10.607427516012168,
-      z: 17.182638442702977,
-      scale: 0.758463725857353,
-      rotate: 0,
-    },
-    {
-      id: 5,
-      x: 73.47264583940554,
-      y: 10.348974053137283,
-      z: 18.302975584197675,
-      scale: 1.156402992437469,
-      rotate: 0,
-    },
-    {
-      id: 9,
-      x: 37.59583507590727,
-      y: 10.736477320817048,
-      z: 19.229792195555422,
-      scale: 1.523284729378542,
-      rotate: 0,
-    },
-    {
-      id: 3,
-      x: 0,
-      y: 10.386855247461334,
-      z: 20.463757465934055,
-      scale: 1.0990511982694398,
-      rotate: 180,
-    },
-    {
-      id: 4,
-      x: 65.65241598091147,
-      y: 10.854760973651564,
-      z: 20.892530124046353,
-      scale: 0.8148064769330987,
-      rotate: 0,
-    },
-    {
-      id: 7,
-      x: 6.839600034258275,
-      y: 10.50284923267713,
-      z: 21.56745579861351,
-      scale: 0.5838768199020548,
-      rotate: 0,
-    },
-    {
-      id: 2,
-      x: 65.7079059896084,
-      y: 10.965968258032781,
-      z: 23.075463241050613,
-      scale: 1.0747912314868102,
-      rotate: 0,
-    },
-    {
-      id: 9,
-      x: 20.84137447690102,
-      y: 10.774222270371613,
-      z: 23.75381266491684,
-      scale: 0.7199405068021977,
-      rotate: 0,
-    },
-    {
-      id: 8,
-      x: 87.0364742953218,
-      y: 10.548955996157652,
-      z: 24.631880247781666,
-      scale: 1.46247856240122,
-      rotate: 0,
-    },
-    {
-      id: 1,
-      x: 95.05288816802748,
-      y: 10.774913971309598,
-      z: 26.16265950937151,
-      scale: 1.4269785574511953,
-      rotate: 0,
-    },
-    {
-      id: 5,
-      x: 60.68507162679489,
-      y: 11.002354106298679,
-      z: 26.663312965098356,
-      scale: 1.0663576672444335,
-      rotate: 0,
-    },
-    {
-      id: 0,
-      x: 78.78249280246989,
-      y: 11.124279324178453,
-      z: 27.77419845029354,
-      scale: 1.0693523074903775,
-      rotate: 0,
-    },
-    {
-      id: 6,
-      x: 96.8728909233184,
-      y: 10.643989705017411,
-      z: 29.449881717579323,
-      scale: 0.7972063977920717,
-      rotate: 0,
-    },
-    {
-      id: 8,
-      x: 32.72932037995269,
-      y: 11.059498217238998,
-      z: 30.26729862048497,
-      scale: 0.639382061367042,
-      rotate: 0,
-    },
-    {
-      id: 0,
-      x: 75.50479469933562,
-      y: 11.244932534757949,
-      z: 30.87443070120136,
-      scale: 1.3789574775330498,
-      rotate: 0,
-    },
-    {
-      id: 5,
-      x: 59.07941104473653,
-      y: 11.203197311776108,
-      z: 32.4881977586779,
-      scale: 1.06607057117629,
-      rotate: 0,
-    },
-    {
-      id: 7,
-      x: 13.669281480690309,
-      y: 10.530301546510486,
-      z: 32.68351093482712,
-      scale: 1.2625146053791187,
-      rotate: 0,
-    },
-    {
-      id: 1,
-      x: 10.929880348654875,
-      y: 10.709255402123633,
-      z: 34.341039743806654,
-      scale: 1.2363352682465287,
-      rotate: 0,
-    },
-    {
-      id: 6,
-      x: 34.267894931895704,
-      y: 10.32397504410442,
-      z: 35.458897076641136,
-      scale: 0.7549066925220341,
-      rotate: 0,
-    },
-    {
-      id: 4,
-      x: 6.3221520618566895,
-      y: 10.618241447267353,
-      z: 35.52351597344268,
-      scale: 0.8326959254051345,
-      rotate: 0,
-    },
-    {
-      id: 2,
-      x: 42.67589950048869,
-      y: 10.775209476752693,
-      z: 36.74957452193549,
-      scale: 0.5212748637685415,
-      rotate: 0,
-    },
-    {
-      id: 3,
-      x: 0,
-      y: 11.11420048683652,
-      z: 37.888305137649894,
-      scale: 0.8326692901647781,
-      rotate: 180,
-    },
-    {
-      id: 9,
-      x: 19.827805061879666,
-      y: 10.845511933968222,
-      z: 39.236463437893086,
-      scale: 0.8518605012359227,
-      rotate: 0,
-    },
-    {
-      id: 0,
-      x: 23.66876305867187,
-      y: 10.574267660669571,
-      z: 40.34643944685523,
-      scale: 0.6777130569468683,
-      rotate: 0,
-    },
-    {
-      id: 1,
-      x: 67.6394708586814,
-      y: 11.032312512742406,
-      z: 40.978181853438436,
-      scale: 0.7123907907790913,
-      rotate: 0,
-    },
-    {
-      id: 4,
-      x: 40.35870354828097,
-      y: 10.290348067414142,
-      z: 41.62239759523162,
-      scale: 0.26582831359271886,
-      rotate: 0,
-    },
-    {
-      id: 5,
-      x: 85.99953355641601,
-      y: 10.910519774174112,
-      z: 42.85681547895193,
-      scale: 0.8277572298635741,
-      rotate: 0,
-    },
-    {
-      id: 2,
-      x: 79.3036821490958,
-      y: 10.66157999095718,
-      z: 44.21186161991131,
-      scale: 0.3748164897313654,
-      rotate: 0,
-    },
-    {
-      id: 6,
-      x: 11.220414147910486,
-      y: 10.59813718507066,
-      z: 44.729835092760766,
-      scale: 0.41587353170265096,
-      rotate: 0,
-    },
-    {
-      id: 3,
-      x: 100,
-      y: 10.259431656484145,
-      z: 45.94148181903967,
-      scale: 0.8498197382408917,
-      rotate: 0,
-    },
-    {
-      id: 7,
-      x: 28.71719139348201,
-      y: 10.937741441819966,
-      z: 47.08028285811973,
-      scale: 0.6915695134732991,
-      rotate: 0,
-    },
-    {
-      id: 9,
-      x: 94.31068772873232,
-      y: 10.563013927033353,
-      z: 48.12806320261425,
-      scale: 1.0592476227354548,
-      rotate: 0,
-    },
-    {
-      id: 8,
-      x: 68.99943288718941,
-      y: 10.72299339420308,
-      z: 48.63419758339261,
-      scale: 1.162255137757923,
-      rotate: 0,
-    },
-    {
-      id: 0,
-      x: 21.992639851499906,
-      y: 10.647892429604655,
-      z: 50.30054194544414,
-      scale: 0.6702470030684117,
-      rotate: 0,
-    },
-    {
-      id: 2,
-      x: 75.21004124268602,
-      y: 11.144651606971017,
-      z: 51.316058511568166,
-      scale: 0.7103240429173145,
-      rotate: 0,
-    },
-    {
-      id: 6,
-      x: 67.44378723883264,
-      y: 10.46742666223862,
-      z: 52.19676270024857,
-      scale: 0.5970195984625525,
-      rotate: 0,
-    },
-    {
-      id: 8,
-      x: 68.04948325667002,
-      y: 11.15424313413535,
-      z: 52.585640592799315,
-      scale: 0.33678761510838773,
-      rotate: 0,
-    },
-    {
-      id: 9,
-      x: 62.949771295717596,
-      y: 11.192398239703337,
-      z: 53.833418490941796,
-      scale: 0.8148492170036763,
-      rotate: 0,
-    },
-    {
-      id: 7,
-      x: 66.28773563636653,
-      y: 10.729647325808623,
-      z: 54.914464202422586,
-      scale: 0.1494465688090164,
-      rotate: 0,
-    },
-    {
-      id: 3,
-      x: 0,
-      y: 11.042401536196707,
-      z: 55.96932170627313,
-      scale: 0.3202011976933363,
-      rotate: 180,
-    },
-    {
-      id: 4,
-      x: 35.05028626346369,
-      y: 10.31736164868605,
-      z: 57.05411121499137,
-      scale: 0.9605819403193444,
-      rotate: 0,
-    },
-    {
-      id: 1,
-      x: 90.59884012581834,
-      y: 10.874614670302368,
-      z: 58.16830823715719,
-      scale: 0.4250282411344235,
-      rotate: 0,
-    },
-    {
-      id: 5,
-      x: 40.457721683920944,
-      y: 10.543405449733173,
-      z: 58.52947082138725,
-      scale: 0.49130335922892787,
-      rotate: 0,
-    },
-  ],
+  undefined,
 ];
 
 const preloads = ["images/background.png", "images/sin.png"];
@@ -3909,8 +3428,8 @@ function jitter(n, ratio = 0.5) {
 }
 
 const perspective = 100;
-const slides = 10;
-let slidesToDecorate = 8;
+const slides = 11;
+let slidesToDecorate = 9;
 /** @type {HTMLImageElement[] | null} */
 let loadedImages = null;
 
@@ -4019,12 +3538,12 @@ async function setResponse(response) {
     }
   }
 
-  slidesToDecorate = 9;
+  slidesToDecorate = 10;
   positionAllFlowers();
 
   const backgrounds = document.getElementsByClassName("background");
   for (const bg of backgrounds) {
-    /** @type HTMLElement **/ (bg).style.height = "1450vh";
+    /** @type HTMLElement **/ (bg).style.height = "1600vh";
   }
 
   scroller &&
@@ -4054,7 +3573,7 @@ async function setResponse(response) {
 }
 
 const sinScreen = 6;
-const formScreen = 8;
+const formScreen = 9;
 
 /** @param {number} n */
 function slideMiddle(n) {
@@ -4067,6 +3586,9 @@ const slideElements = /** @type {HTMLElement[]} */ (Array.from(
 const shortSlideElements = /** @type {HTMLElement[]} */ (Array.from(
   document.getElementsByClassName("short-slide")
 ));
+const longSlideElements = /** @type {HTMLElement[]} */ (Array.from(
+  document.getElementsByClassName("long-slide")
+));
 
 function resize() {
   const screenHeight = window.innerHeight;
@@ -4077,6 +3599,9 @@ function resize() {
   for (const slide of shortSlideElements) {
     slide.style.height = `${screenHeight}px`;
   }
+  for (const slide of longSlideElements) {
+    slide.style.height = `${screenHeight * 3}px`;
+  }
 }
 
 function positionAllFlowers() {
@@ -4085,6 +3610,7 @@ function positionAllFlowers() {
 
   positionFlowers(loadedImages, flowerData[0], screenHeight);
   for (let slide = 0; slide < slidesToDecorate; slide++) {
+    if (slide === sinScreen + 1) continue;
     positionFlowers(loadedImages, flowerData[1 + slide], screenHeight);
   }
   positionFlowers(loadedImages, flowerData[slides + 1], screenHeight);
@@ -4111,7 +3637,7 @@ async function main() {
 
       const backgrounds = document.getElementsByClassName("background");
       for (const bg of backgrounds) {
-        /** @type HTMLElement **/ (bg).style.height = "1600vh";
+        /** @type HTMLElement **/ (bg).style.height = "1750vh";
       }
 
       const idElement = document.getElementById("id");
@@ -4123,6 +3649,9 @@ async function main() {
           body: new FormData(/** @type {HTMLFormElement} */ (currentTarget)),
         });
       }
+
+      slidesToDecorate = 11;
+      positionAllFlowers();
 
       if (scroller) {
         scroller.scrollTo({
@@ -4153,6 +3682,7 @@ async function main() {
     (flowerData[0] = createFlowerData(images.length, 0, 0.33, 2));
 
   for (let slide = 0; slide < slides; slide++) {
+    if (slide === sinScreen + 1) continue;
     const middle = 1 + slide * 1.5;
     flowerData[1 + slide] ||
       (flowerData[1 + slide] = createFlowerData(
@@ -4167,7 +3697,7 @@ async function main() {
     (flowerData[slides + 1] = createFlowerData(
       images.length,
       middle - 0.5,
-      middle + 0.5,
+      middle + 2,
       6
     ));
 

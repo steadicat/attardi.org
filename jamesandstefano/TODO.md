@@ -1,5 +1,4 @@
 - [Bug] Fix bottom scroll
-- [Scroll] Pause on SIN
 - [Polish] Custom number selector design
 - Email design
 - Test in browsers
