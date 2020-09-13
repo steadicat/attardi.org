@@ -112,7 +112,7 @@ export const Template = ({
           </div>
           <div className="slide text">
             <div style={{ marginBottom: "4vh" }}>
-              {_("Are you able to attend?", "Siete disponibili?")}
+              {_("Do you hope to attend?", "Sarete presenti?")}
             </div>
             <div
               className="small-text"
@@ -177,10 +177,10 @@ export const Template = ({
           </div>
           <div className="slide text no hidden">
             <div className="small-text">
-              {_("We regret that you", "Sentiremo la")}
+              {_("Thank you for your response.", "Grazie per la risposta.")}
             </div>
             <div className="small-text">
-              {_("will not be able to attend.", "vostra mancanza.")}
+              {_("You will be missed.", "Sentiremo la vostra mancanza.")}
             </div>
           </div>
           <div id="confirm" className="slide text">

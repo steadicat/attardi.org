@@ -7,7 +7,7 @@ body {
 }
 html {
   background: #000;
-  font: italic 10vmin/1.2 "Playfair Display", serif;
+  font: italic 10vmin/1.6 "Playfair Display", serif;
 }
 .small-text {
   font-size: 66.6%;
@@ -134,8 +134,6 @@ html {
   font-size: 5vw;
   line-height: 3.5vw;
   border: 2px solid white;
-  display: inline-block;
-  vertical-align: middle;
   color: transparent;
   margin-right: 2vw;
 }
@@ -144,4 +142,6 @@ html {
 }
 .response {
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
