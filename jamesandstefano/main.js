@@ -4833,7 +4833,7 @@ async function setResponse(response) {
 
   scroller &&
     scroller.scrollTo({
-      top: slideMiddle(formScreen) - screenHeight / 2,
+      top: slideMiddle(formScreen) - actualScreenHeight / 2,
       behavior: "smooth",
     });
 
@@ -4943,7 +4943,7 @@ async function main() {
 
       if (scroller) {
         scroller.scrollTo({
-          top: slideMiddle(formScreen + 1) - screenHeight / 2,
+          top: slideMiddle(formScreen + 1) - actualScreenHeight / 2,
           behavior: "smooth",
         });
         // scroller.style.overflow = "hidden";
@@ -4962,7 +4962,7 @@ async function main() {
       if (screenMiddle > slideMiddle(visibleSlides)) {
         event.preventDefault();
         scroller.scrollTo({
-          top: slideMiddle(visibleSlides) - screenHeight / 2,
+          top: slideMiddle(visibleSlides) - actualScreenHeight / 2,
         });
       }
     });

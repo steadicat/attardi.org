@@ -1,4 +1,4 @@
-- Email design
+- Email command
 - Test in browsers
 
 # Maybe
