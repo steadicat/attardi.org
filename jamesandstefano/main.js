@@ -4958,7 +4958,7 @@ async function main() {
 
   if (scroller) {
     scroller.addEventListener("scroll", (event) => {
-      const screenMiddle = scroller.scrollTop + screenHeight / 2;
+      const screenMiddle = scroller.scrollTop + actualScreenHeight / 2;
       if (screenMiddle > slideMiddle(visibleSlides)) {
         event.preventDefault();
         scroller.scrollTo({
