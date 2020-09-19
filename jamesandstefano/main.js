@@ -4686,10 +4686,100 @@ const preloads = ["images/background.png", "images/sin.png"];
 
 const scroller = document.getElementById("scroller");
 const content = document.getElementById("scroller-content");
-let actualScreenHeight = window.innerHeight;
-let screenHeight = Math.min(window.innerHeight, document.body.clientWidth);
-const canvasHeight =
-  (content && content.offsetHeight) || document.body.clientHeight;
+
+/**
+ * @template {(...args: any[]) => any} Fn
+ * @typedef {Fn & {
+ *  subscribe(fn: ReactiveFunction<any>): void;
+ *  unsubscribe(fn: ReactiveFunction<any>): void;
+ *  logCall(fn: ReactiveFunction<any>): void;
+ * }} ReactiveFunction
+ */
+
+const VOID = { __void__: true };
+
+/**
+ * @template T
+ * @param {Set<T>} a
+ * @param {Set<T>} b
+ * @return {T[]}
+ */
+function subtract(a, b) {
+  return Array.from(a).filter((x) => !b.has(x));
+}
+
+/** @type {ReactiveFunction<any>[]} */
+const stack = [];
+
+/**
+ * @template {(...args: any[]) => any} Fn
+ * @param {Fn} fn
+ * @return {ReactiveFunction<Fn>}
+ */
+function reactive(fn) {
+  /** @type {ReturnType<Fn> | typeof VOID} */
+  let previousRes = VOID;
+  /** @type {Set<ReactiveFunction<any>>} */
+  const subscribers = new Set();
+  /** @type {Set<ReactiveFunction<any>>} */
+  let subscriptions = new Set();
+  /** @type {Set<ReactiveFunction<any>>} */
+  let newSubscriptions = new Set();
+  /** @type {ReturnType<Fn> | typeof VOID} */
+  let earlyReturn = VOID;
+
+  const reactiveFn = /** @type {ReactiveFunction<Fn>} */ (
+    /** @param {Parameters<Fn>} args */ (...args) => {
+      /** @type {ReactiveFunction<any> | undefined} */
+      const caller = stack[0];
+      caller && caller.logCall(reactiveFn);
+
+      if (earlyReturn !== VOID) return earlyReturn;
+
+      stack.unshift(reactiveFn);
+      const res = fn(...args);
+      stack.shift();
+
+      const toSubscribe = subtract(newSubscriptions, subscriptions);
+      const toUnsubscribe = subtract(subscriptions, newSubscriptions);
+      toSubscribe.forEach((fn) => fn.subscribe(reactiveFn));
+      toUnsubscribe.forEach((fn) => fn.unsubscribe(reactiveFn));
+      subscriptions = newSubscriptions;
+      newSubscriptions = new Set();
+
+      if (res !== previousRes) {
+        earlyReturn = res;
+        for (const subscriber of Array.from(subscribers)) {
+          subscriber();
+        }
+        earlyReturn = VOID;
+        previousRes = res;
+      }
+      return res;
+    }
+  );
+  /** @param {ReactiveFunction<any>} fn */
+  reactiveFn.logCall = (fn) => newSubscriptions.add(fn);
+  /** @param {ReactiveFunction<any>} fn */
+  reactiveFn.subscribe = (fn) => subscribers.add(fn);
+  /** @param {ReactiveFunction<any>} fn */
+  reactiveFn.unsubscribe = (fn) => subscribers.delete(fn);
+  return reactiveFn;
+}
+
+const screenHeight = reactive(() => window.innerHeight);
+const screenWidth = reactive(() => document.body.clientWidth);
+const screenUnit = reactive(() => Math.min(screenHeight(), screenWidth()));
+const slideHeight = reactive(() => screenUnit() * 1.5);
+
+window.addEventListener("resize", () => {
+  screenHeight();
+  screenWidth();
+});
+window.addEventListener("orientationchange", () => {
+  screenHeight();
+  screenWidth();
+});
 
 /**
  * @param {string} src
@@ -4704,7 +4794,6 @@ function loadImage(src) {
 }
 
 /**
- *
  * @param {number} n
  * @param {number} ratio
  */
@@ -4714,9 +4803,10 @@ function jitter(n, ratio = 0.5) {
 
 const perspective = 100;
 const slides = 12;
+const sinScreen = 6;
+const formScreen = 9;
 let visibleSlides = 8;
-/** @type {HTMLImageElement[] | null} */
-let loadedImages = null;
+const getVisibleSlides = reactive(() => visibleSlides);
 
 /**
  * @typedef {Object} FlowerData
@@ -4768,8 +4858,8 @@ const flowerElements = new Map();
 /**
  * @param {HTMLImageElement[]} images
  * @param {FlowerData[]} flowers
- * @param {number} offset
- * @param {number} screenHeight
+ * @param {() => number} offset
+ * @param {() => number} screenHeight
  */
 function positionFlowers(images, flowers, offset, screenHeight) {
   for (const flower of flowers) {
@@ -4777,46 +4867,68 @@ function positionFlowers(images, flowers, offset, screenHeight) {
     const { width, height, src } = images[id];
     const w = width / 2;
     const h = height / 2;
-    let img = flowerElements.get(flower);
-    if (!img) {
-      img = document.createElement("img");
-      flowerElements.set(flower, img);
-      img.className = "flower";
-      img.src = src;
-      img.style.width = `${w}px`;
-      img.style.height = `${h}px`;
-      img.style.left = `${-w / 2}px`;
-      content && content.appendChild(img);
-    }
-    img.style.transform = `translate3d(calc(${x}vw - ${w / 2}px), ${
-      offset + y * screenHeight - h / 2
-    }px, ${z}px) scale(${scale}) rotateZ(${rotate}deg)`;
+    const img = document.createElement("img");
+    flowerElements.set(flower, img);
+    img.className = "flower";
+    img.src = src;
+    img.style.width = `${w}px`;
+    img.style.height = `${h}px`;
+    img.style.left = `${-w / 2}px`;
+    content && content.appendChild(img);
+    reactive(() => {
+      img.style.transform = `translate3d(calc(${x}vw - ${w / 2}px), ${
+        offset() + y * screenHeight() - h / 2
+      }px, ${z}px) scale(${scale}) rotateZ(${rotate}deg)`;
+    })();
   }
 }
 
-const slideHeight = screenHeight * 1.5;
+/** @type {'Yes' | 'No' | null} */
+let response = null;
+const getResponse = reactive(() => response);
+
+const idElement = document.getElementById("id");
+const yesCheck = document.getElementById("yes-checkbox");
+const noCheck = document.getElementById("no-checkbox");
+const yesElements = Array.from(document.getElementsByClassName("yes"));
+const noElements = Array.from(document.getElementsByClassName("no"));
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const form = document.getElementById("form");
+const scrollElement = document.getElementById("scroll");
+
+/** @type {(() => number)[]} */
+const slideMiddles = [];
 
 /**
- * @param {'Yes' | 'No'} response
+ * @param {number} n
+ * @return {() => n}
  */
-async function setResponse(response) {
-  const yesCheck = document.getElementById("yes-checkbox");
-  const noCheck = document.getElementById("no-checkbox");
-  if (response === "Yes") {
-    yesCheck && yesCheck.classList.add("checked");
-    noCheck && noCheck.classList.remove("checked");
-  } else {
-    yesCheck && yesCheck.classList.remove("checked");
-    noCheck && noCheck.classList.add("checked");
-  }
-  for (const el of Array.from(document.getElementsByClassName("yes"))) {
+function slideMiddle(n) {
+  return (
+    slideMiddles[n] ||
+    (slideMiddles[n] = reactive(
+      () => screenHeight() + n * slideHeight() + slideHeight() / 2
+    ))
+  );
+}
+
+reactive(() => {
+  const response = getResponse();
+
+  response === "Yes" && yesCheck && yesCheck.classList.add("checked");
+  response !== "Yes" && yesCheck && yesCheck.classList.remove("checked");
+  response === "No" && noCheck && noCheck.classList.add("checked");
+  response !== "No" && noCheck && noCheck.classList.remove("checked");
+
+  for (const el of yesElements) {
     if (response === "Yes") {
       el.classList.remove("hidden");
     } else {
       el.classList.add("hidden");
     }
   }
-  for (const el of Array.from(document.getElementsByClassName("no"))) {
+  for (const el of noElements) {
     if (response === "No") {
       el.classList.remove("hidden");
     } else {
@@ -4824,45 +4936,37 @@ async function setResponse(response) {
     }
   }
 
-  visibleSlides = 9;
-
-  const form = document.getElementById("form");
   if (form) {
-    form.style.visibility = "visible";
+    form.style.visibility = response !== null ? "visible" : "hidden";
   }
+})();
+
+/**
+ * @param {'Yes' | 'No'} res
+ */
+async function setResponse(res) {
+  response = res;
+  getResponse();
+  visibleSlides = 9;
+  getVisibleSlides();
 
   scroller &&
     scroller.scrollTo({
-      top: slideMiddle(formScreen) - actualScreenHeight / 2,
+      top: slideMiddle(formScreen)() - screenHeight() / 2,
       behavior: "smooth",
     });
 
-  if (response === "No") {
-    // if (scroller) {
-    //   scroller.style.overflow = "hidden";
-    //   scroller.addEventListener("scroll", (event) => event.preventDefault());
-    // }
+  if (idElement) {
+    const id = idElement.getAttribute("value");
+    id &&
+      (await fetch("/rsvp", {
+        method: "POST",
+        body: new URLSearchParams([
+          ["id", id],
+          ["response", response],
+        ]),
+      }));
   }
-
-  const idElement = document.getElementById("id");
-  const id = idElement ? idElement.getAttribute("value") : null;
-  if (id) {
-    await fetch("/rsvp", {
-      method: "POST",
-      body: new URLSearchParams([
-        ["id", id],
-        ["response", response],
-      ]),
-    });
-  }
-}
-
-const sinScreen = 6;
-const formScreen = 9;
-
-/** @param {number} n */
-function slideMiddle(n) {
-  return actualScreenHeight + n * slideHeight + slideHeight / 2;
 }
 
 const slideElements = /** @type {HTMLElement[]} */ (Array.from(
@@ -4875,59 +4979,25 @@ const longSlideElements = /** @type {HTMLElement[]} */ (Array.from(
   document.getElementsByClassName("long-slide")
 ));
 
-function resize() {
-  actualScreenHeight = window.innerHeight;
-  screenHeight = Math.min(actualScreenHeight, document.body.clientWidth);
-
+reactive(() => {
   for (const slide of slideElements) {
-    slide.style.height = `${screenHeight * 1.5}px`;
+    slide.style.height = `${slideHeight()}px`;
   }
   for (const slide of shortSlideElements) {
-    slide.style.height = `${window.innerHeight}px`;
+    slide.style.height = `${screenHeight()}px`;
   }
   for (const slide of longSlideElements) {
-    slide.style.height = `${screenHeight * 3}px`;
+    slide.style.height = `${slideHeight() * 2}px`;
   }
-}
+})();
 
-function positionAllFlowers() {
-  if (!loadedImages) return;
-  actualScreenHeight = window.innerHeight;
-  screenHeight = Math.min(actualScreenHeight, document.body.clientWidth);
-
-  positionFlowers(loadedImages, flowerData[0], 0, screenHeight);
-  for (let slide = 0; slide < slides; slide++) {
-    if (slide === sinScreen + 1) continue;
-    positionFlowers(
-      loadedImages,
-      flowerData[1 + slide],
-      actualScreenHeight,
-      screenHeight
-    );
-  }
-  positionFlowers(
-    loadedImages,
-    flowerData[slides + 1],
-    actualScreenHeight,
-    screenHeight
-  );
-}
-
-async function main() {
-  const yes = document.getElementById("yes");
+(async function main() {
   yes && yes.addEventListener("click", () => setResponse("Yes"));
-
-  const no = document.getElementById("no");
   no && no.addEventListener("click", () => setResponse("No"));
 
-  const form = document.getElementById("form");
-  if (form) {
+  form &&
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      // const confirm = document.getElementById("confirm");
-      // if (confirm) {
-      //   confirm.classList.remove("hidden");
-      // }
 
       const idElement = document.getElementById("id");
       const id = idElement ? idElement.getAttribute("value") : null;
@@ -4940,33 +5010,28 @@ async function main() {
       }
 
       visibleSlides = 10;
+      getVisibleSlides();
 
       if (scroller) {
         scroller.scrollTo({
-          top: slideMiddle(formScreen + 1) - actualScreenHeight / 2,
+          top: slideMiddle(formScreen + 1)() - screenHeight() / 2,
           behavior: "smooth",
         });
         // scroller.style.overflow = "hidden";
         // scroller.addEventListener("scroll", (event) => event.preventDefault());
       }
     });
-  }
 
-  window.addEventListener("resize", resize);
-  window.addEventListener("orientationchange", resize);
-  resize();
-
-  if (scroller) {
+  scroller &&
     scroller.addEventListener("scroll", (event) => {
-      const screenMiddle = scroller.scrollTop + screenHeight / 2;
-      if (screenMiddle > slideMiddle(visibleSlides)) {
+      const screenMiddle = scroller.scrollTop + screenHeight() / 2;
+      if (screenMiddle > slideMiddle(visibleSlides)()) {
         event.preventDefault();
         scroller.scrollTo({
-          top: slideMiddle(visibleSlides) - actualScreenHeight / 2,
+          top: slideMiddle(visibleSlides)() - screenHeight() / 2,
         });
       }
     });
-  }
 
   const [images] = await Promise.all([
     Promise.all(flowers.map(loadImage)),
@@ -5002,17 +5067,16 @@ async function main() {
     ));
 
   if (location.hostname === "localhost") {
-    console.log(JSON.stringify(flowerData));
+    // console.log(JSON.stringify(flowerData));
   }
 
-  loadedImages = images;
-  window.addEventListener("resize", positionAllFlowers);
-  window.addEventListener("orientationchange", positionAllFlowers);
-  positionAllFlowers();
+  positionFlowers(images, flowerData[0], () => 0, screenUnit);
+  for (let slide = 0; slide < slides; slide++) {
+    if (slide === sinScreen + 1) continue;
+    positionFlowers(images, flowerData[1 + slide], screenHeight, screenUnit);
+  }
+  positionFlowers(images, flowerData[slides + 1], screenHeight, screenUnit);
 
   await new Promise((resolve) => setTimeout(resolve, 2000));
-  const scroll = document.getElementById("scroll");
-  scroll && (scroll.style.opacity = "1");
-}
-
-main();
+  scrollElement && (scrollElement.style.opacity = "1");
+})();

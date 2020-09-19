@@ -4,7 +4,6 @@
 # Maybe
 
 - JS build
-- Reactive
 
 # Wontfix
 
