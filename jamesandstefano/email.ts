@@ -32,15 +32,15 @@ async function main() {
     return;
   }
 
-  const [, , To, code] = process.argv;
-  console.log(To, code);
+  const [, , To, code, lang] = process.argv;
+  console.log(To, code, lang);
 
   // const background = fs.readFileSync("./images/email.jpg");
 
   const body: Body = {
     To,
     From: "James & Stefano savethedate@jamesandstefano.com",
-    TemplateId: 20223324,
+    TemplateId: lang === "it" ? 20316707 : 20223324,
     TemplateModel: {
       url: `https://jamesandstefano.com/savethedate/${code}`,
       // background: `data:image/jpeg;base64,${background.toString("base64")}`,
