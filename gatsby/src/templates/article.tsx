@@ -16,6 +16,11 @@ import {
   sansCaps,
   serifS,
   monoS,
+  sansS,
+  sansM,
+  serifMedium,
+  serifL,
+  serifM,
 } from '../design/text';
 import {
   linkColor,
@@ -25,6 +30,7 @@ import {
   gray,
   darkerGrayBackground,
   textColor,
+  accentColor,
 } from '../design/colors';
 import {unit, maxColumn} from '../design/layout';
 import {Subtitle, Title, DateView, Link, Button, Heading} from '../components/text';
@@ -61,7 +67,7 @@ const markdownStyle = css({
   '& h4': {...sansBoldM, marginTop: unit * 2, marginBottom: unit / 2},
   '& h3 + h4': {marginTop: unit / 2},
   '& h5': {...sansBoldXS, marginTop: 0, marginBottom: unit / 4},
-  '& strong': sansBold,
+  '& strong': sansBoldS,
   '& .gatsby-highlight, code': monoXS,
   '& p>code, & li>code': {
     ...monoS,
@@ -191,12 +197,40 @@ const markdownStyle = css({
     fontStyle: 'italic',
     color: gray,
   },
-  '& .quote': {
+  '& blockquote.quote': {
     fontStyle: 'italic',
-    marginLeft: unit,
-    marginRight: unit,
+    ...serifM,
+    color: textColor,
+    background: 'transparent',
+    paddingTop: 0,
+    paddingBottom: 0,
+    borderColor: linkColor,
+  },
+  '& ol, & ul': {
+    listStyle: 'none',
+    padding: 0,
+    margin: 0,
     marginTop: unit,
     marginBottom: unit,
+    '&>li': {
+      counterIncrement: 'counter',
+      marginLeft: unit * 2,
+      position: 'relative',
+    },
+    '&>li::before': {
+      content: 'counter(counter) "."',
+      width: unit * 2,
+      position: 'absolute',
+      left: -unit * 2.5,
+      top: 6,
+      textAlign: 'right',
+      ...sansXS,
+    },
+  },
+  '& ul > li::before': {
+    content: '‣',
+    top: -1,
+    ...sansM,
   },
 });
 

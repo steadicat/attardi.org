@@ -5,7 +5,7 @@ export const linkColor = '#6bd';
 export const hoverLinkColor = '#6cf';
 export const activeLinkColor = accentColor;
 
-export const gray = '#aaa';
+export const gray = '#999';
 export const grayBackground = '#f7f7f7';
 export const darkerGrayBackground = '#f0f0f0';
 

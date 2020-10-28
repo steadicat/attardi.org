@@ -32,7 +32,7 @@ const Layout: React.FC<LayoutProps> = React.memo(({children, location}) => (
         content="Engineering Manager at Coinbase. Former UI engineer and designer, specializing in React and React performance. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
       />
       <link
-        href="//fonts.googleapis.com/css2?family=PT+Mono&family=Rubik:wght@300;400;500;600&family=Zilla+Slab:ital,wght@0,400;0,500;1,300&display=block"
+        href="//fonts.googleapis.com/css2?family=PT+Mono&family=Rubik:wght@300;400;500;600&family=Zilla+Slab:ital,wght@0,400;0,500;1,400&display=block"
         rel="stylesheet"
       />
       <meta property="og:site_name" content="attardi.org" />

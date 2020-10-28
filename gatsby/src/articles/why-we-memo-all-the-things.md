@@ -1,13 +1,13 @@
 ---
-title: 'Why we memo all the things'
+title: 'Why We Memo All the Things'
 date: '2020-10-28'
 featuredImage: '../images/pytorch-and-coreml/diagram.png'
 description: ''
 ---
 
-On my team at Coinbase, we have an explicit guideline to wrap every component in `React.memo`. For reasons, this tends to be controversial. This article explains the logic behind it.
+On my team at Coinbase, we have an explicit guideline to wrap every component in `React.memo`. For reasons that have a lot to do with pundits on Twitter, this tends to be controversial. This article explains why we do it anyway.
 
-### Why we React.memo all components
+### Why We React.memo All Components
 
 Let’s start with what we can all agree on: in most apps, some components can benefit from being wrapped in `React.memo`. Maybe because they are expensive to rerender, or maybe they are children of a component that renders much more frequently. Maybe both.
 
@@ -16,9 +16,9 @@ So not using `React.memo` at all is not an option. We are left with two options:
 - Use `React.memo` some of the time
 - Use `React.memo` all the time
 
-The first option sounds like the most appealing, doesn’t it? Figure out when we can benefit from `React.memo`, and use it then, and only then. However, before we go that far, we have to remind ourselves that we work on a large team. No matter how diligent we are with education, code review, and profiling, we are not going to get it right 100% of the time. So we have to ask ourselves:
+The first option sounds like the most appealing, doesn’t it? Figure out when we can benefit from `React.memo`, and use it then, and only then. However, before we go that far, we have to remind ourselves that we work on a large team. No matter how diligent we are with education, code review, and profiling, **we are not going to get it right 100% of the time**. So we have to ask ourselves:
 
-What is the cost of getting it wrong?
+<blockquote class="quote">What is the cost of getting it wrong?</blockquote>
 
 If we `memo` a component that doesn’t need to be, all we’re doing is a shallow equality check on the props of that component, on each potential render.
 
@@ -26,7 +26,7 @@ If we don’t `memo` a component that should be, we are:
 
 1. Running a render function
 2. Allocating all callbacks anew
-3. Allocating all `useMemo` values anew
+3. Allocating all `useMemo` functions anew
 4. Allocating a bunch of new JSX elements
 5. Repeating 1–4 recursively for all the children
 6. Causing the React reconciler to compare the old tree with the new tree
@@ -35,11 +35,11 @@ If you’ve ever profiled a React app – even in production mode – you know t
 
 Wastefully rerendering a component is more expensive that wastefully testing whether props changed. So we want to err on the side of avoiding unnecessary rerenders. Since we are fallible, the only foolproof way to achieve that is `memo`ing everything by default.
 
-### Sane defaults
+### Sane Defaults
 
-On top of that, leaving the responsibility of deciding when to use `memo` and when not to places an unnecessary burden on all our engineers. Do we expect everybody to be intimately familiar with the tradeoffs? To profile each component to make the decision? What is the cost in terms of extra mental effort and time to try to get this right? Is it worth it? Why not provide a sane default, and diverge when necessary?
+On top of that, leaving the responsibility of deciding when to use `memo` and when not to places an unnecessary burden on all our engineers. Do we expect everybody to be intimately familiar with the tradeoffs? To profile each component to make the decision? What is the cost in terms of extra mental effort and time to try to get this right? Is it worth it? Why not provide a _sane_ default, and diverge when necessary?
 
-### CPU cost of React.memo
+### CPU Cost of React.memo
 
 But, you may be thinking, what if the vast majority of my components are cheap to rerender? Won’t the cost of all these unnecessary `memo`s add up to more than the possible cost of a wasted expensive rerender?
 
@@ -47,39 +47,39 @@ In my experience, the answer is no. I have never seen `memo` itself show up in a
 
 > If you have a legit use case where `memo` introduces a measurable performance hit, ping me. I’ll be happy to update this post based on new information!
 
-### Memory cost of React.memo
+### Memory Cost of React.memo
 
 There is a `memo` meme that’s going around: they say that `React.memo` has a memory cost, because – like other memoizations – you have to keep around the old values in case you need them again later. Makes sense? Unfortunately, that’s not quite right. Because of how React works, the result of previous renders needs to be kept around anyway – to diff it against subsequent renders. That’s the basis of React’s reconciliation algorithm. It can’t work without it.
 
 Don’t take my word for it. Here’s [Christopher Chedeau on Twitter](https://twitter.com/Vjeux/status/1083902075946205189), responding to one Dan Abramov:
 
-<div class="quote">I don't think that it’s a great analogy. Doing memoize() on every function would be horrible because you'd have to store the state of the input/output for all the calls. In the React case, React already does that for everything, so it's “free”.</div>
+<blockquote class="quote">I don’t think that it’s a great analogy. Doing memoize() on every function would be horrible because you’d have to store the state of the input/output for all the calls. In the React case, React already does that for everything, so it’s “free”.</blockquote>
 
-> In case you don’t know him, Christopher Chedeau has been on the React Core team at Facebook since 2012, i.e. the very beginning, i.e. much longer than Dan Abramov. He created React Native, Prettier, CSS-in-JS, Excalidraw, and Yoga. Dan Abramov, on the other hand, created Redux.
+> In case you don’t know him, Christopher Chedeau has been on the React Core team at Facebook since 2012, i.e. the very beginning<!--, i.e. much longer than Dan Abramov-->. He created React Native, Prettier, CSS-in-JS, Excalidraw, and Yoga. <!--Dan Abramov, on the other hand, created Redux.-->
 
-### Isn’t it premature optimization?
+### Isn’t it Premature Optimization?
 
-Premature optimization is spending unnecessary time optimizing your code for performance before you know which code needs to be made faster. By asking engineers to make the memo-no-memo choice on every component, we are forcing them to spend more time thinking about performance because we are concerned about the potential performance cost of a `memo` call. That, in my mind, is premature optimization. Not the other way round.
+Premature optimization is spending time optimizing your code for performance before you know which code needs to be made faster. By asking engineers to make the memo-no-memo choice on every component, we are forcing them to spend more time thinking about performance because we are concerned about the _potential_ performance cost of a `memo` call. That, in my mind, is premature optimization. Not the other way round.
 
-### Why we React.useCallback all callbacks
+### Why we React.useCallback All Callbacks
 
 Are we on the same page about `React.memo`? Good, then this one is going to be easy. In the majority of the cases, callbacks get passed as props to other components. If you don’t wrap them in `useCallback`, you’re gonna break `memo`. It’s that simple. Wrap your callbacks in `useCallback` to make `memo` work.
 
 What about callbacks that get passed to primitive components? Isn’t `useCallback` useless in those cases? Yes. But. When the next intern wraps your primitive in another component, are they gonna know to go back and change all the passed in callbacks to wrap them in `useCallback`? Probably not.
 
-Plus, the arguments above about having sane defaults and not creating an extra burden on our engineers still apply. The CPU and `memo`ry cost of `useCallback` is negligible. Yes, callbacks need to stick around in memory regardless. After all, they may need to be called!
+Plus, the arguments above about having sane defaults and not creating an extra burden on our engineers still apply. The CPU and memory cost of `useCallback` is negligible. Yes, callbacks need to stick around in memory regardless. After all, they may need to be called!
 
 Keep it simple. `useCallback` all the fns.
 
-### Why we React.useMemo all the props & deps
+### Why we React.useMemo All the Props & Deps
 
-The same thing goes for any time we are computing a new object or array. We have to wrap it in `useMemo` or it’s going to break any component that receives those values as props.
+The same thing goes for any time we are creating a new object or array. We have to wrap it in `useMemo` or it’s going to break any component that receives those values as props.
 
 Any data structure that gets recreated on every render can also break downstream `useCallback`s and `useMemo`s, by showing up in their list of dependencies. Such ever-changing values are then referenced in other callbacks and derived values, so the breakage spreads – like a coronavirus in a town where only half the people were masks. If things aren’t `memo`ed by default, debugging performance issues as they come up is going to involve a long game of whack-a-mole, as you walk back up the chain of dependencies all the way to add memoization at every step.
 
-### Will someone please think of the children?
+### Will Someone Please Think of the Children?
 
-Many people aren’t aware of this. `children` is a sneaky prop that breaks `memo`. JSX creates a new data structure on every render. Any time a component rerenders and passes JSX to another component, it’s gonna break the child component’s `memo`.
+Many people aren’t aware of this: `children` is a sneaky prop that breaks `memo`. JSX creates a new data structure on every render. Any time a component rerenders and passes JSX to another component, it’s gonna break the child component’s `memo`.
 
 How do we deal with this? The same way we deal with all other complex data structures created during render: we `useMemo` it.
 

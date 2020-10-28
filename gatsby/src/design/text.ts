@@ -12,7 +12,7 @@ export const serif = '"Zilla Slab", "Lucida Bright", serif';
 export const mono = '"PT Mono", "SF Mono", Consolas, Monaco, monospace';
 
 export const serifRegular = {fontFamily: serif, fontWeight: 400};
-const serifMedium = {fontFamily: serif, fontWeight: 500};
+export const serifMedium = {fontFamily: serif, fontWeight: 500};
 export const sansRegular = {fontFamily: sans, fontWeight: 300};
 const sansMedium = {fontFamily: sans, fontWeight: 400};
 export const sansBold = {fontFamily: sans, fontWeight: 500};
@@ -29,6 +29,7 @@ export const sansBoldS = {...sansBold, ...s};
 export const sansBoldXS = {...sansBold, ...xs};
 
 export const serifS = {...serifRegular, ...s, fontSize: 19};
+export const serifM = {...serifRegular, ...m};
 
 export const monoXS = {
   ...monoRegular,
