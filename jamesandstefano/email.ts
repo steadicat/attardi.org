@@ -39,6 +39,7 @@ async function main() {
 
   const body: Body = {
     To,
+    Bcc: "James & Stefano <savethedate@jamesandstefano.com>",
     From: "James & Stefano savethedate@jamesandstefano.com",
     TemplateId: lang === "it" ? 20316707 : 20223324,
     TemplateModel: {

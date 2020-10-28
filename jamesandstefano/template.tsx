@@ -25,10 +25,6 @@ export const Template = ({
         rel="stylesheet"
       />
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <meta
-        name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
-      />
       <link rel="apple-touch-icon" href="/savethedate/images/7.png" />
       <link rel="icon" href="/savethedate/images/7.png" />
     </head>
@@ -132,7 +128,7 @@ export const Template = ({
               </div>
               <div id="no" className="response">
                 <Checkbox id="no-checkbox" />
-                {_("No, with regret", "No, con duolo")}
+                {_("No, with regret", "No, con rammarico")}
               </div>
             </div>
           </div>

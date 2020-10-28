@@ -7,7 +7,7 @@ import fetch from "node-fetch";
 const apiKey = process.env.AIRTABLE_API_KEY;
 const base = "appX8ncwIIqYiABo7";
 const baseName = "Save the date";
-const viewName = "Tier 1";
+const viewName = "Ready to Send";
 
 const url = `https://api.airtable.com/v0/${encodeURIComponent(
   base
