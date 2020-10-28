@@ -63,7 +63,7 @@ const markdownStyle = css({
   '& h5': {...sansBoldXS, marginTop: 0, marginBottom: unit / 4},
   '& strong': sansBold,
   '& .gatsby-highlight, code': monoXS,
-  '& p>code': {
+  '& p>code, & li>code': {
     ...monoS,
     background: darkerGrayBackground,
     borderRadius: 3,
@@ -75,9 +75,7 @@ const markdownStyle = css({
   '& h3>.caps, h4>.caps, h5>.caps, a>.caps': sansBoldCaps,
   '& blockquote>p>.caps': sansCaps,
   '& p': {margin: 0},
-  '& p + p': {
-    textIndent: unit * 1.5,
-  },
+  '& p+p': {marginTop: unit},
   '& blockquote': {
     ...sansXS,
     marginTop: unit / 2,
@@ -192,6 +190,13 @@ const markdownStyle = css({
   '& .thanks': {
     fontStyle: 'italic',
     color: gray,
+  },
+  '& .quote': {
+    fontStyle: 'italic',
+    marginLeft: unit,
+    marginRight: unit,
+    marginTop: unit,
+    marginBottom: unit,
   },
 });
 
@@ -353,7 +358,6 @@ const Sidebar = ({title, tableOfContents}: {title: string; tableOfContents: stri
     width={sidebarWidth}
     overflow="auto"
     flexShrink={0}
-    marginTop={555}
     padding={unit}
     {...tableOfContentsStyle}
     media={['(max-width: 959px)', {display: 'none'}]}
@@ -448,10 +452,7 @@ const ArticlePage = ({
           <Heading>
             <Link to="/">Stefano J. Attardi</Link>
           </Heading>
-          <Subtitle>
-            UI Engineering and Design consultant, specializing in React and React performance.
-            Consulting as <Link href="https://rationalcreation.com/">Rational Creation</Link>.
-          </Subtitle>
+          <Subtitle>Engineering Manager at Coinbase. We’re hiring!</Subtitle>
           <Button href="/email">Get in Touch</Button>
         </View>
       </View>
