@@ -22,17 +22,17 @@ const Layout: React.FC<LayoutProps> = React.memo(({children, location}) => (
     color={textColor}>
     <Helmet
       titleTemplate="%s - Stefano J. Attardi"
-      defaultTitle="Stefano J. Attardi: UI Engineering and Design consultant">
+      defaultTitle="Stefano J. Attardi: Engineering Manager">
       <meta
         name="description"
-        content="UI Engineering and Design consultant, specializing in React and React performance. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
+        content="Engineering Manager at Coinbase. Former UI engineer and designer, specializing in React and React performance. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
       />
       <meta
         name="og:description"
-        content="UI Engineering and Design consultant, specializing in React and React performance. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
+        content="Engineering Manager at Coinbase. Former UI engineer and designer, specializing in React and React performance. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
       />
       <link
-        href="//fonts.googleapis.com/css?family=Zilla+Slab:400,400i,500|Rubik:600,500,400,300|PT+Mono:400"
+        href="//fonts.googleapis.com/css2?family=PT+Mono&family=Rubik:wght@300;400;500;600&family=Zilla+Slab:ital,wght@0,400;0,500;1,300&display=block"
         rel="stylesheet"
       />
       <meta property="og:site_name" content="attardi.org" />
