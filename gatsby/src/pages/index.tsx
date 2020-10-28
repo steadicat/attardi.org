@@ -107,8 +107,7 @@ const IndexPage = ({
         {ProjectRow(
           'https://itunes.apple.com/app/movement-watch-tracker/id1329445157',
           'Movement',
-          'iOS app to set and track mechanical watches.',
-          true
+          'iOS app to set and track mechanical watches.'
         )}
         {ProjectRow(
           'https://pdfbymail.com/',
