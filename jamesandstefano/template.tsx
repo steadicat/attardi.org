@@ -88,7 +88,7 @@ export const Template = ({
           </div>
           <div className="slide text">
             <div className="small-text">{_("on the", "il")}</div>
-            <div>{_("29th of May, 2021", "29 maggio 2021")}</div>
+            <div>{_("4th of September, 2021", "4 settembre 2021")}</div>
           </div>
           <div className="slide text">
             <div className="small-text">{_("in", "a")}</div>

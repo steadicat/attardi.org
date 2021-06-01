@@ -8,6 +8,9 @@ handlers:
   - url: /savethedate/images
     static_dir: images
     secure: always
+  - url: /home/images
+    static_dir: home/images
+    secure: always
   - url: /savethedate/main\.js
     static_files: main.js
     upload: main\.js
