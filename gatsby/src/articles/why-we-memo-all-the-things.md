@@ -1,20 +1,20 @@
 ---
 title: 'Why We Memo All the Things'
 date: '2020-10-28'
-featuredImage: '../images/pytorch-and-coreml/diagram.png'
-description: ''
+featuredImage: '../images/memo-all-the-things.png'
+description: 'On my team at Coinbase, we ask everyone to use the React performance trinity – memo, useMemo, and useCallback – all the time. For some reason, this is controversial. I’m guessing this has something to do with Twitter. This article explains why we do it anyway.'
 ---
 
-On my team at Coinbase, we have an explicit guideline to wrap every component in `React.memo`. For reasons that have a lot to do with pundits on Twitter, this tends to be controversial. This article explains why we do it anyway.
+On my team at Coinbase, we ask everyone to use the React performance trinity – `memo`, `useMemo`, and `useCallback` – all the time. For some reason, this is controversial. I’m guessing this has something to do with Twitter. This article explains why we do it anyway.
 
 ### Why We React.memo All Components
 
 Let’s start with what we can all agree on: in most apps, some components can benefit from being wrapped in `React.memo`. Maybe because they are expensive to rerender, or maybe they are children of a component that renders much more frequently. Maybe both.
 
-So not using `React.memo` at all is not an option. We are left with two options:
+So not using `memo` at all is not an option. We are left with two options:
 
-- Use `React.memo` some of the time
-- Use `React.memo` all the time
+- Use `memo` some of the time
+- Use `memo` all the time
 
 The first option sounds like the most appealing, doesn’t it? Figure out when we can benefit from `React.memo`, and use it then, and only then. However, before we go that far, we have to remind ourselves that we work on a large team. No matter how diligent we are with education, code review, and profiling, **we are not going to get it right 100% of the time**. So we have to ask ourselves:
 
@@ -33,7 +33,7 @@ If we don’t `memo` a component that should be, we are:
 
 If you’ve ever profiled a React app – even in production mode – you know there is a non-negligible performance impact to every component that renders. By contrast, the props comparison in `memo` itself hardly ever shows up in profiles.
 
-Wastefully rerendering a component is more expensive that wastefully testing whether props changed. So we want to err on the side of avoiding unnecessary rerenders. Since we are fallible, the only foolproof way to achieve that is `memo`ing everything by default.
+Wastefully rerendering a component is more expensive than wastefully testing whether props changed. So we want to err on the side of avoiding unnecessary rerenders. Since we are fallible, the only foolproof way to achieve that is `memo`ing everything by default.
 
 ### Sane Defaults
 
@@ -75,7 +75,7 @@ Keep it simple. `useCallback` all the fns.
 
 The same thing goes for any time we are creating a new object or array. We have to wrap it in `useMemo` or it’s going to break any component that receives those values as props.
 
-Any data structure that gets recreated on every render can also break downstream `useCallback`s and `useMemo`s, by showing up in their list of dependencies. Such ever-changing values are then referenced in other callbacks and derived values, so the breakage spreads – like a coronavirus in a town where only half the people were masks. If things aren’t `memo`ed by default, debugging performance issues as they come up is going to involve a long game of whack-a-mole, as you walk back up the chain of dependencies all the way to add memoization at every step.
+Any data structure that gets recreated on every render can also break downstream `useCallback`s and `useMemo`s, by showing up in their list of dependencies. Such ever-changing values are then referenced in other callbacks and derived values, so the breakage spreads – like a coronavirus in a town where only half the people wear masks. If things aren’t `memo`ed by default, debugging performance issues as they come up is going to involve a long game of whack-a-mole, as you walk back up the chain of dependencies all the way to add memoization at every step.
 
 ### Will Someone Please Think of the Children?
 

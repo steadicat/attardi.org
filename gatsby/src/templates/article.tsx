@@ -100,9 +100,6 @@ const markdownStyle = css({
         fontWeight: 'normal',
       },
     },
-    '& p + p': {
-      textIndent: unit,
-    },
     '& p>code': monoXS,
     '& .gatsby-highlight': {
       background: darkerGrayBackground,
