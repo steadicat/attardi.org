@@ -1,0 +1,17 @@
+service: verbamanent
+runtime: go112
+
+handlers:
+  - url: /scripts
+    static_dir: scripts
+  - url: /styles
+    static_dir: styles
+  - url: /(.+)/
+    static_files: \1/index.html
+    upload: (.+)/index.html
+  - url: /(.+)
+    static_files: \1/index.html
+    upload: (.+)/index.html
+  - url: /
+    static_files: index.html
+    upload: index.html

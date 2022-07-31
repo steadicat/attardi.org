@@ -1,0 +1,120 @@
+body {
+  font: 16px/24px georgia, serif; }
+
+a, strong, em {
+  font: bold 14px/24px helvetica, arial, sans-serif;
+  text-decoration: none; }
+
+.user, h2 {
+  font: 14px/24px helvetica, arial, sans-serif; }
+
+.info, .meta, .pullout, .copyright {
+  font: 12px/24px helvetica, arial, sans-serif; }
+  .info a, .meta a, .pullout a, .copyright a {
+    font-size: 12px; }
+
+.comments {
+  font-size: 13px;
+  list-style-type: none; }
+
+.comments a, .comments strong {
+  font: bold 11px/24x helvetica, arial, sans-serif;
+}
+
+.signature {
+  margin: 2em 0;
+  font-style: italic; }
+
+h1 {
+  background: #faca85;
+  border-bottom: 1px solid #946524;
+  color: #946524;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 6px;
+  font-size: 16px;
+  padding: 40px 60px 10px; }
+  .scriptavolant h1 {
+    background: #777;
+    color: #faca85;
+    border-bottom: 1px solid #000; }
+
+.pullout, h2, .copyright {
+  color: #999; }
+
+a[href] {
+  color: #cc6622; }
+  a[href]:visited {
+    color: #883322; }
+  a[href]:hover {
+    color: #ee8844; }
+  a[href]:active {
+    color: #f93; }
+
+.meta a[href] {
+  color: #336; }
+
+.info {
+  color: #999; }
+
+.template, .off {
+  display: none; }
+
+.info {
+  color: gray; }
+
+html, body {
+  margin: 0;
+  padding: 0; }
+
+h2, p {
+  margin: 0; }
+
+h2 {
+  margin-top: 2em; }
+
+p+p {
+  text-indent: 22px; }
+  .copyright p+p, p+p.signature {
+    text-indent: 0; }
+
+.body {
+  margin-bottom: 0.2em; }
+
+.meta {
+  margin-left: 60px; }
+
+.meta a {
+  margin-right: 22px; }
+
+.post, #info {
+  padding: 0 2em;
+  margin: 2em 10em 2em 20em; }
+
+.comment {
+  margin: 0 0 1em 0; }
+
+.pullout {
+  position: absolute;
+  left: 60px; }
+
+.loading {
+  margin: 6em 0;
+  text-align: center;
+  color: gray; }
+
+.user {
+  line-height: 30px; }
+  .user h3 {
+    margin-left: 40%;
+    padding-left: 0.8em; }
+
+.key {
+  width: 40%;
+  float: left;
+  text-align: right;
+  margin-right: 1em;
+  font-weight: bold; }
+  .key:after {
+    content: ": "; }
