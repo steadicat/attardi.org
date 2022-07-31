@@ -8,8 +8,8 @@ handlers:
   - url: /savethedate/images
     static_dir: images
     secure: always
-  - url: /home/images
-    static_dir: home/images
+  - url: /home
+    static_dir: home
     secure: always
   - url: /savethedate/main\.js
     static_files: main.js
@@ -21,9 +21,19 @@ handlers:
     upload: savethedate/(.*)\.html
     mime_type: text/html; charset=utf-8
     secure: always
-  - url: /.*
+  - url: /
     static_files: index.html
     upload: index.html
+    mime_type: text/html; charset=utf-8
+    secure: always
+  - url: /it
+    static_files: index.it.html
+    upload: index.it.html
+    mime_type: text/html; charset=utf-8
+    secure: always
+  - url: /.*
+    static_files: 404.html
+    upload: 404.html
     mime_type: text/html; charset=utf-8
     secure: always
 

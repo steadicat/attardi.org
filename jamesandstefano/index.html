@@ -3,6 +3,13 @@
   <head>
     <title>James + Stefano</title>
     <style>
+      @font-face {
+        font-family: "Katahdin";
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url(./home/katahdin.woff2) format("woff2");
+      }
       h1,
       h2,
       h3,
@@ -11,6 +18,7 @@
       body {
         margin: 0;
         padding: 0;
+        font: inherit;
       }
       a {
         color: inherit;
@@ -22,30 +30,35 @@
       }
       html,
       body {
-        font-family: "Raleway", sans-serif;
-        text-align: "center";
-        font-size: 0.1vmin;
+        font-family: "Katahdin", sans-serif;
+        font-weight: 900;
+        text-align: center;
+        font-size: calc(0.3px + 0.05vmin);
         text-transform: uppercase;
+        --l: calc(24px + (64 - 24) * (100vmin - 375px) / (1440 - 375));
+        --m: calc(18px + (36 - 18) * (100vmin - 375px) / (1440 - 375));
+        --s: calc(14px + (20 - 14) * (100vmin - 375px) / (1440 - 375));
+        --xs: calc(10px + (16 - 10) * (100vmin - 375px) / (1440 - 375));
       }
       h1 {
-        font-size: 64rem;
-        line-height: 80rem;
+        font-size: var(--l);
+        line-height: 1.25;
         letter-spacing: 0.3em;
       }
       h2 {
-        font-size: 36rem;
-        line-height: 64rem;
+        font-size: var(--m);
+        line-height: 1.8;
         letter-spacing: 0.3em;
         margin-bottom: 48rem;
       }
       h3 {
-        font-size: 20rem;
-        line-height: 48rem;
+        font-size: var(--s);
+        line-height: 2.4;
         letter-spacing: 0.3em;
       }
       h4 {
-        font-size: 16rem;
-        line-height: 38rem;
+        font-size: var(--xs);
+        line-height: 2.4;
         letter-spacing: 0.3em;
       }
       section {
@@ -55,6 +68,9 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        box-sizing: border-box;
+        padding-top: 128rem;
+        padding-bottom: 128rem;
         padding-left: 32rem;
         padding-right: 32rem;
       }
@@ -100,9 +116,33 @@
           rgba(0, 0, 0, 0)
         );
       }
-      @media (max-width: 480px) {
+      #travel {
+        background: #fff url("./home/images/maps.jpg") no-repeat center bottom;
+        background-size: 100%;
+        min-height: 70vw;
+        max-height: 87vw;
+        height: 100vmin;
+        justify-content: flex-start;
+      }
+      .row {
+        display: flex;
+        align-self: stretch;
+        justify-content: center;
+      }
+      @media (max-width: 640px) {
         nav {
           display: none;
+        }
+        h2 {
+          margin-bottom: 24rem;
+        }
+        #travel {
+          max-height: none;
+          height: auto;
+          padding-bottom: 60vmin;
+        }
+        .row {
+          display: block;
         }
       }
       .ellip {
@@ -110,6 +150,7 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        align-self: stretch;
       }
     </style>
     <meta
@@ -143,6 +184,7 @@
         background: #000 url('./home/images/header.jpg') no-repeat center center;
         background-size: cover;
         color: #fff;
+        position: relative;
       "
     >
       <nav>
@@ -156,50 +198,52 @@
       <h1>James Nguyen</h1>
       <h1>+</h1>
       <h1>Stefano Attardi</h1>
-      <h2 style="margin-top: 64rem; margin-bottom: 0">September 4th, 2021</h2>
+      <h3 style="margin-top: 64rem; margin-bottom: 0">September 4th 2021</h3>
+      <h3 style="position: absolute; bottom: 20rem">
+        <a href="/it">Italiano</a>
+      </h3>
     </section>
     <section
       id="schedule"
       style="
-        background: #a08285 url('./home/images/monogram.png') no-repeat center
+        background: #a08285 url('./home/images/monogram.svg') no-repeat center
           center;
         background-size: auto 80%;
         color: #3b1c21;
       "
     >
       <h2 style="color: #fff">Schedule</h2>
-      <h4>Thursday, September 2nd – Friday, September 3rd</h4>
-      <h3>Arrival in Arquà Petrarca</h3>
+      <h4>Thursday September 2nd</h4>
+      <h3 style="opacity: 0.5">Early Arrivals</h3>
       <h4 style="margin-top: 48rem">Friday September 3rd</h4>
-      <h3>Afternoon activities (wine and olive oil tasting, etc.)</h3>
-      <h3>Rehearsal dinner</h3>
+      <h3 style="opacity: 0.5">Late Arrivals</h3>
+      <h3>Tour of nearby walled town</h3>
+      <h3>Prosciutto and wine tasting</h3>
+      <h3>Welcome dinner</h3>
       <h4 style="margin-top: 48rem">Saturday September 4th</h4>
-      <h3>Wedding ceremony (sunset)</h3>
+      <h3>Tour of Arquà</h3>
+      <h3>Wedding ceremony (5pm)</h3>
       <h3>Dinner</h3>
       <h3>Party</h3>
       <h4 style="margin-top: 48rem">Sunday September 5th</h4>
       <h3>Brunch</h3>
+      <h3 style="opacity: 0.5">Departures</h3>
+
+      <h4 style="margin-top: 48rem; opacity: 0.5">
+        All activities optional, except Saturday evening.
+      </h4>
     </section>
-    <section
-      id="travel"
-      style="
-        background: #fff url('./home/images/maps.jpg') no-repeat center bottom;
-        background-size: cover;
-        min-height: 70vw;
-        height: 100vmin;
-        justify-content: flex-start;
-      "
-    >
-      <h2 style="margin-top: 96rem">Travel</h2>
+    <section id="travel">
+      <h2>Travel</h2>
       <h4 style="max-width: 860rem">
         We can help arrange transportation from the airport or train station to
         Arquà.
       </h4>
-      <h4 style="margin-top: 24rem; max-width: 860rem">
+      <h4 style="margin-top: 12rem; max-width: 860rem">
         If you plan to explore on your own, you may wish to rent a car or
         <a
           href="https://www.seat61.com/train-travel-in-italy.htm"
-          style="color: #be9159"
+          style="color: #6573a3; border-bottom: 1px solid #6573a3"
           >travel by train</a
         >
         until you are ready to arrive in Arquà.
@@ -215,22 +259,22 @@
       "
     >
       <h2 style="color: #fff">Accommodations</h2>
-      <h4 style="max-width: 1280rem; margin-bottom: 96rem">
-        We have reserved rooms at the following hotels near the villa from
-        Thursday September 2nd to Monday September 5th, with the option to
-        extend to a full week stay. Please let us know which rooms you would
-        like us to reserve.
+      <h4 style="max-width: 1280rem; margin-bottom: 48rem">
+        We have reserved rooms for all our guests at the following hotels. A
+        shuttle will be available between the hotels and the villa.
       </h4>
-      <div
-        style="
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          grid-row-gap: 12rem;
-        "
-      >
+      <div class="row">
         <a
           href="https://www.tripadvisor.com/Hotel_Review-g940890-d7074513-Reviews-Locanda_Viridarium-Arqua_Petrarca_Province_of_Padua_Veneto.html"
-          style="display: flex; flex-direction: column; align-items: center"
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 24rem;
+            flex-shrink: 1;
+            flex-basis: 500rem;
+            min-width: 60px;
+          "
         >
           <div
             style="
@@ -239,7 +283,7 @@
               background: url('./home/images/locanda.jpg') no-repeat center
                 center;
               background-size: cover;
-              border-radius: 60px;
+              border-radius: 100%;
               margin-bottom: 12rem;
             "
           ></div>
@@ -251,29 +295,16 @@
           </h4>
         </a>
         <a
-          href="https://www.tripadvisor.com/Hotel_Review-g940890-d1007896-Reviews-Villa_del_Poeta-Arqua_Petrarca_Province_of_Padua_Veneto.html"
-          style="display: flex; flex-direction: column; align-items: center"
-        >
-          <div
-            style="
-              width: 120rem;
-              height: 120rem;
-              background: url('./home/images/villa.jpg') no-repeat center center;
-              background-size: cover;
-              border-radius: 60px;
-              margin-bottom: 12rem;
-            "
-          ></div>
-          <h3 class="ellip" style="margin-bottom: 8rem">Villa del Poeta</h3>
-          <h4>
-            <span class="drive">3 min</span>
-            <span class="walk">15 min</span>
-            <span class="elevation">0</span>
-          </h4>
-        </a>
-        <a
           href="https://www.tripadvisor.com/Hotel_Review-g940890-d4187486-Reviews-Alloggio_Franciscus-Arqua_Petrarca_Province_of_Padua_Veneto.html"
-          style="display: flex; flex-direction: column; align-items: center"
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 24rem;
+            flex-shrink: 1;
+            flex-basis: 500rem;
+            min-width: 60px;
+          "
         >
           <div
             style="
@@ -282,39 +313,26 @@
               background: url('./home/images/alloggio.jpg') no-repeat center
                 center;
               background-size: cover;
-              border-radius: 60px;
+              border-radius: 100%;
               margin-bottom: 12rem;
             "
           ></div>
           <h3 class="ellip" style="margin-bottom: 8rem">Alloggio Franciscus</h3>
           <h4>
             <span class="drive">5 min</span>
-            <span class="walk">10/20 min</span>
-            <span class="elevation">30M/0</span>
+            <span class="walk">10 min</span>
+            <span class="elevation">40M</span>
           </h4>
         </a>
       </div>
-      <h4 style="margin-top: 48rem; margin-bottom: 24rem; max-width: 1280rem">
-        Other options include:
-      </h4>
-      <h3 style="display: flex; line-height: 48rem">
-        <a
-          href="https://www.olivobianco.com/home/camere-vacanze-guest-house/"
-          style="margin-right: 48rem"
-          >Olivo Bianco</a
-        >
-        <a href="https://www.booking.com/hotel/it/appartamenti-quota-101.html"
-          >Appartamenti Quota 101</a
-        >
-      </h3>
     </section>
     <section id="dresscode" style="background: #fff">
-      <h2 style="margin-top: 92rem">Dress Code</h2>
-      <h4 style="max-width: 1280rem; margin-bottom: 48rem">
-        Sinful late summer eveningwear. Garden of eden, forbidden forest –
+      <h2>Dress Code</h2>
+      <h4 style="max-width: 1320rem; margin-bottom: 48rem">
+        Sinful late summer eveningwear. Think garden of eden, forbidden forest:
         mysterious, mystical, dark, sinister. For the ladies, we suggest florals
-        in any style. For the men, suits with a tie – and optional brocade,
-        jacquard, floral accents. Flower boutonnieres will be provided.
+        in any style. For the men, suit and tie – with optional brocade,
+        jacquard, or floral accents. Flower boutonnieres will be provided.
       </h4>
       <div
         style="
@@ -339,10 +357,14 @@
       "
     >
       <h2>Gifts</h2>
-      <h3 style="max-width: 780rem">
-        No gifts are necessary. If you insist, a gift registry will be available
-        in August.
-      </h3>
+      <h4 style="max-width: 780rem">
+        No gifts are necessary. For those who insist, please see our
+        <a
+          href="https://www.zola.com/registry/jamesandstefano"
+          style="color: #6573a3; border-bottom: 1px solid #6573a3"
+          >gift registry</a
+        >.
+      </h4>
     </section>
     <section
       id="respond"
@@ -354,14 +376,14 @@
     >
       <h2>Respond</h2>
       <h4 style="max-width: 780rem; margin-bottom: 48rem">
-        If you have dietary restrictions, if your plans change, or to reserve
-        accommodations, please email:
+        Please email us to confirm arrival and departure times and any dietary
+        restrictions:
       </h4>
-      <h3>
+      <h4>
         <a href="mailto:respond@jamesandstefano.com" style="color: #6573a3"
           >respond@jamesandstefano.com</a
         >
-      </h3>
+      </h4>
     </section>
     <section
       style="
@@ -371,9 +393,9 @@
         color: #fff;
       "
     >
-      <h3 style="color: #b46b62">
-        He who is without sin <br />
-        let him cast the first stone
+      <h3 style="color: #b46b62; margin-top: 280rem">
+        Let he who is without sin <br />
+        cast the first stone
       </h3>
       <h4 style="margin-top: 280rem">
         <a href="#top">
