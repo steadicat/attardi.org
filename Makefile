@@ -26,7 +26,7 @@ serve: app/app.yaml
 	cd app && go run main.go
 
 deploy: app/public app/app.yaml
-	cd app && gcloud app deploy --no-promote
+	cd app && gcloud app deploy --promote
 
 deploy-www:
 	cd app-www && gcloud app deploy

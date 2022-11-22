@@ -13,11 +13,15 @@ function handler(path, add) {
 
   if (/\.sass$/.test(path)) {
     // Skip
-  } else if (/^\/component---/.test(path)) {
+  } else if (/\.js$/.test(path)) {
     // Skip
-  } else if (/^\/path---/.test(path)) {
+  } else if (/\.js\.map$/.test(path)) {
     // Skip
-  } else if (/^\/static\/.+\.(png|jpg)$/.test(path)) {
+  } else if (/\.json$/.test(path)) {
+    // Skip
+  } else if (/\.LICENSE\.txt$/.test(path)) {
+    // Skip
+  } else if (/^.+\.(png|jpg)$/.test(path)) {
     // Skip
   } else if (/\.html$/.test(path)) {
     let url = path.replace(/\/index\.html$/, '').replace(/\.html$/, '');
@@ -40,6 +44,7 @@ function handler(path, add) {
       mime_type: 'text/css; charset=UTF-8',
     });
   } else {
+    console.log(path);
     add({url: path, file: path});
   }
 }

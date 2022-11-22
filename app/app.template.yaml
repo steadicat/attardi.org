@@ -8,23 +8,31 @@ handlers:
 - url: /labels2?/?
   script: auto
   secure: always
-- url: /(component|path)---(.+)\.js$
+- url: /(.+)\.js$
   mime_type: application/javascript; charset=UTF-8
-  static_files: public/\1---\2.js
-  upload: public/(component|path)---(.+)\.js$
+  static_files: public/\1.js
+  upload: public/(.+)\.js$
   expiration: 1m
   secure: always
   http_headers:
     Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
-- url: /(component|path)---(.+)\.js\.map$
+- url: /(.+)\.js\.map$
   mime_type: application/json; charset=UTF-8
-  static_files: public/\1---\2.js.map
-  upload: public/(component|path)---(.+)\.js\.map$
+  static_files: public/\1.js.map
+  upload: public/(.+)\.js\.map$
   expiration: 1m
   secure: always
   http_headers:
     Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
-- url: /static\/(.+)\.(png|jpg)$
+- url: /(.+)\.json$
+  mime_type: application/json; charset=UTF-8
+  static_files: public/\1.json
+  upload: public/(.+)\.json$
+  expiration: 1m
+  secure: always
+  http_headers:
+    Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
+- url: /(.+)\.(png|jpg)$
   static_files: public/static/\1.\2
   upload: public/static\/(.+)\.(png|jpg)$
   expiration: 30d
