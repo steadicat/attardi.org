@@ -11,7 +11,7 @@ import {
   sansS,
 } from '../design/text';
 import {unit} from '../design/layout';
-import GatsbyLink from 'gatsby-link';
+import {Link as GatsbyLink} from 'gatsby';
 import {linkColor, hoverLinkColor, activeLinkColor, gray, white} from '../design/colors';
 
 export const Title = ({

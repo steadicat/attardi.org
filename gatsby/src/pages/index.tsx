@@ -9,7 +9,7 @@ import Layout from '../components/Layout';
 
 export const pageQuery = graphql`
   {
-    allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
+    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
       edges {
         node {
           frontmatter {
@@ -87,13 +87,23 @@ const IndexPage = ({
         <Button href="/email">Get in Touch</Button>
       </View>
       <Heading marginTop={unit}>Articles</Heading>
-      {edges.map(({node: {frontmatter: {title, date}, fields: {slug}}}, i) => [
-        <Heading key={`${i}0`} marginTop={unit} marginBottom={unit / 4}>
-          <Link to={slug}>{title}</Link>{' '}
-          {Date.now() - new Date(date).valueOf() < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
-        </Heading>,
-        <DateView key={`${i}1`} date={date} />,
-      ])}
+      {edges.map(
+        (
+          {
+            node: {
+              frontmatter: {title, date},
+              fields: {slug},
+            },
+          },
+          i
+        ) => [
+          <Heading key={`${i}0`} marginTop={unit} marginBottom={unit / 4}>
+            <Link to={slug}>{title}</Link>{' '}
+            {Date.now() - new Date(date).valueOf() < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
+          </Heading>,
+          <DateView key={`${i}1`} date={date} />,
+        ]
+      )}
       <View
         display="grid"
         css={{
@@ -158,10 +168,19 @@ const IndexPage = ({
           <Link href="/email">Email</Link>
         </View>
         <View {...sansBoldS}>
-          <Link href="https://twitter.com/steadicat">Twitter</Link>
+          <Link rel="me" href="https://twitter.com/steadicat">
+            Twitter
+          </Link>
         </View>
         <View {...sansBoldS}>
-          <Link href="https://github.com/steadicat">GitHub</Link>
+          <Link rel="me" href="https://github.com/steadicat">
+            GitHub
+          </Link>
+        </View>
+        <View {...sansBoldS}>
+          <Link rel="me" href="https://mas.town/@steadicat">
+            Mastodon
+          </Link>
         </View>
       </View>
     </div>

@@ -35,12 +35,12 @@ import {
 import {unit, maxColumn} from '../design/layout';
 import {Subtitle, Title, DateView, Link, Button, Heading} from '../components/text';
 
-import * as webIcon from '../images/icons/web.svg';
-import * as wikipediaIcon from '../images/icons/wikipedia.svg';
-import * as mailIcon from '../images/icons/mail.svg';
-import * as twitterIcon from '../images/icons/twitter.svg';
-import * as githubIcon from '../images/icons/github.svg';
-import * as appstoreIcon from '../images/icons/appstore.svg';
+import webIcon from '../images/icons/web.svg';
+import wikipediaIcon from '../images/icons/wikipedia.svg';
+import mailIcon from '../images/icons/mail.svg';
+import twitterIcon from '../images/icons/twitter.svg';
+import githubIcon from '../images/icons/github.svg';
+import appstoreIcon from '../images/icons/appstore.svg';
 import Layout from '../components/Layout';
 
 const commonStyle = {
@@ -287,7 +287,7 @@ function setActiveHeaderId(id: string | null) {
     sidebar.className = id ? 'isScrolled' : '';
   }
   if (!id) return;
-  const active = document.querySelector(`[href="${window.location.pathname}#${id}"]`);
+  const active = document.querySelector(`[href="#${id}"]`);
   if (!active) return;
   active.className = 'active';
   activeHeaderLink = active;
@@ -494,7 +494,7 @@ const ArticlePage = ({
 export default ArticlePage;
 
 export const pageQuery = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     markdownRemark(fields: {slug: {eq: $slug}}) {
       frontmatter {
         title
