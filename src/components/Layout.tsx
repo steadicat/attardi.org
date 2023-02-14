@@ -40,16 +40,12 @@ const Layout: React.FC<LayoutProps> = React.memo(({children, location}) => (
       <meta name="og:url" content={`https://attardi.org${location.pathname}`} />
     </Helmet>
     {children}
-    <script async src="https://www.google-analytics.com/analytics.js" />
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "0ecb6fcc2dcb47f59f6847ba5798e7a2"}'
+    />
   </View>
 ));
-
-if (typeof window !== 'undefined') {
-  window.ga = window.ga || ((...args: unknown[]) => (ga.q = ga.q || []).push(args));
-
-  ga('create', 'UA-1809956-1', 'auto');
-  ga('set', 'transport', 'beacon');
-  ga('send', 'pageview');
-}
 
 export default Layout;
