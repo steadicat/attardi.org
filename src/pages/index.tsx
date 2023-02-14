@@ -9,7 +9,8 @@ import Layout from '../components/Layout';
 
 export const pageQuery = graphql`
   {
-    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+    # Gatsby 5: allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+    allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
       edges {
         node {
           frontmatter {
