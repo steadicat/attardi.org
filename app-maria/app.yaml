@@ -1,9 +1,0 @@
-service: maria
-runtime: go112
-
-handlers:
-  - url: /.*
-    static_files: index.html
-    upload: index.html
-    mime_type: text/html; charset=UTF-8
-    secure: always

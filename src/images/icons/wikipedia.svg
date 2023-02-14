@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>wikipedia</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="wikipedia" stroke="#CCCCCC">
+            <path d="M14.6676676,4.50439456 L12.0006005,4.50439456" id="Path-2"></path>
+            <path d="M3.99939945,4.50439456 L1.33233242,4.50439456" id="Path-2-Copy"></path>
+            <path d="M7.55548883,4.50439456 L4.8884218,4.50439456" id="Path-2-Copy-2"></path>
+            <path d="M11.1115782,4.50439456 L8.44451117,4.50439456" id="Path-2-Copy-3"></path>
+            <polyline id="Path-3" stroke-linejoin="bevel" points="6.22195531 4.7956543 9.68498278 12.8168337 13.1480103 4.7956543"></polyline>
+            <polyline id="Path-3-Copy" stroke-linejoin="bevel" points="2.66586594 4.7956543 6.22195531 12.8168337 9.77804469 4.7956543"></polyline>
+        </g>
+    </g>
+</svg>
