@@ -3,14 +3,30 @@ import React from 'react';
 const context = React.createContext<string | null | false>(null);
 const {Provider} = context;
 
-export function ProtectedEmailProvider({siteKey, endpoint, children}) {
+interface Window {
+  protectedEmailCallback?: (token: string) => void;
+}
+
+export function ProtectedEmailProvider({
+  siteKey,
+  endpoint,
+  timeout = 3000,
+  children,
+}: {
+  siteKey: string;
+  endpoint: string;
+  timeout: number;
+  children: JSX.Element;
+}) {
   const [email, setEmail] = React.useState<string | null | false>(null);
 
   React.useEffect(() => {
+    let done = false;
+
     window.protectedEmailCallback = async (token: string) => {
       const res = await fetch(`${endpoint}?token=${token}`);
       const body = await res.json();
-      console.log(body);
+      done = true;
       if (body.success) {
         setEmail(body.email);
       } else {
@@ -25,8 +41,17 @@ export function ProtectedEmailProvider({siteKey, endpoint, children}) {
     script.defer = true;
     document.body.appendChild(script);
 
+    const timer = setTimeout(() => {
+      if (!done) {
+        done = true;
+        setEmail(false);
+        delete window.protectedEmailCallback;
+      }
+    }, timeout);
+
     return () => {
       document.body.removeChild(script);
+      clearTimeout(timer);
     };
   }, []);
 

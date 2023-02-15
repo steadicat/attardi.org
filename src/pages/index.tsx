@@ -87,7 +87,11 @@ const IndexPage = ({
           Engineering Manager at <Link href="https://coinbase.com/">Coinbase</Link>.
         </Subtitle>
         <ProtectedEmail>
-          {(email) => (email ? <Button href={`mailto:${email}`}>Get in Touch</Button> : null)}
+          {(email) => (
+            <Button disabled={!email} href={email ? `mailto:${email}` : undefined}>
+              Get in Touch
+            </Button>
+          )}
         </ProtectedEmail>
       </View>
       <Heading marginTop={unit}>Articles</Heading>
@@ -171,7 +175,7 @@ const IndexPage = ({
         <View {...sansBoldS}>
           <ProtectedEmail>
             {(email) => (
-              <Link href={email ? `mailto:${email}` : undefined} style={{opacity: email ? 1 : 0}}>
+              <Link href={email ? `mailto:${email}` : undefined} disabled={!email}>
                 Email
               </Link>
             )}

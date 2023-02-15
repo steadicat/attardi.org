@@ -12,7 +12,14 @@ import {
 } from '../design/text';
 import {unit} from '../design/layout';
 import {Link as GatsbyLink} from 'gatsby';
-import {linkColor, hoverLinkColor, activeLinkColor, gray, white} from '../design/colors';
+import {
+  linkColor,
+  hoverLinkColor,
+  activeLinkColor,
+  gray,
+  white,
+  grayBackground,
+} from '../design/colors';
 
 export const Title = ({
   children,
@@ -118,18 +125,20 @@ export const Link = ({
   children,
   to,
   href,
+  disabled = false,
   ...props
 }: {
   children: React.ReactNode;
   to?: string;
   href?: string;
+  disabled?: boolean;
 }) => (
   <View
     component={to ? GatsbyLink : 'a'}
-    color={linkColor}
-    hover={{color: hoverLinkColor}}
+    color={disabled ? grayBackground : linkColor}
+    hover={{color: disabled ? grayBackground : hoverLinkColor}}
     active={{
-      color: activeLinkColor,
+      color: disabled ? grayBackground : activeLinkColor,
       transitionDuration: '0.1s',
     }}
     lineHeight="14px"
@@ -146,19 +155,21 @@ export const Button = ({
   children,
   to,
   href,
+  disabled = false,
   ...props
 }: {
   children: React.ReactNode;
   to?: string;
   href?: string;
+  disabled?: boolean;
 }) => (
   <View
     component={to ? GatsbyLink : 'a'}
     color={white}
-    background={linkColor}
-    hover={{background: hoverLinkColor}}
+    background={disabled ? grayBackground : linkColor}
+    hover={{background: disabled ? grayBackground : hoverLinkColor}}
     active={{
-      background: activeLinkColor,
+      background: disabled ? grayBackground : activeLinkColor,
       transitionDuration: '0.1s',
     }}
     transition="0.5s background"

@@ -484,9 +484,13 @@ const ArticlePage = ({
           <Heading>
             <Link to="/">Stefano J. Attardi</Link>
           </Heading>
-          <Subtitle>Engineering Manager at Coinbase. We’re hiring!</Subtitle>
+          <Subtitle>Engineering Manager at Coinbase.</Subtitle>
           <ProtectedEmail>
-            {(email) => (email ? <Button href={`mailto:${email}`}>Get in Touch</Button> : null)}
+            {(email) => (
+              <Button disabled={!email} href={email ? `mailto:${email}` : undefined}>
+                Get in Touch
+              </Button>
+            )}
           </ProtectedEmail>
         </View>
       </View>
