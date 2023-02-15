@@ -42,6 +42,7 @@ import twitterIcon from '../images/icons/twitter.svg';
 import githubIcon from '../images/icons/github.svg';
 import appstoreIcon from '../images/icons/appstore.svg';
 import Layout from '../components/Layout';
+import {ProtectedEmail} from '../protectedEmail';
 
 const commonStyle = {
   '& a': {
@@ -484,7 +485,9 @@ const ArticlePage = ({
             <Link to="/">Stefano J. Attardi</Link>
           </Heading>
           <Subtitle>Engineering Manager at Coinbase. We’re hiring!</Subtitle>
-          <Button href="/email">Get in Touch</Button>
+          <ProtectedEmail>
+            {(email) => (email ? <Button href={`mailto:${email}`}>Get in Touch</Button> : null)}
+          </ProtectedEmail>
         </View>
       </View>
     </View>

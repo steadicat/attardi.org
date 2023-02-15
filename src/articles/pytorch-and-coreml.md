@@ -1137,7 +1137,7 @@ Pick one. Or two. Or all. I don’t care. You do you:
 - Come up with one problem in your app that you can solve with neural networks.
 - Follow me on Twitter: <a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>. I will announce future posts there.
 
-You can also <a title="Email" href="/email">hire me</a> as a consultant. I specialize in React, React Native, and ML work.
+You can also <a href="/">hire me</a> as a consultant. I specialize in React, React Native, and ML work.
 
 <br />
 <br />

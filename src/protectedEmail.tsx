@@ -1,10 +1,10 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 
-const context = React.createContext<string | null>(null);
+const context = React.createContext<string | null | false>(null);
 const {Provider} = context;
 
 export function ProtectedEmailProvider({siteKey, endpoint, children}) {
-  const [email, setEmail] = React.useState(null);
+  const [email, setEmail] = React.useState<string | null | false>(null);
 
   React.useEffect(() => {
     window.protectedEmailCallback = async (token: string) => {
@@ -13,6 +13,8 @@ export function ProtectedEmailProvider({siteKey, endpoint, children}) {
       console.log(body);
       if (body.success) {
         setEmail(body.email);
+      } else {
+        setEmail(false);
       }
       delete window.protectedEmailCallback;
     };
@@ -36,7 +38,11 @@ export function ProtectedEmailProvider({siteKey, endpoint, children}) {
   );
 }
 
-export function ProtectedEmail({children}: {children: (email: string) => JSX.Element}) {
+export function ProtectedEmail({
+  children,
+}: {
+  children: (email: string | null | false) => JSX.Element | null;
+}) {
   const email = React.useContext(context);
-  return email ? children(email) : null;
+  return children(email);
 }

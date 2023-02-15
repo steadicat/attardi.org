@@ -86,7 +86,9 @@ const IndexPage = ({
         <Subtitle marginTop={unit} marginBottom={unit}>
           Engineering Manager at <Link href="https://coinbase.com/">Coinbase</Link>.
         </Subtitle>
-        <Button href="/email">Get in Touch</Button>
+        <ProtectedEmail>
+          {(email) => (email ? <Button href={`mailto:${email}`}>Get in Touch</Button> : null)}
+        </ProtectedEmail>
       </View>
       <Heading marginTop={unit}>Articles</Heading>
       {edges.map(
@@ -167,7 +169,13 @@ const IndexPage = ({
       </View>
       <View display="flex" justifyContent="space-around" marginTop={unit * 4}>
         <View {...sansBoldS}>
-          <ProtectedEmail>{(email) => <Link href={`mailto:${email}`}>Email</Link>}</ProtectedEmail>
+          <ProtectedEmail>
+            {(email) => (
+              <Link href={email ? `mailto:${email}` : undefined} style={{opacity: email ? 1 : 0}}>
+                Email
+              </Link>
+            )}
+          </ProtectedEmail>
         </View>
         <View {...sansBoldS}>
           <Link rel="me" href="https://twitter.com/steadicat">
