@@ -3,8 +3,16 @@ import React from 'react';
 const context = React.createContext<string | null | false>(null);
 const {Provider} = context;
 
-interface Window {
-  protectedEmailCallback?: (token: string) => void;
+let loaded = false;
+
+function loadTurnstileJS() {
+  if (loaded) return;
+  const script = document.createElement('script');
+  script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+  script.async = true;
+  script.defer = true;
+  document.body.appendChild(script);
+  loaded = true;
 }
 
 export function ProtectedEmailProvider({
@@ -35,11 +43,7 @@ export function ProtectedEmailProvider({
       delete window.protectedEmailCallback;
     };
 
-    const script = document.createElement('script');
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
+    loadTurnstileJS();
 
     const timer = setTimeout(() => {
       if (!done) {
@@ -50,7 +54,6 @@ export function ProtectedEmailProvider({
     }, timeout);
 
     return () => {
-      document.body.removeChild(script);
       clearTimeout(timer);
     };
   }, []);
