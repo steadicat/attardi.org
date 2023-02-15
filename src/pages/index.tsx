@@ -6,6 +6,7 @@ import {accentColor, gray} from '../design/colors';
 import {sansXS, sansCaps, sansM, sansBoldS} from '../design/text';
 import {unit} from '../design/layout';
 import Layout from '../components/Layout';
+import {ProtectedEmail} from '../protectedEmail';
 
 export const pageQuery = graphql`
   {
@@ -166,7 +167,7 @@ const IndexPage = ({
       </View>
       <View display="flex" justifyContent="space-around" marginTop={unit * 4}>
         <View {...sansBoldS}>
-          <Link href="/email">Email</Link>
+          <ProtectedEmail>{(email) => <Link href={`mailto:${email}`}>Email</Link>}</ProtectedEmail>
         </View>
         <View {...sansBoldS}>
           <Link rel="me" href="https://twitter.com/steadicat">

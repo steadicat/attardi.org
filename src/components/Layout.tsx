@@ -5,6 +5,7 @@ import {View} from 'glamor/jsxstyle';
 import '../design/prism.css';
 import {textColor} from '../design/colors';
 import {unit, mobileMargin, maxColumn} from '../design/layout';
+import {ProtectedEmailProvider} from '../protectedEmail';
 
 interface LayoutProps extends React.HTMLProps<HTMLDivElement> {
   location: {
@@ -39,7 +40,9 @@ const Layout: React.FC<LayoutProps> = React.memo(({children, location}) => (
       <meta name="og:type" content="website" />
       <meta name="og:url" content={`https://attardi.org${location.pathname}`} />
     </Helmet>
-    {children}
+    <ProtectedEmailProvider siteKey="0x4AAAAAAACiX56uiMszpvqE" endpoint="/email">
+      {children}
+    </ProtectedEmailProvider>
     <script
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"
