@@ -37,6 +37,12 @@ export function ProtectedEmailProvider({
       done = true;
       if (body.success) {
         setEmail(body.email);
+
+        document.querySelectorAll('.email').forEach((el) => {
+          el.innerHTML = body.email;
+          el.setAttribute('href', `mailto:${body.email}`);
+          el.classList.remove('email');
+        });
       } else {
         setEmail(false);
       }
