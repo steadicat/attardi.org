@@ -1,0 +1,135 @@
+---
+title: 'Obfuscate Email Addresses with Invisible Captchas'
+description: 'On my team at Coinbase, we ask everyone to use the React performance trinity – memo, useMemo, and useCallback – all the time. For some reason, this is controversial. I’m guessing this has something to do with Twitter. This article explains why we do it anyway.'
+date: '2023-10-03'
+image: '/images/memo-all-the-things.png'
+---
+
+If you are not a robot, you should see my email address below, in its full, clickable glory:
+
+<a class="email" title="Email">...</a>
+
+If you were a robot, you would see this:
+
+...
+
+What is this sorcery? How am I able to show my email address so brazenly to my kind visitors, without fear of robots spamming the hell out of me?
+
+The secret sauce is <a href="https://developers.cloudflare.com/turnstile/">Cloudflare Turnstile</a>, a CAPTCHA alternative that works magically behind the scenes to distinguish robots from people.
+
+```typescript
+import {PagesFunction, Response} from '@cloudflare/workers-types';
+
+interface Env {
+  SECRET_KEY: string;
+  EMAIL: string;
+}
+
+export const onRequestGet: PagesFunction<Env> = async ({request, env}) => {
+  const token = new URL(request.url).searchParams.get('token');
+  const ip = request.headers.get('CF-Connecting-IP');
+
+  // Validate the token by calling the "/siteverify" API endpoint.
+  const formData = new FormData();
+  formData.append('secret', env.SECRET_KEY!);
+  formData.append('response', token ?? '');
+  formData.append('remoteip', ip ?? '');
+
+  console.log(formData);
+
+  const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+  const result = await fetch(url, {
+    body: formData,
+    method: 'POST',
+  });
+
+  const outcome = (await result.json()) as {success: boolean};
+  console.log(outcome);
+
+  if (outcome.success) {
+    return new Response(JSON.stringify({success: true, email: env.EMAIL}), {
+      headers: {'Content-Type': 'application/json'},
+    });
+  } else {
+    return new Response(JSON.stringify({success: false, email: env.EMAIL}), {
+      status: 401,
+      headers: {'Content-Type': 'application/json'},
+    });
+  }
+};
+```
+
+```typescript
+
+import React, {ReactNode} from 'react';
+
+const context = React.createContext<string | null | false>(null);
+const {Provider} = context;
+
+let loaded = false;
+
+function loadTurnstileJS() {
+  if (loaded) return;
+  const script = document.createElement('script');
+  script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+  script.async = true;
+  script.defer = true;
+  document.body.appendChild(script);
+  loaded = true;
+}
+
+export function ProtectedEmailProvider({
+  siteKey,
+  endpoint,
+  timeout = 3000,
+  children,
+}: {
+  siteKey: string;
+  endpoint: string;
+  timeout?: number;
+  children: ReactNode;
+}) {
+  const [email, setEmail] = React.useState<string | null | false>(null);
+
+  React.useEffect(() => {
+    let done = false;
+
+    window.protectedEmailCallback = async (token: string) => {
+      const res = await fetch(`${endpoint}?token=${token}`);
+      const body = await res.json();
+      done = true;
+      if (body.success) {
+        setEmail(body.email);
+      } else {
+        setEmail(false);
+      }
+      delete window.protectedEmailCallback;
+    };
+
+    loadTurnstileJS();
+
+    const timer = setTimeout(() => {
+      if (!done) {
+        done = true;
+        setEmail(false);
+        delete window.protectedEmailCallback;
+      }
+    }, timeout);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return <Provider value={email}>{children}</Provider>;
+}
+
+export function ProtectedEmail({
+  children,
+}: {
+  children: (email: string | null | false) => JSX.Element | null;
+}) {
+  const email = React.useContext(context);
+  return children(email);
+}
+```

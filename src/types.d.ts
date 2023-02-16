@@ -3,6 +3,11 @@ declare module '*.svg' {
   export = svg;
 }
 
+declare module '*.mdx' {
+  let MDXComponent: (props) => JSX.Element;
+  export default MDXComponent;
+}
+
 interface Window {
   protectedEmailCallback?: (token: string) => void;
 }

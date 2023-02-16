@@ -3,13 +3,12 @@ interface Env {
   EMAIL: string;
 }
 
-export const onRequestGet: PagesFunction<Env> = async ({request, env}) => {
+export const onRequestGet: ExportedHandlerFetchHandler<Env> = async ({request, env}) => {
   const token = new URL(request.url).searchParams.get('token');
   const ip = request.headers.get('CF-Connecting-IP');
 
-  // Validate the token by calling the
-  // "/siteverify" API endpoint.
-  let formData = new FormData();
+  // Validate the token by calling the "/siteverify" API endpoint.
+  const formData = new FormData();
   formData.append('secret', env.SECRET_KEY!);
   formData.append('response', token ?? '');
   formData.append('remoteip', ip ?? '');
@@ -22,7 +21,7 @@ export const onRequestGet: PagesFunction<Env> = async ({request, env}) => {
     method: 'POST',
   });
 
-  const outcome = await result.json<{success: boolean}>();
+  const outcome = (await result.json()) as {success: boolean};
   console.log(outcome);
 
   if (outcome.success) {
