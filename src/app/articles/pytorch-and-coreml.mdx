@@ -9,8 +9,16 @@ This is the story of how I trained a simple <a title="Wikipedia" href="https://e
 
 I’ll walk you through every step, from problem all the way to App Store. On the way we’ll take a quick detour into an alternative approach using simple math (fail), through tool building, dataset generation, neural network architecting, and PyTorch training. We’ll endure the treacherous CoreML model converting to finally reach the React Native&nbsp;UI.
 
-If this feels like too long a journey, not to worry. You can click the left side of this page to skip around. And if you’re just looking for a tl;dr, here are some links:
-<a title="GitHub" href="https://github.com/steadicat/pytorch-coreml-example">code</a>, [test UI](/pytorch-and-coreml-test-ui/), <a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">iOS app</a>, and <a title="Twitter" href="https://twitter.com/steadicat">my Twitter</a>.
+<p>
+  If this feels like too long a journey, not to worry. You can click the left side of this page to
+  skip around. And if you’re just looking for a tl;dr, here are some links:{' '}
+  <a title="GitHub" href="https://github.com/steadicat/pytorch-coreml-example">code</a>, <a href="/pytorch-and-coreml-test-ui/">test UI</a>, <a
+    title="App Store"
+    href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">
+    iOS app
+  </a>, and{' '}
+  <a title="Twitter" href="https://twitter.com/steadicat">my Twitter</a>.
+</p>
 
 ### The Challenge
 
@@ -18,7 +26,10 @@ I recently built <a title="App Store" href="https://itunes.apple.com/app/movemen
 
 ![](../images/pytorch-and-coreml/app-store.png)
 
-<figcaption><a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">Movement - Watch Tracker</a> introducing itself in the App Store.</figcaption>
+<figcaption>
+  <a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">Movement - Watch Tracker</a>
+  introducing itself in the App Store.
+</figcaption>
 
 In the app, watch owners add measurements by tapping the screen when their watch shows a certain time. Over time these measurements tell the story of how each watch is performing.
 
@@ -58,7 +69,10 @@ Turns out this solution is very sensitive to the parameters you pick, like how m
 
 ![](../images/pytorch-and-coreml/test-ui.png)
 
-<figcaption><a href="/pytorch-and-coreml-test-ui/">The UI</a> I used to create and visualize examples, with hot reload for paramater tuning.</figcaption>
+<figcaption>
+  <a href="/pytorch-and-coreml-test-ui/">The UI</a> I used to create and visualize examples, with
+  hot reload for paramater tuning.
+</figcaption>
 
 No matter how I tweaked the parameters, the algorithm was either splitting too frequently, or not frequently enough. This approach wasn’t going to cut it.
 
@@ -100,7 +114,10 @@ I had the perfect UI already. I’d built it to tweak the parameters of my simpl
 
 ![](../images/pytorch-and-coreml/test-ui-nn.png)
 
-<figcaption><a href="/pytorch-and-coreml-test-ui/">Test UI</a> with manually-entered splits, and red boxes around incorrect predictions.</figcaption>
+<figcaption>
+  <a href="/pytorch-and-coreml-test-ui/">Test UI</a> with manually-entered splits, and red boxes
+  around incorrect predictions.
+</figcaption>
 
 With a few clicks and a `JSON.stringify` call, I had enough data to jump into Python.
 
@@ -114,7 +131,36 @@ Another common hurdle when designing a neural network is finding the optimal way
 
 In my dataset, each example is a series of `[x, y]` coordinates, one for each of the points in the input. I also have a list of coordinates for each of the splits that I’ve manually entered – which is what I will be training the network to learn.
 
-<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="235" y1="0" x2="235" y2="200"></line><line stroke="#ccc" x1="320" y1="0" x2="320" y2="200"></line><line stroke="#ccc" x1="467" y1="0" x2="467" y2="200"></line><circle fill="#01beff" r="5" cx="43" cy="167"></circle><circle fill="#01beff" r="5" cx="86" cy="131"></circle><circle fill="#01beff" r="5" cx="152" cy="106"></circle><circle fill="#01beff" r="5" cx="175" cy="82"></circle><circle fill="#01beff" r="5" cx="221" cy="44"></circle><circle fill="#01beff" r="5" cx="247" cy="162"></circle><circle fill="#01beff" r="5" cx="279" cy="139"></circle><circle fill="#01beff" r="5" cx="303" cy="111"></circle><circle fill="#01beff" r="5" cx="329" cy="166"></circle><circle fill="#01beff" r="5" cx="369" cy="144"></circle><circle fill="#01beff" r="5" cx="392" cy="124"></circle><circle fill="#01beff" r="5" cx="422" cy="81"></circle><circle fill="#01beff" r="5" cx="461" cy="72"></circle><circle fill="#01beff" r="5" cx="470" cy="166"></circle><circle fill="#01beff" r="5" cx="500" cy="143"></circle><circle fill="#01beff" r="5" cx="525" cy="107"></circle><circle fill="#01beff" r="5" cx="542" cy="86"></circle><circle fill="#01beff" r="5" cx="582" cy="62"></circle><line stroke="#f00" x1="43" y1="166.20683699600977" x2="221" y2="50.223969189843785"></line><line stroke="#f00" x1="247" y1="163.74324324324328" x2="303" y2="113.32432432432437"></line><line stroke="#f00" x1="329" y1="168.57152451309602" x2="461" y2="65.6044325050369"></line><line stroke="#f00" x1="470" y1="165.48665886809277" x2="582" y2="55.80439505347596"></line></svg></div>
+<div>
+  <svg viewBox="0 0 800 200" style={{border: '1px solid rgb(238, 238, 238)', boxSizing: 'border-box', display: 'block', margin: '20px 0px', width: '100%'}}>
+    <rect x="0" y="0" width="800" height="10" fill="#eee"></rect>
+    <line stroke="#ccc" x1="235" y1="0" x2="235" y2="200"></line>
+    <line stroke="#ccc" x1="320" y1="0" x2="320" y2="200"></line>
+    <line stroke="#ccc" x1="467" y1="0" x2="467" y2="200"></line>
+    <circle fill="#01beff" r="5" cx="43" cy="167"></circle>
+    <circle fill="#01beff" r="5" cx="86" cy="131"></circle>
+    <circle fill="#01beff" r="5" cx="152" cy="106"></circle>
+    <circle fill="#01beff" r="5" cx="175" cy="82"></circle>
+    <circle fill="#01beff" r="5" cx="221" cy="44"></circle>
+    <circle fill="#01beff" r="5" cx="247" cy="162"></circle>
+    <circle fill="#01beff" r="5" cx="279" cy="139"></circle>
+    <circle fill="#01beff" r="5" cx="303" cy="111"></circle>
+    <circle fill="#01beff" r="5" cx="329" cy="166"></circle>
+    <circle fill="#01beff" r="5" cx="369" cy="144"></circle>
+    <circle fill="#01beff" r="5" cx="392" cy="124"></circle>
+    <circle fill="#01beff" r="5" cx="422" cy="81"></circle>
+    <circle fill="#01beff" r="5" cx="461" cy="72"></circle>
+    <circle fill="#01beff" r="5" cx="470" cy="166"></circle>
+    <circle fill="#01beff" r="5" cx="500" cy="143"></circle>
+    <circle fill="#01beff" r="5" cx="525" cy="107"></circle>
+    <circle fill="#01beff" r="5" cx="542" cy="86"></circle>
+    <circle fill="#01beff" r="5" cx="582" cy="62"></circle>
+    <line stroke="#f00" x1="43" y1="166.20683699600977" x2="221" y2="50.223969189843785"></line>
+    <line stroke="#f00" x1="247" y1="163.74324324324328" x2="303" y2="113.32432432432437"></line>
+    <line stroke="#f00" x1="329" y1="168.57152451309602" x2="461" y2="65.6044325050369"></line>
+    <line stroke="#f00" x1="470" y1="165.48665886809277" x2="582" y2="55.80439505347596"></line>
+  </svg>
+</div>
 
 The above, as JSON, looks like this:
 
@@ -670,25 +716,197 @@ My accuracy results were pretty decent out of the gate. To truly understand how 
 
 There were many difficult examples where it was spot on, and it made me a proud daddy:
 
-<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="139" y1="0" x2="139" y2="200"></line><line stroke="#ccc" x1="195" y1="0" x2="195" y2="200"></line><line stroke="#ccc" x1="329" y1="0" x2="329" y2="200"></line><line stroke="#ccc" x1="462" y1="0" x2="462" y2="200"></line><line stroke="#ccc" x1="534" y1="0" x2="534" y2="200"></line><line stroke="#ccc" x1="619" y1="0" x2="619" y2="200"></line><line stroke="#ccc" x1="667" y1="0" x2="667" y2="200"></line><circle fill="#01beff" r="5" cx="51" cy="186"></circle><circle fill="#01beff" r="5" cx="78" cy="167"></circle><circle fill="#01beff" r="5" cx="106" cy="151"></circle><circle fill="#01beff" r="5" cx="133" cy="130"></circle><circle fill="#01beff" r="5" cx="151" cy="187"></circle><circle fill="#01beff" r="5" cx="176" cy="168"></circle><circle fill="#01beff" r="5" cx="201" cy="190"></circle><circle fill="#01beff" r="5" cx="245" cy="152"></circle><circle fill="#01beff" r="5" cx="280" cy="118"></circle><circle fill="#01beff" r="5" cx="316" cy="92"></circle><circle fill="#01beff" r="5" cx="332" cy="192"></circle><circle fill="#01beff" r="5" cx="366" cy="162"></circle><circle fill="#01beff" r="5" cx="387" cy="135"></circle><circle fill="#01beff" r="5" cx="430" cy="95"></circle><circle fill="#01beff" r="5" cx="496" cy="190"></circle><circle fill="#01beff" r="5" cx="565" cy="189"></circle><circle fill="#01beff" r="5" cx="592" cy="161"></circle><circle fill="#01beff" r="5" cx="631" cy="190"></circle><circle fill="#01beff" r="5" cx="685" cy="188"></circle><circle fill="#01beff" r="5" cx="753" cy="117"></circle><circle fill="#01beff" r="5" cx="781" cy="93"></circle><line stroke="#f00" x1="51" y1="186.02264251465104" x2="133" y2="130.97735748534896"></line><line stroke="#f00" x1="151" y1="187" x2="176" y2="168"></line><line stroke="#f00" x1="201" y1="189.38972517608065" x2="316" y2="90.06504626432815"></line><line stroke="#f00" x1="332" y1="192.90064944722621" x2="430" y2="94.5848495364632"></line><line stroke="#f00" x1="565" y1="189" x2="592" y2="161"></line><line stroke="#f00" x1="685" y1="187.31838074398252" x2="781" y2="91.34463894967178"></line></svg></div>
+<div>
+  <svg viewBox="0 0 800 200" style={{border: '1px solid rgb(238, 238, 238)', boxSizing: 'border-box', display: 'block', margin: '20px 0px', width: '100%'}}>
+    <rect x="0" y="0" width="800" height="10" fill="#eee"></rect>
+    <line stroke="#ccc" x1="139" y1="0" x2="139" y2="200"></line>
+    <line stroke="#ccc" x1="195" y1="0" x2="195" y2="200"></line>
+    <line stroke="#ccc" x1="329" y1="0" x2="329" y2="200"></line>
+    <line stroke="#ccc" x1="462" y1="0" x2="462" y2="200"></line>
+    <line stroke="#ccc" x1="534" y1="0" x2="534" y2="200"></line>
+    <line stroke="#ccc" x1="619" y1="0" x2="619" y2="200"></line>
+    <line stroke="#ccc" x1="667" y1="0" x2="667" y2="200"></line>
+    <circle fill="#01beff" r="5" cx="51" cy="186"></circle>
+    <circle fill="#01beff" r="5" cx="78" cy="167"></circle>
+    <circle fill="#01beff" r="5" cx="106" cy="151"></circle>
+    <circle fill="#01beff" r="5" cx="133" cy="130"></circle>
+    <circle fill="#01beff" r="5" cx="151" cy="187"></circle>
+    <circle fill="#01beff" r="5" cx="176" cy="168"></circle>
+    <circle fill="#01beff" r="5" cx="201" cy="190"></circle>
+    <circle fill="#01beff" r="5" cx="245" cy="152"></circle>
+    <circle fill="#01beff" r="5" cx="280" cy="118"></circle>
+    <circle fill="#01beff" r="5" cx="316" cy="92"></circle>
+    <circle fill="#01beff" r="5" cx="332" cy="192"></circle>
+    <circle fill="#01beff" r="5" cx="366" cy="162"></circle>
+    <circle fill="#01beff" r="5" cx="387" cy="135"></circle>
+    <circle fill="#01beff" r="5" cx="430" cy="95"></circle>
+    <circle fill="#01beff" r="5" cx="496" cy="190"></circle>
+    <circle fill="#01beff" r="5" cx="565" cy="189"></circle>
+    <circle fill="#01beff" r="5" cx="592" cy="161"></circle>
+    <circle fill="#01beff" r="5" cx="631" cy="190"></circle>
+    <circle fill="#01beff" r="5" cx="685" cy="188"></circle>
+    <circle fill="#01beff" r="5" cx="753" cy="117"></circle>
+    <circle fill="#01beff" r="5" cx="781" cy="93"></circle>
+    <line stroke="#f00" x1="51" y1="186.02264251465104" x2="133" y2="130.97735748534896"></line>
+    <line stroke="#f00" x1="151" y1="187" x2="176" y2="168"></line>
+    <line stroke="#f00" x1="201" y1="189.38972517608065" x2="316" y2="90.06504626432815"></line>
+    <line stroke="#f00" x1="332" y1="192.90064944722621" x2="430" y2="94.5848495364632"></line>
+    <line stroke="#f00" x1="565" y1="189" x2="592" y2="161"></line>
+    <line stroke="#f00" x1="685" y1="187.31838074398252" x2="781" y2="91.34463894967178"></line>
+  </svg>
+</div>
 
 As the network got better, I started thinking up more and more evil examples. Like this pair:
 
-<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="265" y1="0" x2="265" y2="200"></line><line stroke="#ccc" x1="429" y1="0" x2="429" y2="200"></line><line stroke="#ccc" x1="631" y1="0" x2="631" y2="200"></line><circle fill="#01beff" r="5" cx="81" cy="129"></circle><circle fill="#01beff" r="5" cx="130" cy="117"></circle><circle fill="#01beff" r="5" cx="155" cy="108"></circle><circle fill="#01beff" r="5" cx="176" cy="104"></circle><circle fill="#01beff" r="5" cx="218" cy="92"></circle><circle fill="#01beff" r="5" cx="246" cy="81"></circle><circle fill="#01beff" r="5" cx="288" cy="88"></circle><circle fill="#01beff" r="5" cx="301" cy="100"></circle><circle fill="#01beff" r="5" cx="327" cy="106"></circle><circle fill="#01beff" r="5" cx="340" cy="114"></circle><circle fill="#01beff" r="5" cx="377" cy="124"></circle><circle fill="#01beff" r="5" cx="392" cy="132"></circle><circle fill="#01beff" r="5" cx="402" cy="134"></circle><circle fill="#01beff" r="5" cx="446" cy="126"></circle><circle fill="#01beff" r="5" cx="476" cy="113"></circle><circle fill="#01beff" r="5" cx="503" cy="106"></circle><circle fill="#01beff" r="5" cx="529" cy="97"></circle><circle fill="#01beff" r="5" cx="553" cy="90"></circle><circle fill="#01beff" r="5" cx="574" cy="81"></circle><circle fill="#01beff" r="5" cx="594" cy="68"></circle><circle fill="#01beff" r="5" cx="615" cy="62"></circle><circle fill="#01beff" r="5" cx="648" cy="77"></circle><circle fill="#01beff" r="5" cx="675" cy="86"></circle><circle fill="#01beff" r="5" cx="694" cy="93"></circle><circle fill="#01beff" r="5" cx="722" cy="102"></circle><circle fill="#01beff" r="5" cx="733" cy="106"></circle><circle fill="#01beff" r="5" cx="745" cy="111"></circle><line stroke="#f00" x1="81" y1="130.01884534848938" x2="246" y2="82.70412055040383"></line><line stroke="#f00" x1="288" y1="91.73880525914632" x2="402" y2="134.96127096036585"></line><line stroke="#f00" x1="446" y1="126.5953237782052" x2="615" y2="63.45144878079046"></line><line stroke="#f00" x1="648" y1="76.83482368820651" x2="745" y2="110.44312950420596"></line></svg></div>
+<div>
+  <svg viewBox="0 0 800 200" style={{border: '1px solid rgb(238, 238, 238)', boxSizing: 'border-box', display: 'block', margin: '20px 0px', width: '100%'}}>
+    <rect x="0" y="0" width="800" height="10" fill="#eee"></rect>
+    <line stroke="#ccc" x1="265" y1="0" x2="265" y2="200"></line>
+    <line stroke="#ccc" x1="429" y1="0" x2="429" y2="200"></line>
+    <line stroke="#ccc" x1="631" y1="0" x2="631" y2="200"></line>
+    <circle fill="#01beff" r="5" cx="81" cy="129"></circle>
+    <circle fill="#01beff" r="5" cx="130" cy="117"></circle>
+    <circle fill="#01beff" r="5" cx="155" cy="108"></circle>
+    <circle fill="#01beff" r="5" cx="176" cy="104"></circle>
+    <circle fill="#01beff" r="5" cx="218" cy="92"></circle>
+    <circle fill="#01beff" r="5" cx="246" cy="81"></circle>
+    <circle fill="#01beff" r="5" cx="288" cy="88"></circle>
+    <circle fill="#01beff" r="5" cx="301" cy="100"></circle>
+    <circle fill="#01beff" r="5" cx="327" cy="106"></circle>
+    <circle fill="#01beff" r="5" cx="340" cy="114"></circle>
+    <circle fill="#01beff" r="5" cx="377" cy="124"></circle>
+    <circle fill="#01beff" r="5" cx="392" cy="132"></circle>
+    <circle fill="#01beff" r="5" cx="402" cy="134"></circle>
+    <circle fill="#01beff" r="5" cx="446" cy="126"></circle>
+    <circle fill="#01beff" r="5" cx="476" cy="113"></circle>
+    <circle fill="#01beff" r="5" cx="503" cy="106"></circle>
+    <circle fill="#01beff" r="5" cx="529" cy="97"></circle>
+    <circle fill="#01beff" r="5" cx="553" cy="90"></circle>
+    <circle fill="#01beff" r="5" cx="574" cy="81"></circle>
+    <circle fill="#01beff" r="5" cx="594" cy="68"></circle>
+    <circle fill="#01beff" r="5" cx="615" cy="62"></circle>
+    <circle fill="#01beff" r="5" cx="648" cy="77"></circle>
+    <circle fill="#01beff" r="5" cx="675" cy="86"></circle>
+    <circle fill="#01beff" r="5" cx="694" cy="93"></circle>
+    <circle fill="#01beff" r="5" cx="722" cy="102"></circle>
+    <circle fill="#01beff" r="5" cx="733" cy="106"></circle>
+    <circle fill="#01beff" r="5" cx="745" cy="111"></circle>
+    <line stroke="#f00" x1="81" y1="130.01884534848938" x2="246" y2="82.70412055040383"></line>
+    <line stroke="#f00" x1="288" y1="91.73880525914632" x2="402" y2="134.96127096036585"></line>
+    <line stroke="#f00" x1="446" y1="126.5953237782052" x2="615" y2="63.45144878079046"></line>
+    <line stroke="#f00" x1="648" y1="76.83482368820651" x2="745" y2="110.44312950420596"></line>
+  </svg>
+</div>
 
-<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><circle fill="#01beff" r="5" cx="83" cy="116"></circle><circle fill="#01beff" r="5" cx="124" cy="109"></circle><circle fill="#01beff" r="5" cx="171" cy="102"></circle><circle fill="#01beff" r="5" cx="201" cy="104"></circle><circle fill="#01beff" r="5" cx="223" cy="105"></circle><circle fill="#01beff" r="5" cx="253" cy="113"></circle><circle fill="#01beff" r="5" cx="275" cy="120"></circle><circle fill="#01beff" r="5" cx="298" cy="123"></circle><circle fill="#01beff" r="5" cx="350" cy="126"></circle><circle fill="#01beff" r="5" cx="404" cy="126"></circle><circle fill="#01beff" r="5" cx="451" cy="109"></circle><circle fill="#01beff" r="5" cx="493" cy="91"></circle><circle fill="#01beff" r="5" cx="521" cy="84"></circle><circle fill="#01beff" r="5" cx="585" cy="88"></circle><circle fill="#01beff" r="5" cx="612" cy="90"></circle><circle fill="#01beff" r="5" cx="662" cy="97"></circle><circle fill="#01beff" r="5" cx="695" cy="108"></circle><circle fill="#01beff" r="5" cx="720" cy="114"></circle><circle fill="#01beff" r="5" cx="747" cy="109"></circle><circle fill="#01beff" r="5" cx="773" cy="97"></circle><line stroke="#f00" x1="83" y1="114.04278068464784" x2="773" y2="99.23109561830489"></line></svg></div>
+<div>
+  <svg viewBox="0 0 800 200" style={{border: '1px solid rgb(238, 238, 238)', boxSizing: 'border-box', display: 'block', margin: '20px 0px', width: '100%'}}>
+    <rect x="0" y="0" width="800" height="10" fill="#eee"></rect>
+    <circle fill="#01beff" r="5" cx="83" cy="116"></circle>
+    <circle fill="#01beff" r="5" cx="124" cy="109"></circle>
+    <circle fill="#01beff" r="5" cx="171" cy="102"></circle>
+    <circle fill="#01beff" r="5" cx="201" cy="104"></circle>
+    <circle fill="#01beff" r="5" cx="223" cy="105"></circle>
+    <circle fill="#01beff" r="5" cx="253" cy="113"></circle>
+    <circle fill="#01beff" r="5" cx="275" cy="120"></circle>
+    <circle fill="#01beff" r="5" cx="298" cy="123"></circle>
+    <circle fill="#01beff" r="5" cx="350" cy="126"></circle>
+    <circle fill="#01beff" r="5" cx="404" cy="126"></circle>
+    <circle fill="#01beff" r="5" cx="451" cy="109"></circle>
+    <circle fill="#01beff" r="5" cx="493" cy="91"></circle>
+    <circle fill="#01beff" r="5" cx="521" cy="84"></circle>
+    <circle fill="#01beff" r="5" cx="585" cy="88"></circle>
+    <circle fill="#01beff" r="5" cx="612" cy="90"></circle>
+    <circle fill="#01beff" r="5" cx="662" cy="97"></circle>
+    <circle fill="#01beff" r="5" cx="695" cy="108"></circle>
+    <circle fill="#01beff" r="5" cx="720" cy="114"></circle>
+    <circle fill="#01beff" r="5" cx="747" cy="109"></circle>
+    <circle fill="#01beff" r="5" cx="773" cy="97"></circle>
+    <line stroke="#f00" x1="83" y1="114.04278068464784" x2="773" y2="99.23109561830489"></line>
+  </svg>
+</div>
 
 I soon realized that the problem was way harder than I had imagined. Still, the network did well. It got to the point where I would cook up examples I was not be sure how to split myself. I would trust the network to figure it out. Like with this crazy one:
 
-<div><svg viewBox="0 0 800 200" style="border: 1px solid rgb(238, 238, 238); box-sizing: border-box; display: block; margin: 20px 0px; width: 100%"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="186" y1="0" x2="186" y2="200"></line><line stroke="#ccc" x1="389" y1="0" x2="389" y2="200"></line><line stroke="#ccc" x1="570" y1="0" x2="570" y2="200"></line><line stroke="#ccc" x1="678" y1="0" x2="678" y2="200"></line><circle fill="#01beff" r="5" cx="137" cy="152"></circle><circle fill="#01beff" r="5" cx="168" cy="131"></circle><circle fill="#01beff" r="5" cx="220" cy="109"></circle><circle fill="#01beff" r="5" cx="257" cy="92"></circle><circle fill="#01beff" r="5" cx="306" cy="77"></circle><circle fill="#01beff" r="5" cx="360" cy="68"></circle><circle fill="#01beff" r="5" cx="422" cy="60"></circle><circle fill="#01beff" r="5" cx="481" cy="57"></circle><circle fill="#01beff" r="5" cx="531" cy="62"></circle><circle fill="#01beff" r="5" cx="593" cy="72"></circle><circle fill="#01beff" r="5" cx="644" cy="86"></circle><circle fill="#01beff" r="5" cx="708" cy="113"></circle><circle fill="#01beff" r="5" cx="766" cy="143"></circle><line stroke="#f00" x1="137" y1="152" x2="168" y2="131"></line><line stroke="#f00" x1="220" y1="105.52238603779547" x2="360" y2="65.01844618545528"></line><line stroke="#f00" x1="422" y1="58.754338819840996" x2="531" y2="60.530119807412376"></line><line stroke="#f00" x1="593" y1="72" x2="644" y2="86"></line><line stroke="#f00" x1="708" y1="113" x2="766" y2="143"></line></svg></div>
+<div>
+  <svg viewBox="0 0 800 200" style={{border: '1px solid rgb(238, 238, 238)', boxSizing: 'border-box', display: 'block', margin: '20px 0px', width: '100%'}}>
+    <rect x="0" y="0" width="800" height="10" fill="#eee"></rect>
+    <line stroke="#ccc" x1="186" y1="0" x2="186" y2="200"></line>
+    <line stroke="#ccc" x1="389" y1="0" x2="389" y2="200"></line>
+    <line stroke="#ccc" x1="570" y1="0" x2="570" y2="200"></line>
+    <line stroke="#ccc" x1="678" y1="0" x2="678" y2="200"></line>
+    <circle fill="#01beff" r="5" cx="137" cy="152"></circle>
+    <circle fill="#01beff" r="5" cx="168" cy="131"></circle>
+    <circle fill="#01beff" r="5" cx="220" cy="109"></circle>
+    <circle fill="#01beff" r="5" cx="257" cy="92"></circle>
+    <circle fill="#01beff" r="5" cx="306" cy="77"></circle>
+    <circle fill="#01beff" r="5" cx="360" cy="68"></circle>
+    <circle fill="#01beff" r="5" cx="422" cy="60"></circle>
+    <circle fill="#01beff" r="5" cx="481" cy="57"></circle>
+    <circle fill="#01beff" r="5" cx="531" cy="62"></circle>
+    <circle fill="#01beff" r="5" cx="593" cy="72"></circle>
+    <circle fill="#01beff" r="5" cx="644" cy="86"></circle>
+    <circle fill="#01beff" r="5" cx="708" cy="113"></circle>
+    <circle fill="#01beff" r="5" cx="766" cy="143"></circle>
+    <line stroke="#f00" x1="137" y1="152" x2="168" y2="131"></line>
+    <line stroke="#f00" x1="220" y1="105.52238603779547" x2="360" y2="65.01844618545528"></line>
+    <line stroke="#f00" x1="422" y1="58.754338819840996" x2="531" y2="60.530119807412376"></line>
+    <line stroke="#f00" x1="593" y1="72" x2="644" y2="86"></line>
+    <line stroke="#f00" x1="708" y1="113" x2="766" y2="143"></line>
+  </svg>
+</div>
 
 Even when it “fails”, according to my arbitrary inputs, it’s arguably just as correct as I am. Sometimes it even makes me question my own judgment. Like, what was I thinking here?
 
-<div><svg viewBox="0 0 800 200" style="border: 3px solid rgb(255, 0, 0); box-sizing: border-box; display: block; margin: 20px 0px;"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="112" y1="0" x2="112" y2="200"></line><line stroke="#ccc" x1="276" y1="0" x2="276" y2="200"></line><line stroke="#ccc" x1="410" y1="0" x2="410" y2="200"></line><circle fill="#01beff" r="5" cx="41" cy="176"></circle><circle fill="#01beff" r="5" cx="163" cy="84"></circle><circle fill="#01beff" r="5" cx="254" cy="84"></circle><circle fill="#01beff" r="5" cx="319" cy="97"></circle><circle fill="#01beff" r="5" cx="484" cy="88"></circle><circle fill="#01beff" r="5" cx="533" cy="116"></circle><circle fill="#01beff" r="5" cx="629" cy="109"></circle><line stroke="#f00" x1="163" y1="81.91284403669724" x2="319" y2="94.07798165137613"></line><line stroke="#f00" x1="484" y1="96.91415967158875" x2="629" y2="113.54993566570676"></line></svg></div>
+<div>
+  <svg
+    viewBox="0 0 800 200"
+    style={{border: '3px solid rgb(255, 0, 0)', boxSizing: 'border-box', display: 'block', margin: '20px 0px', width: '100%'}}>
+    <rect x="0" y="0" width="800" height="10" fill="#eee"></rect>
+    <line stroke="#ccc" x1="112" y1="0" x2="112" y2="200"></line>
+    <line stroke="#ccc" x1="276" y1="0" x2="276" y2="200"></line>
+    <line stroke="#ccc" x1="410" y1="0" x2="410" y2="200"></line>
+    <circle fill="#01beff" r="5" cx="41" cy="176"></circle>
+    <circle fill="#01beff" r="5" cx="163" cy="84"></circle>
+    <circle fill="#01beff" r="5" cx="254" cy="84"></circle>
+    <circle fill="#01beff" r="5" cx="319" cy="97"></circle>
+    <circle fill="#01beff" r="5" cx="484" cy="88"></circle>
+    <circle fill="#01beff" r="5" cx="533" cy="116"></circle>
+    <circle fill="#01beff" r="5" cx="629" cy="109"></circle>
+    <line stroke="#f00" x1="163" y1="81.91284403669724" x2="319" y2="94.07798165137613"></line>
+    <line stroke="#f00" x1="484" y1="96.91415967158875" x2="629" y2="113.54993566570676"></line>
+  </svg>
+</div>
 
 No, it’s not perfect. Here’s an example where it clearly fails. I forgive it though: I might have made that mistake myself.
 
-<div><svg viewBox="0 0 800 200" style="border: 3px solid rgb(255, 0, 0); box-sizing: border-box; display: block; margin: 20px 0px;"><rect x="0" y="0" width="800" height="10" fill="#eee"></rect><line stroke="#ccc" x1="169" y1="0" x2="169" y2="200"></line><line stroke="#ccc" x1="285" y1="0" x2="285" y2="200"></line><line stroke="#ccc" x1="444" y1="0" x2="444" y2="200"></line><line stroke="#ccc" x1="657" y1="0" x2="657" y2="200"></line><circle fill="#01beff" r="5" cx="133" cy="143"></circle><circle fill="#01beff" r="5" cx="215" cy="143"></circle><circle fill="#01beff" r="5" cx="254" cy="128"></circle><circle fill="#01beff" r="5" cx="305" cy="149"></circle><circle fill="#01beff" r="5" cx="357" cy="127"></circle><circle fill="#01beff" r="5" cx="428" cy="96"></circle><circle fill="#01beff" r="5" cx="451" cy="151"></circle><circle fill="#01beff" r="5" cx="528" cy="119"></circle><circle fill="#01beff" r="5" cx="580" cy="89"></circle><circle fill="#01beff" r="5" cx="644" cy="56"></circle><circle fill="#01beff" r="5" cx="667" cy="136"></circle><circle fill="#01beff" r="5" cx="718" cy="107"></circle><circle fill="#01beff" r="5" cx="762" cy="83"></circle><line stroke="#f00" x1="133" y1="145.0960412479245" x2="254" y2="132.40706108537972"></line><line stroke="#f00" x1="305" y1="149.15519804144444" x2="428" y2="96.11366617119873"></line><line stroke="#f00" x1="451" y1="153.3004932875429" x2="644" y2="57.42836091164531"></line><line stroke="#f00" x1="667" y1="135.8312933195694" x2="762" y2="82.80445362041002"></line></svg></div>
+<div>
+  <svg
+    viewBox="0 0 800 200"
+    style={{border: '3px solid rgb(255, 0, 0)', boxSizing: 'border-box', display: 'block', margin: '20px 0px', width: '100%'}}>
+    <rect x="0" y="0" width="800" height="10" fill="#eee"></rect>
+    <line stroke="#ccc" x1="169" y1="0" x2="169" y2="200"></line>
+    <line stroke="#ccc" x1="285" y1="0" x2="285" y2="200"></line>
+    <line stroke="#ccc" x1="444" y1="0" x2="444" y2="200"></line>
+    <line stroke="#ccc" x1="657" y1="0" x2="657" y2="200"></line>
+    <circle fill="#01beff" r="5" cx="133" cy="143"></circle>
+    <circle fill="#01beff" r="5" cx="215" cy="143"></circle>
+    <circle fill="#01beff" r="5" cx="254" cy="128"></circle>
+    <circle fill="#01beff" r="5" cx="305" cy="149"></circle>
+    <circle fill="#01beff" r="5" cx="357" cy="127"></circle>
+    <circle fill="#01beff" r="5" cx="428" cy="96"></circle>
+    <circle fill="#01beff" r="5" cx="451" cy="151"></circle>
+    <circle fill="#01beff" r="5" cx="528" cy="119"></circle>
+    <circle fill="#01beff" r="5" cx="580" cy="89"></circle>
+    <circle fill="#01beff" r="5" cx="644" cy="56"></circle>
+    <circle fill="#01beff" r="5" cx="667" cy="136"></circle>
+    <circle fill="#01beff" r="5" cx="718" cy="107"></circle>
+    <circle fill="#01beff" r="5" cx="762" cy="83"></circle>
+    <line stroke="#f00" x1="133" y1="145.0960412479245" x2="254" y2="132.40706108537972"></line>
+    <line stroke="#f00" x1="305" y1="149.15519804144444" x2="428" y2="96.11366617119873"></line>
+    <line stroke="#f00" x1="451" y1="153.3004932875429" x2="644" y2="57.42836091164531"></line>
+    <line stroke="#f00" x1="667" y1="135.8312933195694" x2="762" y2="82.80445362041002"></line>
+  </svg>
+</div>
 
 I’m quite satisfied with these results. I’m cheating a little bit here, since most of these examples I’ve already used to train the network. Running in the app on real data will be the real test. Still, this looks much more promising than the simple approach I used earlier. Time to ship it!
 
@@ -700,7 +918,7 @@ I’m not gonna lie, this was the scariest part. The conversion to CoreML is a m
 
 My first struggle was getting all the types right. On my first few tries I fed the network integers (such is my input data), but some type cast was causing the CoreML conversion to fail. In this case I worked around it by explicitly casting my inputs to floats during preprocessing. With other networks – especially ones that use <a title="Wikipedia" href="https://en.wikipedia.org/wiki/Word_embedding">embeddings</a> – I haven’t been so lucky.
 
-Another issue I ran into is that ONNX-CoreML does not support <span class="caps">1D</span> convolutions, the kind I use. Despite being simpler, <span class="caps">1D</span> convolutions are always the underdog, because working with text and sequences is not as cool as working with images. Thankfully, it’s pretty easy to reshape my data to add an extra bogus dimension. I changed the model to use <span class="caps">2D</span> convolutions, and I used the `view()` method on the input tensor to reshape the data to match what the <span class="caps">2D</span> convolutions expect.
+Another issue I ran into is that ONNX-CoreML does not support <span className="caps">1D</span> convolutions, the kind I use. Despite being simpler, <span className="caps">1D</span> convolutions are always the underdog, because working with text and sequences is not as cool as working with images. Thankfully, it’s pretty easy to reshape my data to add an extra bogus dimension. I changed the model to use <span className="caps">2D</span> convolutions, and I used the `view()` method on the input tensor to reshape the data to match what the <span className="caps">2D</span> convolutions expect.
 
 ```python{11,15,19,23,28}
 import torch.nn as nn
@@ -1130,7 +1348,10 @@ I hope this inspires you to start sprinkling neural nets into your apps as well,
 
 Pick one. Or two. Or all. I don’t care. You do you:
 
-- <a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">Get the app</a>, or tell a watch lover friend.
+- <a title="App Store" href="https://itunes.apple.com/app/movement-watch-tracker/id1329445157">
+    Get the app
+  </a>
+  , or tell a watch lover friend.
 - Comment [on Hacker News](https://news.ycombinator.com/item?id=16364826), or ask me a question on Twitter (<a title="Twitter" href="https://twitter.com/steadicat">steadicat</a>).
 - Check out the full code <a title="GitHub" href="https://github.com/steadicat/pytorch-coreml-example">on GitHub</a>.
 - See the training data and [try out the test UI here](/pytorch-and-coreml-test-ui/).
@@ -1142,4 +1363,7 @@ You can also <a href="/">hire me</a> as a consultant. I specialize in React, Rea
 <br />
 <br />
 
-<div class="thanks">Thanks to Casey Muller, Ana Muller, Beau Hartshorne, Giuseppe Attardi, and Maria Simi for reading drafts of this.</div>
+<div className="thanks">
+  Thanks to Casey Muller, Ana Muller, Beau Hartshorne, Giuseppe Attardi, and Maria Simi for reading
+  drafts of this.
+</div>

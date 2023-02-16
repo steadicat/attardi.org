@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ProtectedEmailProvider} from './src/protectedEmail';
+import {ProtectedEmailProvider} from './src/components/ProtectedEmail';
 
 export const wrapRootElement = ({element}) => (
   <ProtectedEmailProvider

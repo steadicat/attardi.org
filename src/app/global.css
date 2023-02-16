@@ -1,0 +1,45 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --textColor: #2d2d2d;
+  --accentColor: #ffcc00;
+
+  --linkColor: #6bd;
+  --hoverLinkColor: #6cf;
+  --activeLinkColor: var(--accentColor);
+
+  --gray: #999;
+  --grayDisabled: #ddd;
+  --grayBackground: #f7f7f7;
+  --darkerGrayBackground: #f0f0f0;
+
+  --white: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --textColor: #fff;
+    --accentColor: #ffcc00;
+
+    --linkColor: #6bd;
+    --hoverLinkColor: #6cf;
+    --activeLinkColor: var(--accentColor);
+
+    --gray: #999;
+    --grayDisabled: #666;
+    --grayBackground: #f7f7f7;
+    --darkerGrayBackground: #f0f0f0;
+
+    --white: #2d2d2d;
+  }
+}

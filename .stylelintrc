@@ -1,0 +1,9 @@
+{
+  "extends": ["stylelint-config-recommended", "@linaria/stylelint-config-standard-linaria"],
+  "rules": {
+    "block-opening-brace-newline-after": null,
+    "declaration-block-semicolon-newline-after": null,
+    "string-quotes": "single",
+    "unit-no-unknown": true
+  }
+}

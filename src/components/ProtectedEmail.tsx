@@ -1,10 +1,13 @@
-import React from 'react';
+'use client';
+
+import React, {ReactNode} from 'react';
 
 const context = React.createContext<string | null | false>(null);
 const {Provider} = context;
 
 let loaded = false;
 
+// eslint-disable-next-line react-memo/require-memo
 function loadTurnstileJS() {
   if (loaded) return;
   const script = document.createElement('script');
@@ -23,8 +26,8 @@ export function ProtectedEmailProvider({
 }: {
   siteKey: string;
   endpoint: string;
-  timeout: number;
-  children: JSX.Element;
+  timeout?: number;
+  children: ReactNode;
 }) {
   const [email, setEmail] = React.useState<string | null | false>(null);
 
@@ -64,12 +67,7 @@ export function ProtectedEmailProvider({
     };
   }, []);
 
-  return (
-    <Provider value={email}>
-      <div className="cf-turnstile" data-sitekey={siteKey} data-callback="protectedEmailCallback" />
-      {children}
-    </Provider>
-  );
+  return <Provider value={email}>{children}</Provider>;
 }
 
 export function ProtectedEmail({

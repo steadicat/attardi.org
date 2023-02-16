@@ -18,7 +18,7 @@ So not using `memo` at all is not an option. We are left with two options:
 
 The first option sounds like the most appealing, doesn’t it? Figure out when we can benefit from `React.memo`, and use it then, and only then. However, before we go that far, we have to remind ourselves that we work on a large team. No matter how diligent we are with education, code review, and profiling, **we are not going to get it right 100% of the time**. So we have to ask ourselves:
 
-<blockquote class="quote">What is the cost of getting it wrong?</blockquote>
+<blockquote className="quote">What is the cost of getting it wrong?</blockquote>
 
 If we `memo` a component that doesn’t need to be, all we’re doing is a shallow equality check on the props of that component, on each potential render.
 
@@ -53,9 +53,13 @@ There is a `memo` meme that’s going around: they say that `React.memo` has a m
 
 Don’t take my word for it. Here’s [Christopher Chedeau on Twitter](https://twitter.com/Vjeux/status/1083902075946205189), responding to one Dan Abramov:
 
-<blockquote class="quote">I don’t think that it’s a great analogy. Doing memoize() on every function would be horrible because you’d have to store the state of the input/output for all the calls. In the React case, React already does that for everything, so it’s “free”.</blockquote>
+<blockquote className="quote">
+  I don’t think that it’s a great analogy. Doing memoize() on every function would be horrible
+  because you’d have to store the state of the input/output for all the calls. In the React case,
+  React already does that for everything, so it’s “free”.
+</blockquote>
 
-> In case you don’t know him, Christopher Chedeau has been on the React Core team at Facebook since 2012, i.e. the very beginning<!--, i.e. much longer than Dan Abramov-->. He created React Native, Prettier, CSS-in-JS, Excalidraw, and Yoga. <!--Dan Abramov, on the other hand, created Redux.-->
+> In case you don’t know him, Christopher Chedeau has been on the React Core team at Facebook since 2012, i.e. the very beginning{/* , i.e. much longer than Dan Abramov */}. He created React Native, Prettier, CSS-in-JS, Excalidraw, and Yoga. {/* Dan Abramov, on the other hand, created Redux. */}
 
 ### Isn’t it Premature Optimization?
 

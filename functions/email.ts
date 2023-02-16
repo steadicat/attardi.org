@@ -1,3 +1,5 @@
+import {PagesFunction, Response} from '@cloudflare/workers-types';
+
 interface Env {
   SECRET_KEY: string;
   EMAIL: string;
@@ -9,7 +11,7 @@ export const onRequestGet: PagesFunction<Env> = async ({request, env}) => {
 
   // Validate the token by calling the
   // "/siteverify" API endpoint.
-  let formData = new FormData();
+  const formData = new FormData();
   formData.append('secret', env.SECRET_KEY!);
   formData.append('response', token ?? '');
   formData.append('remoteip', ip ?? '');
@@ -22,7 +24,7 @@ export const onRequestGet: PagesFunction<Env> = async ({request, env}) => {
     method: 'POST',
   });
 
-  const outcome = await result.json<{success: boolean}>();
+  const outcome = (await result.json()) as {success: boolean};
   console.log(outcome);
 
   if (outcome.success) {

@@ -1,100 +1,88 @@
+import {css} from '@linaria/core';
+import NextLink from 'next/link';
 import * as React from 'react';
-import {View} from 'glamor/jsxstyle';
+
 import {
-  sansBoldXL,
-  sansBoldM,
-  sansBoldXS,
-  sansBoldS,
-  sansBoldL,
-  sansXS,
-  sansM,
-  sansS,
-} from '../design/text';
-import {unit} from '../design/layout';
-import {Link as GatsbyLink} from 'gatsby';
-import {
-  linkColor,
-  hoverLinkColor,
   activeLinkColor,
   gray,
+  grayDisabled,
+  hoverLinkColor,
+  linkColor,
   white,
-  grayBackground,
-} from '../design/colors';
+} from '@/design/colors';
+import {unit} from '@/design/layout';
+import {sansBoldL, sansBoldM, sansBoldXL, sansM, sansXS} from '@/design/text';
 
-export const Title = ({
+export const Title = React.memo(function Title({
   children,
-  marginTop = 0,
-  marginBottom = 0,
+  className = '',
   id,
 }: {
   children: React.ReactNode;
-  marginTop?: number;
-  marginBottom?: number;
+  className?: string;
   id?: string;
-}) => (
-  <View component="h1" {...sansBoldXL} marginTop={marginTop} marginBottom={marginBottom} id={id}>
-    {children}
-  </View>
-);
+}) {
+  return (
+    <h1
+      id={id}
+      className={`${css`
+        ${sansBoldXL};
+      `} ${className}`}>
+      {children}
+    </h1>
+  );
+});
 
-export const Subtitle = ({
+export const Subtitle = React.memo(function Subtitle({
   children,
-  marginTop = 0,
-  marginBottom = 0,
+  className = '',
 }: {
   children: React.ReactNode;
-  marginTop?: number;
-  marginBottom?: number;
-}) => (
-  <View component="h2" {...sansM} marginTop={marginTop} marginBottom={marginBottom} color={gray}>
-    {children}
-  </View>
-);
+  className?: string;
+}) {
+  return (
+    <h2
+      className={`${css`
+        ${sansM};
+      `} ${className}`}>
+      {children}
+    </h2>
+  );
+});
 
-export const Heading = ({
+export const Heading = React.memo(function Heading({
   children,
-  marginTop = 0,
-  marginBottom = 0,
-  gridColumn,
+  className = '',
 }: {
   children: React.ReactNode;
-  marginTop?: number;
-  marginBottom?: number;
-  gridColumn?: string;
-}) => (
-  <View
-    component="h2"
-    {...sansBoldL}
-    marginTop={marginTop}
-    marginBottom={marginBottom}
-    /* TODO */ style={{gridColumn}}>
-    {children}
-  </View>
-);
+  className?: string;
+}) {
+  return (
+    <h2
+      className={`${css`
+        ${sansBoldL};
+      `} ${className}`}>
+      {children}
+    </h2>
+  );
+});
 
-export const Subheading = ({
+export const Subheading = React.memo(function Subheading({
   children,
-  css = {},
-  media = [],
-  marginTop = 0,
-  marginBottom = 0,
+  className = '',
 }: {
   children: React.ReactNode;
-  marginTop?: number;
-  marginBottom?: number;
-  css?: React.CSSProperties;
-  media?: [string, React.CSSProperties][];
-}) => (
-  <View
-    component="h3"
-    {...sansBoldM}
-    css={css}
-    media={media}
-    marginTop={marginTop}
-    marginBottom={marginBottom}>
-    {children}
-  </View>
-);
+  className?: string;
+}) {
+  return (
+    <h3
+      className={`${css`
+        ${sansBoldM}
+      `} ${className}`}>
+      {children}
+    </h3>
+  );
+});
 
 const months = [
   'January',
@@ -115,79 +103,127 @@ function format(date: Date) {
   return `${months[date.getUTCMonth()]} ${date.getUTCDate()},  ${date.getUTCFullYear()}`;
 }
 
-export const DateView = ({date}: {date: string}) => (
-  <View component="h3" {...sansXS} fontSize={16} marginBottom={0} color={gray} marginTop={unit / 2}>
-    {format(new Date(date))}
-  </View>
-);
+export const DateView = React.memo(function DateView({date}: {date: Date}) {
+  return (
+    <h3
+      className={css`
+        ${sansXS};
+        font-size: 16px;
+        margin-bottom: 0;
+        color: ${gray};
+        margin-top: ${unit / 2};
+      `}>
+      {format(date)}
+    </h3>
+  );
+});
 
-export const Link = ({
+export const Link = React.memo(function Link({
   children,
   to,
   href,
   disabled = false,
-  ...props
+  className = '',
+}: {
+  children: React.ReactNode;
+  to?: string;
+  href?: string;
+  rel?: string;
+  disabled?: boolean;
+  className?: string;
+}) {
+  const Component = to ? NextLink : 'a';
+
+  return (
+    <Component
+      data-disabled={disabled || undefined}
+      className={`${css`
+        color: ${linkColor};
+
+        &:hover {
+          color: ${hoverLinkColor};
+        }
+
+        &:active {
+          color: ${activeLinkColor};
+          transition-duration: 0.1s;
+        }
+
+        &[data-disabled] {
+          color: ${grayDisabled};
+
+          &:hover {
+            color: ${grayDisabled};
+          }
+
+          &:active {
+            color: ${grayDisabled};
+          }
+        }
+
+        line-height: 14px;
+        transition: 0.5s color;
+        text-decoration: none;
+      `} ${className}`}
+      href={to ?? href ?? ''}>
+      {children}
+    </Component>
+  );
+});
+
+export const Button = React.memo(function Button({
+  children,
+  to,
+  href,
+  disabled = false,
 }: {
   children: React.ReactNode;
   to?: string;
   href?: string;
   disabled?: boolean;
-}) => (
-  <View
-    component={to ? GatsbyLink : 'a'}
-    color={disabled ? grayBackground : linkColor}
-    hover={{color: disabled ? grayBackground : hoverLinkColor}}
-    active={{
-      color: disabled ? grayBackground : activeLinkColor,
-      transitionDuration: '0.1s',
-    }}
-    lineHeight="14px"
-    transition="0.5s color"
-    textDecoration="none"
-    to={to}
-    href={href}
-    {...props}>
-    {children}
-  </View>
-);
+}) {
+  const Component = to ? NextLink : 'a';
+  return (
+    <Component
+      href={to ?? href ?? ''}
+      data-disabled={disabled}
+      className={css`
+        color: ${white};
+        background: ${linkColor};
 
-export const Button = ({
-  children,
-  to,
-  href,
-  disabled = false,
-  ...props
-}: {
-  children: React.ReactNode;
-  to?: string;
-  href?: string;
-  disabled?: boolean;
-}) => (
-  <View
-    component={to ? GatsbyLink : 'a'}
-    color={white}
-    background={disabled ? grayBackground : linkColor}
-    hover={{background: disabled ? grayBackground : hoverLinkColor}}
-    active={{
-      background: disabled ? grayBackground : activeLinkColor,
-      transitionDuration: '0.1s',
-    }}
-    transition="0.5s background"
-    textDecoration="none"
-    to={to}
-    href={href}
-    borderRadius={3}
-    paddingTop={unit / 2}
-    paddingBottom={unit / 2}
-    paddingLeft={unit}
-    paddingRight={unit}
-    display="inline-block"
-    marginLeft="auto"
-    marginRight="auto"
-    textAlign="center"
-    marginTop={unit}
-    {...sansBoldM}
-    {...props}>
-    {children}
-  </View>
-);
+        &:hover {
+          background: ${hoverLinkColor};
+        }
+
+        &:active {
+          background: ${activeLinkColor};
+          transition-duration: 0.1s;
+        }
+
+        &[data-disabled] {
+          background: ${grayDisabled};
+
+          &:hover {
+            background: ${grayDisabled};
+          }
+
+          &:active {
+            background: ${grayDisabled};
+          }
+        }
+
+        transition: 0.5s background;
+        text-decoration: none;
+        border-radius: 3px;
+        padding: ${unit / 2}px ${unit}px ${unit / 2}px ${unit}px;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        margin-top: ${unit}px;
+        ${sansBoldM}
+      `}>
+      {children}
+    </Component>
+  );
+});
