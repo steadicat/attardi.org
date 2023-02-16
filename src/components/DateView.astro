@@ -1,0 +1,26 @@
+---
+type Props = {
+  date: Date,
+}
+
+const {date} = Astro.props;
+---
+
+<style>
+  h3 {
+    font-size: 16px;
+    margin-bottom: 0;
+    color: var(--gray);
+    margin-top: calc(var(--unit) / 2);
+  }
+</style>
+
+<h3 class="sansRegular s">
+  {
+    date.toLocaleDateString('en-us', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  }
+</h3>

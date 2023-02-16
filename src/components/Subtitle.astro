@@ -1,0 +1,13 @@
+---
+const {id, class: className} = Astro.props;
+---
+
+<style>
+  h2 {
+    color: var(--gray);
+  }
+</style>
+
+<h2 id={id} class:list={['sansRegular', 'm', className]}>
+  <slot />
+</h2>

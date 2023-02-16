@@ -1,0 +1,26 @@
+---
+import Link from './Link.astro';
+import NewTag from './NewTag.astro';
+import Subheading from './Subheading.astro';
+
+const {url, title, description, isNew} = Astro.props;
+---
+
+<style>
+  @media (max-width: 480px) {
+    .heading {
+      margin-top: var(--unit);
+    }
+  }
+  .description {
+    color: var(--gray);
+  }
+</style>
+
+<Subheading class="heading">
+  <Link href={url}>{title}</Link>
+  {isNew && <NewTag />}
+</Subheading>
+<div class="sansRegular m description">
+  {description}
+</div>

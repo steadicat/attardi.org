@@ -1,0 +1,35 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Title from '../components/Title.astro';
+import Subtitle from '../components/Subtitle.astro';
+import Button from '../components/Button.svelte';
+---
+
+<style>
+  .not-found {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80vh;
+  }
+  .subtitle {
+    margin-top: calc(var(--unit) / 2);
+    margin-bottom: calc(var(--unit) * 2);
+  }
+</style>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Stefano J. Attardi: Engineering Manager at Coinbase"
+      description="Engineering Manager at Coinbase. Former UI engineer and designer, specializing in React, React performance, and GraphQL. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
+    />
+  </head>
+  <body>
+    <div class="not-found">
+      <Title>Not Found</Title>
+      <Subtitle class="subtitle">There’s nothing here.</Subtitle>
+      <Button href="/">Back Home</Button>
+    </div>
+  </body>
+</html>

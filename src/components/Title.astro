@@ -1,0 +1,13 @@
+---
+type Props = {
+  id?: string;
+  class?: string;
+  style?: string;
+};
+
+const {id, class: className, style} = Astro.props;
+---
+
+<div id={id} class:list={['sansBold', 'xl', className]} style={style}>
+  <slot />
+</div>

@@ -1,0 +1,162 @@
+---
+import {getCollection} from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Title from '../components/Title.astro';
+import Subtitle from '../components/Subtitle.astro';
+import Link from '../components/Link.astro';
+import Heading from '../components/Heading.astro';
+import DateView from '../components/DateView.astro';
+import NewTag from '../components/NewTag.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import EmailButton from '../components/EmailButton.svelte';
+import EmailLink from '../components/EmailLink.svelte';
+import ProtectedEmailProvider from 'src/components/ProtectedEmailProvider.svelte';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<style>
+  header {
+    padding-top: calc(var(--unit) * 2);
+    padding-bottom: calc(var(--unit) * 2);
+  }
+  .subtitle {
+    margin-top: var(--unit);
+    margin-bottom: var(--unit);
+  }
+  .heading {
+    margin-top: var(--unit);
+  }
+  .article-heading {
+    margin-top: var(--unit);
+    margin-bottom: calc(var(--unit) / 4);
+  }
+
+  .projects {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: var(--unit);
+
+    @media (max-width: 490px) {
+      display: block;
+    }
+  }
+
+  .projects-heading {
+    grid-column: 1/3;
+    margin-top: calc(var(--unit) * 2);
+  }
+
+  .code-heading {
+    grid-column: 1/3;
+    margin-top: calc(var(--unit) * 2);
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: calc(var(--unit) * 4);
+  }
+</style>
+
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Stefano J. Attardi: Engineering Manager at Coinbase"
+      description="Engineering Manager at Coinbase. Former UI engineer and designer, specializing in React, React performance, and GraphQL. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
+    />
+  </head>
+  <body>
+    <ProtectedEmailProvider siteKey="0x4AAAAAAACiX56uiMszpvqE" endpoint="/email" client:load />
+    <header>
+      <Title>Stefano J. Attardi</Title>
+      <Subtitle class="subtitle">
+        Engineering Manager at <Link href="https://coinbase.com/">Coinbase</Link>.
+      </Subtitle>
+      <EmailButton client:load />
+    </header>
+    <Heading class="heading">Articles</Heading>
+    {
+      articles.map(({slug, data: {title, date}}) => (
+        <>
+          <Heading class="article-heading">
+            <Link href={slug}>{title}</Link>{' '}
+            {Date.now() - new Date(date).valueOf() < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
+          </Heading>
+          <DateView date={new Date(date)} />
+        </>
+      ))
+    }
+    <div class="projects">
+      <Heading class="projects-heading">Projects</Heading>
+      <ProjectRow
+        url="https://itunes.apple.com/app/movement-watch-tracker/id1329445157"
+        title="Movement"
+        description="iOS app to set and track mechanical watches."
+      />
+      <!-- <ProjectRow
+        url="https://pdfbymail.com/"
+        title="Send PDF by Mail"
+        description="Web app to instantly send a physical letter anywhere in the world."
+      /> -->
+      <ProjectRow
+        url="https://thecapturedproject.com/"
+        title="Captured"
+        description="People in prison drawing people who should be."
+      />
+      <ProjectRow
+        url="https://swarmation.com/"
+        title="Swarmation"
+        description="An in-browser real-time multiplayer game, winner of the 2010 Node.js Knockout."
+      />
+      <ProjectRow
+        url="https://justpickthis.com/"
+        title="Just Pick This"
+        description="A minimal product review site."
+      />
+      <!-- <ProjectRow
+        url="https://napkincalc.appspot.com/"
+        title="Napkin"
+        description="Experimental spreadsheet-as-documents web app."
+      /> -->
+      <Heading class="code-heading">Code</Heading>
+      <ProjectRow
+        url="https://github.com/steadicat/grindelwald"
+        title="Grindelwald"
+        description="Tiny functional reactive programming library with dark magic."
+      />
+      <ProjectRow
+        url="https://github.com/steadicat/react-rebound"
+        title="React Rebound"
+        description="High-performance spring-based animations for React."
+      />
+      <ProjectRow
+        url="https://github.com/steadicat/vectorinox"
+        title="Vectorinox"
+        description="A swiss-army knife for converting and processing SVG files."
+      />
+    </div>
+    <footer>
+      <div class="sansBold s">
+        <EmailLink client:load />
+      </div>
+      <div class="sansBold s">
+        <Link rel="me" href="https://threads.net/steadicat">Threads</Link>
+      </div>
+      <div class="sansBold s">
+        <Link rel="me" href="https://mas.town/@steadicat">Mastodon</Link>
+      </div>
+      <div class="sansBold s">
+        <Link rel="me" href="https://twitter.com/steadicat">X</Link>
+      </div>
+      <div class="sansBold s">
+        <Link rel="me" href="https://github.com/steadicat">GitHub</Link>
+      </div>
+      <div class="sansBold s">
+        <Link rel="me" href="https://linkedin.com/in/attardi">Linkedin</Link>
+      </div>
+    </footer>
+  </body>
+</html>

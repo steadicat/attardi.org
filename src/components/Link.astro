@@ -1,0 +1,42 @@
+---
+type Props = {
+  href: string;
+  class?: string;
+  disabled?: boolean;
+  rel?: string;
+};
+
+const {href, class: className, rel, disabled = false} = Astro.props;
+---
+
+<a href={href} rel={rel} class:list={[className, {disabled}]}><slot /></a>
+
+<style>
+  a {
+    color: var(--linkColor);
+    line-height: 14px;
+    transition: 0.5s color;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--hoverLinkColor);
+  }
+
+  a:active {
+    color: var(--activeLinkColor);
+    transition-duration: 0.1s;
+  }
+
+  a.disabled {
+    color: var(--grayDisabled);
+
+    a:hover {
+      color: var(--grayDisabled);
+    }
+
+    a:active {
+      color: var(--grayDisabled);
+    }
+  }
+</style>

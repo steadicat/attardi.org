@@ -1,0 +1,7 @@
+---
+const {id, class: className} = Astro.props;
+---
+
+<h3 id={id} class:list={['sansBold', 'm', className]}>
+  <slot />
+</h3>

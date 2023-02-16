@@ -1,0 +1,405 @@
+---
+import {CollectionEntry, getCollection} from 'astro:content';
+import ClickHandler from 'src/components/ClickHandler.svelte';
+import Heading from 'src/components/Heading.astro';
+import Link from 'src/components/Link.astro';
+import Sidebar from 'src/components/Sidebar.svelte';
+import Subtitle from 'src/components/Subtitle.astro';
+import Title from 'src/components/Title.astro';
+import BaseHead from '../components/BaseHead.astro';
+import DateView from '../components/DateView.astro';
+import ProtectedEmailProvider from 'src/components/ProtectedEmailProvider.svelte';
+import EmailButton from 'src/components/EmailButton.svelte';
+
+const unit = 18;
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: {slug: article.slug},
+    props: article,
+  }));
+}
+type Props = CollectionEntry<'articles'>;
+
+const {
+  data: {title, description, date, image},
+  render,
+} = Astro.props;
+const {Content, headings} = await render();
+---
+
+<style is:global>
+  .markdown {
+    padding-top: 36px;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  @media (min-width: 960px) {
+    main {
+      display: flex;
+      align-items: flex-start;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding-bottom: calc(var(--unit) * 4);
+    }
+
+    article {
+      max-width: var(--maxColumn);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .markdown a {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 27px;
+    color: var(--linkColor);
+    text-decoration: none;
+    transition:
+      0.5s color,
+      border-color;
+    -webkit-transition:
+      0.5s color,
+      border-color;
+    -moz-transition:
+      0.5s color,
+      border-color;
+  }
+  .markdown a:hover {
+    color: var(--hoverLinkColor);
+  }
+  .markdown a:active {
+    color: var(--activeLinkColor);
+    transition-duration: 0.1s;
+    -webkit-transition-duration: 0.1s;
+  }
+  .markdown h3 {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 36px;
+    margin-top: 36px;
+    margin-bottom: 9px;
+  }
+  .markdown h4 {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    margin-top: 36px;
+    margin-bottom: 9px;
+  }
+  .markdown h3 + h4 {
+    margin-top: 9px;
+  }
+  .markdown h5 {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 0;
+    margin-bottom: 4.5px;
+  }
+  .markdown strong {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 27px;
+  }
+  .markdown code {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 18px;
+  }
+  .markdown pre > code {
+    background: #2d2d2d;
+    border-radius: 3px;
+    margin-bottom: 18px;
+    margin-top: 18px;
+    overflow: auto;
+    padding: 18px;
+  }
+  .markdown pre > code > span.highlighted {
+    background-color: #444;
+    display: block;
+    margin-left: -18px;
+    margin-right: -18px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .markdown p > code,
+  .markdown li > code {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 14px;
+    background: var(--darkerGrayBackground);
+    border-radius: 3px;
+    font-variant-ligatures: none;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+  .markdown p > .caps {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 76%;
+    letter-spacing: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    line-height: 1;
+  }
+  .markdown h3 > .caps,
+  .markdown h4 > .caps,
+  .markdown h5 > .caps,
+  .markdown a > .caps {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 78%;
+    letter-spacing: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    line-height: 1;
+  }
+  .markdown blockquote > p > .caps {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 78%;
+    letter-spacing: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    line-height: 1;
+  }
+  .markdown p {
+    margin: 0;
+  }
+  .markdown p + p {
+    margin-top: 18px;
+  }
+  .markdown blockquote {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+    background: var(--grayBackground);
+    border-left: 3px solid var(--gray);
+    padding: 13.5px 18px 13.5px 18px;
+    color: var(--gray);
+    margin: 18px 0px;
+  }
+  .markdown blockquote h4 {
+    margin: 0;
+    color: var(--gray);
+  }
+  .markdown blockquote a {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .markdown blockquote a .caps {
+    font-weight: 300;
+  }
+  .markdown blockquote p > code {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 18px;
+  }
+  .markdown img {
+    margin-top: 36px;
+    margin-bottom: 9px;
+    max-width: 100%;
+  }
+  .markdown figcaption {
+    font-style: normal;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    display: block;
+    text-align: center;
+    margin-bottom: 36px;
+    text-indent: 0;
+  }
+  .markdown figcaption a {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .markdown a[href] {
+    background: no-repeat url('/images/icons/web.svg') 0px 3px;
+    padding-left: 18px;
+  }
+  .markdown blockquote a[href],
+  .markdown figcaption a[href] {
+    background-size: 12px 12px;
+    padding-left: 14px;
+    background-position: 0 1px;
+  }
+  .markdown a.anchor,
+  .markdown blockquote a.anchor,
+  .markdown figcaption a.anchor,
+  .markdown .prev-next a {
+    padding: 0;
+    background: none;
+  }
+  .markdown a[title='Wikipedia'] {
+    background-image: url('/images/icons/wikipedia.svg');
+  }
+  .markdown a[title='Email'] {
+    background-image: url('/images/icons/mail.svg');
+  }
+  .markdown a[title='Twitter'] {
+    background-image: url('/images/icons/twitter.svg');
+  }
+  .markdown a[title='GitHub'] {
+    background-image: url('/images/icons/github.svg');
+  }
+  .markdown a[title='App Store'] {
+    background-image: url('/images/icons/appstore.svg');
+  }
+  .markdown .prev-next {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    margin-top: -4.5px;
+    margin-bottom: 4.5px;
+  }
+  .markdown .prev-next a {
+    flex: 1;
+    text-align: center;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 36px;
+    -webkit-flex: 1;
+  }
+  .markdown a.anchor,
+  .markdown blockquote a.anchor {
+    opacity: 0.3;
+    padding: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 8px;
+    margin-left: -20px;
+    -webkit-transform: translateY(-50%);
+  }
+  .markdown a.anchor > svg,
+  .markdown blockquote a.anchor > svg {
+    display: block;
+    width: 12px;
+    height: 12px;
+  }
+  .markdown .thanks {
+    font-style: italic;
+    color: var(--gray);
+  }
+  .markdown blockquote.quote {
+    font-style: italic;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 27px;
+    color: var(--textColor);
+    background: transparent;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-color: var(--linkColor);
+  }
+  .markdown ol,
+  .markdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+  .markdown ol > li,
+  .markdown ul > li {
+    counter-increment: counter;
+    margin-left: 36px;
+    position: relative;
+  }
+  .markdown ol > li::before,
+  .markdown ul > li::before {
+    content: counter(counter) '.';
+    width: 36px;
+    position: absolute;
+    left: -45px;
+    top: 6px;
+    text-align: right;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .markdown ul > li::before {
+    content: '‣';
+    top: -1px;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  @media (min-width: 960px) {
+    .markdown .prev-next {
+      display: none;
+    }
+  }
+
+  .svg {
+    border: 1px solid rgb(238, 238, 238);
+    box-sizing: border-box;
+    display: block;
+    margin: 20px 0px;
+    width: 100%;
+  }
+  .red-border {
+    border: 3px solid rgb(255, 0, 0);
+  }
+</style>
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <ProtectedEmailProvider siteKey="0x4AAAAAAACiX56uiMszpvqE" endpoint="/email" client:load />
+    <main>
+      <Sidebar title={title} headings={headings} client:load />
+      <article>
+        <Heading style={`margin-top: ${unit}px`}>
+          <Link href="/">Stefano J. Attardi</Link>
+        </Heading>
+        <Title id="top" style={`margin-top: ${unit}px`}>
+          {title}
+        </Title>
+        <DateView date={date} />
+        <ClickHandler client:load>
+          <div class="markdown">
+            <Content />
+          </div>
+        </ClickHandler>
+        <div style={`margin-top: ${unit * 4}px`}>
+          <Heading>
+            <Link href="/">Stefano J. Attardi</Link>
+          </Heading>
+          <Subtitle>Engineering Manager at Coinbase.</Subtitle>
+          <EmailButton />
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
