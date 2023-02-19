@@ -80,29 +80,44 @@ const ProjectRow = React.memo(function ProjectRow({
   );
 });
 
-export default function Home() {
-  const dir = path.join(process.cwd(), 'src/app/articles');
+type ArticleMeta = {
+  date: string;
+  description: string;
+  featuredImage?: string;
+  title: string;
+  slug: string;
+};
+
+export async function getStaticProps() {
+  const dir = path.join(process.cwd(), 'src/articles');
   const files = fs.readdirSync(dir, {withFileTypes: true});
 
-  const articles = React.use(
-    Promise.all(
-      files.map(async (file) => {
-        const article = (await import(`./articles/${file.name}`)) as {
-          default: () => JSX.Element;
-          date: string;
-          description: string;
-          featuredImage?: string;
-          title: string;
-        };
-        return {
-          ...article,
-          date: new Date(article.date),
-          slug: file.name.replace(/.mdx?$/, ''),
-        };
-      })
-    )
+  const articles = await Promise.all(
+    files.map(async (file): Promise<ArticleMeta> => {
+      const {date, description, featuredImage, title} = (await import(
+        `../articles/${file.name}`
+      )) as {
+        default: () => JSX.Element;
+        date: string;
+        description: string;
+        featuredImage?: string;
+        title: string;
+      };
+      return {
+        date,
+        description,
+        featuredImage,
+        title,
+        slug: file.name.replace(/.mdx?$/, ''),
+      };
+    })
   );
+  return {
+    props: {articles},
+  };
+}
 
+export default function Home({articles}: {articles: ArticleMeta[]}) {
   return (
     <div>
       <div>
@@ -140,9 +155,9 @@ export default function Home() {
                 margin-bottom: ${unit / 4}px;
               `}>
               <Link to={slug}>{title}</Link>{' '}
-              {Date.now() - date.valueOf() < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
+              {Date.now() - new Date(date).valueOf() < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
             </Heading>,
-            <DateView key={`${i}1`} date={date} />,
+            <DateView key={`${i}1`} date={new Date(date)} />,
           ])}
         <div
           className={css`

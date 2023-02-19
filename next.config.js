@@ -14,7 +14,6 @@ const withLinaria = require('next-with-linaria');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: true,
     mdxRs: true,
   },
   async rewrites() {

@@ -31,8 +31,8 @@ import {
   serifS,
 } from '@/design/text';
 
-import ClickHandler from './ClickHandler';
-import Sidebar from './Sidebar';
+import ClickHandler from '../../components/ClickHandler';
+import Sidebar from '../../components/Sidebar';
 
 import type {Metadata} from 'next';
 
