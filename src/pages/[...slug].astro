@@ -10,6 +10,8 @@ import BaseHead from '../components/BaseHead.astro';
 import DateView from '../components/DateView.astro';
 import ProtectedEmailProvider from 'src/components/ProtectedEmailProvider.svelte';
 import EmailButton from 'src/components/EmailButton.svelte';
+import IconLink from '../components/IconLink.astro';
+import {HomeIcon} from 'astro-feather';
 
 const unit = 18;
 
@@ -34,19 +36,16 @@ const {Content, headings} = await render();
     padding-top: 36px;
     font-family: var(--serif);
     font-weight: 300;
-    font-size: 18px;
-    line-height: 27px;
+    font-size: 16px;
+    line-height: 28px;
   }
 
   @media (min-width: 960px) {
     main {
       display: flex;
       align-items: flex-start;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
       padding-bottom: calc(var(--unit) * 4);
+      max-width: none;
     }
 
     article {
@@ -58,8 +57,8 @@ const {Content, headings} = await render();
 
   .markdown a {
     font-family: var(--sans);
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 500;
+    font-size: 15px;
     line-height: 27px;
     color: var(--linkColor);
     text-decoration: none;
@@ -82,16 +81,16 @@ const {Content, headings} = await render();
     -webkit-transition-duration: 0.1s;
   }
   .markdown h3 {
-    font-family: var(--sans);
-    font-weight: 400;
+    font-family: var(--serif);
+    font-weight: 500;
     font-size: 28px;
     line-height: 36px;
     margin-top: 36px;
     margin-bottom: 9px;
   }
   .markdown h4 {
-    font-family: var(--sans);
-    font-weight: 400;
+    font-family: var(--serif);
+    font-weight: 500;
     font-size: 22px;
     line-height: 27px;
     margin-top: 36px;
@@ -102,7 +101,7 @@ const {Content, headings} = await render();
   }
   .markdown h5 {
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 12px;
     line-height: 18px;
     margin-top: 0;
@@ -110,7 +109,7 @@ const {Content, headings} = await render();
   }
   .markdown strong {
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 17px;
     line-height: 27px;
   }
@@ -119,12 +118,13 @@ const {Content, headings} = await render();
     margin-bottom: 18px;
   }
 
-  /* .markdown code {
+  .markdown code {
     font-family: var(--mono);
     font-weight: 400;
-    font-size: 11px;
+    font-size: 15px;
     line-height: 18px;
   }
+  /*
   .markdown pre > code {
     background: #2d2d2d;
     border-radius: 3px;
@@ -141,6 +141,7 @@ const {Content, headings} = await render();
     padding-left: 18px;
     padding-right: 18px;
   }
+  */
   .markdown p > code,
   .markdown li > code {
     font-family: var(--mono);
@@ -151,10 +152,11 @@ const {Content, headings} = await render();
     font-variant-ligatures: none;
     padding-left: 2px;
     padding-right: 2px;
-  } */
+  }
+
   .markdown p > .caps {
     font-family: var(--serif);
-    font-weight: 500;
+    font-weight: 400;
     font-size: 76%;
     letter-spacing: 1px;
     padding-left: 1px;
@@ -166,7 +168,7 @@ const {Content, headings} = await render();
   .markdown h5 > .caps,
   .markdown a > .caps {
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 78%;
     letter-spacing: 1px;
     padding-left: 1px;
@@ -175,7 +177,7 @@ const {Content, headings} = await render();
   }
   .markdown blockquote > p > .caps {
     font-family: var(--sans);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 78%;
     letter-spacing: 1px;
     padding-left: 1px;
@@ -226,7 +228,7 @@ const {Content, headings} = await render();
   .markdown figcaption {
     font-style: normal;
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 12px;
     line-height: 18px;
     display: block;
@@ -236,12 +238,12 @@ const {Content, headings} = await render();
   }
   .markdown figcaption a {
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 12px;
     line-height: 18px;
   }
   .markdown a[href] {
-    background: no-repeat url('/images/icons/web.svg') 0px 3px;
+    background: no-repeat url('/images/icons/web.svg') 0px 1px;
     padding-left: 18px;
   }
   .markdown blockquote a[href],
@@ -345,7 +347,7 @@ const {Content, headings} = await render();
     top: 6px;
     text-align: right;
     font-family: var(--sans);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 12px;
     line-height: 18px;
   }
@@ -353,7 +355,7 @@ const {Content, headings} = await render();
     content: '‣';
     top: -1px;
     font-family: var(--sans);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 22px;
     line-height: 27px;
   }
@@ -378,7 +380,7 @@ const {Content, headings} = await render();
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={image} />
   </head>
   <body>
     <ProtectedEmailProvider siteKey="0x4AAAAAAACiX56uiMszpvqE" endpoint="/email" client:load />
@@ -401,8 +403,7 @@ const {Content, headings} = await render();
           <Heading>
             <Link href="/">Stefano J. Attardi</Link>
           </Heading>
-          <Subtitle>Engineering Manager at Coinbase.</Subtitle>
-          <EmailButton />
+          <Subtitle>Sr. Engineering Manager, Developer Experience at Coinbase</Subtitle>
         </div>
       </article>
     </main>

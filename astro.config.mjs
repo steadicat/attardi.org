@@ -9,10 +9,11 @@ export default defineConfig({
   scopedStyleStrategy: 'where',
   integrations: [
     expressiveCode({
-      frames: {
-        showCopyToClipboardButton: false,
+      frames: false,
+      defaultProps: {
+        wrap: true,
       },
-      themes: ['min-dark', 'min-light'],
+      themes: ['min-dark'],
       styleOverrides: {
         codeFontFamily: 'var(--mono)',
         codeFontSize: '11px',

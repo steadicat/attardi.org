@@ -3,6 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Title from '../components/Title.astro';
 import Subtitle from '../components/Subtitle.astro';
 import Button from '../components/Button.svelte';
+import {HomeIcon} from 'astro-feather';
+import IconLink from '../components/IconLink.astro';
 ---
 
 <style>
@@ -11,6 +13,7 @@ import Button from '../components/Button.svelte';
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 80vh;
   }
   .subtitle {
@@ -29,7 +32,7 @@ import Button from '../components/Button.svelte';
     <div class="not-found">
       <Title>Not Found</Title>
       <Subtitle class="subtitle">There’s nothing here.</Subtitle>
-      <Button href="/">Back Home</Button>
+      <IconLink href="/"><HomeIcon /></IconLink>
     </div>
   </body>
 </html>

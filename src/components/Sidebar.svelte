@@ -65,7 +65,7 @@
 
 <svelte:window on:scroll={onScroll} on:resize={onResize} />
 
-<div
+<nav
   id="sidebar"
   class:is-scrolled={activeHeaderID !== null}
   on:click={onLinkClick}
@@ -85,7 +85,7 @@
     {/each}
   </ul>
   <!-- .replace(/[A-Z]{2,8}/g, '<span className="caps">$&</span>'), -->
-</div>
+</nav>
 
 <style>
   #sidebar {
@@ -109,7 +109,7 @@
 
   a {
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 300;
     font-size: 12px;
     line-height: var(--unit);
     text-decoration: none;
@@ -149,7 +149,7 @@
 
   a.is-active {
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 12px;
     line-height: var(--unit);
   }
@@ -162,7 +162,7 @@
 
   .caps {
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 78%;
     letter-spacing: 1px;
     padding-left: 1px;
@@ -172,7 +172,7 @@
 
   a.is-active .caps {
     font-family: var(--sans);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 78%;
     letter-spacing: 1px;
     padding-left: 1px;

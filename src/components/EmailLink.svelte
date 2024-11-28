@@ -3,4 +3,6 @@
   import {email} from './email';
 </script>
 
-<Link disabled={!$email} href={$email ? `mailto:${$email}` : undefined}>Email</Link>
+<Link disabled={!$email} href={$email ? `mailto:${$email}` : undefined} class={$$props.class}>
+  <slot />
+</Link>

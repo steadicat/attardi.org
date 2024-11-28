@@ -13,7 +13,7 @@
     background: var(--linkColor);
     transition: 0.5s background;
     text-decoration: none;
-    border-radius: 3px;
+    border-radius: calc(var(--unit) * 2);
     padding: calc(var(--unit) / 2) var(--unit) calc(var(--unit) / 2) calc(var(--unit));
     display: inline-block;
     margin-left: auto;
