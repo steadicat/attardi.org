@@ -114,7 +114,12 @@ const {Content, headings} = await render();
     font-size: 17px;
     line-height: 27px;
   }
-  .markdown code {
+  .markdown .expressive-code {
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+
+  /* .markdown code {
     font-family: var(--mono);
     font-weight: 400;
     font-size: 11px;
@@ -146,7 +151,7 @@ const {Content, headings} = await render();
     font-variant-ligatures: none;
     padding-left: 2px;
     padding-right: 2px;
-  }
+  } */
   .markdown p > .caps {
     font-family: var(--serif);
     font-weight: 500;

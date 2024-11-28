@@ -13,7 +13,7 @@ import EmailLink from '../components/EmailLink.svelte';
 import ProtectedEmailProvider from 'src/components/ProtectedEmailProvider.svelte';
 
 const articles = (await getCollection('articles')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---
 
@@ -33,7 +33,6 @@ const articles = (await getCollection('articles')).sort(
     margin-top: var(--unit);
     margin-bottom: calc(var(--unit) / 4);
   }
-
   .projects {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -146,7 +145,7 @@ const articles = (await getCollection('articles')).sort(
         <Link rel="me" href="https://threads.net/steadicat">Threads</Link>
       </div>
       <div class="sansBold s">
-        <Link rel="me" href="https://mas.town/@steadicat">Mastodon</Link>
+        <Link rel="me" href="https://bsky.app/profile/steadicat.bsky.social">Bluesky</Link>
       </div>
       <div class="sansBold s">
         <Link rel="me" href="https://twitter.com/steadicat">X</Link>

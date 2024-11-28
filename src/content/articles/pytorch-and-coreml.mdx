@@ -344,13 +344,13 @@ The aim is to tweak the various parameters so the network progressively transfor
 
 To install PyTorch, I followed the instructions on the [PyTorch homepage](http://pytorch.org/):
 
-```bash
+```bash frame="none"
 pip install http://download.pytorch.org/whl/torch-0.3.0.post4-cp27-none-macosx_10_6_x86_64.whl
 ```
 
 This is how the above structure translates to PyTorch code. I subclass `nn.Module`, and in the constructor I define each layer I need. I’m choosing padding values carefully to preserve the length of my input. So if I have a convolution kernel that’s 7 wide, I pad by 3 on each side so that the kernel still has room to center on the first and last positions.
 
-```py
+```py wrap
 import torch.nn as nn
 
 input_channels = 2
@@ -492,7 +492,7 @@ dataset = PointsDataset()
 
 I need to set aside some of the data to keep track of how my learning is going. This is called a _validation set_. I like to automatically split out a random subset of examples for this purpose. PyTorch doesn’t provide an easy way to do that out of the box, so I used <a title="GitHub" href="https://github.com/pytorch/tnt">PyTorchNet</a>. It’s not in PyPI, so I installed it straight from GitHub:
 
-```bash
+```bash frame="none"
 pip install git+https://github.com/pytorch/tnt.git
 ```
 
@@ -677,7 +677,7 @@ def evaluate(model, data):
 
 Time to run it. This is what the output looks like.
 
-```bash
+```bash frame="none"
 [   1] validation loss: 0.084769 - validation accuracy: 86.667% (52/60 correct)
 [   2] validation loss: 0.017048 - validation accuracy: 86.667% (52/60 correct)
 [   3] validation loss: 0.016706 - validation accuracy: 86.667% (52/60 correct)
@@ -974,7 +974,7 @@ To convert the ONNX model to CoreML, I used <a title="GitHub" href="https://gith
 
 The version of ONNX-CoreML on PyPI is broken, so I installed the latest version straight from GitHub:
 
-```bash
+```bash frame="none"
 pip install git+https://github.com/onnx/onnx-coreml.git
 ```
 
