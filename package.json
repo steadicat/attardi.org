@@ -34,6 +34,6 @@
     "stylelint-config-recommended": "^14.0.1",
     "svelte": "^5.2.10",
     "typescript": "^5.7.2",
-    "vite": "^6.0.15"
+    "vite": "^6.1.6"
   }
 }
