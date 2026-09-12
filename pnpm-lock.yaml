@@ -29,12 +29,24 @@ importers:
       '@fontsource/fraunces':
         specifier: ^5.1.0
         version: 5.1.0
+      '@fontsource/geist':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource/geist-mono':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource/manrope':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/rubik':
         specifier: ^5.1.0
         version: 5.1.0
       '@fontsource/space-mono':
         specifier: ^5.1.1
         version: 5.1.1
+      '@iconify-json/griddy-icons':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@types/react':
         specifier: ^18.3.12
         version: 18.3.12
@@ -527,11 +539,26 @@ packages:
   '@fontsource/fraunces@5.1.0':
     resolution: {integrity: sha512-GqkwHWzSf7eYIAeULbp1oOspYIG3zUR//DuaV/tbnGZnVfeuQgxCr04dtbt71EFEKyD6uHfZfaZaeFKZAnxhWg==}
 
+  '@fontsource/geist-mono@5.3.0':
+    resolution: {integrity: sha512-UtJ1BBBCVpMYdIcW7nEB45UAoAw5M53ZXs2t0ciPW+IokuAAIc56M8+kW5tXbRJCTpDw4XTtU7proT6NdQAHTg==}
+
+  '@fontsource/geist@5.3.0':
+    resolution: {integrity: sha512-u03ftlfVwb05uijq2jGDJ03/HKGqMKaNFk7KOhkpBUex8+BhrAOfMs/XciJ2UUNUX9fEsZbZQld/RWMA2oFU7g==}
+
+  '@fontsource/manrope@5.3.0':
+    resolution: {integrity: sha512-obJ1Dv3+uCA6HlHgW8u4BGYxJR9In2HW7gjJhlflEvkrj1X1iSEwu0fToL+JYGC/FEKFfIz1sBuPduvcL2gIAA==}
+
   '@fontsource/rubik@5.1.0':
     resolution: {integrity: sha512-QyZQw03z/v1RltDPPtWxAQsYgmwbDY6CKH/YWubRY4x9UFGuAImwFYPitR2sTB/FBj0Dxf0DftoC9kqGZKWjug==}
 
   '@fontsource/space-mono@5.1.1':
     resolution: {integrity: sha512-v72P4frEQhldHTKQv0GqOF2JRRGhMrPAIj50v88qmW1aJW1SJAvjMtFOk/3D+L+dQM0fP2A1ZVzVkDbv8JGf7A==}
+
+  '@iconify-json/griddy-icons@1.2.0':
+    resolution: {integrity: sha512-C3AdVCAC9WrUNFSmyljsiH59CuyOqUfALsanzD4dO0VOHt4Fz0sttDSeayiSap8u8uACeq8WMZ1KZAmMusuf9w==}
+
+  '@iconify/types@2.0.0':
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -3040,9 +3067,21 @@ snapshots:
 
   '@fontsource/fraunces@5.1.0': {}
 
+  '@fontsource/geist-mono@5.3.0': {}
+
+  '@fontsource/geist@5.3.0': {}
+
+  '@fontsource/manrope@5.3.0': {}
+
   '@fontsource/rubik@5.1.0': {}
 
   '@fontsource/space-mono@5.1.1': {}
+
+  '@iconify-json/griddy-icons@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify/types@2.0.0': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:

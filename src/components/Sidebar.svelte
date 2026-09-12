@@ -90,112 +90,63 @@
 <style>
   #sidebar {
     position: sticky;
-    top: 0;
-    max-height: 100vh;
-    margin-left: calc((100vw - var(--maxColumn) - var(--sidebarWidth)) / 4);
-    margin-right: calc((100vw - var(--maxColumn) - var(--sidebarWidth)) / -4);
-    box-sizing: border-box;
+    top: 48px;
+    max-height: calc(100vh - 96px);
     width: var(--sidebarWidth);
     overflow: auto;
-    flex-shrink: 0;
-    padding: var(--unit);
+    padding-right: var(--unit);
+    font-size: 12px;
+    line-height: var(--lineHeight);
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
   }
 
-  @media (max-width: 959px) {
+  @media (max-width: 1199px) {
     #sidebar {
       display: none;
     }
   }
 
   a {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 12px;
-    line-height: var(--unit);
+    color: var(--gray);
     text-decoration: none;
-    transition: 0.5s color;
-    color: var(--linkColor);
+    font: inherit;
+    transition: color 0.15s ease;
   }
 
-  a:hover {
-    color: var(--hoverLinkColor);
-  }
-
-  a:active {
-    color: var(--activeLinkColor);
-    transition-duration: 0.1s;
+  a:hover,
+  a.is-active {
+    color: var(--accentColor);
   }
 
   ul {
-    margin: 0;
     padding: 0;
-    list-style-type: none;
+    margin: 0;
+    list-style: none;
   }
+
   li {
-    margin-top: 9px;
+    margin-top: 12px;
   }
+
   li.is-nested {
-    margin-top: 0;
     padding-left: var(--unit);
   }
 
-  li > a {
-    font-weight: 300;
-    color: var(--gray);
-    transition: 0.5s color;
-    -webkit-transition: 0.5s color;
-    -moz-transition: 0.5s color;
-  }
-
-  a.is-active {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 12px;
-    line-height: var(--unit);
-  }
-
-  a.is-active::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-  }
-
-  .caps {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 78%;
-    letter-spacing: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    line-height: 1;
-  }
-
-  a.is-active .caps {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 78%;
-    letter-spacing: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    line-height: 1;
-  }
-
-  .home-link {
-    opacity: 0.01;
-    transition: 0.6s opacity;
-    transform: translateZ(0);
+  .home-link,
+  .heading-link {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.15s ease;
   }
 
   .heading-link {
+    margin: var(--unit) 0 32px;
     color: var(--textColor);
-    opacity: 0.01;
-    transition: 0.6s opacity;
-    transform: translateZ(0);
-    margin-bottom: var(--unit);
-    display: block;
   }
 
-  .is-scrolled > .show {
+  .is-scrolled > .show,
+  .show:focus-visible {
     opacity: 1;
   }
 </style>

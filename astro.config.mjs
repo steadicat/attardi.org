@@ -16,9 +16,9 @@ export default defineConfig({
       themes: ['min-dark'],
       styleOverrides: {
         codeFontFamily: 'var(--mono)',
-        codeFontSize: '11px',
+        codeFontSize: 'var(--codeFontSize)',
         codeFontWeight: '400',
-        codeLineHeight: '18px',
+        codeLineHeight: 'var(--codeLineHeight)',
         codePaddingBlock: '18px',
         codePaddingInline: '18px',
       },

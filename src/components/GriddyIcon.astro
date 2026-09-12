@@ -1,0 +1,29 @@
+---
+import {icons} from '@iconify-json/griddy-icons/icons.json';
+
+type Props = {
+  name: 'email' | 'threads' | 'bluesky' | 'x' | 'github' | 'linkedin';
+};
+
+const {name} = Astro.props;
+---
+
+<svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="22"
+  height="22"
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+  focusable="false"
+  set:html={icons[name].body}
+/>
+
+<style>
+  .icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+
+</style>

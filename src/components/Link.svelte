@@ -9,13 +9,14 @@
 <style>
   a {
     color: var(--linkColor);
-    line-height: 14px;
-    transition: 0.5s color;
+    line-height: inherit;
+    transition: color 0.15s ease;
     text-decoration: none;
   }
 
   a:hover {
     color: var(--hoverLinkColor);
+    text-decoration: underline;
   }
 
   a:active {

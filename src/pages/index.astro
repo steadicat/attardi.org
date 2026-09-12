@@ -9,16 +9,9 @@ import DateView from '../components/DateView.astro';
 import NewTag from '../components/NewTag.astro';
 import ProjectRow from '../components/ProjectRow.astro';
 import EmailIconLink from '../components/EmailIconLink.svelte';
-import ProtectedEmailProvider from 'src/components/ProtectedEmailProvider.svelte';
-import {
-  MessageCircleIcon,
-  GithubIcon,
-  LinkedinIcon,
-  CloudIcon,
-  XIcon,
-  MailIcon,
-} from 'astro-feather';
 import IconLink from '../components/IconLink.astro';
+import GriddyIcon from '../components/GriddyIcon.astro';
+import ProtectedEmailProvider from 'src/components/ProtectedEmailProvider.svelte';
 
 const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -27,58 +20,100 @@ const articles = (await getCollection('articles')).sort(
 
 <style>
   header {
-    padding-top: calc(var(--unit) * 2);
-    padding-bottom: calc(var(--unit) * 2);
-    text-align: center;
+    margin-bottom: 72px;
+  }
+  header :global(h1) {
+    color: var(--accentColor);
   }
   .subtitle {
-    margin-top: var(--unit);
+    margin-top: 4px;
+  }
+  .section-heading {
+    color: var(--gray);
     margin-bottom: var(--unit);
   }
-  .heading {
+  section + section {
+    margin-top: 64px;
+  }
+  .article-entry + .article-entry {
     margin-top: var(--unit);
   }
-
   .article-heading {
-    margin-top: var(--unit);
-    margin-bottom: calc(var(--unit) / 4);
+    margin: 0;
   }
-  .projects {
+  .project-list {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-gap: var(--unit);
-
-    @media (max-width: 490px) {
-      display: block;
-    }
+    gap: var(--unit);
   }
-
-  .projects-heading {
-    grid-column: 1/3;
-    margin-top: calc(var(--unit) * 2);
-  }
-
-  .code-heading {
-    grid-column: 1/3;
-    margin-top: calc(var(--unit) * 2);
-  }
-
   nav {
     display: flex;
-    justify-content: center;
-    margin-top: calc(var(--unit) * 1);
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: var(--unit);
+    margin-left: -11px;
   }
 
-  .icon-link {
-    padding: var(--unit);
+  /* Equal perceptual lightness and chroma, with distinct hues inside sRGB. */
+  main :global(a[href^='https://']),
+  main :global(a[aria-label='Email']) {
+    --hoverLinkColor: oklch(76% 0.12 var(--externalHoverHue, 21));
+    --activeLinkColor: var(--hoverLinkColor);
+  }
+
+  main :global(a[href^='https://']:focus-visible),
+  main :global(a[href^='mailto:']:focus-visible) {
+    color: var(--hoverLinkColor);
+  }
+
+  main :global(a[href='https://openai.com/']) {
+    --externalHoverHue: 150;
+  }
+  main :global(a[aria-label='Email']) {
+    --externalHoverHue: 47;
+  }
+  main :global(a[href='https://threads.net/steadicat']) {
+    --externalHoverHue: 355;
+  }
+  main :global(a[href='https://bsky.app/profile/steadic.at']) {
+    --externalHoverHue: 227;
+  }
+  main :global(a[href='https://twitter.com/steadicat']) {
+    --externalHoverHue: 98;
+  }
+  main :global(a[href='https://github.com/steadicat']) {
+    --externalHoverHue: 304;
+  }
+  main :global(a[href='https://linkedin.com/in/attardi']) {
+    --externalHoverHue: 252;
+  }
+  main :global(a[href='https://itunes.apple.com/app/movement-watch-tracker/id1329445157']) {
+    --externalHoverHue: 124;
+  }
+  main :global(a[href='https://thecapturedproject.com/']) {
+    --externalHoverHue: 330;
+  }
+  main :global(a[href='https://swarmation.com/']) {
+    --externalHoverHue: 72;
+  }
+  main :global(a[href='https://justpickthis.com/']) {
+    --externalHoverHue: 175;
+  }
+  main :global(a[href='https://github.com/steadicat/grindelwald']) {
+    --externalHoverHue: 278;
+  }
+  main :global(a[href='https://github.com/steadicat/react-rebound']) {
+    --externalHoverHue: 201;
+  }
+  main :global(a[href='https://github.com/steadicat/vectorinox']) {
+    --externalHoverHue: 21;
   }
 </style>
 
 <html lang="en">
   <head>
     <BaseHead
-      title="Stefano J. Attardi: Sr. Engineering Manager at Coinbase"
-      description="Sr. Engineering Manager, Developer Experience at Coinbase. Former UI engineer and designer, specializing in React, React performance, and GraphQL. Previously at Facebook and Storehouse. Winner of the first Node.js Knockout with Swarmation.com."
+      title="Stefano J. Attardi — Member of technical staff, OpenAI"
+      description="Member of technical staff at OpenAI. Writing, projects, and open-source work by Stefano J. Attardi."
     />
   </head>
   <body>
@@ -87,87 +122,85 @@ const articles = (await getCollection('articles')).sort(
       <header>
         <Title>Stefano J. Attardi</Title>
         <Subtitle class="subtitle">
-          Sr. Engineering Manager, Developer Experience at <Link href="https://coinbase.com/"
-            >Coinbase</Link
-          >
+          Member of technical staff, <Link href="https://openai.com/">OpenAI</Link>
         </Subtitle>
-        <nav class="sansBold s">
-          <EmailIconLink client:load>
-            <MailIcon size={18} />
-          </EmailIconLink>
+        <nav aria-label="Contact and social profiles">
+          <EmailIconLink client:load><GriddyIcon name="email" /></EmailIconLink>
           <IconLink rel="me" href="https://threads.net/steadicat" label="Threads">
-            <MessageCircleIcon size={18} />
+            <GriddyIcon name="threads" />
           </IconLink>
-
           <IconLink rel="me" href="https://bsky.app/profile/steadic.at" label="Bluesky">
-            <CloudIcon size={18} />
+            <GriddyIcon name="bluesky" />
           </IconLink>
-
           <IconLink rel="me" href="https://twitter.com/steadicat" label="X">
-            <XIcon size={18} />
+            <GriddyIcon name="x" />
           </IconLink>
-
           <IconLink rel="me" href="https://github.com/steadicat" label="GitHub">
-            <GithubIcon size={18} />
+            <GriddyIcon name="github" />
           </IconLink>
-
-          <IconLink rel="me" href="https://linkedin.com/in/attardi" label="Linkedin">
-            <LinkedinIcon size={18} />
+          <IconLink rel="me" href="https://linkedin.com/in/attardi" label="LinkedIn">
+            <GriddyIcon name="linkedin" />
           </IconLink>
         </nav>
       </header>
       <section class="articles">
-        <Heading class="heading">Writing</Heading>
+        <Heading class="section-heading">Writing</Heading>
         {
           articles.map(({slug, data: {title, date}}) => (
-            <>
+            <div class="article-entry">
               <Heading class="article-heading">
                 <Link href={slug}>{title}</Link>{' '}
                 {Date.now() - new Date(date).valueOf() < 7 * 24 * 60 * 60 * 1000 && <NewTag />}
               </Heading>
               <DateView date={new Date(date)} />
-            </>
+            </div>
           ))
         }
       </section>
       <section class="projects">
-        <Heading class="projects-heading">Projects</Heading>
-        <ProjectRow
-          url="https://itunes.apple.com/app/movement-watch-tracker/id1329445157"
-          title="Movement"
-          description="iOS app to set and track mechanical watches."
-        />
-        <ProjectRow
-          url="https://thecapturedproject.com/"
-          title="Captured"
-          description="People in prison drawing people who should be."
-        />
-        <ProjectRow
-          url="https://swarmation.com/"
-          title="Swarmation"
-          description="An in-browser real-time multiplayer game, winner of the 2010 Node.js Knockout."
-        />
-        <ProjectRow
-          url="https://justpickthis.com/"
-          title="Just Pick This"
-          description="A minimal product review site."
-        />
-        <Heading class="code-heading">Code</Heading>
-        <ProjectRow
-          url="https://github.com/steadicat/grindelwald"
-          title="Grindelwald"
-          description="Tiny functional reactive programming library with (maybe too much) dark magic."
-        />
-        <ProjectRow
-          url="https://github.com/steadicat/react-rebound"
-          title="React Rebound"
-          description="High-performance spring-based animations for React."
-        />
-        <ProjectRow
-          url="https://github.com/steadicat/vectorinox"
-          title="Vectorinox"
-          description="A swiss-army knife for converting and processing SVG files."
-        />
+        <Heading class="section-heading">Projects</Heading>
+        <div class="project-list">
+          <ProjectRow
+            url="https://itunes.apple.com/app/movement-watch-tracker/id1329445157"
+            title="Movement"
+            description="iOS app to set and track mechanical watches."
+          />
+          <ProjectRow
+            url="https://thecapturedproject.com/"
+            title="Captured"
+            description="People in prison drawing people who should be."
+          />
+          <ProjectRow
+            url="https://swarmation.com/"
+            title="Swarmation"
+            description="An in-browser real-time multiplayer game, winner of the 2010 Node.js Knockout."
+          />
+          <ProjectRow
+            url="https://justpickthis.com/"
+            title="Just Pick This"
+            description="A minimal product review site."
+          />
+        </div>
+      </section>
+      <section class="code">
+        <Heading class="section-heading">Code</Heading>
+        <div class="project-list">
+          <ProjectRow
+            url="https://github.com/steadicat/grindelwald"
+            title="Grindelwald"
+            description="Tiny functional reactive programming library with (maybe too much) dark magic."
+          />
+          <ProjectRow
+            url="https://github.com/steadicat/react-rebound"
+            title="React Rebound"
+            description="High-performance spring-based animations for React."
+          />
+          <ProjectRow
+            url="https://github.com/steadicat/vectorinox"
+            title="Vectorinox"
+            description="A swiss-army knife for converting and processing SVG files."
+          />
+        </div>
       </section>
     </main>
   </body>

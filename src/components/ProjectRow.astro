@@ -7,20 +7,24 @@ const {url, title, description, isNew} = Astro.props;
 ---
 
 <style>
-  @media (max-width: 480px) {
-    .heading {
-      margin-top: var(--unit);
-    }
-  }
   .description {
     color: var(--gray);
   }
+
+  @media (min-width: 640px) {
+    .project-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      column-gap: var(--unit);
+      align-items: start;
+    }
+  }
 </style>
 
-<Subheading class="heading">
-  <Link href={url}>{title}</Link>
-  {isNew && <NewTag />}
-</Subheading>
-<div class="serifRegular m description">
-  {description}
+<div class="project-row">
+  <Subheading>
+    <Link href={url}>{title}</Link>
+    {isNew && <NewTag />}
+  </Subheading>
+  <div class="description">{description}</div>
 </div>

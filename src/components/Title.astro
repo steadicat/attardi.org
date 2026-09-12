@@ -8,6 +8,13 @@ type Props = {
 const {id, class: className, style} = Astro.props;
 ---
 
-<div id={id} class:list={['serifBold', 'xl', className]} style={style}>
+<h1 id={id} class:list={['title', className]} style={style}>
   <slot />
-</div>
+</h1>
+
+<style>
+  .title {
+    font-size: 32px;
+    line-height: var(--lineHeight);
+  }
+</style>
