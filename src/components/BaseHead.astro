@@ -1,6 +1,6 @@
 ---
 import '@fontsource/geist-mono/400.css';
-import '@fontsource/dm-sans/500.css';
+import '@fontsource/inter/400.css';
 
 export interface Props {
   title: string;
@@ -42,6 +42,15 @@ const {title, description, image = ''} = Astro.props;
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <style is:global>
+  @font-face {
+    font-family: 'Fakt Pro';
+    src: url('../assets/fonts/FaktPro-Normal-latin.woff2') format('woff2'),
+      url('../assets/fonts/FaktPro-Normal-latin.woff') format('woff');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
   *,
   *::before,
   *::after {
@@ -61,7 +70,7 @@ const {title, description, image = ''} = Astro.props;
   }
 
   :root {
-    --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --sans: 'Fakt Pro', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --serif: var(--sans);
     --mono: 'Geist Mono', 'SF Mono', Consolas, Monaco, monospace;
 
@@ -101,10 +110,10 @@ const {title, description, image = ''} = Astro.props;
 
   @media (prefers-color-scheme: light) {
     :root {
-      --textColor: #272725;
-      --accentColor: #c43c2e;
-      --linkColor: #171716;
-      --gray: #6a6a65;
+      --textColor: #151817;
+      --accentColor: oklch(65% 0.21 25);
+      --linkColor: #151817;
+      --gray: #8c908a;
       --grayDisabled: #aaa;
       --darkerGrayBackground: #efefec;
       --grayBackground: #f7f7f5;
@@ -113,9 +122,9 @@ const {title, description, image = ''} = Astro.props;
       --subtleBorderColor: #deded9;
       --linkUnderlineColor: #b5b5af;
       --scrollbarColor: #c5c5bf;
-      --selectionTextColor: #fff;
-      --externalHoverLightness: 54%;
-      --externalHoverChroma: 0.09;
+      --selectionTextColor: #151817;
+      --externalHoverLightness: 64%;
+      --externalHoverChroma: 0.17;
       --white: #fff;
       --hoverBackground: #efefec;
       color-scheme: light;
@@ -127,7 +136,7 @@ const {title, description, image = ''} = Astro.props;
     color: var(--textColor);
     font-family: var(--sans);
     font-size: var(--fontSize);
-    font-weight: 500;
+    font-weight: 400;
     line-height: var(--lineHeight);
     letter-spacing: -0.015em;
     -webkit-font-smoothing: antialiased;

@@ -23,11 +23,11 @@ const articles = (await getCollection('articles')).sort(
     margin-bottom: 72px;
   }
   header :global(h1) {
-    color: #61c9b9;
+    color: #61c8dc;
   }
   @media (prefers-color-scheme: light) {
     header :global(h1) {
-      color: #157d6c;
+      color: oklch(68% 0.16 220);
     }
   }
   .subtitle {
@@ -58,7 +58,7 @@ const articles = (await getCollection('articles')).sort(
     margin-left: -11px;
   }
 
-  /* Equal perceptual lightness and chroma, with distinct hues inside sRGB. */
+  /* Equal perceptual lightness and chroma, with a distinct hue for each link. */
   main :global(a[href^='https://']),
   main :global(a[aria-label='Email']) {
     --hoverLinkColor: oklch(var(--externalHoverLightness) var(--externalHoverChroma) var(--externalHoverHue, 21));
