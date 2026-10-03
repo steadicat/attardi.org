@@ -1,6 +1,6 @@
 ---
 import '@fontsource/geist-mono/400.css';
-import '@fontsource/manrope/500.css';
+import '@fontsource/dm-sans/500.css';
 
 export interface Props {
   title: string;
@@ -61,7 +61,7 @@ const {title, description, image = ''} = Astro.props;
   }
 
   :root {
-    --sans: Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --serif: var(--sans);
     --mono: 'Geist Mono', 'SF Mono', Consolas, Monaco, monospace;
 
@@ -85,10 +85,41 @@ const {title, description, image = ''} = Astro.props;
     --grayDisabled: #666;
     --darkerGrayBackground: #191919;
     --grayBackground: #101010;
+    --codeBackground: #1f1f1f;
+    --borderColor: #444;
+    --subtleBorderColor: #333;
+    --linkUnderlineColor: #555;
+    --scrollbarColor: #333;
+    --selectionTextColor: #000;
+    --externalHoverLightness: 76%;
+    --externalHoverChroma: 0.12;
 
     --white: #000;
     --hoverBackground: #191919;
     color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --textColor: #272725;
+      --accentColor: #c43c2e;
+      --linkColor: #171716;
+      --gray: #6a6a65;
+      --grayDisabled: #aaa;
+      --darkerGrayBackground: #efefec;
+      --grayBackground: #f7f7f5;
+      --codeBackground: #f7f7f5;
+      --borderColor: #d6d6d1;
+      --subtleBorderColor: #deded9;
+      --linkUnderlineColor: #b5b5af;
+      --scrollbarColor: #c5c5bf;
+      --selectionTextColor: #fff;
+      --externalHoverLightness: 54%;
+      --externalHoverChroma: 0.09;
+      --white: #fff;
+      --hoverBackground: #efefec;
+      color-scheme: light;
+    }
   }
 
   html {
@@ -145,7 +176,7 @@ const {title, description, image = ''} = Astro.props;
 
   ::selection {
     background: var(--accentColor);
-    color: #000;
+    color: var(--selectionTextColor);
   }
 
   .sansCaps,

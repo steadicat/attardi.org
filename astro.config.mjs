@@ -13,8 +13,9 @@ export default defineConfig({
       defaultProps: {
         wrap: true,
       },
-      themes: ['min-dark'],
+      themes: ['min-dark', 'min-light'],
       styleOverrides: {
+        codeBackground: 'var(--codeBackground)',
         codeFontFamily: 'var(--mono)',
         codeFontSize: 'var(--codeFontSize)',
         codeFontWeight: '400',

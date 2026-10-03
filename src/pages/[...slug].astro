@@ -84,7 +84,7 @@ const {Content, headings} = await render();
   .markdown a {
     color: var(--linkColor);
     text-decoration: underline;
-    text-decoration-color: #555;
+    text-decoration-color: var(--linkUnderlineColor);
     transition: color 0.15s ease, text-decoration-color 0.15s ease;
   }
 
@@ -126,7 +126,7 @@ const {Content, headings} = await render();
   .markdown blockquote {
     margin: 32px 0;
     padding: 0 0 0 var(--unit);
-    border-left: 1px solid #444;
+    border-left: 1px solid var(--borderColor);
     color: var(--gray);
   }
 
@@ -208,7 +208,7 @@ const {Content, headings} = await render();
   }
 
   .svg {
-    border: 1px solid #333;
+    border: 1px solid var(--subtleBorderColor);
     display: block;
     margin: 32px 0;
     width: 100%;

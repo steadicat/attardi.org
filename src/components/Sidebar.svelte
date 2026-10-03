@@ -98,7 +98,7 @@
     font-size: 12px;
     line-height: var(--lineHeight);
     scrollbar-width: thin;
-    scrollbar-color: #333 transparent;
+    scrollbar-color: var(--scrollbarColor) transparent;
   }
 
   @media (max-width: 1199px) {
